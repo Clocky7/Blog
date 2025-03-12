@@ -2254,6 +2254,7 @@ main:not(.up) .search #search-header input {
   display: flex;
   justify-content: stretch;
   position: relative;
+  flex-wrap: wrap /* 支持换行，使得布局更加灵活 */;
 }
 #archive-aside {
   scrollbar-width: none;
@@ -2351,6 +2352,12 @@ main:not(.up) .search #search-header input {
 .tags {
   display: inline-block;
 }
+@media (max-width: 768px) {
+  .categories,
+  .tags {
+    display: block /* 在小屏幕设备上改为块级元素，避免横向溢出 */;
+  }
+}
 #Archives-bg {
   box-sizing: border-box;
   padding: 10px;
@@ -2371,6 +2378,12 @@ main:not(.up) .search #search-header input {
   left: 15px;
   border-bottom: 1px var(--theme-unimportant-trans) solid;
 }
+@media (max-width: 768px) {
+  .article-item {
+    flex-direction: column /* 手机屏幕上文章项堆叠显示 */;
+    padding-inline: 10px /* 减少内边距，避免拥挤 */;
+  }
+}
 #Categories {
   height: fit-content;
   overflow: visible;
@@ -2381,6 +2394,11 @@ main:not(.up) .search #search-header input {
 #Categories p {
   text-align: center;
 }
+@media (max-width: 768px) {
+  #Categories {
+    height: auto /* 在小屏幕上让分类高度自适应 */;
+  }
+}
 #Tags {
   height: fit-content;
   overflow: visible;
@@ -2389,6 +2407,11 @@ main:not(.up) .search #search-header input {
 }
 #Tags p {
   text-align: center;
+}
+@media (max-width: 768px) {
+  #Tags {
+    height: auto /* 在小屏幕上让标签高度自适应 */;
+  }
 }
 #navigation a {
   width: 100%;
@@ -2399,12 +2422,22 @@ main:not(.up) .search #search-header input {
   font-family: BenderLight;
   text-align: center;
 }
+@media (max-width: 768px) {
+  #navigation a {
+    font-size: large /* 在手机上字体稍微小一点，避免拥挤 */;
+  }
+}
 .control-archive {
   width: 55px;
   display: inline-block;
 }
 .control-archive + a {
   width: calc(100% - 55px);
+}
+@media (max-width: 768px) {
+  .control-archive {
+    width: 100% /* 在手机上控制归档宽度为100%，避免溢出 */;
+  }
 }
 article {
   transition: margin 0.3s;
