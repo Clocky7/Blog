@@ -1,0 +1,306 @@
+<!DOCTYPE html><html lang="zh-cn" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>python常见复合类型基础 | Clocky7's Blog</title><link rel="icon" type="image/x-icon" href="/favicon.ico"><link rel="preload" as="font" crossorigin="anonymous" href="/font/Bender.ttf"><link rel="preload" as="font" crossorigin="anonymous" href="/font/BenderLight.ttf"><link rel="preload" as="font" crossorigin="anonymous" href="/font/JetBrainsMono-Regular.woff2"><link rel="stylesheet" href="/css/arknights.css"><style>@font-face {
+  font-family: Bender;
+  src: local('Bender'), url("/font/Bender.ttf"), url("/font/Bender.otf");
+}
+@font-face {
+  font-family: BenderLight;
+  src: local('BenderLight'), url("/font/BenderLight.ttf");
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}
+</style><script>var config = {"root":"/","search":{"preload":false,"activeHolder":"键入以继续","blurHolder":"搜索","noResult":"无 $0 相关数据"},"code":{"codeInfo":"$0 - $1 行","copy":"复制"}}</script><link type="text/css" rel="stylesheet" href="/lib/encrypt/hbe.style.css"><script src="//unpkg.com/mermaid@10.5.0/dist/mermaid.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+ menuSettings: {
+   zoom: "None"
+ },
+ showMathMenu: false,
+ jax: ["input/TeX","output/CommonHTML"],
+ extensions: ["tex2jax.js"],
+ TeX: {
+   extensions: ["AMSmath.js","AMSsymbols.js"],
+   equationNumbers: {
+     autoNumber: "AMS"
+   }
+ },
+ tex2jax: {
+   inlineMath: [["\\(", "\\)"]],
+   displayMath: [["\\[", "\\]"]]
+ }
+});</script><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lightgallery.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-zoom.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-thumbnail.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/css/all.min.css"><style defer src="article.css"></style><link rel="stylesheet" href="article.css"><script>if (window.localStorage.getItem('theme-mode') === 'light')
+ document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark')
+ document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.woff2") format('woff2');
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}</style><style>:root {
+ --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
+ --light-background: url('/img/bk.jpg');
+ --theme-encrypt-confirm: '确认'
+}</style><script defer src="/js/arknights.js"></script><script defer src="/js/search.js"></script><script defer type="module">import mermaid from '//unpkg.com/mermaid@10.5.0/dist/mermaid.esm.mjs';
+window.mermaid = mermaid;
+code.paintMermaid();
+</script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+  menuSettings: {
+    zoom: "None"
+  },
+  showMathMenu: false,
+  jax: ["input/TeX","output/CommonHTML"],
+  extensions: ["tex2jax.js"],
+  TeX: {
+    extensions: ["AMSmath.js","AMSsymbols.js"],
+    equationNumbers: {
+      autoNumber: "AMS"
+    }
+  },
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]]
+  }
+});
+</script><script async src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script async src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script async src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script async src="/lib/encrypt/hbe.js"></script><script async src="/js/pjax.js"></script><script class="pjax-js">reset= () => {document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js','data-pjax','.busuanzi'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><script class="pjax-js">reset= () => {document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="loading" style="opacity: 0;"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><div class="navBtn"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><nav><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="搜索" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup" tabindex="0"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">主页</span></a></li><li class="navItem"><a class="navBlock" href="/about/"><span class="navItemTitle">于我</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">归档</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>python常见复合类型基础</h1><div id="post-info"><span>文章发布时间: <div class="control"><time datetime="2025-03-17T00:35:28.000Z" id="date"> 2025-03-17</time></div></span><br><span>最后更新时间: <div class="control"><time datetime="2025-03-17T02:48:44.638Z" id="updated"> 2025-03-17</time></div></span><br><span>文章总字数: <div class="control">3.2k</div></span><br><span>预计阅读时间: <div class="control">15 分钟</div></span></div></div><hr><div id="post-content"><h2 id="一-列表"><a href="#一-列表" class="headerlink" title="一.列表"></a>一.列表</h2><ul>
+<li><p>列表中可以填充各种类型的数据，且可以同时存在于一个列表中，包括可以包含几个列表。  </p>
+</li>
+<li><p>列表中的数据有顺序、有下标。</p>
+</li>
+</ul>
+<h3 id="1-1-列表创建"><a href="#1-1-列表创建" class="headerlink" title="1.1 列表创建"></a>1.1 列表创建</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">#创建空列表<br>a = list()<br>print(a)<br> <br>#创建列表<br>b = list([1,2,3])<br>print(b)<br> <br>#创建字符列表<br>c = list(&#x27;abc&#x27;)<br>print(c)    <br></code></pre></td></tr></table></figure>
+
+<pre><code>[]
+[1, 2, 3]
+[&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]
+</code></pre>
+<p>总结：只要可以取下标，就可以传入列表。</p>
+<h3 id="1-2-列表运算"><a href="#1-2-列表运算" class="headerlink" title="1.2 列表运算"></a>1.2 列表运算</h3><ul>
+<li>与字符串基本相似，可以根据字符串运算参考。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">#列表合并<br>a = [100,200,300]<br>b = [400,500,600]<br>c = a + b<br>print(c)<br> <br>#列表累乘（累乘必须乘以正整数,2.0这类也不可以）<br>a = [1,2]<br>b = a * 3<br>print(b)<br> <br>#加等,即源式加后面的式子<br>a = [1,2,3]<br>a+=[4,5,6]<br>print(a)<br> <br>#乘等，同理<br>a = [1,2,3]<br>a*=3<br>print(a)<br> <br>#判断是否包含，同理于字符串<br>a = [1,2,3,4,5,6]<br>print(1 in a)<br></code></pre></td></tr></table></figure>
+
+<pre><code>[100, 200, 300, 400, 500, 600]
+[1, 2, 1, 2, 1, 2]
+[1, 2, 3, 4, 5, 6]
+[1, 2, 3, 1, 2, 3, 1, 2, 3]
+True
+</code></pre>
+<h3 id="1-3-列表基本访问"><a href="#1-3-列表基本访问" class="headerlink" title="1.3 列表基本访问"></a>1.3 列表基本访问</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">#下标访问简单列表元素<br>a = [1,2,3,4,5]<br>print(a[0])<br> <br>#切片访问列表元素（这里切片出来是一个列表，因为其本身就是一个列表）<br>a = [1,2,3,4,5]<br>print(a[1:3])<br> <br>#多重列表<br>a = [[1,2,3],<br>     [4,5,6],<br>     [7,8,9]]<br> <br>#取了第二个列表，然后取了其第一个元素<br>print(a[1][0])<br> <br>#取了前两个列表<br>print(a[0:2])<br> <br>#取了前两个列表，然后取了第一个列表<br>print(a[0:2][0])<br> <br>#取了前两个列表，然后取了第一个列表，然后取了第一个元素<br>print(a[0:2][0][0])<br></code></pre></td></tr></table></figure>
+
+<pre><code>1
+[2, 3]
+4
+[[1, 2, 3], [4, 5, 6]]
+[1, 2, 3]
+1
+</code></pre>
+<h3 id="1-4-列表添加元素"><a href="#1-4-列表添加元素" class="headerlink" title="1.4 列表添加元素"></a>1.4 列表添加元素</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">#增<br>x = [1,2,3]<br>x.append(4)<br>print(x)<br> <br>#插入<br>x = [1,2,3]<br>x.insert(1,4)<br>print(x)<br> <br>#增可迭代对象<br>x = [1,2,3]<br>x.extend([4,5,6])<br>print(x)<br></code></pre></td></tr></table></figure>
+
+<pre><code>[1, 2, 3, 4]
+[1, 4, 2, 3]
+[1, 2, 3, 4, 5, 6
+</code></pre>
+<h3 id="扩展：id（）函数的运用"><a href="#扩展：id（）函数的运用" class="headerlink" title="扩展：id（）函数的运用"></a>扩展：id（）函数的运用</h3><p>其可以查看一个变量保存的数据地址.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">#列表append<br> <br>x = [1,2,3]<br>print(id(x))<br> <br>x.append(4)<br>print(id(x))<br> <br>#列表相加<br> <br>a = [1,2,3]<br>print(id(a))<br> <br>b = [4,5,6]<br>a = a + b<br> <br>print(id(a))<br></code></pre></td></tr></table></figure>
+
+<pre><code>2278015630464
+2278015630464
+2277993865920
+2278015819136
+</code></pre>
+<p>&emsp;&emsp;</p>
+<h3 id="1-5-修改元素"><a href="#1-5-修改元素" class="headerlink" title="1.5 修改元素"></a>1.5 修改元素</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">#在列表下标范围内选元素修改<br> <br>a = [1,2,3,4,5]<br>a[3] = 100<br>print(a)<br> <br>#切片赋值<br> <br>#超出范围<br>a = [1,2,3,4,5]<br>a[4:100] = [1,2]<br>print(a)<br> <br>a = [1,2,3,4,5]<br>a[1:3] = [100,200]<br>print(a)<br></code></pre></td></tr></table></figure>
+
+<pre><code>[1, 2, 3, 100, 5]
+[1, 2, 3, 4, 1, 2]
+[1, 100, 200, 4, 5]
+</code></pre>
+<p><em><strong>总结：若只修改一个元素，必须在列表序列范围内。若用切片修改数据，可以超出范围，但必须是可迭代对象且符合条件。</strong></em></p>
+<h3 id="1-6-删除方法"><a href="#1-6-删除方法" class="headerlink" title="1.6 删除方法"></a>1.6 删除方法</h3><ul>
+<li>remove是直接删除列表内所含元素值，  </li>
+<li>pop是删除列表内指定位置的元素，  </li>
+<li>clear是清空列表</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">#remove方法<br>a = [1,2,3,4,5,6,7,8,9,10]<br>a.remove(1)<br>print(a)<br> <br>#pop方法<br>a = [1,2,3,4,5,6,7,8,9,10]<br>a.pop(0)<br>print(a)<br> <br>#clear方法<br>a = [1,2,3,4,5,6,7,8,9,10]<br>a.clear()<br>print(a)<br> <br>#后期方法del<br>a = [1,2,3,4,5,6,7,8,9,10]<br>del a[0]<br>print(a)<br> <br>#直接删除变量<br>del a<br>print(a)<br></code></pre></td></tr></table></figure>
+
+<pre><code>[2, 3, 4, 5, 6, 7, 8, 9, 10]
+[2, 3, 4, 5, 6, 7, 8, 9, 10]
+[]
+[2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+NameError: name &#39;a&#39; is not defined
+</code></pre>
+<h3 id="1-7-列表常见API"><a href="#1-7-列表常见API" class="headerlink" title="1.7 列表常见API"></a>1.7 列表常见API</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">#len（）<br>a = [1,2,3,4,5]<br>print(len(a))<br> <br>#max（）<br>a = [1,2,3,4,5]<br>print(max(a))<br> <br>#min（）<br>a = [1,2,3,4,5]<br>print(min(a))<br> <br>#list（sep）,转元组为列表<br>a = (1,2,3,4,5)<br>print(list(a))<br></code></pre></td></tr></table></figure>
+
+<pre><code>5
+5
+1
+[1, 2, 3, 4, 5]
+</code></pre>
+<p><em><strong>扩展API</strong></em></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">#index()索引一个元素的第一个下标<br>a = [1,2,3,4,5]<br>print(a.index(3))<br></code></pre></td></tr></table></figure>
+
+<pre><code>2
+</code></pre>
+<h2 id="二-元组"><a href="#二-元组" class="headerlink" title="二.元组"></a>二.元组</h2><h3 id="2-1-元组基本属性"><a href="#2-1-元组基本属性" class="headerlink" title="2.1 元组基本属性"></a>2.1 元组基本属性</h3><ul>
+<li>元组中的元素一般不可变动，较列表不同。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">#空元组<br>x = ()<br>print(x)<br> <br>#元组切片<br>x = (1,2,3,4)<br>print(x[1:7])<br> <br>#单个数据的元组<br>x = (1,)  <br>print(x)<br>print(type(x))<br> <br>#注意，元组中只有一个元素时，必须加逗号<br>y = (1)<br>print(type(y))<br> <br>#不加括号的元组<br>x = 1,2,3,&#x27;hello&#x27;<br>print(x)<br></code></pre></td></tr></table></figure>
+
+<pre><code>()
+(2, 3, 4)
+(1,)
+&lt;class &#39;tuple&#39;&gt;
+&lt;class &#39;int&#39;&gt;
+(1, 2, 3, &#39;hello&#39;)
+</code></pre>
+<h3 id="2-2-创建元组"><a href="#2-2-创建元组" class="headerlink" title="2.2 创建元组"></a>2.2 创建元组</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">x = tuple()<br>print(x)<br> <br>#也得是可迭代对象<br>a = tuple(range(10))<br>print(a)<br></code></pre></td></tr></table></figure>
+
+<pre><code>()
+(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
+</code></pre>
+<p>由于元组不可变，所以只能删除整个变量，不能对其中元素操作。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">#元组切片<br>x = (1,2,3,4)<br>print(x[1:7])<br> <br>#元组解包<br>x = (1,2,3,4)<br>a,b,c,d = x<br>print(a,b,c,d)<br> <br>#常用于结构赋值<br>a,b = (1,2)<br>print(a,b)<br></code></pre></td></tr></table></figure>
+
+<pre><code>(2, 3, 4)
+1 2 3 4
+1 2
+</code></pre>
+<h3 id="2-4-元组运算"><a href="#2-4-元组运算" class="headerlink" title="2.4 元组运算"></a>2.4 元组运算</h3><p>元组虽不可变，但其可以进行叠加，原元组不变，可合并为一个新元组。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">#加法<br>a = (1,2)<br>b = (3,4)<br>c = a + b<br>print(c)<br> <br>#乘法<br>a = (1,2)<br>b = a * 3<br>print(b)<br></code></pre></td></tr></table></figure>
+
+<pre><code>(1, 2, 3, 4)
+(1, 2, 1, 2, 1, 2)
+</code></pre>
+<h3 id="2-5-元组常用API"><a href="#2-5-元组常用API" class="headerlink" title="2.5 元组常用API"></a>2.5 元组常用API</h3><p>参考列表操作，包括index（）也一样，只有最后的转列表为元组有区别，方法为tuple()。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">#count方法,列表与元组皆有<br>a = (1,2,3)<br>b = [1,1,2]<br>print(a.count(1))<br>print(b.count(1))<br></code></pre></td></tr></table></figure>
+
+<pre><code>1
+2
+</code></pre>
+<h2 id="三-字典"><a href="#三-字典" class="headerlink" title="三.字典"></a>三.字典</h2><h3 id="3-1-字典简介"><a href="#3-1-字典简介" class="headerlink" title="3.1 字典简介"></a>3.1 字典简介</h3><ul>
+<li>字典是可变容器{}  </li>
+<li>字典的数据是无序的  </li>
+<li>字典由键值对构成，键实际就相当于下标</li>
+</ul>
+<h3 id="3-2-字典创建"><a href="#3-2-字典创建" class="headerlink" title="3.2 字典创建"></a>3.2 字典创建</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">#数字也可以作为键<br>a = &#123;1:2,2:3&#125;<br>print(a)<br>print(type(a))<br> <br>#也可以嵌套字典<br>a = &#123;1:2,2:&#123;1:2,2:3&#125;&#125;<br>print(a)<br> <br>#变量可以作为键<br>x = &#x27;hello&#x27;<br>y = 1<br>a = &#123;x:1,y:2&#125;<br>print(a)<br> <br>#重复的键会以最后一个键值对为准<br>a = &#123;1:2,1:3&#125;<br>print(a)<br> <br>#dict函数，等号前为键，后为值<br>a = dict(a=1,b=2,c=3)<br>print(a)<br> <br>b = dict([[1,2],[3,4]])<br>print(b)<br> <br>c = dict([[1,2]])<br>print(c)<br></code></pre></td></tr></table></figure>
+
+<pre><code>&#123;1: 2, 2: 3&#125;
+&lt;class &#39;dict&#39;&gt;
+&#123;1: 2, 2: &#123;1: 2, 2: 3&#125;&#125;
+&#123;&#39;hello&#39;: 1, 1: 2&#125;
+&#123;1: 3&#125;
+&#123;&#39;a&#39;: 1, &#39;b&#39;: 2, &#39;c&#39;: 3&#125;
+&#123;1: 2, 3: 4&#125;
+&#123;1: 2&#125;
+</code></pre>
+<p><em><strong>注意：使用dict（）时需要括号内的数据成对出现，因为要组成键值对。</strong></em></p>
+<h3 id="3-3-字典基本操作"><a href="#3-3-字典基本操作" class="headerlink" title="3.3 字典基本操作"></a>3.3 字典基本操作</h3><ul>
+<li>in 与not in用来表示一个键是否在字典中  </li>
+<li>可以向列表、元组一样通过”键”下标来访问字典中的值</li>
+</ul>
+<h3 id="3-4-字典常用API"><a href="#3-4-字典常用API" class="headerlink" title="3.4 字典常用API"></a>3.4 字典常用API</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><code class="hljs plaintext"># 查看字典长度,即键值对个数<br>a = &#123;&#x27;name&#x27;:&#x27;zhangsan&#x27;,&#x27;age&#x27;:18,&#x27;sex&#x27;:&#x27;male&#x27;&#125;<br>print(len(a))<br> <br># str()把字典[字面量]变为字符串,网络传输常把这种字符串（json）传输<br>a = &#123;&#x27;name&#x27;:&#x27;zhangsan&#x27;,&#x27;age&#x27;:18,&#x27;sex&#x27;:&#x27;male&#x27;&#125;<br>print(str(a),type(str(a)))<br> <br># 清空字典<br>a = &#123;&#x27;name&#x27;:&#x27;zhangsan&#x27;,&#x27;age&#x27;:18,&#x27;sex&#x27;:&#x27;male&#x27;&#125;<br>a.clear()<br>print(a)<br> <br>#浅复制<br>a = &#123;&#x27;name&#x27;:&#x27;zhangsan&#x27;,&#x27;age&#x27;:18,&#x27;sex&#x27;:&#x27;male&#x27;&#125;<br>b = a.copy()<br>print(b)<br> <br>#访问键值对 get(key,x),x为找不到键时的返回值，默认为None<br>a = &#123;&#x27;name&#x27;:&#x27;zhangsan&#x27;,&#x27;age&#x27;:18,&#x27;sex&#x27;:&#x27;male&#x27;&#125;<br>print(a.get(&#x27;name&#x27;))<br>print(a.get(&#x27;address&#x27;,&#x27;not found&#x27;))<br> <br># 以列表返回一个视图(可迭代)对象，即一个一个打包的键值对 items()<br>a = &#123;&#x27;name&#x27;:&#x27;zhangsan&#x27;,&#x27;age&#x27;:18,&#x27;sex&#x27;:&#x27;male&#x27;&#125;<br>print(a.items(),type(a.items()))<br> <br># 返回一个键的迭代器 keys()<br>a = &#123;&#x27;name&#x27;:&#x27;zhangsan&#x27;,&#x27;age&#x27;:18,&#x27;sex&#x27;:&#x27;male&#x27;&#125;<br>print(a.keys(),type(a.keys()))<br> <br># 返回一个值的迭代器 values()<br>a = &#123;&#x27;name&#x27;:&#x27;zhangsan&#x27;,&#x27;age&#x27;:18,&#x27;sex&#x27;:&#x27;male&#x27;&#125;<br>print(a.values(),type(a.values()))<br> <br># 更新整个字典 update()，类似append和extend<br>a = &#123;&#x27;name&#x27;:&#x27;zhangsan&#x27;,&#x27;age&#x27;:18,&#x27;sex&#x27;:&#x27;male&#x27;&#125;<br>b = &#123;&#x27;address&#x27;:&#x27;beijing&#x27;,&#x27;phone&#x27;:&#x27;123456789&#x27;&#125;<br>a.update(b)<br>print(a)<br> <br># 删除字典中的键值对 pop(key,x),x为找不到键时的返回值，默认为None<br>a = &#123;&#x27;name&#x27;:&#x27;zhangsan&#x27;,&#x27;age&#x27;:18,&#x27;sex&#x27;:&#x27;male&#x27;&#125;<br>print(a.pop(&#x27;name&#x27;))<br>print(a.pop(&#x27;address&#x27;,&#x27;not found&#x27;))<br></code></pre></td></tr></table></figure>
+
+<pre><code>3
+&#123;&#39;name&#39;: &#39;zhangsan&#39;, &#39;age&#39;: 18, &#39;sex&#39;: &#39;male&#39;&#125; &lt;class &#39;str&#39;&gt;
+&#123;&#125;
+&#123;&#39;name&#39;: &#39;zhangsan&#39;, &#39;age&#39;: 18, &#39;sex&#39;: &#39;male&#39;&#125;
+zhangsan
+not found
+dict_items([(&#39;name&#39;, &#39;zhangsan&#39;), (&#39;age&#39;, 18), (&#39;sex&#39;, &#39;male&#39;)]) &lt;class &#39;dict_items&#39;&gt;
+dict_keys([&#39;name&#39;, &#39;age&#39;, &#39;sex&#39;]) &lt;class &#39;dict_keys&#39;&gt;
+dict_values([&#39;zhangsan&#39;, 18, &#39;male&#39;]) &lt;class &#39;dict_values&#39;&gt;
+&#123;&#39;name&#39;: &#39;zhangsan&#39;, &#39;age&#39;: 18, &#39;sex&#39;: &#39;male&#39;, &#39;address&#39;: &#39;beijing&#39;, &#39;phone&#39;: &#39;123456789&#39;&#125;
+zhangsan
+not found
+</code></pre>
+<h2 id="四-集合"><a href="#四-集合" class="headerlink" title="四.集合"></a>四.集合</h2><h3 id="4-1-集合基本介绍"><a href="#4-1-集合基本介绍" class="headerlink" title="4.1 集合基本介绍"></a>4.1 集合基本介绍</h3><p>集合分set和固定集合frozenset</p>
+<p>set的元素值必须是不可变的，不能存储 list、dict 等可变类型。</p>
+<ul>
+<li>集合是可变的容器，固定集合是不可变的集合  </li>
+<li>集合内的数据绝对不同</li>
+</ul>
+<h3 id="4-2-集合创建"><a href="#4-2-集合创建" class="headerlink" title="4.2 集合创建"></a>4.2 集合创建</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">#set()创建<br>a = set([1,2,3,4,5])<br>print(a,type(a))<br> <br>#空集合 注意：空集合创建必须用set()，不能用&#123;&#125;<br>a = set()<br>b = &#123;&#125;<br>print(a,type(a))<br>print(b,type(b))<br> <br>#与列表的联合应用,set()是允许里面是列表的<br>a = [1,2,3,4,5,6,1,2,2,3]<br>b = set(a)<br>print(b)<br></code></pre></td></tr></table></figure>
+
+<pre><code>&#123;1, 2, 3, 4, 5&#125; &lt;class &#39;set&#39;&gt;
+set() &lt;class &#39;set&#39;&gt;
+&#123;&#125; &lt;class &#39;dict&#39;&gt;
+&#123;1, 2, 3, 4, 5, 6&#125;
+</code></pre>
+<p><em><strong>来三个容易绕住你的问题 &gt;V&lt;</strong></em></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs plaintext"># a里有几个数据<br>a = &#123;(10,20,30),(20,10,30)&#125;<br>print(a)<br> <br># a中数据是什么<br>a = &#123;(10),(10)&#125;<br>print(a)<br> <br># a中数据该怎么写<br>a = &#123;(10,),(10,)&#125;<br>print(a)<br></code></pre></td></tr></table></figure>
+<pre><code>&#123;(20, 10, 30), (10, 20, 30)&#125;
+&#123;10&#125;
+&#123;(10,)&#125;
+</code></pre>
+<p>总结：<br>一定要把基础学牢，前面的东西要学会</p>
+<h3 id="4-3-集合操作"><a href="#4-3-集合操作" class="headerlink" title="4.3 集合操作"></a>4.3 集合操作</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">#添加元素<br>a = &#123;1,2,3&#125;<br>a.add(4)<br>print(a)<br> <br>#update()添加多个元素,实际为添加容器,不管是列表还是元组都会被取出数据传入<br>a = &#123;1,2,3&#125;<br>a.update([4,5,6],(7,8,9))<br>print(a)<br> <br>#remove()删除元素，如果元素不存在，会报错<br>a = &#123;1,2,3&#125;<br>a.remove(1)<br>print(a)    <br> <br>#discard()删除元素，如果元素不存在，不会报错<br>a = &#123;1,2,3&#125;<br>a.discard(4)<br>print(a)<br> <br>&#x27;&#x27;&#x27;<br>pop()对集合某种排序（有但不清楚，所以其实是固定排序），删除第一个元素并显示，如果集合为空，会报错<br>方便记的,pop()就是随机删除一个元素并显示<br>&#x27;&#x27;&#x27;<br>a = &#123;1,2,3&#125;<br>b = a.pop()<br>print(a)<br>print(b)<br></code></pre></td></tr></table></figure>
+
+<pre><code>&#123;1, 2, 3, 4&#125;
+&#123;1, 2, 3, 4, 5, 6, 7, 8, 9&#125;
+&#123;2, 3&#125;
+&#123;1, 2, 3&#125;
+&#123;2, 3&#125;
+1
+</code></pre>
+<p><em><strong>注:尽管集合无序，但可以用for循环来遍历集合</strong></em></p>
+<h3 id="4-4-判断集合是否含某元素"><a href="#4-4-判断集合是否含某元素" class="headerlink" title="4.4 判断集合是否含某元素"></a>4.4 判断集合是否含某元素</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">a = &#123;1,2,3&#125;<br>print(2 in a)<br> <br>b = &#123;1,2,3,4,5&#125;<br>print(3 not in b)<br></code></pre></td></tr></table></figure>
+
+<pre><code>True
+False
+</code></pre>
+<h3 id="4-5-集合常用API"><a href="#4-5-集合常用API" class="headerlink" title="4.5 集合常用API"></a>4.5 集合常用API</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><code class="hljs plaintext"># 添加元素<br> <br>a = &#123;1,2,3&#125;<br>a.add(4)<br>print(a)<br> <br># 清空集合<br> <br>a = &#123;1,2,3&#125;<br>a.clear()<br>print(a)<br> <br># 拷贝<br> <br>a = &#123;1,2,3&#125;<br>b = a.copy()<br>print(b)<br> <br># 返回差集<br> <br>a = &#123;1,2,3&#125;<br>b = &#123;2,3,4&#125;<br> <br>print(a.difference(b))<br>print(a)<br> <br> <br># 返回差集并删除该集合其他元素<br> <br>a = &#123;1,2,3&#125;<br>b = &#123;2,3,4&#125;<br>a.difference_update(b)<br>print(a)<br>print(b)<br> <br> <br># 返回交集<br> <br>a = &#123;1,2,3&#125;<br>b = &#123;2,3,4&#125;<br>print(a.intersection(b))<br> <br># 返回交集并删除该集合其他元素<br>a = &#123;1,2,3&#125;<br>b = &#123;2,3,4&#125;<br>a.intersection_update(b)<br>print(a)<br>print(b)<br> <br># 判断两个集合是否完全不同<br> <br>a = &#123;1,2,3&#125;<br>b = &#123;2,3,4&#125;<br>print(a.isdisjoint(b))<br> <br># 判断前集合是否为后集合子集<br> <br>a = &#123;1,2,3&#125;<br>b = &#123;2,3&#125;<br>print(a.issubset(b))<br> <br># 判断后集合是否为前集合子集<br> <br>a = &#123;1,2,3&#125;<br>b = &#123;2,3&#125;<br>print(a.issuperset(b))<br> <br># 返回俩集合不重复的元素，I为并集，即 U-I<br>a = &#123;1,2,3&#125;<br>b = &#123;2,3,4&#125;<br>print(a.symmetric_difference(b))<br>print(a)<br> <br># 返回俩集合不重复的元素，删除其他元素<br>a = &#123;1,2,3&#125;<br>b = &#123;2,3,4&#125;<br>a.symmetric_difference_update(b)<br>print(a)<br> <br># 返回俩集合的并集<br>a = &#123;1,2,3&#125;<br>b = &#123;2,3,4&#125;<br>print(a.union(b))<br> <br># 看集合长度<br>a = &#123;1,2,3&#125;<br>print(len(a))<br></code></pre></td></tr></table></figure>
+
+<pre><code>&#123;1, 2, 3, 4&#125;
+set()
+&#123;1, 2, 3&#125;
+&#123;1&#125;
+&#123;1, 2, 3&#125;
+&#123;1&#125;
+&#123;2, 3, 4&#125;
+&#123;2, 3&#125;
+&#123;2, 3&#125;
+&#123;2, 3, 4&#125;
+False
+False
+True
+&#123;1, 4&#125;
+&#123;1, 2, 3&#125;
+&#123;1, 4&#125;
+&#123;1, 2, 3, 4&#125;
+3
+</code></pre>
+<div id="paginator"></div></div><div id="post-footer"><div id="pages" style="justify-content: flex-end"><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/post/40fa0d1d/">python基础变量（字符串、数字） 上一篇 →</a></div></div></div></div><div class="bottom-btn"><div><a class="i-top" id="to-top" onClick="scrolls.scrolltop();" title="回到顶部" style="opacity: 0; display: none;">∧ </a><a class="i-index" id="to-index" href="#toc-div" title="文章目录">≡</a><a class="i-color" id="color-mode" onClick="colorMode.change()" title="切换主题"></a><a onclick="BgmControl()"><svg id="bgm-control" viewBox="0 0 30 34" fill="#18d1ff" style="width: 24px; transition: transform .3s;margin-top: 4px"><path d="M25.998 23.422V11.29h3.999v12.132h-3.999zM19.497 6.234h4.001v22.243h-4.001V6.234zM12.998.867h4v32.978h-4V.867zm-6.5 5.367h4.001v22.243H6.498V6.234zm-6.5 5.056h4v12.132h-4V11.29z"></path></svg><audio id="bgm" src="/audio/bgm.mp3" autoplay loop crossorigin="anonymous"> </audio></a></div></div></article><aside><div id="about"><a href="/" id="logo"><img src="https://ak.hypergryph.com/assets/index/images/ak/pc/faction/1.png" alt="Logo" style="margin:0;border-radius:0;"></a><h1 id="Dr"><a href="/">Clocky7</a></h1><div id="description"><p></p></div><div id="social-links"><a class="social" target="_blank" rel="noopener" href="https://github.com/Clocky7"><i class="fab fa-github" alt="GitHub"></i></a></div></div><div id="aside-block"><div id="toc-div"><h1>目录</h1><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80-%E5%88%97%E8%A1%A8"><span class="toc-number">1.</span> <span class="toc-text">一.列表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E5%88%97%E8%A1%A8%E5%88%9B%E5%BB%BA"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 列表创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E5%88%97%E8%A1%A8%E8%BF%90%E7%AE%97"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 列表运算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E5%88%97%E8%A1%A8%E5%9F%BA%E6%9C%AC%E8%AE%BF%E9%97%AE"><span class="toc-number">1.3.</span> <span class="toc-text">1.3 列表基本访问</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-%E5%88%97%E8%A1%A8%E6%B7%BB%E5%8A%A0%E5%85%83%E7%B4%A0"><span class="toc-number">1.4.</span> <span class="toc-text">1.4 列表添加元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%A9%E5%B1%95%EF%BC%9Aid%EF%BC%88%EF%BC%89%E5%87%BD%E6%95%B0%E7%9A%84%E8%BF%90%E7%94%A8"><span class="toc-number">1.5.</span> <span class="toc-text">扩展：id（）函数的运用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5-%E4%BF%AE%E6%94%B9%E5%85%83%E7%B4%A0"><span class="toc-number">1.6.</span> <span class="toc-text">1.5 修改元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-6-%E5%88%A0%E9%99%A4%E6%96%B9%E6%B3%95"><span class="toc-number">1.7.</span> <span class="toc-text">1.6 删除方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-7-%E5%88%97%E8%A1%A8%E5%B8%B8%E8%A7%81API"><span class="toc-number">1.8.</span> <span class="toc-text">1.7 列表常见API</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C-%E5%85%83%E7%BB%84"><span class="toc-number">2.</span> <span class="toc-text">二.元组</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E5%85%83%E7%BB%84%E5%9F%BA%E6%9C%AC%E5%B1%9E%E6%80%A7"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 元组基本属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E5%88%9B%E5%BB%BA%E5%85%83%E7%BB%84"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 创建元组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-%E5%85%83%E7%BB%84%E8%BF%90%E7%AE%97"><span class="toc-number">2.3.</span> <span class="toc-text">2.4 元组运算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-%E5%85%83%E7%BB%84%E5%B8%B8%E7%94%A8API"><span class="toc-number">2.4.</span> <span class="toc-text">2.5 元组常用API</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89-%E5%AD%97%E5%85%B8"><span class="toc-number">3.</span> <span class="toc-text">三.字典</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E5%AD%97%E5%85%B8%E7%AE%80%E4%BB%8B"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 字典简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E5%AD%97%E5%85%B8%E5%88%9B%E5%BB%BA"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 字典创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-%E5%AD%97%E5%85%B8%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="toc-number">3.3.</span> <span class="toc-text">3.3 字典基本操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-%E5%AD%97%E5%85%B8%E5%B8%B8%E7%94%A8API"><span class="toc-number">3.4.</span> <span class="toc-text">3.4 字典常用API</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B-%E9%9B%86%E5%90%88"><span class="toc-number">4.</span> <span class="toc-text">四.集合</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E9%9B%86%E5%90%88%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D"><span class="toc-number">4.1.</span> <span class="toc-text">4.1 集合基本介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E9%9B%86%E5%90%88%E5%88%9B%E5%BB%BA"><span class="toc-number">4.2.</span> <span class="toc-text">4.2 集合创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-%E9%9B%86%E5%90%88%E6%93%8D%E4%BD%9C"><span class="toc-number">4.3.</span> <span class="toc-text">4.3 集合操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4-%E5%88%A4%E6%96%AD%E9%9B%86%E5%90%88%E6%98%AF%E5%90%A6%E5%90%AB%E6%9F%90%E5%85%83%E7%B4%A0"><span class="toc-number">4.4.</span> <span class="toc-text">4.4 判断集合是否含某元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-5-%E9%9B%86%E5%90%88%E5%B8%B8%E7%94%A8API"><span class="toc-number">4.5.</span> <span class="toc-text">4.5 集合常用API</span></a></li></ol></li></ol></div></div><footer><nobr>构建自 <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr><wbr><nobr> 使用主题 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus/hexo-theme-arknights">Arknights</a></nobr><wbr><nobr> 主题作者 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus">Yue_plus</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas></body></html>
