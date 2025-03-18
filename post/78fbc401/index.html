@@ -1,0 +1,501 @@
+<!DOCTYPE html><html lang="zh-cn" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>python函数基础与变量作用域 | Clocky7's Blog</title><link rel="icon" type="image/x-icon" href="/favicon.ico"><link rel="preload" as="font" crossorigin="anonymous" href="/font/Bender.ttf"><link rel="preload" as="font" crossorigin="anonymous" href="/font/BenderLight.ttf"><link rel="preload" as="font" crossorigin="anonymous" href="/font/JetBrainsMono-Regular.woff2"><link rel="stylesheet" href="/css/arknights.css"><style>@font-face {
+  font-family: Bender;
+  src: local('Bender'), url("/font/Bender.ttf"), url("/font/Bender.otf");
+}
+@font-face {
+  font-family: BenderLight;
+  src: local('BenderLight'), url("/font/BenderLight.ttf");
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}
+</style><script>var config = {"root":"/","search":{"preload":false,"activeHolder":"键入以继续","blurHolder":"搜索","noResult":"无 $0 相关数据"},"code":{"codeInfo":"$0 - $1 行","copy":"复制"}}</script><link type="text/css" rel="stylesheet" href="/lib/encrypt/hbe.style.css"><script src="//unpkg.com/mermaid@10.5.0/dist/mermaid.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+ menuSettings: {
+   zoom: "None"
+ },
+ showMathMenu: false,
+ jax: ["input/TeX","output/CommonHTML"],
+ extensions: ["tex2jax.js"],
+ TeX: {
+   extensions: ["AMSmath.js","AMSsymbols.js"],
+   equationNumbers: {
+     autoNumber: "AMS"
+   }
+ },
+ tex2jax: {
+   inlineMath: [["\\(", "\\)"]],
+   displayMath: [["\\[", "\\]"]]
+ }
+});</script><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lightgallery.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-zoom.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-thumbnail.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/css/all.min.css"><style defer src="article.css"></style><link rel="stylesheet" href="article.css"><script>if (window.localStorage.getItem('theme-mode') === 'light')
+ document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark')
+ document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.woff2") format('woff2');
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}</style><style>:root {
+ --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
+ --light-background: url('/img/bk.jpg');
+ --theme-encrypt-confirm: '确认'
+}</style><script defer src="/js/arknights.js"></script><script defer src="/js/search.js"></script><script defer type="module">import mermaid from '//unpkg.com/mermaid@10.5.0/dist/mermaid.esm.mjs';
+window.mermaid = mermaid;
+code.paintMermaid();
+</script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+  menuSettings: {
+    zoom: "None"
+  },
+  showMathMenu: false,
+  jax: ["input/TeX","output/CommonHTML"],
+  extensions: ["tex2jax.js"],
+  TeX: {
+    extensions: ["AMSmath.js","AMSsymbols.js"],
+    equationNumbers: {
+      autoNumber: "AMS"
+    }
+  },
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]]
+  }
+});
+</script><script async src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script async src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script async src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script async src="/lib/encrypt/hbe.js"></script><script async src="/js/pjax.js"></script><script class="pjax-js">reset= () => {document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js','data-pjax','.busuanzi'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><script class="pjax-js">reset= () => {document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="loading" style="opacity: 0;"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><div class="navBtn"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><nav><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="搜索" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup" tabindex="0"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">主页</span></a></li><li class="navItem"><a class="navBlock" href="/about/"><span class="navItemTitle">于我</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">归档</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>python函数基础与变量作用域</h1><div id="post-info"><span>文章发布时间: <div class="control"><time datetime="2025-03-18T02:25:01.000Z" id="date"> 2025-03-18</time></div></span><br><span>最后更新时间: <div class="control"><time datetime="2025-03-18T03:05:29.585Z" id="updated"> 2025-03-18</time></div></span><br><span>文章总字数: <div class="control">3.4k</div></span><br><span>预计阅读时间: <div class="control">16 分钟</div></span></div></div><hr><div id="post-content"><h2 id="一-函数基础知识"><a href="#一-函数基础知识" class="headerlink" title="一.函数基础知识"></a>一.函数基础知识</h2><ul>
+<li>函数是面向过程编程的最小单位，也是一种数据  </li>
+<li>目的就是封装方便以后复用  </li>
+<li>函数分自定义函数，内置函数（python官方），第三方函数（第三方库）</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 使用def 语句定义一个函数a</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">function_name</span>(<span class="hljs-params">parameters</span>):<br>    <span class="hljs-comment"># 函数体</span><br>    <span class="hljs-comment"># 进行一些操作</span><br>    <span class="hljs-keyword">return</span> result  <span class="hljs-comment"># 可选的返回值</span><br> <br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">type</span>(function_name))<br></code></pre></td></tr></table></figure>
+
+<pre><code>&lt;class &#39;function&#39;&gt;
+</code></pre>
+<ol>
+<li><p>def：用于声明一个函数，告诉 Python 这是一个函数的定义。</p>
+</li>
+<li><p>function_name：函数名，一个有效的标识符，规则和变量名一致。</p>
+</li>
+<li><p>parameters：形参，可以是0 ~ n 个，参数之间用逗号分隔。</p>
+</li>
+<li><p>函数体：定义函数执行的具体操作。</p>
+</li>
+<li><p>return：指定函数的返回值，没有则默认返回None。</p>
+</li>
+<li><p>return之后的代码不会执行。</p>
+</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 示例</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test</span>():<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;test&#x27;</span>)<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">1</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;test2&#x27;</span>)<br>    <span class="hljs-keyword">return</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;test3&#x27;</span>)<br>    <span class="hljs-keyword">return</span><br> <br><span class="hljs-comment"># 直接调用，最后显示的1是因为ipynb文件会直接渲染最后一个值，而.py文件就不会</span><br>test()<br> <br><span class="hljs-comment"># 比如这里，x是最后一个值，所以会直接渲染，没有渲染上面的1</span><br>x = <span class="hljs-number">10</span><br>x<br></code></pre></td></tr></table></figure>
+
+<pre><code>test
+10
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">test</span>():<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;test&#x27;</span>)<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">1</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;test2&#x27;</span>)<br>    <span class="hljs-keyword">return</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;test3&#x27;</span>)<br>    <span class="hljs-keyword">return</span><br> <br>test()<br><span class="hljs-comment"># 先执行return后面的语句，再执行return后面的语句，x实际为1</span><br>x = test()<br><span class="hljs-built_in">print</span>(x)<br></code></pre></td></tr></table></figure>
+
+<pre><code>test
+test
+1
+</code></pre>
+<h2 id="二-函数调用"><a href="#二-函数调用" class="headerlink" title="二.函数调用"></a>二.函数调用</h2><ul>
+<li>函数调用是一个表达式，可以参与运算</li>
+</ul>
+<h3 id="2-1-位置传参"><a href="#2-1-位置传参" class="headerlink" title="2.1 位置传参"></a>2.1 位置传参</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 指形参与实参会互相匹配顺序数量，参数（argument）</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">func</span>(<span class="hljs-params">a,b</span>):<br>    <span class="hljs-built_in">print</span>(a,b)<br>    <span class="hljs-keyword">return</span><br> <br>func(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>)<br>func(<span class="hljs-number">2</span>,<span class="hljs-number">1</span>)<br>func(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>)<br></code></pre></td></tr></table></figure>
+
+<pre><code>1 2
+2 1
+
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+Cell In[21], line 8
+    6 func(1,2)
+    7 func(2,1)
+----&gt; 8 func(1,2,3)
+
+TypeError: func() takes 2 positional arguments but 3 were given
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 只要匹配的上，用不用参数无所谓</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">func</span>(<span class="hljs-params">a,b</span>):<br>    <span class="hljs-built_in">print</span>(a)<br>func(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>)<br></code></pre></td></tr></table></figure>
+
+<pre><code>1
+</code></pre>
+<h3 id="2-2-关键词传参"><a href="#2-2-关键词传参" class="headerlink" title="2.2 关键词传参"></a>2.2 关键词传参</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 直接指定特定参数传什么数据，没有顺序问题</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">func</span>(<span class="hljs-params">a,b,c</span>):<br>    <span class="hljs-built_in">print</span>(a,b,c)<br>func(b = <span class="hljs-number">1</span>,c = <span class="hljs-number">2</span>,a = <span class="hljs-number">3</span>)<br> <br><span class="hljs-comment"># 只传几个，关键词传参必须放在所有位置参数后面</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">func</span>(<span class="hljs-params">a,b,c</span>):<br>    <span class="hljs-built_in">print</span>(a,b,c)<br>func(<span class="hljs-number">1</span>,c = <span class="hljs-number">2</span>,b = <span class="hljs-number">3</span> )<br></code></pre></td></tr></table></figure>
+
+<pre><code>3 1 2
+1 3 2
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">func</span>(<span class="hljs-params">a,b,c</span>):<br>    <span class="hljs-built_in">print</span>(a,b,c)<br>func(<span class="hljs-number">1</span>,c = <span class="hljs-number">3</span>,<span class="hljs-number">2</span>)<br></code></pre></td></tr></table></figure>
+
+<pre><code>Cell In[36], line 3
+    func(1,c = 3,2)
+                ^
+SyntaxError: positional argument follows keyword argument
+</code></pre>
+<h3 id="2-3-参数默认值"><a href="#2-3-参数默认值" class="headerlink" title="2.3 参数默认值"></a>2.3 参数默认值</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 直接在构建函数时给形参赋值</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test</span>(<span class="hljs-params">a, b = <span class="hljs-number">2</span> , c = <span class="hljs-number">1</span></span>):<br>    <span class="hljs-built_in">print</span>(a,b,c)<br>    <span class="hljs-keyword">return</span><br>test(<span class="hljs-number">1</span>)<br>test(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>)<br>test(<span class="hljs-number">1</span>,c = <span class="hljs-number">3</span>)<br>test(<span class="hljs-number">1</span>,<span class="hljs-literal">None</span>,<span class="hljs-number">3</span>)<br></code></pre></td></tr></table></figure>
+
+<pre><code>1 2 1
+1 2 3
+1 2 3
+1 None 3
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 注意，默认值参数必须放在形参后面，除非全有默认值</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test</span>(<span class="hljs-params">a = <span class="hljs-number">1</span>, b, c = <span class="hljs-number">3</span></span>):<br>    <span class="hljs-built_in">print</span>(a,b,c)<br>    <span class="hljs-keyword">return</span><br></code></pre></td></tr></table></figure>
+
+<pre><code>Cell In[46], line 2
+    def test(a = 1, b, c = 3):
+                    ^
+SyntaxError: parameter without a default follows parameter with a default
+</code></pre>
+<h3 id="2-4-可变位置参数"><a href="#2-4-可变位置参数" class="headerlink" title="2.4 可变位置参数"></a>2.4 可变位置参数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 在变量名前加上 * 可以将所有数据收集成一个元组，不传都行，是空元组</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test</span>(<span class="hljs-params">*args</span>):<br>    <span class="hljs-built_in">print</span>(args)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-built_in">type</span>(args))<br>    <span class="hljs-built_in">print</span>()<br>    <span class="hljs-keyword">return</span><br> <br>test(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>)<br>test()<br> <br><span class="hljs-comment"># 也可以先传普通形参</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test</span>(<span class="hljs-params">a,*args</span>):<br>    <span class="hljs-built_in">print</span>(a)<br>    <span class="hljs-built_in">print</span>(args)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-built_in">type</span>(args))<br>    <span class="hljs-keyword">return</span><br>test(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>)<br></code></pre></td></tr></table></figure>
+
+<pre><code>(1, 2, 3)
+&lt;class &#39;tuple&#39;&gt;
+
+()
+&lt;class &#39;tuple&#39;&gt;
+
+1
+(2,)
+&lt;class &#39;tuple&#39;&gt;
+</code></pre>
+<h3 id="2-5-可变关键词参数（字典）"><a href="#2-5-可变关键词参数（字典）" class="headerlink" title="2.5 可变关键词参数（字典）"></a>2.5 可变关键词参数（字典）</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 在变量名前加 ** ，可以将后面传入的参数以字典的形式传入,且必须以关键词传参</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test</span>(<span class="hljs-params">a,**kwargs</span>):<br>    <span class="hljs-built_in">print</span>(kwargs)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-built_in">type</span>(kwargs))<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> kwargs:<br>        <span class="hljs-built_in">print</span>(i,kwargs[i])<br> <br>test(<span class="hljs-number">1</span>,b=<span class="hljs-number">2</span>,c=<span class="hljs-number">3</span>)<br></code></pre></td></tr></table></figure>
+
+<pre><code>&#123;&#39;b&#39;: 2, &#39;c&#39;: 3&#125;
+&lt;class &#39;dict&#39;&gt;
+b 2
+c 3
+</code></pre>
+<ul>
+<li>两个可变参数的联合使用  </li>
+<li>实质是剩余参数传递，即普通形参传完后剩余的参数传递给可变参数</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">test</span>(<span class="hljs-params">a,*args,**kwargs</span>):<br>    <span class="hljs-built_in">print</span>(a)<br>    <span class="hljs-built_in">print</span>(args)<br>    <span class="hljs-built_in">print</span>(kwargs)<br> <br>test(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,Name = <span class="hljs-string">&#x27;clocky7&#x27;</span>)<br></code></pre></td></tr></table></figure>
+
+<pre><code>1
+(2, 3, 4)
+&#123;&#39;Name&#39;: &#39;clocky7&#39;&#125;
+</code></pre>
+<h3 id="2-6-多参数解包"><a href="#2-6-多参数解包" class="headerlink" title="2.6 多参数解包"></a>2.6 多参数解包</h3><h4 id="2-6-1-解包位置传参"><a href="#2-6-1-解包位置传参" class="headerlink" title="2.6.1 解包位置传参"></a>2.6.1 解包位置传参</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#就是反过来在实参中使用*</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test</span>(<span class="hljs-params">a,b,c</span>):<br>    <span class="hljs-built_in">print</span>(a,b,c)<br> <br>x = (<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>)<br>test(*x)<br></code></pre></td></tr></table></figure>
+
+<pre><code>1 2 3
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 实参多于形参</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test</span>(<span class="hljs-params">a,b,c</span>):<br>    <span class="hljs-built_in">print</span>(a,b,c)<br> <br>x = (<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>)<br>test(*x)<br></code></pre></td></tr></table></figure>
+
+<pre><code>---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+Cell In[68], line 6
+    3     print(a,b,c)
+    5 x = (1,2,3,4)
+----&gt; 6 test(*x)
+
+TypeError: test() takes 3 positional arguments but 4 were given
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 实参少于形参</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test</span>(<span class="hljs-params">a,b,c</span>):<br>    <span class="hljs-built_in">print</span>(a,b,c)<br>x = (<span class="hljs-number">1</span>,<span class="hljs-number">2</span>)<br>test(*x)<br></code></pre></td></tr></table></figure>
+
+<pre><code>---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+Cell In[70], line 5
+    3     print(a,b,c)
+    4 x = (1,2)
+----&gt; 5 test(*x)
+
+TypeError: test() missing 1 required positional argument: &#39;c&#39;
+</code></pre>
+<h4 id="2-6-2-解包关键字传参（字典）"><a href="#2-6-2-解包关键字传参（字典）" class="headerlink" title="2.6.2 解包关键字传参（字典）"></a>2.6.2 解包关键字传参（字典）</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">test</span>(<span class="hljs-params">a,b,c</span>):<br>    <span class="hljs-built_in">print</span>(a,b,c)<br>x = &#123;<span class="hljs-string">&#x27;a&#x27;</span>:<span class="hljs-number">1</span>,<span class="hljs-string">&#x27;c&#x27;</span>:<span class="hljs-number">3</span>,<span class="hljs-string">&#x27;b&#x27;</span>:<span class="hljs-number">2</span>&#125;<br>test(**x)<br></code></pre></td></tr></table></figure>
+
+<pre><code>1 2 3
+</code></pre>
+<p><em><strong>注意 ： * 本身不是参数，只是一个占位符</strong></em></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">test</span>(<span class="hljs-params">a,*,b = <span class="hljs-number">3</span></span>):<br>    <span class="hljs-built_in">print</span>(a,b)<br>test(<span class="hljs-number">1</span>)<br></code></pre></td></tr></table></figure>
+
+<pre><code>1 3
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">test</span>(<span class="hljs-params">a,*,b = <span class="hljs-number">3</span></span>):<br>    <span class="hljs-built_in">print</span>(a,b)<br>test(<span class="hljs-number">1</span>,<span class="hljs-number">3</span>)<br></code></pre></td></tr></table></figure>
+
+<pre><code>---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+Cell In[83], line 3
+    1 def test(a,*,b = 3):
+    2     print(a,b)
+----&gt; 3 test(1,3)
+
+TypeError: test() takes 1 positional argument but 2 were given
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 意思是*占一个参数位置，其后面的参数若要传参必须以关键字传参</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test</span>(<span class="hljs-params">a,*,b = <span class="hljs-number">3</span></span>):<br>    <span class="hljs-built_in">print</span>(a,b)<br>test(<span class="hljs-number">1</span>,b = <span class="hljs-number">4</span>)<br></code></pre></td></tr></table></figure>
+
+<pre><code>1 4
+</code></pre>
+<h2 id="三-可变与不可变参数"><a href="#三-可变与不可变参数" class="headerlink" title="三.可变与不可变参数"></a>三.可变与不可变参数</h2><p>实质上是传入变量中的数据,但指向一个对象。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 传不可变数据</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test</span>(<span class="hljs-params">a</span>): <span class="hljs-comment">#这里其实本质是传入10，但x作为一个变量兼对象，所以其实是传入了地址引用</span><br>    a = <span class="hljs-number">20</span><br> <br>x = <span class="hljs-number">10</span><br>test(x)<br><span class="hljs-built_in">print</span>(x)<br> <br> <br><span class="hljs-comment"># 传可变数据</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test</span>(<span class="hljs-params">a</span>):<br>    a[<span class="hljs-number">0</span>] = <span class="hljs-number">20</span><br> <br>y = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>]<br>test(y)<br><span class="hljs-built_in">print</span>(y)<br></code></pre></td></tr></table></figure>
+
+<pre><code>10
+[20, 2, 3]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 不可变的元组也一样</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test</span>(<span class="hljs-params">a</span>):<br>    a[<span class="hljs-number">0</span>] = <span class="hljs-number">20</span><br>z = (<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>)<br>test(z)<br><span class="hljs-built_in">print</span>(z)<br></code></pre></td></tr></table></figure>
+
+<pre><code>---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+Cell In[92], line 5
+    3     a[0] = 20
+    4 z = (1,2,3)
+----&gt; 5 test(z)
+    6 print(z)
+
+Cell In[92], line 3, in test(a)
+    2 def test(a):
+----&gt; 3     a[0] = 20
+
+TypeError: &#39;tuple&#39; object does not support item assignment
+</code></pre>
+<h2 id="四-匿名函数"><a href="#四-匿名函数" class="headerlink" title="四.匿名函数"></a>四.匿名函数</h2><p>没有名字，可以有任意数量的参数，但只能包含一个表达式，并返回该表达式的结果。用lambda定义匿名函数。</p>
+<ul>
+<li>lambda arguments: expression</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><br>fn = <span class="hljs-keyword">lambda</span> x:x+<span class="hljs-number">1</span><br><span class="hljs-built_in">print</span>(fn(<span class="hljs-number">1</span>))<br> <br><span class="hljs-comment"># 用于条件表达式,判断是否为偶数</span><br>is_even = <span class="hljs-keyword">lambda</span> x: <span class="hljs-string">&quot;Even&quot;</span> <span class="hljs-keyword">if</span> x % <span class="hljs-number">2</span> == <span class="hljs-number">0</span> <span class="hljs-keyword">else</span> <span class="hljs-string">&quot;Odd&quot;</span><br> <br><span class="hljs-built_in">print</span>(is_even(<span class="hljs-number">4</span>))  <span class="hljs-comment"># 输出: Even</span><br><span class="hljs-built_in">print</span>(is_even(<span class="hljs-number">7</span>))  <span class="hljs-comment"># 输出: Odd</span><br><br></code></pre></td></tr></table></figure>
+
+<pre><code>2
+Even
+Odd
+</code></pre>
+<h2 id="五-内置函数"><a href="#五-内置函数" class="headerlink" title="五.内置函数"></a>五.内置函数</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python"><br><span class="hljs-comment"># all函数 可迭代对象中的所有元素都为 `True`，返回 `True`，否则返回 `False`</span><br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">all</span>([<span class="hljs-literal">True</span>, <span class="hljs-literal">True</span>, <span class="hljs-literal">False</span>]))  <span class="hljs-comment"># 输出: False</span><br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">all</span>([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]))           <span class="hljs-comment"># 输出: True</span><br> <br><span class="hljs-built_in">print</span>()<br> <br><span class="hljs-comment"># any函数 可迭代对象中只要一个元素为 `True`，返回 `True`，否则返回 `False`</span><br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">any</span>([<span class="hljs-literal">False</span>, <span class="hljs-literal">False</span>, <span class="hljs-literal">False</span>]))  <span class="hljs-comment"># 输出: False</span><br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">any</span>([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]))             <span class="hljs-comment"># 输出: True</span><br><br></code></pre></td></tr></table></figure>
+
+<pre><code>False
+True
+
+False
+True
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><br><span class="hljs-comment"># sum函数，返回可迭代对象中所有元素的总和</span><br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">sum</span>([<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>]))<br><br></code></pre></td></tr></table></figure>
+
+<pre><code>15
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python"><br><span class="hljs-comment"># sorted 返回一个新列表，其中包含可迭代对象中的元素，按照升序排序（这就是默认排序）</span><br>l = (<span class="hljs-number">1</span>, <span class="hljs-number">5</span>, <span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">4</span>)<br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">sorted</span>(l))<br> <br><span class="hljs-comment"># sorted() 函数还可以接受一个 key 参数，指定一个函数，用这个函数操作的结果来排序（排序的内容仍然是原可迭代对象中的元素）</span><br>l = (<span class="hljs-number">1</span>, <span class="hljs-number">5</span>, <span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">4</span>)<br><span class="hljs-keyword">def</span> <span class="hljs-title function_">my_key</span>(<span class="hljs-params">x</span>):<br>    <span class="hljs-keyword">return</span> x % <span class="hljs-number">3</span><br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">sorted</span>(l, key=my_key))<br><br></code></pre></td></tr></table></figure>
+
+<pre><code>[1, 2, 3, 4, 5]
+[3, 1, 4, 5, 2]
+</code></pre>
+<p><em>这里补充一个小知识：经典的math库中abs()表示取绝对值</em></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><br><span class="hljs-comment"># reversed() 返回一个反向迭代器</span><br>x = <span class="hljs-built_in">reversed</span>([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>])<br> <br><span class="hljs-comment"># 将方向迭代器转换为列表</span><br>re = <span class="hljs-built_in">list</span>(x)<br> <br><span class="hljs-built_in">print</span>(x,<span class="hljs-built_in">type</span>(x))<br><span class="hljs-built_in">print</span>(re)<br><br></code></pre></td></tr></table></figure>
+
+<pre><code>&lt;list_reverseiterator object at 0x0000019B8496A530&gt; &lt;class &#39;list_reverseiterator&#39;&gt;
+[3, 2, 1]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><br><span class="hljs-comment"># callable 检查对象是否可以当函数被调用</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">fn</span>(<span class="hljs-params">x</span>):<br>    <span class="hljs-keyword">return</span><br> <br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">callable</span>(fn))<br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">callable</span>(<span class="hljs-built_in">print</span>))<br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">callable</span>(<span class="hljs-number">123</span>))<br><br></code></pre></td></tr></table></figure>
+
+<pre><code>True
+True
+False
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><br><span class="hljs-comment"># zip 将多个可迭代对象中对应元素打包成一个zip对象，常用于并行遍历多个序列，如果超出则丢弃</span><br>a = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]<br>b = (<span class="hljs-string">&#x27;name&#x27;</span>,<span class="hljs-string">&#x27;age&#x27;</span>)<br>c = (<span class="hljs-string">&#x27;clocky&#x27;</span>,<span class="hljs-string">&#x27;20&#x27;</span>)<br> <br>x = <span class="hljs-built_in">zip</span>(a,b,c)<br><span class="hljs-built_in">print</span>(x,<span class="hljs-built_in">type</span>(x))<br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">list</span>(x))<br><br></code></pre></td></tr></table></figure>
+
+<pre><code>&lt;zip object at 0x0000019B84F18880&gt; &lt;class &#39;zip&#39;&gt;
+[(1, &#39;name&#39;, &#39;clocky&#39;), (2, &#39;age&#39;, &#39;20&#39;)]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><br><span class="hljs-comment"># exec 执行存储在字符串中的 Python 代码（这个比eval能写的内容更多）</span><br><span class="hljs-comment"># eval 只能执行一个字符串表达式，exec可以执行多行</span><br>code = <span class="hljs-string">&#x27;&#x27;&#x27;for i in range(3): </span><br><span class="hljs-string">            print(i)&#x27;&#x27;&#x27;</span><br> <br><span class="hljs-built_in">exec</span>(code)<br><br></code></pre></td></tr></table></figure>
+
+<pre><code>0
+1
+2
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><br><span class="hljs-comment"># globals 返回值为一个字典，字典key为当前python环境全局变量的名字</span><br> <br><span class="hljs-keyword">for</span> key <span class="hljs-keyword">in</span> <span class="hljs-built_in">globals</span>():<br>    <span class="hljs-built_in">print</span>(key)<br><br></code></pre></td></tr></table></figure>
+
+<pre><code>__name__
+__doc__
+__package__
+__loader__
+__spec__
+__builtin__
+__builtins__
+........
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><br><span class="hljs-comment"># locals 返回一个字典，字典key为当前函数内部或者局部的变量名</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">fn</span>(<span class="hljs-params">x</span>):<br>    y = x + <span class="hljs-number">1</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-built_in">locals</span>())<br> <br>fn(<span class="hljs-number">1</span>)<br><br></code></pre></td></tr></table></figure>
+
+<pre><code>&#123;&#39;x&#39;: 1, &#39;y&#39;: 2&#125;
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><br><span class="hljs-comment"># filter（fun,x） 返回一个经过函数筛选的可迭代对象filter,函数操作后实际会给出一个布尔值，若为True则原数据保留，否则丢弃</span><br><span class="hljs-comment"># filter 又叫过滤器</span><br>numbers = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>]<br>filtered = <span class="hljs-built_in">filter</span>(<span class="hljs-keyword">lambda</span> x: x**<span class="hljs-number">2</span>, numbers)<br><span class="hljs-built_in">print</span>(filtered,<span class="hljs-built_in">type</span>(filtered))<br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">list</span>(filtered)) <br><br></code></pre></td></tr></table></figure>
+
+<pre><code>&lt;filter object at 0x000002A4449C1F60&gt; &lt;class &#39;filter&#39;&gt;
+[1, 2, 3, 4, 5]
+</code></pre>
+<h3 id="5-1-高阶函数"><a href="#5-1-高阶函数" class="headerlink" title="5.1 高阶函数"></a>5.1 高阶函数</h3><h4 id="5-1-1-map"><a href="#5-1-1-map" class="headerlink" title="5.1.1 map"></a>5.1.1 map</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><br><span class="hljs-comment"># 类似filter()函数，返回一个迭代器</span><br>x = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>,<span class="hljs-number">7</span>,<span class="hljs-number">8</span>,<span class="hljs-number">9</span>,<span class="hljs-number">10</span>]<br><span class="hljs-keyword">def</span> <span class="hljs-title function_">is_even</span>(<span class="hljs-params">n</span>):<br>    <span class="hljs-keyword">if</span> n % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>:<br>        <span class="hljs-keyword">return</span> n<br> <br>even_numbers = <span class="hljs-built_in">map</span>(is_even, x)<br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">list</span>(even_numbers))<br><br></code></pre></td></tr></table></figure>
+
+<pre><code>[None, 2, None, 4, None, 6, None, 8, None, 10]
+</code></pre>
+<h4 id="5-1-2-reduce"><a href="#5-1-2-reduce" class="headerlink" title="5.1.2 reduce"></a>5.1.2 reduce</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python"><br><span class="hljs-comment"># 这里不同的是用于两个参数的函数，reduce会将函数操作后的返回值作为第一个参数，再取下一个数据</span><br><span class="hljs-comment"># reduce(fun,arg,init)会返回函数的最后一个返回值,其中init是初始值，可自定义，将其作为第一个参数，多用于累加后再加一个值</span><br><span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> reduce<br> <br>x = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>]<br><span class="hljs-keyword">def</span> <span class="hljs-title function_">fn</span>(<span class="hljs-params">a,b</span>):<br>    <span class="hljs-built_in">print</span>(a,b)<br>    <span class="hljs-keyword">return</span> a+b<br>re = reduce(fn,x,<span class="hljs-number">0</span>)<br> <br><span class="hljs-built_in">print</span>()<br><span class="hljs-built_in">print</span>(re)<br><br></code></pre></td></tr></table></figure>
+
+<pre><code>0 1
+1 2
+3 3
+6 4
+10 5
+
+15
+</code></pre>
+<h2 id="六-变量作用域"><a href="#六-变量作用域" class="headerlink" title="六.变量作用域"></a>六.变量作用域</h2><ul>
+<li><p>指在程序中某个变量的有效范围，也就是在代码的哪个部分可以访问或修改该变量</p>
+</li>
+<li><p>Python中的变量作用域遵循LEGB规则（Local, Enclosing, Global, Built-in），依次搜索变量的定义位置</p>
+</li>
+<li><p>函数内部可以访问内部变量和外部的全局变量，外部则不能访问内部局部变量</p>
+</li>
+</ul>
+<h3 id="6-1-Local→局部作用域"><a href="#6-1-Local→局部作用域" class="headerlink" title="6.1 Local→局部作用域"></a>6.1 Local→局部作用域</h3><p>在函数调用时被创建，在函数调用后自动销毁。</p>
+<h3 id="6-2-Enclosing→嵌套作用域"><a href="#6-2-Enclosing→嵌套作用域" class="headerlink" title="6.2 Enclosing→嵌套作用域"></a>6.2 Enclosing→嵌套作用域</h3><ul>
+<li><p>指外层函数中的变量，在内层函数中可访问，但不可修改。</p>
+</li>
+<li><p>当一个函数嵌套在另一个函数内部时，外层函数的变量属于Enclosing作用域</p>
+</li>
+<li><p>内层函数变量若与外层变量同名，则优先选择内层</p>
+</li>
+<li><p>实质上就是在最内层找到变量，若找不到，则继续往外层找，一层一层直到找到为止。</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python"><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">fn1</span>():<br>    a = <span class="hljs-number">100</span><br> <br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">fn2</span>():<br>        a = <span class="hljs-number">200</span><br>        <span class="hljs-built_in">print</span>(a)<br>    fn2()<br> <br>fn1()<br><br></code></pre></td></tr></table></figure>
+
+<pre><code>200
+</code></pre>
+<h3 id="6-3-全局作用域"><a href="#6-3-全局作用域" class="headerlink" title="6.3 全局作用域"></a>6.3 全局作用域</h3><ul>
+<li><p>指模块级别定义的变量，整个模块都可以访问。</p>
+</li>
+<li><p>如果想在函数中修改全局变量，需要使用<code>global</code>关键字</p>
+</li>
+</ul>
+<h3 id="6-4-Built-in→内建作用域"><a href="#6-4-Built-in→内建作用域" class="headerlink" title="6.4 Built-in→内建作用域"></a>6.4 Built-in→内建作用域</h3><ul>
+<li><p>包含Python内建的函数、异常和常量，如<code>print()</code>, <code>len()</code>, <code>int</code>, <code>Exception</code>等。</p>
+</li>
+<li><p>这些变量可以在任何地方使用。</p>
+</li>
+</ul>
+<h3 id="6-5-函数调用问题"><a href="#6-5-函数调用问题" class="headerlink" title="6.5 函数调用问题"></a>6.5 函数调用问题</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><br><span class="hljs-comment"># 特殊调用</span><br>a = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-keyword">lambda</span> x:x+<span class="hljs-number">1</span>]<br>a[<span class="hljs-number">3</span>](<span class="hljs-number">1</span>)<br><br></code></pre></td></tr></table></figure>
+
+<pre><code>2
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><br><span class="hljs-comment"># 函数无论在哪里调用，一定是在它定义的作用域下运行</span><br>a = <span class="hljs-number">1</span><br> <br><span class="hljs-keyword">def</span> <span class="hljs-title function_">fn</span>():<br>    <span class="hljs-built_in">print</span>(a)<br> <br><span class="hljs-keyword">def</span> <span class="hljs-title function_">fn1</span>():<br>    a = <span class="hljs-number">2</span><br>    fn()<br> <br>fn1()<br><br></code></pre></td></tr></table></figure>
+
+<pre><code>1
+</code></pre>
+<p><em><strong>修改变量的值</strong></em></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><br><span class="hljs-comment"># 一个会报错的情况，x的赋值和print顺序不能换，换了甚至取不到外面的值</span><br>x = <span class="hljs-number">1</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">f1</span>():<br>    <span class="hljs-built_in">print</span>(x)<br>    x = <span class="hljs-number">2</span><br> <br>f1()<br><br></code></pre></td></tr></table></figure>
+
+<pre><code>---------------------------------------------------------------------------
+UnboundLocalError                         Traceback (most recent call last)
+Cell In[31], line 7
+    4     print(x)
+    5     x = 2
+----&gt; 7 f1()
+
+Cell In[31], line 4, in f1()
+    3 def f1():
+----&gt; 4     print(x)
+    5     x = 2
+
+UnboundLocalError: cannot access local variable &#39;x&#39; where it is not associated with a value
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><br><span class="hljs-comment"># 修改全局变量</span><br>a = <span class="hljs-number">1</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">f1</span>():<br>    <br>    <span class="hljs-keyword">global</span> a<br>    <span class="hljs-built_in">print</span>(a)<br>    a = <span class="hljs-number">2</span><br> <br>f1()<br><span class="hljs-built_in">print</span>(a)<br><br></code></pre></td></tr></table></figure>
+
+<pre><code>1
+2
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><br><span class="hljs-comment"># 修改函数外层变量</span><br>a = <span class="hljs-number">1</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">foo</span>():<br>    a = <span class="hljs-number">2</span><br> <br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">foo1</span>():<br>        <span class="hljs-keyword">nonlocal</span> a<br>        <span class="hljs-built_in">print</span>(a)<br>        a = <span class="hljs-number">3</span><br> <br>    foo1()<br>    <span class="hljs-built_in">print</span>(a)<br> <br>foo()<br><span class="hljs-built_in">print</span>(a)<br><br></code></pre></td></tr></table></figure>
+
+<pre><code>2
+3
+1
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><br><span class="hljs-comment"># 变量查找遵从由内向外，全局之后还有官方系统的内建作用域</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">f1</span>():<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">f2</span>():<br>        <span class="hljs-built_in">print</span>(__name__)<br>    f2()<br>f1()<br><br></code></pre></td></tr></table></figure>
+
+<pre><code>__main__
+</code></pre>
+<h3 id="6-6-函数内层分配"><a href="#6-6-函数内层分配" class="headerlink" title="6.6 函数内层分配"></a>6.6 函数内层分配</h3><p>1.将函数代码存储到代码区，函数中代码不执行。</p>
+<p>2.调用函数时，在内存中开辟空间（栈帧），存储函数内部定义的变量。</p>
+<p>3.函数调用后，栈帧立即被释放。</p>
+<h2 id="七-递归函数"><a href="#七-递归函数" class="headerlink" title="七.递归函数"></a>七.递归函数</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><br><span class="hljs-comment"># 先将一个简单的,函数内部的作用域是可以访问定义的函数自身的,但是很容易陷入死循环（函数自调用）</span><br><span class="hljs-comment"># 这种情况一般和条件语句混合使用，强行退出自调用</span><br>a = <span class="hljs-number">1</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">fn</span>():<br>    <span class="hljs-keyword">pass</span><br> <br><span class="hljs-keyword">def</span> <span class="hljs-title function_">fn1</span>():<br>    <span class="hljs-built_in">print</span>(a)<br>    <span class="hljs-built_in">print</span>(fn())<br>    <span class="hljs-built_in">print</span>(fn1())<br>fn1()<br><br></code></pre></td></tr></table></figure>
+
+<pre><code>1 None
+1 None
+1 None 
+...
+1 None
+1 None
+
+---------------------------------------------------------------------------
+RecursionError                            Traceback (most recent call last)
+Cell In[40], line 10
+    8     print(fn())
+    9     print(fn1())
+---&gt; 10 fn1()
+
+Cell In[40], line 9, in fn1()
+    7 print(a)
+    8 print(fn())
+----&gt; 9 print(fn1())
+
+Cell In[40], line 9, in fn1()
+    7 print(a)
+    8 print(fn())
+----&gt; 9 print(fn1())
+
+    [... skipping similar frames: fn1 at line 9 (2972 times)]
+
+Cell In[40], line 9, in fn1()
+    7 print(a)
+    8 print(fn())
+----&gt; 9 print(fn1())
+
+Cell In[40], line 7, in fn1()
+    6 def fn1():
+----&gt; 7     print(a)
+    8     print(fn())
+    9     print(fn1())
+
+File c:\Users\Clocky7\anaconda3\envs\start1\Lib\site-packages\ipykernel\iostream.py:664, in OutStream.write(self, string)
+    655 def write(self, string: str) -&gt; Optional[int]:  # type:ignore[override]
+    656     &quot;&quot;&quot;Write to current stream after encoding if necessary
+    657 
+    658     Returns
+(...)    662 
+    663     &quot;&quot;&quot;
+--&gt; 664     parent = self.parent_header
+    666     if not isinstance(string, str):
+    667         msg = f&quot;write() argument must be str, not &#123;type(string)&#125;&quot;  # type:ignore[unreachable]
+
+RecursionError: maximum recursion depth exceeded
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 正确用法</span><br>a = <span class="hljs-number">1</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">fn</span>(<span class="hljs-params">x</span>):<br>    <span class="hljs-keyword">if</span> x &gt;= <span class="hljs-number">5</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">5</span><br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-keyword">return</span> fn(x+<span class="hljs-number">1</span>)<br>    <br>fn(a)<br></code></pre></td></tr></table></figure>
+
+<pre><code>5
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python"><br><span class="hljs-comment"># 用于阶乘计算</span><br> <br><span class="hljs-keyword">def</span> <span class="hljs-title function_">jiecheng</span>(<span class="hljs-params">a</span>):<br>    <span class="hljs-keyword">if</span> a &lt;= <span class="hljs-number">1</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span><br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-keyword">return</span> a * jiecheng(a - <span class="hljs-number">1</span>)<br> <br><span class="hljs-built_in">print</span>(jiecheng(<span class="hljs-number">5</span>))<br><br></code></pre></td></tr></table></figure>
+
+<pre><code>120
+</code></pre>
+<div id="paginator"></div></div><div id="post-footer"><div id="pages" style="justify-content: flex-end"><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/post/d47c321/">python语句基础 上一篇 →</a></div></div></div></div><div class="bottom-btn"><div><a class="i-top" id="to-top" onClick="scrolls.scrolltop();" title="回到顶部" style="opacity: 0; display: none;">∧ </a><a class="i-index" id="to-index" href="#toc-div" title="文章目录">≡</a><a class="i-color" id="color-mode" onClick="colorMode.change()" title="切换主题"></a><a onclick="BgmControl()"><svg id="bgm-control" viewBox="0 0 30 34" fill="#18d1ff" style="width: 24px; transition: transform .3s;margin-top: 4px"><path d="M25.998 23.422V11.29h3.999v12.132h-3.999zM19.497 6.234h4.001v22.243h-4.001V6.234zM12.998.867h4v32.978h-4V.867zm-6.5 5.367h4.001v22.243H6.498V6.234zm-6.5 5.056h4v12.132h-4V11.29z"></path></svg><audio id="bgm" src="/audio/bgm.mp3" autoplay loop crossorigin="anonymous"> </audio></a></div></div></article><aside><div id="about"><a href="/" id="logo"><img src="https://ak.hypergryph.com/assets/index/images/ak/pc/faction/1.png" alt="Logo" style="margin:0;border-radius:0;"></a><h1 id="Dr"><a href="/">Clocky7</a></h1><div id="description"><p></p></div><div id="social-links"><a class="social" target="_blank" rel="noopener" href="https://github.com/Clocky7"><i class="fab fa-github" alt="GitHub"></i></a></div></div><div id="aside-block"><div id="toc-div"><h1>目录</h1><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80-%E5%87%BD%E6%95%B0%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="toc-number">1.</span> <span class="toc-text">一.函数基础知识</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C-%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">二.函数调用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E4%BD%8D%E7%BD%AE%E4%BC%A0%E5%8F%82"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 位置传参</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E5%85%B3%E9%94%AE%E8%AF%8D%E4%BC%A0%E5%8F%82"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 关键词传参</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E5%8F%82%E6%95%B0%E9%BB%98%E8%AE%A4%E5%80%BC"><span class="toc-number">2.3.</span> <span class="toc-text">2.3 参数默认值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-%E5%8F%AF%E5%8F%98%E4%BD%8D%E7%BD%AE%E5%8F%82%E6%95%B0"><span class="toc-number">2.4.</span> <span class="toc-text">2.4 可变位置参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-%E5%8F%AF%E5%8F%98%E5%85%B3%E9%94%AE%E8%AF%8D%E5%8F%82%E6%95%B0%EF%BC%88%E5%AD%97%E5%85%B8%EF%BC%89"><span class="toc-number">2.5.</span> <span class="toc-text">2.5 可变关键词参数（字典）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-6-%E5%A4%9A%E5%8F%82%E6%95%B0%E8%A7%A3%E5%8C%85"><span class="toc-number">2.6.</span> <span class="toc-text">2.6 多参数解包</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-6-1-%E8%A7%A3%E5%8C%85%E4%BD%8D%E7%BD%AE%E4%BC%A0%E5%8F%82"><span class="toc-number">2.6.1.</span> <span class="toc-text">2.6.1 解包位置传参</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-6-2-%E8%A7%A3%E5%8C%85%E5%85%B3%E9%94%AE%E5%AD%97%E4%BC%A0%E5%8F%82%EF%BC%88%E5%AD%97%E5%85%B8%EF%BC%89"><span class="toc-number">2.6.2.</span> <span class="toc-text">2.6.2 解包关键字传参（字典）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89-%E5%8F%AF%E5%8F%98%E4%B8%8E%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0"><span class="toc-number">3.</span> <span class="toc-text">三.可变与不可变参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B-%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0"><span class="toc-number">4.</span> <span class="toc-text">四.匿名函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94-%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0"><span class="toc-number">5.</span> <span class="toc-text">五.内置函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0"><span class="toc-number">5.1.</span> <span class="toc-text">5.1 高阶函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#5-1-1-map"><span class="toc-number">5.1.1.</span> <span class="toc-text">5.1.1 map</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-1-2-reduce"><span class="toc-number">5.1.2.</span> <span class="toc-text">5.1.2 reduce</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD-%E5%8F%98%E9%87%8F%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-number">6.</span> <span class="toc-text">六.变量作用域</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-Local%E2%86%92%E5%B1%80%E9%83%A8%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-number">6.1.</span> <span class="toc-text">6.1 Local→局部作用域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-Enclosing%E2%86%92%E5%B5%8C%E5%A5%97%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-number">6.2.</span> <span class="toc-text">6.2 Enclosing→嵌套作用域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3-%E5%85%A8%E5%B1%80%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-number">6.3.</span> <span class="toc-text">6.3 全局作用域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-4-Built-in%E2%86%92%E5%86%85%E5%BB%BA%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-number">6.4.</span> <span class="toc-text">6.4 Built-in→内建作用域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-5-%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E9%97%AE%E9%A2%98"><span class="toc-number">6.5.</span> <span class="toc-text">6.5 函数调用问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-6-%E5%87%BD%E6%95%B0%E5%86%85%E5%B1%82%E5%88%86%E9%85%8D"><span class="toc-number">6.6.</span> <span class="toc-text">6.6 函数内层分配</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%83-%E9%80%92%E5%BD%92%E5%87%BD%E6%95%B0"><span class="toc-number">7.</span> <span class="toc-text">七.递归函数</span></a></li></ol></div></div><footer><nobr>构建自 <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr><wbr><nobr> 使用主题 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus/hexo-theme-arknights">Arknights</a></nobr><wbr><nobr> 主题作者 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus">Yue_plus</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas></body></html>
