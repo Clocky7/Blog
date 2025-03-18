@@ -1,0 +1,192 @@
+<!DOCTYPE html><html lang="zh-cn" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>python语句基础 | Clocky7's Blog</title><link rel="icon" type="image/x-icon" href="/favicon.ico"><link rel="preload" as="font" crossorigin="anonymous" href="/font/Bender.ttf"><link rel="preload" as="font" crossorigin="anonymous" href="/font/BenderLight.ttf"><link rel="preload" as="font" crossorigin="anonymous" href="/font/JetBrainsMono-Regular.woff2"><link rel="stylesheet" href="/css/arknights.css"><style>@font-face {
+  font-family: Bender;
+  src: local('Bender'), url("/font/Bender.ttf"), url("/font/Bender.otf");
+}
+@font-face {
+  font-family: BenderLight;
+  src: local('BenderLight'), url("/font/BenderLight.ttf");
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}
+</style><script>var config = {"root":"/","search":{"preload":false,"activeHolder":"键入以继续","blurHolder":"搜索","noResult":"无 $0 相关数据"},"code":{"codeInfo":"$0 - $1 行","copy":"复制"}}</script><link type="text/css" rel="stylesheet" href="/lib/encrypt/hbe.style.css"><script src="//unpkg.com/mermaid@10.5.0/dist/mermaid.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+ menuSettings: {
+   zoom: "None"
+ },
+ showMathMenu: false,
+ jax: ["input/TeX","output/CommonHTML"],
+ extensions: ["tex2jax.js"],
+ TeX: {
+   extensions: ["AMSmath.js","AMSsymbols.js"],
+   equationNumbers: {
+     autoNumber: "AMS"
+   }
+ },
+ tex2jax: {
+   inlineMath: [["\\(", "\\)"]],
+   displayMath: [["\\[", "\\]"]]
+ }
+});</script><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lightgallery.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-zoom.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-thumbnail.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/css/all.min.css"><style defer src="article.css"></style><link rel="stylesheet" href="article.css"><script>if (window.localStorage.getItem('theme-mode') === 'light')
+ document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark')
+ document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.woff2") format('woff2');
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}</style><style>:root {
+ --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
+ --light-background: url('/img/bk.jpg');
+ --theme-encrypt-confirm: '确认'
+}</style><script defer src="/js/arknights.js"></script><script defer src="/js/search.js"></script><script defer type="module">import mermaid from '//unpkg.com/mermaid@10.5.0/dist/mermaid.esm.mjs';
+window.mermaid = mermaid;
+code.paintMermaid();
+</script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+  menuSettings: {
+    zoom: "None"
+  },
+  showMathMenu: false,
+  jax: ["input/TeX","output/CommonHTML"],
+  extensions: ["tex2jax.js"],
+  TeX: {
+    extensions: ["AMSmath.js","AMSsymbols.js"],
+    equationNumbers: {
+      autoNumber: "AMS"
+    }
+  },
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]]
+  }
+});
+</script><script async src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script async src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script async src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script async src="/lib/encrypt/hbe.js"></script><script async src="/js/pjax.js"></script><script class="pjax-js">reset= () => {document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js','data-pjax','.busuanzi'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><script class="pjax-js">reset= () => {document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="loading" style="opacity: 0;"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><div class="navBtn"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><nav><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="搜索" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup" tabindex="0"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">主页</span></a></li><li class="navItem"><a class="navBlock" href="/about/"><span class="navItemTitle">于我</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">归档</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>python语句基础</h1><div id="post-info"><span>文章发布时间: <div class="control"><time datetime="2025-03-18T01:50:09.000Z" id="date"> 2025-03-18</time></div></span><br><span>最后更新时间: <div class="control"><time datetime="2025-03-18T02:07:32.177Z" id="updated"> 2025-03-18</time></div></span><br><span>文章总字数: <div class="control">1.1k</div></span><br><span>预计阅读时间: <div class="control">5 分钟</div></span></div></div><hr><div id="post-content"><ul>
+<li><p>语句是计算机执行程序的最小单位，标准语句写完后以分号结尾，相当于语言的句号，但python不需要。</p>
+</li>
+<li><p>语句又分空语句、单语句、多行语句，python中空语句容易导致程序语义不明，所以python中空语句用pass 表示。</p>
+</li>
+</ul>
+<h2 id="一-单语句"><a href="#一-单语句" class="headerlink" title="一.单语句"></a>一.单语句</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#简单的赋值语句</span><br>a = <span class="hljs-number">10</span><br> <br><span class="hljs-comment">#简单的调用语句</span><br><span class="hljs-built_in">print</span>(a)<br> <br><span class="hljs-comment">#range函数的调用循环语句</span><br><span class="hljs-built_in">range</span>(<span class="hljs-number">10</span>)<br></code></pre></td></tr></table></figure>
+
+<h2 id="二-空语句"><a href="#二-空语句" class="headerlink" title="二.空语句"></a>二.空语句</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># pass表示你这里还是写了东西的，只是为空语句</span><br><span class="hljs-keyword">if</span> a &gt; <span class="hljs-number">10</span> :<br>    <span class="hljs-keyword">pass</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="三-多行语句"><a href="#三-多行语句" class="headerlink" title="三.多行语句"></a>三.多行语句</h2><p>多行语句较为完整，由于是多行所以需要缩进（Tab或4个空格），比如</p>
+<ul>
+<li><p>条件语句 if elif&#x2F;else  </p>
+</li>
+<li><p>循环语句 for&#x2F;while</p>
+</li>
+</ul>
+<h3 id="3-1-条件语句"><a href="#3-1-条件语句" class="headerlink" title="3.1 条件语句"></a>3.1 条件语句</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">if</span> <span class="hljs-literal">True</span>:<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;True&#x27;</span>)<br><span class="hljs-keyword">elif</span> <span class="hljs-literal">True</span>:<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;111&#x27;</span>)<br><span class="hljs-keyword">else</span>:<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;False&#x27;</span>)<br></code></pre></td></tr></table></figure>
+
+<pre><code>True
+</code></pre>
+<h3 id="3-2-循环语句"><a href="#3-2-循环语句" class="headerlink" title="3.2 循环语句"></a>3.2 循环语句</h3><p>就是重复执行一些代码，直到满足条件为止。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 例如for是把可迭代对象中元素遍历完就结束</span><br>a = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>]<br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> a:<br>    <span class="hljs-built_in">print</span>(i)<br></code></pre></td></tr></table></figure>
+
+<p><em><strong>for循环中有个值得注意的叫推导式（在之前的表达式中也提过），多用于新建可迭代对象</strong></em></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#这就是列表推导式</span><br>x = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>]<br>y = [el**<span class="hljs-number">2</span> <span class="hljs-keyword">for</span> el <span class="hljs-keyword">in</span> x] <br><span class="hljs-built_in">print</span>(y)<br> <br><span class="hljs-comment"># 字典推导式</span><br>x = [<span class="hljs-number">65</span>,<span class="hljs-number">66</span>,<span class="hljs-number">67</span>,<span class="hljs-number">68</span>]<br>y = &#123;<span class="hljs-built_in">chr</span>(el):el <span class="hljs-keyword">for</span> el <span class="hljs-keyword">in</span> x&#125;<br><span class="hljs-built_in">print</span>(y)<br> <br>a = &#123;<span class="hljs-string">&#x27;a&#x27;</span>:<span class="hljs-number">1</span>,<span class="hljs-string">&#x27;b&#x27;</span>:<span class="hljs-number">2</span>,<span class="hljs-string">&#x27;c&#x27;</span>:<span class="hljs-number">3</span>&#125;<br>b = &#123;k:v <span class="hljs-keyword">for</span> k,v <span class="hljs-keyword">in</span> a.items()&#125;<br><span class="hljs-built_in">print</span>(b)<br> <br><span class="hljs-comment"># 拓展，x = [表达式 for x in 可迭代对象 if 条件]</span><br>x = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>]<br>y = [el <span class="hljs-keyword">or</span> <span class="hljs-number">100</span> <span class="hljs-keyword">for</span> el <span class="hljs-keyword">in</span> x <span class="hljs-keyword">if</span> el &gt; <span class="hljs-number">2</span>]<br><span class="hljs-built_in">print</span>(y)<br></code></pre></td></tr></table></figure>
+
+<pre><code>[1, 4, 9, 16]
+&#123;&#39;A&#39;: 65, &#39;B&#39;: 66, &#39;C&#39;: 67, &#39;D&#39;: 68&#125;
+&#123;&#39;a&#39;: 1, &#39;b&#39;: 2, &#39;c&#39;: 3&#125;
+[3, 4]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># while 是只要条件满足（表达式为真）就一直循环,有个坏处，容易陷入死循环</span><br><span class="hljs-keyword">while</span> <span class="hljs-literal">False</span>: <span class="hljs-comment">#如果这里是True，就会一直打印hello world</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;hello world&quot;</span>)<br> <br><span class="hljs-keyword">else</span>:<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;gg&quot;</span>)<br> <br><span class="hljs-comment"># while正常用法</span><br>a = <span class="hljs-number">0</span><br><span class="hljs-keyword">while</span> a &lt; <span class="hljs-number">10</span>:<br>    <span class="hljs-built_in">print</span>(a)<br>    a += <span class="hljs-number">1</span><br></code></pre></td></tr></table></figure>
+
+<pre><code>gg
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 特殊的range函数,括号内为左闭右开，默认左边为0,生成range类数据，一个可迭代容器</span><br><span class="hljs-comment"># range(start,end,step),step为取的步长，默认为1，也可以反正取</span><br>x = <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>,<span class="hljs-number">10</span>)<br><span class="hljs-built_in">print</span>(x,<span class="hljs-built_in">type</span>(x))<br> <br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> x:<br>    <span class="hljs-built_in">print</span>(i)<br></code></pre></td></tr></table></figure>
+
+<pre><code>range(0, 10) &lt;class &#39;range&#39;&gt;
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+</code></pre>
+<ul>
+<li>关键字</li>
+</ul>
+<p>&emsp;&emsp;break 会打断所在的循环，跳出循环，继续执行下一行代码  </p>
+<p>&emsp;&emsp;continue 会跳过这次循环，继续下一次循环  </p>
+<p>&emsp;&emsp;pass 表示也不做,整个过程不变</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># break</span><br>a = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>]<br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> a:<br>    <span class="hljs-keyword">if</span> i == <span class="hljs-number">2</span>:<br>        <span class="hljs-keyword">break</span><br>    <span class="hljs-built_in">print</span>(i)<br> <br><span class="hljs-comment"># continue</span><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> a:<br>    <span class="hljs-keyword">if</span> i == <span class="hljs-number">2</span>:<br>        <span class="hljs-keyword">continue</span><br>    <span class="hljs-built_in">print</span>(i)<br> <br><span class="hljs-comment"># pass,程序不会报错</span><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> a:<br>    <span class="hljs-keyword">if</span> i == <span class="hljs-number">2</span>:<br>        <span class="hljs-keyword">pass</span><br></code></pre></td></tr></table></figure>
+
+<pre><code>1
+1
+3
+</code></pre>
+<h2 id="四-函数定义语句"><a href="#四-函数定义语句" class="headerlink" title="四.函数定义语句"></a>四.函数定义语句</h2><p>用于定义一个函数，包含 <code>def</code> 关键字：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">greet</span>(<span class="hljs-params">name</span>):<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Hello, <span class="hljs-subst">&#123;name&#125;</span>!&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<h2 id="五-异常处理语句"><a href="#五-异常处理语句" class="headerlink" title="五.异常处理语句"></a>五.异常处理语句</h2><p>用于捕获和处理可能出现的错误。通过 <code>try</code>、<code>except</code>、<code>else</code> 和 <code>finally</code> 来定义异常处理流程。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">try</span>:<br>    result = <span class="hljs-number">10</span> / <span class="hljs-number">0</span>  <span class="hljs-comment"># 触发异常</span><br><span class="hljs-keyword">except</span> ZeroDivisionError:<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;除数不能为零&quot;</span>)<br><span class="hljs-keyword">else</span>:<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;没有错误&quot;</span>)<br><span class="hljs-keyword">finally</span>:<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;无论如何都会执行&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<pre><code>除数不能为零
+无论如何都会执行
+</code></pre>
+<h2 id="六-导入语句"><a href="#六-导入语句" class="headerlink" title="六.导入语句"></a>六.导入语句</h2><p>用于导入模块或包，使得程序可以使用外部代码和库。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> math  <span class="hljs-comment"># 导入math模块</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="七-注释语句"><a href="#七-注释语句" class="headerlink" title="七.注释语句"></a>七.注释语句</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 这是一个单行注释</span><br>x = <span class="hljs-number">5</span>  <span class="hljs-comment"># 这是一个行尾注释</span><br> <br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">这是一个多行注释</span><br><span class="hljs-string">可以用于更长的解释</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="八-类定义语句"><a href="#八-类定义语句" class="headerlink" title="八.类定义语句"></a>八.类定义语句</h2><p>用于定义一个类，类中包含属性和方法。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Person</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, name, age</span>):<br>        <span class="hljs-variable language_">self</span>.name = name<br>        <span class="hljs-variable language_">self</span>.age = age<br>    <br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">greet</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Hello, my name is <span class="hljs-subst">&#123;self.name&#125;</span> and I am <span class="hljs-subst">&#123;self.age&#125;</span> years old.&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<h2 id="九-with语句"><a href="#九-with语句" class="headerlink" title="九.with语句"></a>九.with语句</h2><p>用于处理资源管理（如文件操作），确保资源在使用后被正确关闭或释放。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># open函数,第一个参数为文件名，第二个参数为打开文件的方式</span><br>f = <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;./1.txt&#x27;</span>,<span class="hljs-string">&#x27;r&#x27;</span>)<br><span class="hljs-built_in">print</span>(f)<br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> f:<br>    <span class="hljs-built_in">print</span>(i)<br> <br><span class="hljs-comment"># with语句，指在当前语境下作用，使用后自动解除文件占用，方便对文件进行增删查改</span><br><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;./1.txt&#x27;</span>,<span class="hljs-string">&#x27;r&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>    <span class="hljs-built_in">print</span>(f)<br>    <span class="hljs-keyword">for</span> p <span class="hljs-keyword">in</span> f:<br>        <span class="hljs-built_in">print</span>(p)<br></code></pre></td></tr></table></figure>
+
+<pre><code>&lt;_io.TextIOWrapper name=&#39;./1.txt&#39; mode=&#39;r&#39; encoding=&#39;utf-8&#39;&gt; 12345 123 &lt;_io.TextIOWrapper name=&#39;./1.txt&#39; mode=&#39;r&#39; encoding=&#39;utf-8&#39;&gt;
+12345 123
+</code></pre>
+<div id="paginator"></div></div><div id="post-footer"><div id="pages" style="justify-content: flex-end"><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/post/fbe2c3eb/">python运算符以及表达式基础 上一篇 →</a></div></div></div></div><div class="bottom-btn"><div><a class="i-top" id="to-top" onClick="scrolls.scrolltop();" title="回到顶部" style="opacity: 0; display: none;">∧ </a><a class="i-index" id="to-index" href="#toc-div" title="文章目录">≡</a><a class="i-color" id="color-mode" onClick="colorMode.change()" title="切换主题"></a><a onclick="BgmControl()"><svg id="bgm-control" viewBox="0 0 30 34" fill="#18d1ff" style="width: 24px; transition: transform .3s;margin-top: 4px"><path d="M25.998 23.422V11.29h3.999v12.132h-3.999zM19.497 6.234h4.001v22.243h-4.001V6.234zM12.998.867h4v32.978h-4V.867zm-6.5 5.367h4.001v22.243H6.498V6.234zm-6.5 5.056h4v12.132h-4V11.29z"></path></svg><audio id="bgm" src="/audio/bgm.mp3" autoplay loop crossorigin="anonymous"> </audio></a></div></div></article><aside><div id="about"><a href="/" id="logo"><img src="https://ak.hypergryph.com/assets/index/images/ak/pc/faction/1.png" alt="Logo" style="margin:0;border-radius:0;"></a><h1 id="Dr"><a href="/">Clocky7</a></h1><div id="description"><p></p></div><div id="social-links"><a class="social" target="_blank" rel="noopener" href="https://github.com/Clocky7"><i class="fab fa-github" alt="GitHub"></i></a></div></div><div id="aside-block"><div id="toc-div"><h1>目录</h1><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80-%E5%8D%95%E8%AF%AD%E5%8F%A5"><span class="toc-number">1.</span> <span class="toc-text">一.单语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C-%E7%A9%BA%E8%AF%AD%E5%8F%A5"><span class="toc-number">2.</span> <span class="toc-text">二.空语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89-%E5%A4%9A%E8%A1%8C%E8%AF%AD%E5%8F%A5"><span class="toc-number">3.</span> <span class="toc-text">三.多行语句</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E6%9D%A1%E4%BB%B6%E8%AF%AD%E5%8F%A5"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 条件语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 循环语句</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B-%E5%87%BD%E6%95%B0%E5%AE%9A%E4%B9%89%E8%AF%AD%E5%8F%A5"><span class="toc-number">4.</span> <span class="toc-text">四.函数定义语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94-%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E8%AF%AD%E5%8F%A5"><span class="toc-number">5.</span> <span class="toc-text">五.异常处理语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD-%E5%AF%BC%E5%85%A5%E8%AF%AD%E5%8F%A5"><span class="toc-number">6.</span> <span class="toc-text">六.导入语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%83-%E6%B3%A8%E9%87%8A%E8%AF%AD%E5%8F%A5"><span class="toc-number">7.</span> <span class="toc-text">七.注释语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AB-%E7%B1%BB%E5%AE%9A%E4%B9%89%E8%AF%AD%E5%8F%A5"><span class="toc-number">8.</span> <span class="toc-text">八.类定义语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B9%9D-with%E8%AF%AD%E5%8F%A5"><span class="toc-number">9.</span> <span class="toc-text">九.with语句</span></a></li></ol></div></div><footer><nobr>构建自 <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr><wbr><nobr> 使用主题 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus/hexo-theme-arknights">Arknights</a></nobr><wbr><nobr> 主题作者 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus">Yue_plus</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas></body></html>
