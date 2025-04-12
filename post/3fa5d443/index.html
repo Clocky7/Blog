@@ -1,0 +1,131 @@
+<!DOCTYPE html><html lang="zh-cn" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>回调与闭包函数基础 | Clocky7's Blog</title><link rel="icon" type="image/x-icon" href="/favicon.ico"><link rel="preload" as="font" crossorigin="anonymous" href="/font/Bender.ttf"><link rel="preload" as="font" crossorigin="anonymous" href="/font/BenderLight.ttf"><link rel="preload" as="font" crossorigin="anonymous" href="/font/JetBrainsMono-Regular.woff2"><link rel="stylesheet" href="/css/arknights.css"><style>@font-face {
+  font-family: Bender;
+  src: local('Bender'), url("/font/Bender.ttf"), url("/font/Bender.otf");
+}
+@font-face {
+  font-family: BenderLight;
+  src: local('BenderLight'), url("/font/BenderLight.ttf");
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}
+</style><script>var config = {"root":"/","search":{"preload":false,"activeHolder":"键入以继续","blurHolder":"搜索","noResult":"无 $0 相关数据"},"code":{"codeInfo":"$0 - $1 行","copy":"复制"}}</script><link type="text/css" rel="stylesheet" href="/lib/encrypt/hbe.style.css"><script src="//unpkg.com/mermaid@10.5.0/dist/mermaid.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+ menuSettings: {
+   zoom: "None"
+ },
+ showMathMenu: false,
+ jax: ["input/TeX","output/CommonHTML"],
+ extensions: ["tex2jax.js"],
+ TeX: {
+   extensions: ["AMSmath.js","AMSsymbols.js"],
+   equationNumbers: {
+     autoNumber: "AMS"
+   }
+ },
+ tex2jax: {
+   inlineMath: [["\\(", "\\)"]],
+   displayMath: [["\\[", "\\]"]]
+ }
+});</script><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lightgallery.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-zoom.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-thumbnail.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/css/all.min.css"><style defer src="article.css"></style><link rel="stylesheet" href="article.css"><script>if (window.localStorage.getItem('theme-mode') === 'light')
+ document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark')
+ document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.woff2") format('woff2');
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}</style><style>:root {
+ --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
+ --light-background: url('/img/bk.jpg');
+ --theme-encrypt-confirm: '确认'
+}</style><script defer src="/js/arknights.js"></script><script defer src="/js/search.js"></script><script defer type="module">import mermaid from '//unpkg.com/mermaid@10.5.0/dist/mermaid.esm.mjs';
+window.mermaid = mermaid;
+code.paintMermaid();
+</script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+  menuSettings: {
+    zoom: "None"
+  },
+  showMathMenu: false,
+  jax: ["input/TeX","output/CommonHTML"],
+  extensions: ["tex2jax.js"],
+  TeX: {
+    extensions: ["AMSmath.js","AMSsymbols.js"],
+    equationNumbers: {
+      autoNumber: "AMS"
+    }
+  },
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]]
+  }
+});
+</script><script async src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script async src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script async src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script async src="/lib/encrypt/hbe.js"></script><script async src="/js/pjax.js"></script><script class="pjax-js">reset= () => {document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js','data-pjax','.busuanzi'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><script class="pjax-js">reset= () => {document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="loading" style="opacity: 0;"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><div class="navBtn"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><nav><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="搜索" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup" tabindex="0"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">主页</span></a></li><li class="navItem"><a class="navBlock" href="/about/"><span class="navItemTitle">于我</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">归档</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>回调与闭包函数基础</h1><div id="post-info"><span>文章发布时间: <div class="control"><time datetime="2025-03-19T09:22:20.000Z" id="date"> 2025-03-19</time></div></span><br><span>最后更新时间: <div class="control"><time datetime="2025-03-19T09:40:12.394Z" id="updated"> 2025-03-19</time></div></span><br><span>文章总字数: <div class="control">679</div></span><br><span>预计阅读时间: <div class="control">2 分钟</div></span></div></div><hr><div id="post-content"><h2 id="一-回调函数"><a href="#一-回调函数" class="headerlink" title="一.回调函数"></a>一.回调函数</h2><p>&emsp;&emsp;把一个函数传入另一个函数，外面的函数叫工具函数，传入的函数就叫回调函数 (业务函数)，工具操作后得到的数据交给回调函数处理。实质上就是运行过程中回去调用之前的函数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs python"><br><span class="hljs-comment"># 工具函数</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">find_odd</span>(<span class="hljs-params">x,fun</span>):<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> x:<br>        <span class="hljs-keyword">if</span> i % <span class="hljs-number">2</span> == <span class="hljs-number">1</span>:<br>            fun(i)<br> <br><span class="hljs-comment"># 回调函数1</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">fun</span>(<span class="hljs-params">x</span>):<br>    <span class="hljs-built_in">print</span>(x**<span class="hljs-number">2</span>)<br> <br><span class="hljs-comment">#回调函数2</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">fun1</span>(<span class="hljs-params">x</span>):<br>    a = []<br>    a.append(x)<br>    <span class="hljs-built_in">print</span>(a)<br> <br>x = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>]<br>re = find_odd(x,fun)<br>re1 = find_odd(x,fun1)<br><br></code></pre></td></tr></table></figure>
+
+<pre><code>1
+9
+25
+[1]
+[3]
+[5]
+</code></pre>
+<p>就像上面所写，回调函数会把处理过的数据拿来做各种操作，其实就是把拿来的数据完成各种业务。</p>
+<h2 id="二-函数闭包"><a href="#二-函数闭包" class="headerlink" title="二.函数闭包"></a>二.函数闭包</h2><p>函数内部有函数，内部函数即闭包函数，其作用是：</p>
+<ul>
+<li><p>把环境的值单独保存，不被其他地方的环境影响</p>
+</li>
+<li><p>实质就是同名的变量名可以存在，但是需要用闭包来实现</p>
+</li>
+<li><p>借用嵌套作用域，从里面的函数中访问到外面函数的变量，但更外面的环境访问不了，决定一个东西的版权。</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs python"><br><span class="hljs-comment"># 拿支付宝和美团举例</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">alipay</span>():<br>    money1 = <span class="hljs-number">100</span><br> <br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">tool</span>(<span class="hljs-params">pwd,new_money</span>):<br>        <span class="hljs-keyword">nonlocal</span> money1<br>        <span class="hljs-keyword">if</span> pwd == <span class="hljs-number">123</span>:<br>            money1 = new_money<br>        <span class="hljs-built_in">print</span>(money1)<br>    <span class="hljs-keyword">return</span> tool<br>    <br><span class="hljs-keyword">def</span> <span class="hljs-title function_">meituan</span>():<br>    fn = alipay()<br>    fn(<span class="hljs-number">2323</span>,<span class="hljs-number">100000</span>) <span class="hljs-comment">#函数调用的时候是在全局还是alipay涵数内部去执行代码的？</span><br>    fn(<span class="hljs-number">123</span>,<span class="hljs-number">666666</span>)<br>    fn(<span class="hljs-number">555</span>,<span class="hljs-number">77777</span>)<br> <br>meituan()<br><br></code></pre></td></tr></table></figure>
+
+<pre><code>100
+666666
+666666
+</code></pre>
+<p>&emsp;;&emsp;我们先来看alipay的函数，其内部定义了一个变量money1和一个工具tool函数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python"><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">alipay</span>():<br>    money1 = <span class="hljs-number">100</span><br> <br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">tool</span>(<span class="hljs-params">pwd,new_money</span>):<br>        <span class="hljs-keyword">nonlocal</span> money1<br>        <span class="hljs-keyword">if</span> pwd == <span class="hljs-number">123</span>:<br>            money1 = new_money<br>        <span class="hljs-built_in">print</span>(money1)<br>    <span class="hljs-keyword">return</span> tool<br><br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;这就是一个闭包，tool就是所谓的闭包函数，它将alipay里的数据单独保存无法直接被外界作用域访问。<br>&emsp;&emsp;tool实际上就给了外界能够访问操作alipay数据的一个方法，且只能用它，必须满足它里面设定的条件。比如这里，tool函数里面设定了pwd（密码）必须是123，才让你修改其中的数据money1。这也就决定了这个’从alipay取钱’的版权是tool函数的，也就是设计alipay的程序工程师。</p>
+<p>&emsp;&emsp;再来看meituan的函数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">meituan</span>():<br>    fn = alipay()<br>    fn(<span class="hljs-number">2323</span>,<span class="hljs-number">100000</span>) <span class="hljs-comment">#函数调用的时候是在全局还是alipay涵数内部去执行代码的？</span><br>    fn(<span class="hljs-number">123</span>,<span class="hljs-number">666666</span>)<br>    fn(<span class="hljs-number">555</span>,<span class="hljs-number">77777</span>)<br> <br>meituan()<br><br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;其中，meituan函数调用了alipay函数，但其无法直接访问修改里面的moeny1，所以第一次密码输错的时候，没有将moeny1的值修改为100000，而是只打印了100。第二次密码输对了，就将其更改为666666并保存。</p>
+<div id="paginator"></div></div><div id="post-footer"><div id="pages" style="justify-content: flex-end"><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/post/78fbc401/">python函数基础与变量作用域 上一篇 →</a></div></div></div></div><div class="bottom-btn"><div><a class="i-top" id="to-top" onClick="scrolls.scrolltop();" title="回到顶部" style="opacity: 0; display: none;">∧ </a><a class="i-index" id="to-index" href="#toc-div" title="文章目录">≡</a><a class="i-color" id="color-mode" onClick="colorMode.change()" title="切换主题"></a><a onclick="BgmControl()"><svg id="bgm-control" viewBox="0 0 30 34" fill="#18d1ff" style="width: 24px; transition: transform .3s;margin-top: 4px"><path d="M25.998 23.422V11.29h3.999v12.132h-3.999zM19.497 6.234h4.001v22.243h-4.001V6.234zM12.998.867h4v32.978h-4V.867zm-6.5 5.367h4.001v22.243H6.498V6.234zm-6.5 5.056h4v12.132h-4V11.29z"></path></svg><audio id="bgm" src="/audio/bgm.mp3" autoplay loop crossorigin="anonymous"> </audio></a></div></div></article><aside><div id="about"><a href="/" id="logo"><img src="https://ak.hypergryph.com/assets/index/images/ak/pc/faction/1.png" alt="Logo" style="margin:0;border-radius:0;"></a><h1 id="Dr"><a href="/">Clocky7</a></h1><div id="description"><p></p></div><div id="social-links"><a class="social" target="_blank" rel="noopener" href="https://github.com/Clocky7"><i class="fab fa-github" alt="GitHub"></i></a></div></div><div id="aside-block"><div id="toc-div"><h1>目录</h1><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80-%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0"><span class="toc-number">1.</span> <span class="toc-text">一.回调函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C-%E5%87%BD%E6%95%B0%E9%97%AD%E5%8C%85"><span class="toc-number">2.</span> <span class="toc-text">二.函数闭包</span></a></li></ol></div></div><footer><nobr>构建自 <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr><wbr><nobr> 使用主题 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus/hexo-theme-arknights">Arknights</a></nobr><wbr><nobr> 主题作者 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus">Yue_plus</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas></body></html>
