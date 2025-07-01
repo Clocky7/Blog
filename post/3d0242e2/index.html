@@ -1,0 +1,171 @@
+<!DOCTYPE html><html lang="zh-cn" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>图像预处理-图像亮度变换 | Clocky7's Blog</title><link rel="icon" type="image/x-icon" href="/favicon.ico"><link rel="preload" as="font" crossorigin="anonymous" href="/font/Bender.ttf"><link rel="preload" as="font" crossorigin="anonymous" href="/font/BenderLight.ttf"><link rel="preload" as="font" crossorigin="anonymous" href="/font/JetBrainsMono-Regular.woff2"><link rel="stylesheet" href="/css/arknights.css"><style>@font-face {
+  font-family: Bender;
+  src: local('Bender'), url("/font/Bender.ttf"), url("/font/Bender.otf");
+}
+@font-face {
+  font-family: BenderLight;
+  src: local('BenderLight'), url("/font/BenderLight.ttf");
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}
+</style><script>var config = {"root":"/","search":{"preload":false,"activeHolder":"键入以继续","blurHolder":"搜索","noResult":"无 $0 相关数据"},"code":{"codeInfo":"$0 - $1 行","copy":"复制"}}</script><link type="text/css" rel="stylesheet" href="/lib/encrypt/hbe.style.css"><script src="//unpkg.com/mermaid@10.5.0/dist/mermaid.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+ menuSettings: {
+   zoom: "None"
+ },
+ showMathMenu: false,
+ jax: ["input/TeX","output/CommonHTML"],
+ extensions: ["tex2jax.js"],
+ TeX: {
+   extensions: ["AMSmath.js","AMSsymbols.js"],
+   equationNumbers: {
+     autoNumber: "AMS"
+   }
+ },
+ tex2jax: {
+   inlineMath: [["\\(", "\\)"]],
+   displayMath: [["\\[", "\\]"]]
+ }
+});</script><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lightgallery.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-zoom.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-thumbnail.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/css/all.min.css"><style defer src="article.css"></style><link rel="stylesheet" href="article.css"><script>if (window.localStorage.getItem('theme-mode') === 'light')
+ document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark')
+ document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.woff2") format('woff2');
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}</style><style>:root {
+ --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
+ --light-background: url('/img/bk.jpg');
+ --theme-encrypt-confirm: '确认'
+}</style><script defer src="/js/arknights.js"></script><script defer src="/js/search.js"></script><script defer type="module">import mermaid from '//unpkg.com/mermaid@10.5.0/dist/mermaid.esm.mjs';
+window.mermaid = mermaid;
+code.paintMermaid();
+</script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+  menuSettings: {
+    zoom: "None"
+  },
+  showMathMenu: false,
+  jax: ["input/TeX","output/CommonHTML"],
+  extensions: ["tex2jax.js"],
+  TeX: {
+    extensions: ["AMSmath.js","AMSsymbols.js"],
+    equationNumbers: {
+      autoNumber: "AMS"
+    }
+  },
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]]
+  }
+});
+</script><script async src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script async src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script async src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script async src="/lib/encrypt/hbe.js"></script><script async src="/js/pjax.js"></script><script class="pjax-js">reset= () => {document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js','data-pjax','.busuanzi'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><script class="pjax-js">reset= () => {document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="loading" style="opacity: 0;"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><div class="navBtn"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><nav><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="搜索" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup" tabindex="0"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">主页</span></a></li><li class="navItem"><a class="navBlock" href="/about/"><span class="navItemTitle">于我</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">归档</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>图像预处理-图像亮度变换</h1><div id="post-info"><span>文章发布时间: <div class="control"><time datetime="2025-06-24T05:52:37.000Z" id="date"> 2025-06-24</time></div></span><br><span>最后更新时间: <div class="control"><time datetime="2025-07-01T06:42:42.162Z" id="updated"> 2025-07-01</time></div></span><br><span>文章总字数: <div class="control">1.2k</div></span><br><span>预计阅读时间: <div class="control">4 分钟</div></span></div></div><hr><div id="post-content"><h2 id="一-亮度变换"><a href="#一-亮度变换" class="headerlink" title="一.亮度变换"></a>一.亮度变换</h2><p><em>首先有两个关联的说法</em>：</p>
+<ul>
+<li><p>亮度调整：像素强度整体变高或者变低。</p>
+</li>
+<li><p>对比度调整：暗处像素强度变低，亮处像素强度变高，从而拉大中间某个区域范围的显示精度。</p>
+</li>
+</ul>
+<p>opencv中操作这两种变换的公式为：</p>
+<p class='item-img' data-src='/img/temporate/cv109.png'><img src="/img/temporate/cv109.png"></p>
+<ul>
+<li><p>对比度：需要通过<code>alpha</code>、<code>beta</code>一起控制。</p>
+</li>
+<li><p>亮度：通过<code>beta</code>控制。</p>
+</li>
+</ul>
+<p>比如，图像中一点的像素为160，一点为10，我想增强对比度，那就是让这两点差异更大。可以让alpha为1.5，这样两点像素值就分别变成了240和15，然后beta为10，就变成了250和25，差异就更大了。</p>
+<h2 id="二-线性变换"><a href="#二-线性变换" class="headerlink" title="二.线性变换"></a>二.线性变换</h2><p><code>cv2.addWeighted(src1, alpha, src2, beta, gamma)</code></p>
+<ul>
+<li><p>src1：第一张输入图像</p>
+</li>
+<li><p>alpha：第一个输入图像的权重。</p>
+</li>
+<li><p>src2：第二张输入图像</p>
+</li>
+<li><p>beta：第二个输入图像的权重。</p>
+</li>
+<li><p>gamma：一个标量，将被添加到权重求和的结果上，可用于调整总体亮度。</p>
+</li>
+</ul>
+<p>这里用了之前的<strong>颜色加权加法</strong>，本用于两张图相加，但其有一个参数<code>gamma</code>，会作为额外值添加进合并后结果并修改亮度。因此只做亮度变换的话，可以将其中的第二张图设为全黑，权重无所谓；或者设为全白（或其他值），权重设为0。然后根据<code>gamma</code>值<strong>修改亮度</strong>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 养成好习惯，自己敲代码</span><br><span class="hljs-keyword">import</span> cv2 <span class="hljs-keyword">as</span> cv<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br> <br><span class="hljs-comment"># 导入图像</span><br>img = cv.imread(<span class="hljs-string">&#x27;../images/cat1.png&#x27;</span>)<br> <br><span class="hljs-comment"># 进行线性变换（亮度调整）</span><br>dst = cv.addWeighted(img,<span class="hljs-number">1</span>,np.zeros_like(img),<span class="hljs-number">0</span>,<span class="hljs-number">40</span>)<br><span class="hljs-comment"># dst = cv.addWeighted(img,1,np.full_like(img,40),0,40)</span><br><span class="hljs-comment"># dst = cv.addWeighted(img,1,np.ones_like(img),0,40)</span><br> <br><span class="hljs-comment"># 显示图像</span><br>cv.imshow(<span class="hljs-string">&#x27;img&#x27;</span>, img)<br>cv.imshow(<span class="hljs-string">&#x27;dst&#x27;</span>, dst)<br>cv.waitKey(<span class="hljs-number">0</span>)<br>cv.destroyAllWindows()<br></code></pre></td></tr></table></figure>
+
+<p><code>np.ones_like()</code>和<code>np.zeros_like()</code>可以快速生成一张继承原图形状与维度的全黑或值全1的图片,其中传入img图像即可。<code>np.full_like(img，value)</code>可以生成一张全为指定值（如0.5）的图片。</p>
+<h2 id="三-直接像素值修改"><a href="#三-直接像素值修改" class="headerlink" title="三.直接像素值修改"></a>三.直接像素值修改</h2><p><code>numpy.clip(a, a_min, a_max)</code></p>
+<p>对数组中的元素进行限定，将超出指定范围的元素值截断至指定的<strong>最小值和最大值</strong>之间</p>
+<ul>
+<li><p>a：输入数组。</p>
+</li>
+<li><p>a_min：指定的最小值，数组中所有小于 a_min 的元素将被替换为 a_min。</p>
+</li>
+<li><p>a_max：指定的最大值，数组中所有大于 a_max 的元素将被替换为 a_max。</p>
+</li>
+</ul>
+<p>这个API通常完成的是防止像素值溢出的功能，返回一个新图像。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> cv2 <span class="hljs-keyword">as</span> cv<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br> <br><span class="hljs-comment"># 读取图像</span><br>img = cv.imread(<span class="hljs-string">&quot;../images/cat1.png&quot;</span>)<br>p = <span class="hljs-number">40</span><br> <br>dst=np.clip(img.astype(<span class="hljs-built_in">int</span>)+p,<span class="hljs-number">0</span>,<span class="hljs-number">255</span>).astype(np.uint8)<br> <br> <br>cv.imshow(<span class="hljs-string">&quot;img&quot;</span>,img)<br>cv.imshow(<span class="hljs-string">&quot;dst&quot;</span>,dst)<br>cv.waitKey(<span class="hljs-number">0</span>)<br>cv.destroyAllWindows()<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p class='item-img' data-src='/img/temporate/cv110.png'><img src="/img/temporate/cv110.png"></p>
+<p><em>可以看到，代码中使用了两个<code>astype()</code>变换，那为什么要这么做呢？</em></p>
+<p>首先，img图像与int类型整数做加法运算时会<strong>隐式</strong>地将图像中的像素值变换为int64类型，这种<strong>隐式的操作</strong>容易产生潜在问题，因此使用<code>.astype(int)</code>显示指定像素值为<strong>int32</strong>类型来进行加法运算（或者用 np.int32&#x2F;64 都可以）。</p>
+<p>而两者相加之后得到的数值依然是int类型，图像处理函数要求数据类型为unit8，因此在最后还需要加上.astype(np.unit8)来转化。</p>
+<p><em>做到这里，其实有一种更方便的亮度调整方法：</em></p>
+<p>就是创建<strong>滑条</strong>，用一个滑动的窗口来让亮度根据滑动的位置变化。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">cv.createTrackbar<br>(trackbar_name,window_name,trackbar_value,max_value,def)<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><p>trackbar_name : 滑条的名字</p>
+</li>
+<li><p>window_name : 滑条窗口的名字</p>
+</li>
+<li><p>trackbar_value : 滑条默认所在的位置(值)</p>
+</li>
+<li><p>max_value : 滑条最大的范围(值)</p>
+</li>
+<li><p>def : 对图像操作的方法，该方法只能传入一个参数，就是trackbar_value</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> cv2 <span class="hljs-keyword">as</span> cv<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br> <br><span class="hljs-comment"># 给滑条创建窗口</span><br>window_name=<span class="hljs-string">&quot;Trackbar&quot;</span><br>cv.namedWindow(window_name)<br><span class="hljs-comment"># 写一个改变图像亮度的方法</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">change</span>(<span class="hljs-params">p,img</span>):<br>    <span class="hljs-comment"># 把滑条范围映射到[-255,255] 原本滑条值[0,255]</span><br>    p=p/<span class="hljs-number">255</span>*(<span class="hljs-number">255</span>-(-<span class="hljs-number">255</span>))-<span class="hljs-number">255</span><br>    <span class="hljs-comment"># p=2*p-255</span><br>    <span class="hljs-comment">#亮度变换</span><br>    dst=np.uint8(np.clip(img.astype(<span class="hljs-built_in">int</span>)+p,<span class="hljs-number">0</span>,<span class="hljs-number">255</span>))<br>    cv.imshow(<span class="hljs-string">&quot;img&quot;</span>,img)<br>    cv.imshow(<span class="hljs-string">&quot;dst&quot;</span>,dst)<br> <br><span class="hljs-comment"># 读取图像</span><br>img = cv.imread(<span class="hljs-string">&quot;../images/cat1.png&quot;</span>)<br> <br><span class="hljs-comment"># 创建滑条、设置参数</span><br>max_val=<span class="hljs-number">255</span><span class="hljs-comment"># 滑条最大值</span><br>trackbar_name=<span class="hljs-string">&quot;p_value&quot;</span><span class="hljs-comment"># 滑条名</span><br>trackbar_value=<span class="hljs-number">150</span><span class="hljs-comment"># 滑条初始值</span><br>cv.createTrackbar(trackbar_name,window_name,trackbar_value,<span class="hljs-number">255</span>,<span class="hljs-keyword">lambda</span> p:change(p,img))<br>cv.waitKey(<span class="hljs-number">0</span>)<br>cv.destroyAllWindows()<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p class='item-img' data-src='/img/temporate/cv111.png'><img src="/img/temporate/cv111.png"></p>
+<p class='item-img' data-src='/img/temporate/cv112.png'><img src="/img/temporate/cv112.png"></p>
+<p>上面的<code>p/255</code>就是将p这个加入的修改值归一化，然后映射到我们想调整的范围<code>[-255,255]</code>即总共510的范围里去，最后减去255表示把p的值真正地固定在<code>[-255,255]</code>中。</p>
+<p>并且可以看到，我们创建了change函数传入创建滑条的函数，但是其中有两个参数，创建滑条时会报错。因此这里采用匿名函数强制绑定img在回调函数change上，使得img这个参数能够正确传入。</p>
+<div id="paginator"></div></div><div id="post-footer"><div id="pages"><div class="footer-link" style="width: 50%;text-align:right;border-right:1px #fe2 solid"><a href="/post/5a9773f0/">← 下一篇 图像预处理-形态学变换</a></div><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/post/6d1a07a/">图像预处理-霍夫变换 上一篇 →</a></div></div></div></div><div class="bottom-btn"><div><a class="i-top" id="to-top" onClick="scrolls.scrolltop();" title="回到顶部" style="opacity: 0; display: none;">∧ </a><a class="i-index" id="to-index" href="#toc-div" title="文章目录">≡</a><a class="i-color" id="color-mode" onClick="colorMode.change()" title="切换主题"></a><a onclick="BgmControl()"><svg id="bgm-control" viewBox="0 0 30 34" fill="#18d1ff" style="width: 24px; transition: transform .3s;margin-top: 4px"><path d="M25.998 23.422V11.29h3.999v12.132h-3.999zM19.497 6.234h4.001v22.243h-4.001V6.234zM12.998.867h4v32.978h-4V.867zm-6.5 5.367h4.001v22.243H6.498V6.234zm-6.5 5.056h4v12.132h-4V11.29z"></path></svg><audio id="bgm" src="/audio/bgm.mp3" autoplay loop crossorigin="anonymous"> </audio></a></div></div></article><aside><div id="about"><a href="/" id="logo"><img src="https://ak.hypergryph.com/assets/index/images/ak/pc/faction/1.png" alt="Logo" style="margin:0;border-radius:0;"></a><h1 id="Dr"><a href="/">Clocky7</a></h1><div id="description"><p></p></div><div id="social-links"><a class="social" target="_blank" rel="noopener" href="https://github.com/Clocky7"><i class="fab fa-github" alt="GitHub"></i></a></div></div><div id="aside-block"><div id="toc-div"><h1>目录</h1><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80-%E4%BA%AE%E5%BA%A6%E5%8F%98%E6%8D%A2"><span class="toc-number">1.</span> <span class="toc-text">一.亮度变换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C-%E7%BA%BF%E6%80%A7%E5%8F%98%E6%8D%A2"><span class="toc-number">2.</span> <span class="toc-text">二.线性变换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89-%E7%9B%B4%E6%8E%A5%E5%83%8F%E7%B4%A0%E5%80%BC%E4%BF%AE%E6%94%B9"><span class="toc-number">3.</span> <span class="toc-text">三.直接像素值修改</span></a></li></ol></div></div><footer><nobr>构建自 <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr><wbr><nobr> 使用主题 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus/hexo-theme-arknights">Arknights</a></nobr><wbr><nobr> 主题作者 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus">Yue_plus</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas></body></html>

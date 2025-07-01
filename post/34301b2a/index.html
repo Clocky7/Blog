@@ -1,0 +1,251 @@
+<!DOCTYPE html><html lang="zh-cn" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>DataFrame操作（扩充） | Clocky7's Blog</title><link rel="icon" type="image/x-icon" href="/favicon.ico"><link rel="preload" as="font" crossorigin="anonymous" href="/font/Bender.ttf"><link rel="preload" as="font" crossorigin="anonymous" href="/font/BenderLight.ttf"><link rel="preload" as="font" crossorigin="anonymous" href="/font/JetBrainsMono-Regular.woff2"><link rel="stylesheet" href="/css/arknights.css"><style>@font-face {
+  font-family: Bender;
+  src: local('Bender'), url("/font/Bender.ttf"), url("/font/Bender.otf");
+}
+@font-face {
+  font-family: BenderLight;
+  src: local('BenderLight'), url("/font/BenderLight.ttf");
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}
+</style><script>var config = {"root":"/","search":{"preload":false,"activeHolder":"键入以继续","blurHolder":"搜索","noResult":"无 $0 相关数据"},"code":{"codeInfo":"$0 - $1 行","copy":"复制"}}</script><link type="text/css" rel="stylesheet" href="/lib/encrypt/hbe.style.css"><script src="//unpkg.com/mermaid@10.5.0/dist/mermaid.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+ menuSettings: {
+   zoom: "None"
+ },
+ showMathMenu: false,
+ jax: ["input/TeX","output/CommonHTML"],
+ extensions: ["tex2jax.js"],
+ TeX: {
+   extensions: ["AMSmath.js","AMSsymbols.js"],
+   equationNumbers: {
+     autoNumber: "AMS"
+   }
+ },
+ tex2jax: {
+   inlineMath: [["\\(", "\\)"]],
+   displayMath: [["\\[", "\\]"]]
+ }
+});</script><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lightgallery.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-zoom.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-thumbnail.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/css/all.min.css"><style defer src="article.css"></style><link rel="stylesheet" href="article.css"><script>if (window.localStorage.getItem('theme-mode') === 'light')
+ document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark')
+ document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.woff2") format('woff2');
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}</style><style>:root {
+ --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
+ --light-background: url('/img/bk.jpg');
+ --theme-encrypt-confirm: '确认'
+}</style><script defer src="/js/arknights.js"></script><script defer src="/js/search.js"></script><script defer type="module">import mermaid from '//unpkg.com/mermaid@10.5.0/dist/mermaid.esm.mjs';
+window.mermaid = mermaid;
+code.paintMermaid();
+</script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+  menuSettings: {
+    zoom: "None"
+  },
+  showMathMenu: false,
+  jax: ["input/TeX","output/CommonHTML"],
+  extensions: ["tex2jax.js"],
+  TeX: {
+    extensions: ["AMSmath.js","AMSsymbols.js"],
+    equationNumbers: {
+      autoNumber: "AMS"
+    }
+  },
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]]
+  }
+});
+</script><script async src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script async src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script async src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script async src="/lib/encrypt/hbe.js"></script><script async src="/js/pjax.js"></script><script class="pjax-js">reset= () => {document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js','data-pjax','.busuanzi'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><script class="pjax-js">reset= () => {document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="loading" style="opacity: 0;"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><div class="navBtn"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><nav><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="搜索" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup" tabindex="0"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">主页</span></a></li><li class="navItem"><a class="navBlock" href="/about/"><span class="navItemTitle">于我</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">归档</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>DataFrame操作（扩充）</h1><div id="post-info"><span>文章发布时间: <div class="control"><time datetime="2025-06-24T05:47:33.000Z" id="date"> 2025-06-24</time></div></span><br><span>最后更新时间: <div class="control"><time datetime="2025-06-30T08:30:41.561Z" id="updated"> 2025-06-30</time></div></span><br><span>文章总字数: <div class="control">2.4k</div></span><br><span>预计阅读时间: <div class="control">11 分钟</div></span></div></div><hr><div id="post-content"><h2 id="一-合并"><a href="#一-合并" class="headerlink" title="一.合并"></a>一.合并</h2><p><code>merge</code> 将两个 DataFrame 对象根据一个或多个键进行合并，类似于 SQL 中的 JOIN 操作</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">pandas.merge<br>(left, right, how=&#x27;inner&#x27;, on=None, left_on=None, right_on=None, left_index=False, right_index=False, sort=False, suffixes=(&#x27;_x&#x27;, &#x27;_y&#x27;), copy=True, indicator=False, validate=None)<br></code></pre></td></tr></table></figure>
+
+<p>参数：</p>
+<ul>
+<li><p>left：左侧的 DataFrame 对象。</p>
+</li>
+<li><p>right：右侧的 DataFrame 对象。</p>
+</li>
+<li><p>how：合并方式，可以是 ‘inner’、’outer’、’left’ 或 ‘right’。默认为 ‘inner’。</p>
+<ul>
+<li><p>‘inner’：内连接，返回两个 DataFrame 共有的键。</p>
+</li>
+<li><p>‘outer’：外连接，返回两个 DataFrame 的所有键。</p>
+</li>
+<li><p>‘left’：左连接，返回左侧 DataFrame 的所有键，以及右侧 DataFrame 匹配的键。</p>
+</li>
+<li><p>‘right’：右连接，返回右侧 DataFrame 的所有键，以及左侧 DataFrame 匹配的键。</p>
+</li>
+</ul>
+</li>
+<li><p>on：用于连接的列名。如果未指定，则使用两个 DataFrame 中相同的列名。</p>
+</li>
+<li><p>left_on 和 right_on：分别指定左侧和右侧 DataFrame 的连接列名。</p>
+</li>
+<li><p>left_index 和 right_index：布尔值，指定是否使用索引作为连接键。</p>
+</li>
+<li><p>sort：布尔值，指定是否在合并后对结果进行排序。</p>
+</li>
+<li><p>suffixes：一个元组，指定当列名冲突时，右侧和左侧 DataFrame 的后缀。</p>
+</li>
+<li><p>copy：布尔值，指定是否返回一个新的 DataFrame。如果为 False，则可能修改原始 DataFrame。</p>
+</li>
+<li><p>indicator：布尔值，如果为 True，则在结果中添加一个名为 __merge 的列，指示每行是如何合并的。</p>
+</li>
+<li><p>validate：验证合并是否符合特定的模式。</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br> <br><span class="hljs-comment"># 创建两个示例 DataFrame</span><br>left = pd.DataFrame(&#123;<br>    <span class="hljs-string">&#x27;key&#x27;</span>: [<span class="hljs-string">&#x27;K0&#x27;</span>, <span class="hljs-string">&#x27;K1&#x27;</span>, <span class="hljs-string">&#x27;K2&#x27;</span>, <span class="hljs-string">&#x27;K3&#x27;</span>],<br>    <span class="hljs-string">&#x27;A&#x27;</span>: [<span class="hljs-string">&#x27;A0&#x27;</span>, <span class="hljs-string">&#x27;A1&#x27;</span>, <span class="hljs-string">&#x27;A2&#x27;</span>, <span class="hljs-string">&#x27;A3&#x27;</span>],<br>    <span class="hljs-string">&#x27;B&#x27;</span>: [<span class="hljs-string">&#x27;B0&#x27;</span>, <span class="hljs-string">&#x27;B1&#x27;</span>, <span class="hljs-string">&#x27;B2&#x27;</span>, <span class="hljs-string">&#x27;B3&#x27;</span>]<br>&#125;)<br> <br>right = pd.DataFrame(&#123;<br>    <span class="hljs-string">&#x27;key&#x27;</span>: [<span class="hljs-string">&#x27;K0&#x27;</span>, <span class="hljs-string">&#x27;K1&#x27;</span>, <span class="hljs-string">&#x27;K2&#x27;</span>, <span class="hljs-string">&#x27;K4&#x27;</span>],<br>    <span class="hljs-string">&#x27;C&#x27;</span>: [<span class="hljs-string">&#x27;C0&#x27;</span>, <span class="hljs-string">&#x27;C1&#x27;</span>, <span class="hljs-string">&#x27;C2&#x27;</span>, <span class="hljs-string">&#x27;C3&#x27;</span>],<br>    <span class="hljs-string">&#x27;D&#x27;</span>: [<span class="hljs-string">&#x27;D0&#x27;</span>, <span class="hljs-string">&#x27;D1&#x27;</span>, <span class="hljs-string">&#x27;D2&#x27;</span>, <span class="hljs-string">&#x27;D3&#x27;</span>]<br>&#125;)<br> <br><span class="hljs-comment"># 内连接,把指定连接的列中相同的值取出来，不同的去掉</span><br>result = pd.merge(left, right,on = <span class="hljs-string">&#x27;key&#x27;</span>)<br><span class="hljs-built_in">print</span>(result)<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">key   A   B   C   D<br>0  K0  A0  B0  C0  D0<br>1  K1  A1  B1  C1  D1<br>2  K2  A2  B2  C2  D2<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 外连接,把指定连接的列中所有值取出来，没有的填缺失值（空）</span><br>result1 = pd.merge(left, right,how = <span class="hljs-string">&#x27;outer&#x27;</span>,on = <span class="hljs-string">&#x27;key&#x27;</span>)<br><span class="hljs-built_in">print</span>(result1)<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">key    A    B    C    D<br>0  K0   A0   B0   C0   D0<br>1  K1   A1   B1   C1   D1<br>2  K2   A2   B2   C2   D2<br>3  K3   A3   B3  NaN  NaN<br>4  K4  NaN  NaN   C3   D3<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 右连接，以右表为准，可以去掉左表相关值，右表中没有的数据填缺失值</span><br>result2 = pd.merge(left, right,how = <span class="hljs-string">&#x27;right&#x27;</span>,on = <span class="hljs-string">&#x27;key&#x27;</span>)<br><span class="hljs-built_in">print</span>(result2)<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">key    A    B   C   D<br>0  K0   A0   B0  C0  D0<br>1  K1   A1   B1  C1  D1<br>2  K2   A2   B2  C2  D2<br>3  K4  NaN  NaN  C3  D3<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 左连接，以左表为准，可以去掉右表相关值，左表中没有的数据填缺失值</span><br>result3 = pd.merge(left, right,how = <span class="hljs-string">&#x27;left&#x27;</span>,on = <span class="hljs-string">&#x27;key&#x27;</span>)<br><span class="hljs-built_in">print</span>(result3)<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">key   A   B    C    D<br>0  K0  A0  B0   C0   D0<br>1  K1  A1  B1   C1   D1<br>2  K2  A2  B2   C2   D2<br>3  K3  A3  B3  NaN  NaN<br></code></pre></td></tr></table></figure>
+
+<h2 id="二-随机抽样"><a href="#二-随机抽样" class="headerlink" title="二.随机抽样"></a>二.随机抽样</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">DataFrame.sample<br>(n=None, frac=None, replace=False, weights=None, random_state=None, axis=None)<br></code></pre></td></tr></table></figure>
+
+<p>参数：</p>
+<ul>
+<li><p>n：要抽取的行数</p>
+</li>
+<li><p>frac：抽取的比例，比如 frac&#x3D;0.5，代表抽取总体数据的50%</p>
+</li>
+<li><p>replace：布尔值参数，表示是否以有放回抽样的方式进行选择，默认为 False，取出数据后不再放回</p>
+</li>
+<li><p>weights：可选参数，代表每个样本的权重值，参数值是字符串或者数组</p>
+</li>
+<li><p>random_state：可选参数，控制随机状态，默认为 None，表示随机数据不会重复；若为 1 表示会取得重复数据</p>
+</li>
+<li><p>axis：表示在哪个方向上抽取数据(axis&#x3D;1 表示列&#x2F;axis&#x3D;0 表示行)</p>
+</li>
+</ul>
+<p>基本理解背后思想即可，<strong>不经常使用</strong>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br> <br><span class="hljs-comment"># 创建一个示例 DataFrame</span><br>data = &#123;<br>        <span class="hljs-string">&#x27;A&#x27;</span>: [<span class="hljs-string">&#x27;foo&#x27;</span>, <span class="hljs-string">&#x27;bar&#x27;</span>, <span class="hljs-string">&#x27;foo&#x27;</span>, <span class="hljs-string">&#x27;bar&#x27;</span>, <span class="hljs-string">&#x27;foo&#x27;</span>, <span class="hljs-string">&#x27;bar&#x27;</span>, <span class="hljs-string">&#x27;foo&#x27;</span>, <span class="hljs-string">&#x27;foo&#x27;</span>],<br>        <span class="hljs-string">&#x27;B&#x27;</span>: [<span class="hljs-string">&#x27;one&#x27;</span>, <span class="hljs-string">&#x27;one&#x27;</span>, <span class="hljs-string">&#x27;two&#x27;</span>, <span class="hljs-string">&#x27;three&#x27;</span>, <span class="hljs-string">&#x27;two&#x27;</span>, <span class="hljs-string">&#x27;two&#x27;</span>, <span class="hljs-string">&#x27;one&#x27;</span>, <span class="hljs-string">&#x27;three&#x27;</span>],<br>        <span class="hljs-string">&#x27;C&#x27;</span>: [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>],<br>&#125;<br> <br>df = pd.DataFrame(data)<br><span class="hljs-comment"># 随机抽取一行</span><br>h = df.sample(n=<span class="hljs-number">1</span>,axis=<span class="hljs-number">0</span>)<br><span class="hljs-built_in">print</span>(h)<br> <br><span class="hljs-comment"># 随机抽50%</span><br>ff = df.sample(frac=<span class="hljs-number">0.5</span>,axis=<span class="hljs-number">0</span>)<br><span class="hljs-built_in">print</span>(ff)<br> <br><span class="hljs-comment"># 随机抽取一列</span><br>hh = df.sample(n=<span class="hljs-number">1</span>,axis=<span class="hljs-number">1</span>)<br><span class="hljs-built_in">print</span>(hh)<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">A      B  C<br>7  foo  three  8<br>     A      B  C<br>6  foo    one  7<br>3  bar  three  4<br>2  foo    two  3<br>4  foo    two  5<br>       B<br>0    one<br>1    one<br>2    two<br>3  three<br>4    two<br>5    two<br>6    one<br>7  three<br></code></pre></td></tr></table></figure>
+
+<h2 id="三-空值处理"><a href="#三-空值处理" class="headerlink" title="三.空值处理"></a>三.空值处理</h2><h3 id="3-1-检测空值"><a href="#3-1-检测空值" class="headerlink" title="3.1 检测空值"></a>3.1 检测空值</h3><p><code>isnull()</code>检测 DataFrame 或 Series 中的空值，返回一个布尔值的 DataFrame 或 Series。</p>
+<p><code>notnull()</code>检测 DataFrame 或 Series 中的非空值，返回一个布尔值的 DataFrame 或 Series。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br> <br><span class="hljs-comment"># 创建一个示例 DataFrame</span><br>data = &#123;<br>        <span class="hljs-string">&#x27;A&#x27;</span>: [<span class="hljs-string">&#x27;foo&#x27;</span>, <span class="hljs-string">&#x27;bar&#x27;</span>, <span class="hljs-string">&#x27;foo&#x27;</span>, <span class="hljs-string">&#x27;bar&#x27;</span>, <span class="hljs-string">&#x27;foo&#x27;</span>, <span class="hljs-string">&#x27;bar&#x27;</span>, <span class="hljs-string">&#x27;foo&#x27;</span>, <span class="hljs-string">&#x27;foo&#x27;</span>],<br>        <span class="hljs-string">&#x27;B&#x27;</span>: [<span class="hljs-string">&#x27;one&#x27;</span>, <span class="hljs-string">&#x27;one&#x27;</span>, <span class="hljs-string">&#x27;two&#x27;</span>, <span class="hljs-string">&#x27;three&#x27;</span>, <span class="hljs-string">&#x27;two&#x27;</span>, <span class="hljs-string">&#x27;two&#x27;</span>, <span class="hljs-string">&#x27;one&#x27;</span>, <span class="hljs-string">&#x27;three&#x27;</span>],<br>        <span class="hljs-string">&#x27;C&#x27;</span>: [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-literal">None</span>, <span class="hljs-number">8</span>],<br>        <br>&#125;<br> <br>df = pd.DataFrame(data)<br> <br><span class="hljs-comment"># 返回原数据类型显示空值位置</span><br><span class="hljs-built_in">print</span>(df.isnull())<br> <br><span class="hljs-comment"># 返回原数据类型显示非空值位置、</span><br><span class="hljs-built_in">print</span>(df.notnull())<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">A      B      C<br>0  False  False  False<br>1  False  False  False<br>2  False  False  False<br>3  False  False  False<br>4  False  False  False<br>5  False  False  False<br>6  False  False   True<br>7  False  False  False<br>      A     B      C<br>0  True  True   True<br>1  True  True   True<br>2  True  True   True<br>3  True  True   True<br>4  True  True   True<br>5  True  True   True<br>6  True  True  False<br>7  True  True   True<br></code></pre></td></tr></table></figure>
+
+<h3 id="3-2-填充空值"><a href="#3-2-填充空值" class="headerlink" title="3.2 填充空值"></a>3.2 填充空值</h3><p><code>fillna()</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br> <br><span class="hljs-comment"># 创建一个示例 DataFrame</span><br>data = &#123;<br>        <span class="hljs-string">&#x27;A&#x27;</span>: [<span class="hljs-string">&#x27;foo&#x27;</span>, <span class="hljs-string">&#x27;bar&#x27;</span>, <span class="hljs-string">&#x27;foo&#x27;</span>, <span class="hljs-string">&#x27;bar&#x27;</span>, <span class="hljs-literal">None</span>, <span class="hljs-string">&#x27;bar&#x27;</span>, <span class="hljs-string">&#x27;foo&#x27;</span>, <span class="hljs-string">&#x27;foo&#x27;</span>],<br>        <span class="hljs-string">&#x27;B&#x27;</span>: [<span class="hljs-string">&#x27;one&#x27;</span>, <span class="hljs-string">&#x27;one&#x27;</span>, <span class="hljs-string">&#x27;two&#x27;</span>, <span class="hljs-literal">None</span>, <span class="hljs-string">&#x27;two&#x27;</span>, <span class="hljs-string">&#x27;two&#x27;</span>, <span class="hljs-string">&#x27;one&#x27;</span>, <span class="hljs-string">&#x27;three&#x27;</span>],<br>        <span class="hljs-string">&#x27;C&#x27;</span>: [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-literal">None</span>, <span class="hljs-number">8</span>],&#125;<br> <br>df = pd.DataFrame(data)<br> <br><span class="hljs-comment"># 用指定值填充</span><br>h = df.fillna(<span class="hljs-number">0</span>)<br><span class="hljs-built_in">print</span>(h)<br> <br><span class="hljs-comment"># 用方法填充</span><br>h1 = df.fillna(method=<span class="hljs-string">&#x27;ffill&#x27;</span>,inplace=<span class="hljs-literal">False</span>)<br><span class="hljs-built_in">print</span>(h1)<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">A      B    C<br>0  foo    one  1.0<br>1  bar    one  2.0<br>2  foo    two  3.0<br>3  bar      0  4.0<br>4    0    two  5.0<br>5  bar    two  6.0<br>6  foo    one  0.0<br>7  foo  three  8.0<br>     A      B    C<br>0  foo    one  1.0<br>1  bar    one  2.0<br>2  foo    two  3.0<br>3  bar    two  4.0<br>4  bar    two  5.0<br>5  bar    two  6.0<br>6  foo    one  6.0<br>7  foo  three  8.0<br></code></pre></td></tr></table></figure>
+
+<h3 id="3-3-删除空值"><a href="#3-3-删除空值" class="headerlink" title="3.3  删除空值"></a>3.3  删除空值</h3><p><code>dropna()</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br> <br><span class="hljs-comment"># 创建一个示例 DataFrame</span><br>data = &#123;<br>        <span class="hljs-string">&#x27;A&#x27;</span>: [<span class="hljs-string">&#x27;foo&#x27;</span>, <span class="hljs-string">&#x27;bar&#x27;</span>, <span class="hljs-string">&#x27;foo&#x27;</span>, <span class="hljs-string">&#x27;bar&#x27;</span>, <span class="hljs-literal">None</span>, <span class="hljs-string">&#x27;bar&#x27;</span>, <span class="hljs-string">&#x27;foo&#x27;</span>, <span class="hljs-string">&#x27;foo&#x27;</span>],<br>        <span class="hljs-string">&#x27;B&#x27;</span>: [<span class="hljs-string">&#x27;one&#x27;</span>, <span class="hljs-string">&#x27;one&#x27;</span>, <span class="hljs-string">&#x27;two&#x27;</span>, <span class="hljs-literal">None</span>, <span class="hljs-string">&#x27;two&#x27;</span>, <span class="hljs-string">&#x27;two&#x27;</span>, <span class="hljs-string">&#x27;one&#x27;</span>, <span class="hljs-string">&#x27;three&#x27;</span>],<br>        <span class="hljs-string">&#x27;C&#x27;</span>: [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-literal">None</span>, <span class="hljs-number">8</span>],&#125;<br> <br>df = pd.DataFrame(data)<br> <br><span class="hljs-comment"># 按行删除包含空值的行(默认)</span><br>h = df.dropna(axis=<span class="hljs-number">0</span>)<br><span class="hljs-built_in">print</span>(h)<br> <br><span class="hljs-comment"># 按列删除包含空值的列</span><br>v = df.dropna(axis=<span class="hljs-number">1</span>)<br><span class="hljs-built_in">print</span>(v)<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">A      B    C<br>0  foo    one  1.0<br>1  bar    one  2.0<br>2  foo    two  3.0<br>5  bar    two  6.0<br>7  foo  three  8.0<br>Empty DataFrame<br>Columns: []<br>Index: [0, 1, 2, 3, 4, 5, 6, 7]<br></code></pre></td></tr></table></figure>
+
+<h2 id="四-读取CSV文件"><a href="#四-读取CSV文件" class="headerlink" title="四.读取CSV文件"></a>四.读取CSV文件</h2><p><code>csv</code> 介于 <code>txt</code> 与 <code>excel</code> 之间，txt 文件是纯文本文件，excel 文件是电子表格文件。</p>
+<p>可以用记事本打开，也可以通过 excel 打开变成表格。其为 txt 时，以逗号分割列；随后用 excel打开就能看到分割的两列。</p>
+<h3 id="4-1-存储csv"><a href="#4-1-存储csv" class="headerlink" title="4.1 存储csv"></a>4.1 存储csv</h3><p><code>to_csv()</code> 方法将 DataFrame 存储为 csv。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br> <br><span class="hljs-comment"># 创建一个示例 DataFrame</span><br>data = &#123;<br>        <span class="hljs-string">&#x27;A&#x27;</span>: [<span class="hljs-string">&#x27;foo&#x27;</span>, <span class="hljs-string">&#x27;bar&#x27;</span>, <span class="hljs-string">&#x27;foo&#x27;</span>, <span class="hljs-string">&#x27;bar&#x27;</span>, <span class="hljs-string">&#x27;foo&#x27;</span>, <span class="hljs-string">&#x27;bar&#x27;</span>, <span class="hljs-string">&#x27;foo&#x27;</span>, <span class="hljs-string">&#x27;foo&#x27;</span>],<br>        <span class="hljs-string">&#x27;B&#x27;</span>: [<span class="hljs-string">&#x27;one&#x27;</span>, <span class="hljs-string">&#x27;one&#x27;</span>, <span class="hljs-string">&#x27;two&#x27;</span>, <span class="hljs-string">&#x27;three&#x27;</span>, <span class="hljs-string">&#x27;two&#x27;</span>, <span class="hljs-string">&#x27;two&#x27;</span>, <span class="hljs-string">&#x27;one&#x27;</span>, <span class="hljs-string">&#x27;three&#x27;</span>],<br>        <span class="hljs-string">&#x27;C&#x27;</span>: [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>],<br>&#125;<br> <br>df = pd.DataFrame(data,index=[<span class="hljs-string">&#x27;a&#x27;</span>, <span class="hljs-string">&#x27;b&#x27;</span>, <span class="hljs-string">&#x27;c&#x27;</span>, <span class="hljs-string">&#x27;d&#x27;</span>, <span class="hljs-string">&#x27;e&#x27;</span>, <span class="hljs-string">&#x27;f&#x27;</span>, <span class="hljs-string">&#x27;g&#x27;</span>, <span class="hljs-string">&#x27;h&#x27;</span>])<br> <br><span class="hljs-comment"># 将 DataFrame 导出为 CSV，并且不传入行索引index方便观察</span><br>df.to_csv(<span class="hljs-string">&#x27;example.csv&#x27;</span>, index=<span class="hljs-literal">False</span>)<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p class='item-img' data-src='/img/temporate/df.png'><img src="/img/temporate/df.png"></p>
+<p><em>那把index传进去为什么不方便呢，来看看：</em></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 将 DataFrame 导出为 CSV，并且传入行索引index</span><br>df.to_csv(<span class="hljs-string">&#x27;example1.csv&#x27;</span>)<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p class='item-img' data-src='/img/temporate/df1.png'><img src="/img/temporate/df1.png"></p>
+<p>可见，列标签是在<strong>最上方</strong>的，最左边还多了一个逗号。然后依次往下看会发现很多的行标签，如果行标签是<strong>数字</strong>的话其实就可以以省略不写，因为默认就是从0开始，肉眼上会有很多重复的数字。但是如果行标签是<strong>字母</strong>的话，那么就必须要写上。</p>
+<h3 id="4-2-读取数据"><a href="#4-2-读取数据" class="headerlink" title="4.2 读取数据"></a>4.2 读取数据</h3><p><code>read_csv()</code> 将 csv 转换成 DataFram。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br> <br><span class="hljs-comment"># 读取CSV文件</span><br>new = pd.read_csv(<span class="hljs-string">&#x27;example.csv&#x27;</span>)<br><span class="hljs-built_in">print</span>(new)<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">A      B  C<br>0  foo    one  1<br>1  bar    one  2<br>2  foo    two  3<br>3  bar  three  4<br>4  foo    two  5<br>5  bar    two  6<br>6  foo    one  7<br>7  foo  three  8<br></code></pre></td></tr></table></figure>
+
+<h2 id="五-绘图"><a href="#五-绘图" class="headerlink" title="五.绘图"></a>五.绘图</h2><p>Pandas 对 Matplotlib 绘图软件包的基础上单独封装了一个<code>plot()</code>接口，通过调用该接口可以实现常用的绘图。</p>
+<p>只用 pandas 绘制图片可能可以编译，但是不会显示图片，需要使用 matplotlib 库，调用 <code>show()</code> 方法显示图形</p>
+<p>参数：</p>
+<ul>
+<li><p>kind：绘图类型，默认为 line，可选值有：</p>
+<ul>
+<li><p>line：折线图</p>
+</li>
+<li><p>bar：柱状图</p>
+</li>
+<li><p>hist：直方图</p>
+</li>
+<li><p>pie：饼图</p>
+</li>
+<li><p>scatter：散点图</p>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br> <br><span class="hljs-comment"># 创建一个示例 DataFrame</span><br>data = &#123;<br>        <span class="hljs-string">&#x27;B&#x27;</span>: [<span class="hljs-string">&#x27;one&#x27;</span>, <span class="hljs-string">&#x27;one&#x27;</span>, <span class="hljs-string">&#x27;two&#x27;</span>, <span class="hljs-string">&#x27;three&#x27;</span>, <span class="hljs-string">&#x27;two&#x27;</span>, <span class="hljs-string">&#x27;two&#x27;</span>, <span class="hljs-string">&#x27;one&#x27;</span>, <span class="hljs-string">&#x27;three&#x27;</span>],<br>        <span class="hljs-string">&#x27;C&#x27;</span>: [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>],<br>&#125;<br> <br>df = pd.DataFrame(data,index=[<span class="hljs-string">&#x27;a&#x27;</span>, <span class="hljs-string">&#x27;b&#x27;</span>, <span class="hljs-string">&#x27;c&#x27;</span>, <span class="hljs-string">&#x27;d&#x27;</span>, <span class="hljs-string">&#x27;e&#x27;</span>, <span class="hljs-string">&#x27;f&#x27;</span>, <span class="hljs-string">&#x27;g&#x27;</span>, <span class="hljs-string">&#x27;h&#x27;</span>])<br> <br><span class="hljs-comment"># 画柱状图</span><br>df.plot(kind=<span class="hljs-string">&#x27;bar&#x27;</span>)<br>plt.show()<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p class='item-img' data-src='/img/temporate/df2.png'><img src="/img/temporate/df2.png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 直方图</span><br>df.plot(kind=<span class="hljs-string">&#x27;hist&#x27;</span>)<br>plt.show()<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p class='item-img' data-src='/img/temporate/df3.png'><img src="/img/temporate/df3.png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 散点图</span><br>df.plot(kind=<span class="hljs-string">&#x27;scatter&#x27;</span>, x=<span class="hljs-string">&#x27;C&#x27;</span>, y=<span class="hljs-string">&#x27;B&#x27;</span>)<br>plt.show()<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p class='item-img' data-src='/img/temporate/df4.png'><img src="/img/temporate/df4.png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 创建一个示例 Series</span><br>data = &#123;<br>    <span class="hljs-string">&#x27;A&#x27;</span>: <span class="hljs-number">10</span>,<br>    <span class="hljs-string">&#x27;B&#x27;</span>: <span class="hljs-number">20</span>,<br>    <span class="hljs-string">&#x27;C&#x27;</span>: <span class="hljs-number">30</span>,<br>    <span class="hljs-string">&#x27;D&#x27;</span>: <span class="hljs-number">40</span><br>&#125;<br>series = pd.Series(data)<br><span class="hljs-comment"># 绘制饼图</span><br>series.plot(kind=<span class="hljs-string">&#x27;pie&#x27;</span>, autopct=<span class="hljs-string">&#x27;%1.1f%%&#x27;</span>)<br><span class="hljs-comment"># 显示图表</span><br>plt.show()<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p class='item-img' data-src='/img/temporate/df5.png'><img src="/img/temporate/df5.png"></p>
+<div id="paginator"></div></div><div id="post-footer"><div id="pages"><div class="footer-link" style="width: 50%;text-align:right;border-right:1px #fe2 solid"><a href="/post/ea205f49/">← 下一篇 opencv-python基础</a></div><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/post/d7eb5143/">DataFrame的遍历、排序、去重与分组 上一篇 →</a></div></div></div></div><div class="bottom-btn"><div><a class="i-top" id="to-top" onClick="scrolls.scrolltop();" title="回到顶部" style="opacity: 0; display: none;">∧ </a><a class="i-index" id="to-index" href="#toc-div" title="文章目录">≡</a><a class="i-color" id="color-mode" onClick="colorMode.change()" title="切换主题"></a><a onclick="BgmControl()"><svg id="bgm-control" viewBox="0 0 30 34" fill="#18d1ff" style="width: 24px; transition: transform .3s;margin-top: 4px"><path d="M25.998 23.422V11.29h3.999v12.132h-3.999zM19.497 6.234h4.001v22.243h-4.001V6.234zM12.998.867h4v32.978h-4V.867zm-6.5 5.367h4.001v22.243H6.498V6.234zm-6.5 5.056h4v12.132h-4V11.29z"></path></svg><audio id="bgm" src="/audio/bgm.mp3" autoplay loop crossorigin="anonymous"> </audio></a></div></div></article><aside><div id="about"><a href="/" id="logo"><img src="https://ak.hypergryph.com/assets/index/images/ak/pc/faction/1.png" alt="Logo" style="margin:0;border-radius:0;"></a><h1 id="Dr"><a href="/">Clocky7</a></h1><div id="description"><p></p></div><div id="social-links"><a class="social" target="_blank" rel="noopener" href="https://github.com/Clocky7"><i class="fab fa-github" alt="GitHub"></i></a></div></div><div id="aside-block"><div id="toc-div"><h1>目录</h1><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80-%E5%90%88%E5%B9%B6"><span class="toc-number">1.</span> <span class="toc-text">一.合并</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C-%E9%9A%8F%E6%9C%BA%E6%8A%BD%E6%A0%B7"><span class="toc-number">2.</span> <span class="toc-text">二.随机抽样</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89-%E7%A9%BA%E5%80%BC%E5%A4%84%E7%90%86"><span class="toc-number">3.</span> <span class="toc-text">三.空值处理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E6%A3%80%E6%B5%8B%E7%A9%BA%E5%80%BC"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 检测空值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E5%A1%AB%E5%85%85%E7%A9%BA%E5%80%BC"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 填充空值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-%E5%88%A0%E9%99%A4%E7%A9%BA%E5%80%BC"><span class="toc-number">3.3.</span> <span class="toc-text">3.3  删除空值</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B-%E8%AF%BB%E5%8F%96CSV%E6%96%87%E4%BB%B6"><span class="toc-number">4.</span> <span class="toc-text">四.读取CSV文件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E5%AD%98%E5%82%A8csv"><span class="toc-number">4.1.</span> <span class="toc-text">4.1 存储csv</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E8%AF%BB%E5%8F%96%E6%95%B0%E6%8D%AE"><span class="toc-number">4.2.</span> <span class="toc-text">4.2 读取数据</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94-%E7%BB%98%E5%9B%BE"><span class="toc-number">5.</span> <span class="toc-text">五.绘图</span></a></li></ol></div></div><footer><nobr>构建自 <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr><wbr><nobr> 使用主题 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus/hexo-theme-arknights">Arknights</a></nobr><wbr><nobr> 主题作者 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus">Yue_plus</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas></body></html>

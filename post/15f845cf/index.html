@@ -1,0 +1,188 @@
+<!DOCTYPE html><html lang="zh-cn" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>图像预处理-翻转与仿射变换 | Clocky7's Blog</title><link rel="icon" type="image/x-icon" href="/favicon.ico"><link rel="preload" as="font" crossorigin="anonymous" href="/font/Bender.ttf"><link rel="preload" as="font" crossorigin="anonymous" href="/font/BenderLight.ttf"><link rel="preload" as="font" crossorigin="anonymous" href="/font/JetBrainsMono-Regular.woff2"><link rel="stylesheet" href="/css/arknights.css"><style>@font-face {
+  font-family: Bender;
+  src: local('Bender'), url("/font/Bender.ttf"), url("/font/Bender.otf");
+}
+@font-face {
+  font-family: BenderLight;
+  src: local('BenderLight'), url("/font/BenderLight.ttf");
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}
+</style><script>var config = {"root":"/","search":{"preload":false,"activeHolder":"键入以继续","blurHolder":"搜索","noResult":"无 $0 相关数据"},"code":{"codeInfo":"$0 - $1 行","copy":"复制"}}</script><link type="text/css" rel="stylesheet" href="/lib/encrypt/hbe.style.css"><script src="//unpkg.com/mermaid@10.5.0/dist/mermaid.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+ menuSettings: {
+   zoom: "None"
+ },
+ showMathMenu: false,
+ jax: ["input/TeX","output/CommonHTML"],
+ extensions: ["tex2jax.js"],
+ TeX: {
+   extensions: ["AMSmath.js","AMSsymbols.js"],
+   equationNumbers: {
+     autoNumber: "AMS"
+   }
+ },
+ tex2jax: {
+   inlineMath: [["\\(", "\\)"]],
+   displayMath: [["\\[", "\\]"]]
+ }
+});</script><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lightgallery.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-zoom.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-thumbnail.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/css/all.min.css"><style defer src="article.css"></style><link rel="stylesheet" href="article.css"><script>if (window.localStorage.getItem('theme-mode') === 'light')
+ document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark')
+ document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.woff2") format('woff2');
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}</style><style>:root {
+ --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
+ --light-background: url('/img/bk.jpg');
+ --theme-encrypt-confirm: '确认'
+}</style><script defer src="/js/arknights.js"></script><script defer src="/js/search.js"></script><script defer type="module">import mermaid from '//unpkg.com/mermaid@10.5.0/dist/mermaid.esm.mjs';
+window.mermaid = mermaid;
+code.paintMermaid();
+</script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+  menuSettings: {
+    zoom: "None"
+  },
+  showMathMenu: false,
+  jax: ["input/TeX","output/CommonHTML"],
+  extensions: ["tex2jax.js"],
+  TeX: {
+    extensions: ["AMSmath.js","AMSsymbols.js"],
+    equationNumbers: {
+      autoNumber: "AMS"
+    }
+  },
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]]
+  }
+});
+</script><script async src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script async src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script async src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script async src="/lib/encrypt/hbe.js"></script><script async src="/js/pjax.js"></script><script class="pjax-js">reset= () => {document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js','data-pjax','.busuanzi'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><script class="pjax-js">reset= () => {document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="loading" style="opacity: 0;"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><div class="navBtn"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><nav><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="搜索" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup" tabindex="0"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">主页</span></a></li><li class="navItem"><a class="navBlock" href="/about/"><span class="navItemTitle">于我</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">归档</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>图像预处理-翻转与仿射变换</h1><div id="post-info"><span>文章发布时间: <div class="control"><time datetime="2025-06-24T05:48:41.000Z" id="date"> 2025-06-24</time></div></span><br><span>最后更新时间: <div class="control"><time datetime="2025-06-30T08:50:30.878Z" id="updated"> 2025-06-30</time></div></span><br><span>文章总字数: <div class="control">1.2k</div></span><br><span>预计阅读时间: <div class="control">4 分钟</div></span></div></div><hr><div id="post-content"><h2 id="一-图像翻转"><a href="#一-图像翻转" class="headerlink" title="一.图像翻转"></a>一.图像翻转</h2><p><code>cv2.flip(img,flipcode)</code></p>
+<p>参数</p>
+<ul>
+<li>flipcode : 指定翻转类型的标志，为0，表示沿x轴翻转，&gt;0(默认1) 表示沿y轴翻转，为 &lt;0(默认-1) 表示水平+垂直翻转</li>
+</ul>
+<p>OpenCV中，图片的镜像旋转以图像的中心为原点。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> cv2 <span class="hljs-keyword">as</span> cv<br> <br><span class="hljs-comment"># 请在脑海里下意识记住这个操作</span><br>img = cv.imread(<span class="hljs-string">&#x27;../images/cat1.png&#x27;</span>)<br> <br><span class="hljs-comment"># 按镜像翻转</span><br>a = cv.flip(img, flipCode = -<span class="hljs-number">5</span>)<br>cv.imshow(<span class="hljs-string">&#x27;img&#x27;</span>, a)<br>cv.waitKey(<span class="hljs-number">0</span>)<br>cv.destroyAllWindows()<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p class='item-img' data-src='/img/temporate/cv11.png'><img src="/img/temporate/cv11.png"></p>
+<h2 id="二-图像仿射变换"><a href="#二-图像仿射变换" class="headerlink" title="二.图像仿射变换"></a>二.图像仿射变换</h2><p>仿射变换（Affine Transformation）是一种线性变换,保持了点之间的相对距离不变。</p>
+<h3 id="2-1-仿射变换的基本性质"><a href="#2-1-仿射变换的基本性质" class="headerlink" title="2.1 仿射变换的基本性质"></a>2.1 仿射变换的基本性质</h3><ul>
+<li><p>保持直线</p>
+</li>
+<li><p>保持平行</p>
+</li>
+<li><p>比例不变性</p>
+</li>
+<li><p>不保持角度和长度</p>
+</li>
+</ul>
+<h3 id="2-2-仿射变换的基本原理"><a href="#2-2-仿射变换的基本原理" class="headerlink" title="2.2 仿射变换的基本原理"></a>2.2 仿射变换的基本原理</h3><ul>
+<li><p>线性变换</p>
+</li>
+<li><p>二维空间中，图像点坐标为(x,y)，仿射变换的目标是将这些点映射到新的位置(x’, y’)</p>
+</li>
+</ul>
+<p>下面用一个表达式来帮助理解：</p>
+<p class='item-img' data-src='/img/temporate/cv12.png'><img src="/img/temporate/cv12.png"></p>
+<p>中间的2*3矩阵就是变换矩阵，其中abcd都是处理旋转、平移、缩放的系数，tx，ty是平移的系数。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">x&#x27; = x * a + y * b + tx<br><br>y&#x27; = x * c + y * d + ty<br></code></pre></td></tr></table></figure>
+
+<h3 id="2-3-cv2-warpAffine-img-M-dsize"><a href="#2-3-cv2-warpAffine-img-M-dsize" class="headerlink" title="2.3 cv2.warpAffine(img,M,dsize)"></a>2.3 cv2.warpAffine(img,M,dsize)</h3><ul>
+<li><p>M ：2x3的变换矩阵，类型为 np.float32</p>
+</li>
+<li><p>dsize：输出图像的尺寸，形式为 (width,height)。</p>
+</li>
+</ul>
+<p>上述的旋转、平移等操作都需要这个函数实现，通过传入各种操作的变换矩阵，实现各种操作。</p>
+<h2 id="三-仿射变换操作"><a href="#三-仿射变换操作" class="headerlink" title="三.仿射变换操作"></a>三.仿射变换操作</h2><h3 id="3-1-图像旋转"><a href="#3-1-图像旋转" class="headerlink" title="3.1 图像旋转"></a>3.1 图像旋转</h3><p><code>cv2.getRotationMatrix2D(center,angle,scale)</code></p>
+<p>获取旋转矩阵，参数为：</p>
+<ul>
+<li><p>center：旋转中心点的坐标，格式为(x,y)。</p>
+</li>
+<li><p>angle：旋转角度，单位为度，正值表示逆时针旋转负值表示顺时针旋转。</p>
+</li>
+<li><p>scale：缩放比例，若设为1，则不缩放。</p>
+</li>
+</ul>
+<p>返回值是 M ，2x3的旋转矩阵。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> cv2 <span class="hljs-keyword">as</span> cv<br> <br>img = cv.imread(<span class="hljs-string">&#x27;../images/cat1.png&#x27;</span>)<br> <br><span class="hljs-comment"># 获取旋转的变换矩阵</span><br>re = cv.getRotationMatrix2D((img.shape[<span class="hljs-number">1</span>]/<span class="hljs-number">2</span>, img.shape[<span class="hljs-number">0</span>]/<span class="hljs-number">2</span>),<span class="hljs-number">45</span>,<span class="hljs-number">1</span>)<br> <br><span class="hljs-comment"># 利用warpAffine进行旋转</span><br>img1 = cv.warpAffine(img, re, (img.shape[<span class="hljs-number">1</span>], img.shape[<span class="hljs-number">0</span>]))<br> <br>cv.imshow(<span class="hljs-string">&#x27;img&#x27;</span>, img)<br>cv.imshow(<span class="hljs-string">&#x27;img1&#x27;</span>, img1)<br>cv.waitKey(<span class="hljs-number">0</span>)<br>cv.destroyAllWindows()<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p class='item-img' data-src='/img/temporate/cv13.png'><img src="/img/temporate/cv13.png"></p>
+<h3 id="3-2-图像平移"><a href="#3-2-图像平移" class="headerlink" title="3.2 图像平移"></a>3.2 图像平移</h3><p>使用 <code>np.float32()</code> 创建数组，把这个二维数组(变化矩阵)作为参数传给 <code>cv2.warpAffine()</code> 函数就可以实现平移。</p>
+<p class='item-img' data-src='/img/temporate/cv14.png'><img src="/img/temporate/cv14.png"></p>
+<p>代入表达式可得</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">x&#x27; = x + tx<br><br>y&#x27; = y + ty<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> cv2 <span class="hljs-keyword">as</span> cv<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br> <br>img = cv.imread(<span class="hljs-string">&#x27;../images/cat1.png&#x27;</span>)<br> <br><span class="hljs-comment"># 定义偏移量</span><br>tx = <span class="hljs-number">100</span><br>ty = <span class="hljs-number">50</span><br> <br><span class="hljs-comment"># 定义平移变换矩阵</span><br>n = np.float32([[<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,tx],[<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,ty]])<br> <br> <br><span class="hljs-comment"># 使用warpAffine函数实现平移变换</span><br>img_shift = cv.warpAffine(img,n,(img.shape[<span class="hljs-number">1</span>],img.shape[<span class="hljs-number">0</span>]))<br> <br>cv.imshow(<span class="hljs-string">&#x27;img_shift&#x27;</span>,img_shift)<br>cv.waitKey(<span class="hljs-number">0</span>)<br>cv.destroyAllWindows()<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p class='item-img' data-src='/img/temporate/cv15.png'><img src="/img/temporate/cv15.png"></p>
+<h3 id="3-3-图像缩放"><a href="#3-3-图像缩放" class="headerlink" title="3.3 图像缩放"></a>3.3 图像缩放</h3><p>同理创建数组，下面是这个变换矩阵的理解：</p>
+<p class='item-img' data-src='/img/temporate/cv16.png'><img src="/img/temporate/cv16.png"></p>
+<p>代入表达式可得:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">x&#x27; = x * sx<br><br>y&#x27; = y * sy<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> cv2 <span class="hljs-keyword">as</span> cv<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br> <br>img = cv.imread(<span class="hljs-string">&#x27;../images/cat1.png&#x27;</span>)<br> <br><span class="hljs-comment"># 定义缩放比例</span><br>sx = <span class="hljs-number">0.5</span><br>sy = <span class="hljs-number">0.5</span><br> <br><span class="hljs-comment"># 定义缩放变换矩阵</span><br>n = np.float32([[sx,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>],[<span class="hljs-number">0</span>,sy,<span class="hljs-number">0</span>]])<br> <br><span class="hljs-comment"># 这里最后的输出大小适配缩放后的尺寸</span><br>img_scale = cv.warpAffine(img,n,(<span class="hljs-built_in">int</span>(img.shape[<span class="hljs-number">1</span>]*sx),<span class="hljs-built_in">int</span>(img.shape[<span class="hljs-number">0</span>]*sy)))<br> <br>cv.imshow(<span class="hljs-string">&#x27;img_scale&#x27;</span>,img_scale)<br>cv.waitKey()<br>cv.destroyAllWindows()<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p class='item-img' data-src='/img/temporate/cv17.png'><img src="/img/temporate/cv17.png"></p>
+<h3 id="3-4-图像剪切"><a href="#3-4-图像剪切" class="headerlink" title="3.4 图像剪切"></a>3.4 图像剪切</h3><p>&emsp;&emsp;剪切操作可以改变图形的形状，以便其在某个方向上倾斜，它将对象的形状改变为斜边平行四边形，而不改变其面积。也就是一个矩形的宽高都是不变的。它把图片的一个部分切下来放在了另一个地方。</p>
+<p>那怎么实现呢？</p>
+<ul>
+<li>沿x轴剪切：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">x&#x27;=x+shy*y     <br><br>y&#x27;=y<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>沿y轴剪切：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">y&#x27;=shx*x+y<br><br>x&#x27;=x<br></code></pre></td></tr></table></figure>
+
+<p>因为根据warpAffine函数的公式，想要在把图像的一块空间切下来放在另一个地方，不能操作tx，ty，这样会使得整个图像的每个像素点发生平移，不会改变图像具体形状构造，这就是其与平移的区别。然后公式中，能让x，y增减值的只有用 shy 和 shx ，让点的另一个轴坐标乘以剪切因子来实现偏移。</p>
+<p><code>x&#39; = x+shy*y</code></p>
+<p>相当于给x方向上加y方向上的变化，这样就可以有一个矢量变化，方向就会变为斜向上或斜向下，从而实现拉扯。也就是所谓的x偏移，y不变；x不变，y偏移。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> cv2 <span class="hljs-keyword">as</span> cv<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br> <br>img = cv.imread(<span class="hljs-string">&#x27;../images/cat1.png&#x27;</span>)<br> <br><span class="hljs-comment"># 定义剪切因子（示例切y轴方向）</span><br>shx = <span class="hljs-number">0.5</span><br>shy = <span class="hljs-number">0</span><br> <br> <br><span class="hljs-comment"># 定义剪切变换矩阵</span><br>n = np.float32([[<span class="hljs-number">1</span>,shy,<span class="hljs-number">0</span>],[shx,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>]])<br> <br>img_warp = cv.warpAffine(img,n,(img.shape[<span class="hljs-number">1</span>],img.shape[<span class="hljs-number">0</span>]))<br> <br>cv.imshow(<span class="hljs-string">&#x27;img_warp&#x27;</span>,img_warp)<br>cv.waitKey(<span class="hljs-number">0</span>)<br>cv.destroyAllWindows()<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p class='item-img' data-src='/img/temporate/cv18.png'><img src="/img/temporate/cv18.png"></p>
+<div id="paginator"></div></div><div id="post-footer"><div id="pages"><div class="footer-link" style="width: 50%;text-align:right;border-right:1px #fe2 solid"><a href="/post/4023783c/">← 下一篇 图像预处理-插值方法</a></div><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/post/ea205f49/">opencv-python基础 上一篇 →</a></div></div></div></div><div class="bottom-btn"><div><a class="i-top" id="to-top" onClick="scrolls.scrolltop();" title="回到顶部" style="opacity: 0; display: none;">∧ </a><a class="i-index" id="to-index" href="#toc-div" title="文章目录">≡</a><a class="i-color" id="color-mode" onClick="colorMode.change()" title="切换主题"></a><a onclick="BgmControl()"><svg id="bgm-control" viewBox="0 0 30 34" fill="#18d1ff" style="width: 24px; transition: transform .3s;margin-top: 4px"><path d="M25.998 23.422V11.29h3.999v12.132h-3.999zM19.497 6.234h4.001v22.243h-4.001V6.234zM12.998.867h4v32.978h-4V.867zm-6.5 5.367h4.001v22.243H6.498V6.234zm-6.5 5.056h4v12.132h-4V11.29z"></path></svg><audio id="bgm" src="/audio/bgm.mp3" autoplay loop crossorigin="anonymous"> </audio></a></div></div></article><aside><div id="about"><a href="/" id="logo"><img src="https://ak.hypergryph.com/assets/index/images/ak/pc/faction/1.png" alt="Logo" style="margin:0;border-radius:0;"></a><h1 id="Dr"><a href="/">Clocky7</a></h1><div id="description"><p></p></div><div id="social-links"><a class="social" target="_blank" rel="noopener" href="https://github.com/Clocky7"><i class="fab fa-github" alt="GitHub"></i></a></div></div><div id="aside-block"><div id="toc-div"><h1>目录</h1><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80-%E5%9B%BE%E5%83%8F%E7%BF%BB%E8%BD%AC"><span class="toc-number">1.</span> <span class="toc-text">一.图像翻转</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C-%E5%9B%BE%E5%83%8F%E4%BB%BF%E5%B0%84%E5%8F%98%E6%8D%A2"><span class="toc-number">2.</span> <span class="toc-text">二.图像仿射变换</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E4%BB%BF%E5%B0%84%E5%8F%98%E6%8D%A2%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%80%A7%E8%B4%A8"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 仿射变换的基本性质</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E4%BB%BF%E5%B0%84%E5%8F%98%E6%8D%A2%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 仿射变换的基本原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-cv2-warpAffine-img-M-dsize"><span class="toc-number">2.3.</span> <span class="toc-text">2.3 cv2.warpAffine(img,M,dsize)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89-%E4%BB%BF%E5%B0%84%E5%8F%98%E6%8D%A2%E6%93%8D%E4%BD%9C"><span class="toc-number">3.</span> <span class="toc-text">三.仿射变换操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E5%9B%BE%E5%83%8F%E6%97%8B%E8%BD%AC"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 图像旋转</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E5%9B%BE%E5%83%8F%E5%B9%B3%E7%A7%BB"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 图像平移</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-%E5%9B%BE%E5%83%8F%E7%BC%A9%E6%94%BE"><span class="toc-number">3.3.</span> <span class="toc-text">3.3 图像缩放</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-%E5%9B%BE%E5%83%8F%E5%89%AA%E5%88%87"><span class="toc-number">3.4.</span> <span class="toc-text">3.4 图像剪切</span></a></li></ol></li></ol></div></div><footer><nobr>构建自 <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr><wbr><nobr> 使用主题 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus/hexo-theme-arknights">Arknights</a></nobr><wbr><nobr> 主题作者 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus">Yue_plus</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas></body></html>

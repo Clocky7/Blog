@@ -1,0 +1,245 @@
+<!DOCTYPE html><html lang="zh-cn" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>图像预处理-图像噪点消除 | Clocky7's Blog</title><link rel="icon" type="image/x-icon" href="/favicon.ico"><link rel="preload" as="font" crossorigin="anonymous" href="/font/Bender.ttf"><link rel="preload" as="font" crossorigin="anonymous" href="/font/BenderLight.ttf"><link rel="preload" as="font" crossorigin="anonymous" href="/font/JetBrainsMono-Regular.woff2"><link rel="stylesheet" href="/css/arknights.css"><style>@font-face {
+  font-family: Bender;
+  src: local('Bender'), url("/font/Bender.ttf"), url("/font/Bender.otf");
+}
+@font-face {
+  font-family: BenderLight;
+  src: local('BenderLight'), url("/font/BenderLight.ttf");
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}
+</style><script>var config = {"root":"/","search":{"preload":false,"activeHolder":"键入以继续","blurHolder":"搜索","noResult":"无 $0 相关数据"},"code":{"codeInfo":"$0 - $1 行","copy":"复制"}}</script><link type="text/css" rel="stylesheet" href="/lib/encrypt/hbe.style.css"><script src="//unpkg.com/mermaid@10.5.0/dist/mermaid.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+ menuSettings: {
+   zoom: "None"
+ },
+ showMathMenu: false,
+ jax: ["input/TeX","output/CommonHTML"],
+ extensions: ["tex2jax.js"],
+ TeX: {
+   extensions: ["AMSmath.js","AMSsymbols.js"],
+   equationNumbers: {
+     autoNumber: "AMS"
+   }
+ },
+ tex2jax: {
+   inlineMath: [["\\(", "\\)"]],
+   displayMath: [["\\[", "\\]"]]
+ }
+});</script><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lightgallery.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-zoom.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-thumbnail.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/css/all.min.css"><style defer src="article.css"></style><link rel="stylesheet" href="article.css"><script>if (window.localStorage.getItem('theme-mode') === 'light')
+ document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark')
+ document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.woff2") format('woff2');
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}</style><style>:root {
+ --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
+ --light-background: url('/img/bk.jpg');
+ --theme-encrypt-confirm: '确认'
+}</style><script defer src="/js/arknights.js"></script><script defer src="/js/search.js"></script><script defer type="module">import mermaid from '//unpkg.com/mermaid@10.5.0/dist/mermaid.esm.mjs';
+window.mermaid = mermaid;
+code.paintMermaid();
+</script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+  menuSettings: {
+    zoom: "None"
+  },
+  showMathMenu: false,
+  jax: ["input/TeX","output/CommonHTML"],
+  extensions: ["tex2jax.js"],
+  TeX: {
+    extensions: ["AMSmath.js","AMSsymbols.js"],
+    equationNumbers: {
+      autoNumber: "AMS"
+    }
+  },
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]]
+  }
+});
+</script><script async src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script async src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script async src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script async src="/lib/encrypt/hbe.js"></script><script async src="/js/pjax.js"></script><script class="pjax-js">reset= () => {document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js','data-pjax','.busuanzi'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><script class="pjax-js">reset= () => {document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="loading" style="opacity: 0;"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><div class="navBtn"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><nav><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="搜索" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup" tabindex="0"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">主页</span></a></li><li class="navItem"><a class="navBlock" href="/about/"><span class="navItemTitle">于我</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">归档</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>图像预处理-图像噪点消除</h1><div id="post-info"><span>文章发布时间: <div class="control"><time datetime="2025-06-24T05:51:03.000Z" id="date"> 2025-06-24</time></div></span><br><span>最后更新时间: <div class="control"><time datetime="2025-07-01T02:33:10.229Z" id="updated"> 2025-07-01</time></div></span><br><span>文章总字数: <div class="control">2.8k</div></span><br><span>预计阅读时间: <div class="control">11 分钟</div></span></div></div><hr><div id="post-content"><h2 id="一-基本介绍"><a href="#一-基本介绍" class="headerlink" title="一.基本介绍"></a>一.基本介绍</h2><p>噪声：指图像中的一些干扰因素，也可以理解为有那么一些点的像素值与周围的像素值格格不入。常见的噪声类型包括高斯噪声和椒盐噪声。</p>
+<p>滤波器：也可以叫做卷积核</p>
+<ul>
+<li><p>低通滤波器是模糊，高通滤波器是锐化</p>
+</li>
+<li><p>低通滤波器就是允许低频信号通过，在图像中边缘和噪点都相当于高频部分，所以低通滤波器用于去除噪点、平滑和模糊图像。高通滤波器则反之，用来增强图像边缘，进行锐化处理。</p>
+</li>
+</ul>
+<p><strong>注意：椒盐噪声可以理解为斑点，随机出现在图像中的黑点或白点；高斯噪声可以理解为拍摄图片时由于光照等原因造成的噪声。</strong></p>
+<p class='item-img' data-src='/img/temporate/cv63.png'><img src="/img/temporate/cv63.png"></p>
+<p>这是高斯噪声。</p>
+<hr>
+<p class='item-img' data-src='/img/temporate/cv64.png'><img src="/img/temporate/cv64.png"></p>
+<p>这是椒盐噪声，有很多黑白的或者孤立的小点</p>
+<h3 id="1-1-均值滤波"><a href="#1-1-均值滤波" class="headerlink" title="1.1 均值滤波"></a>1.1 均值滤波</h3><p><code>cv.blur(img, ksize)</code></p>
+<p>参数：</p>
+<ul>
+<li>ksize：代表卷积核的大小</li>
+</ul>
+<p>取的是卷积核区域内元素的均值。<br>(对于边界的像素点，则会进行边界填充，以确保卷积核的中心能够对准边界的像素点进行滤波操作。在OpenCV中，默认的是使用BORDER_REFLECT_101的方式进行填充，下面的滤波方法中除了中值滤波使用的是BORDER_REPLICATE进行填充之外，其他默认也是使用这个方式进行填充)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> cv2 <span class="hljs-keyword">as</span> cv<br> <br>img = cv.imread(<span class="hljs-string">&#x27;../images/lvbo2.png&#x27;</span>)<br> <br><span class="hljs-comment"># 均值滤波，用3*3的卷积核</span><br>blur = cv.blur(img, (<span class="hljs-number">3</span>, <span class="hljs-number">3</span>))<br> <br>cv.imshow(<span class="hljs-string">&#x27;img&#x27;</span>, img)<br>cv.imshow(<span class="hljs-string">&#x27;blur&#x27;</span>, blur)<br>cv.waitKey(<span class="hljs-number">0</span>)<br>cv.destroyAllWindows()<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p class='item-img' data-src='/img/temporate/cv65.png'><img src="/img/temporate/cv65.png"></p>
+<h3 id="1-2-方框滤波"><a href="#1-2-方框滤波" class="headerlink" title="1.2 方框滤波"></a>1.2 方框滤波</h3><p><code>cv.boxFilter(img, ddepth,ksize, normalize)</code></p>
+<p>参数：</p>
+<ul>
+<li><p>ksize：代表卷积核的大小</p>
+</li>
+<li><p>ddepth：输出图像的深度，-1代表使用原图像的深度。</p>
+</li>
+</ul>
+<p>指在每个像素点所使用的位数（bit depth），也就是用来表示图像中每一个像素点的颜色信息所需的二进制位数。图像深度决定了图像能够表达的颜色数量或灰度级。</p>
+<ul>
+<li>normalize：当normalize为True的时候，方框滤波就是均值滤波，权重就等于1&#x2F;9；normalize为False的时候，每个像素权重都是1，相当于求区域内的像素和，超出部分做取模运算。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> cv2 <span class="hljs-keyword">as</span> cv<br> <br>img = cv.imread(<span class="hljs-string">&#x27;../images/lvbo2.png&#x27;</span>)<br> <br><span class="hljs-comment"># 方框滤波，用3*3的卷积核，类似均值滤波</span><br>box = cv.boxFilter(img, -<span class="hljs-number">1</span>,(<span class="hljs-number">3</span>, <span class="hljs-number">3</span>),normalize=<span class="hljs-literal">True</span>)<br> <br><span class="hljs-comment"># 真正的方框滤波</span><br>box1 = cv.boxFilter(img, -<span class="hljs-number">1</span>,(<span class="hljs-number">3</span>, <span class="hljs-number">3</span>), normalize=<span class="hljs-literal">False</span>)<br> <br> <br>cv.imshow(<span class="hljs-string">&#x27;img&#x27;</span>, img)<br>cv.imshow(<span class="hljs-string">&#x27;box&#x27;</span>, box)<br>cv.imshow(<span class="hljs-string">&#x27;box1&#x27;</span>, box1)<br>cv.waitKey(<span class="hljs-number">0</span>)<br>cv.destroyAllWindows()<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p class='item-img' data-src='/img/temporate/cv66.png'><img src="/img/temporate/cv66.png"></p>
+<p><em><strong>跟均值滤波很像，可以看到这里的方框滤波显示图片是很接近白色的，因为其将像素点周围的像素权重都设为1，然后相加得到该像素的值，所以很多都超过了255而进行了取模操作。</strong></em></p>
+<h3 id="1-2-高斯滤波"><a href="#1-2-高斯滤波" class="headerlink" title="1.2 高斯滤波"></a>1.2 高斯滤波</h3><p><code>cv.GaussianBlur(img, ksize, sigmaX)</code></p>
+<p>参数：</p>
+<ul>
+<li>sigmaX：</li>
+</ul>
+<p>就是高斯函数里的值，σx值越大，模糊效果越明显。高斯滤波相比均值滤波效率要慢，但可以有效消除高斯噪声，能保留更多的图像细节，所以经常被称为最有用的滤波器。</p>
+<p>通过使用高斯函数（正态分布）作为卷积核来对图像进行模糊处理。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> cv2 <span class="hljs-keyword">as</span> cv<br> <br>img = cv.imread(<span class="hljs-string">&#x27;../images/lvbo2.png&#x27;</span>)<br> <br><span class="hljs-comment"># 高斯，用3*3的卷积核</span><br>Gauss = cv.GaussianBlur(img, (<span class="hljs-number">3</span>, <span class="hljs-number">3</span>), <span class="hljs-number">1</span>)<br> <br> <br>cv.imshow(<span class="hljs-string">&#x27;img&#x27;</span>, img)<br>cv.imshow(<span class="hljs-string">&#x27;Gauss&#x27;</span>, Gauss)<br> <br>cv.waitKey(<span class="hljs-number">0</span>)<br>cv.destroyAllWindows()<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p class='item-img' data-src='/img/temporate/cv67.png'><img src="/img/temporate/cv67.png"></p>
+<h3 id="1-3-中值滤波"><a href="#1-3-中值滤波" class="headerlink" title="1.3 中值滤波"></a>1.3 中值滤波</h3><p><code>cv.medianBlur(img, ksize)</code></p>
+<p>中值滤波<strong>没有核值</strong>，而是在原图中从左上角开始，将卷积核区域内的像素值进行排序，并选取中值作为卷积核的中点的像素值。就是用区域内的中值来代替本像素值，所以那种<strong>孤立</strong>的斑点，如0或255很容易消除掉，适用于去除椒盐噪声和斑点噪声。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> cv2 <span class="hljs-keyword">as</span> cv<br> <br><span class="hljs-comment"># 导入椒盐噪声图片</span><br>img = cv.imread(<span class="hljs-string">&#x27;../images/lvbo3.png&#x27;</span>)<br> <br><span class="hljs-comment"># 中值滤波，注意这里的3</span><br>median = cv.medianBlur(img, <span class="hljs-number">3</span>)<br> <br>cv.imshow(<span class="hljs-string">&#x27;img&#x27;</span>, img)<br>cv.imshow(<span class="hljs-string">&#x27;median&#x27;</span>, median)<br> <br>cv.waitKey(<span class="hljs-number">0</span>)<br>cv.destroyAllWindows()<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p class='item-img' data-src='/img/temporate/cv68.png'><img src="/img/temporate/cv68.png"></p>
+<p>其实你会注意到，中值滤波的ksize为啥是个整数呢，前面的都是(x,x)。因为中值滤波是非线性的，且没有核值不依赖卷积核权重。</p>
+<h3 id="1-4-双边滤波"><a href="#1-4-双边滤波" class="headerlink" title="1.4 双边滤波"></a>1.4 双边滤波</h3><p><code>cv.bilateralFilter(img,ksize,d,sigmaColor,sigmaSpace)</code></p>
+<p>参数：</p>
+<ul>
+<li><p>d：过滤时周围每个像素领域的直径，这里已经设置了核大小。d&#x3D;9&#x3D;&#x3D;&#x3D;&gt;9x9</p>
+</li>
+<li><p>sigmaColor：在color space（值域空间）中过滤sigma。参数越大，那些颜色足够相近的的颜色的影响越大。较大的sigmaColor意味着更大的颜色差异将被允许参与到加权平均中.</p>
+</li>
+<li><p>sigmaSpace：在coordinate space（坐标空间）中过滤sigma。这个参数是坐标空间中的标准差，决定了像素位置对滤波结果的影响程度。</p>
+</li>
+</ul>
+<p>双边滤波的基本思路是同时考虑将要被滤波的像素点的空域(空间)信息（周围像素点的位置的权重）和值域信息（周围像素点的像素值的权重）。因为在边缘处，临近的像素点差异会比较大，如果只是使用空域信息来进行滤波的话，得到的结果必然是边缘被模糊了，这样我们就丢掉了边缘信息。这也是一种非线性滤波。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> cv2 <span class="hljs-keyword">as</span> cv<br> <br>img = cv.imread(<span class="hljs-string">&#x27;../images/lvbo2.png&#x27;</span>)<br> <br><span class="hljs-comment"># 双边滤波</span><br>sb = cv.bilateralFilter(img, <span class="hljs-number">9</span>, <span class="hljs-number">100</span>, <span class="hljs-number">100</span>)<br> <br>cv.imshow(<span class="hljs-string">&#x27;img&#x27;</span>, img)<br>cv.imshow(<span class="hljs-string">&#x27;sb&#x27;</span>, sb)<br> <br>cv.waitKey(<span class="hljs-number">0</span>)<br>cv.destroyAllWindows()<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p class='item-img' data-src='/img/temporate/cv69.png'><img src="/img/temporate/cv69.png"></p>
+<p><em>注意：</em></p>
+<ol>
+<li>关于2个<code>sigma</code>参数：</li>
+</ol>
+<p>简单起见，可以令2个<code>sigma</code>的值相等；</p>
+<ul>
+<li><p>如果他们很小（小于10），那么滤波器几乎没有什么效果；</p>
+</li>
+<li><p>如果他们很大（大于150），那么滤波器的效果会很强，使图像显得非常卡通化。</p>
+</li>
+</ul>
+<ol start="2">
+<li>关于参数<code>d</code>：</li>
+</ol>
+<ul>
+<li><p>过大的滤波器（d&gt;5）执行效率低。</p>
+</li>
+<li><p>对于实时应用，建议取d&#x3D;5；</p>
+</li>
+<li><p>对于需要过滤严重噪声的离线应用，可取d&#x3D;9；</p>
+</li>
+</ul>
+<h2 id="二-图像梯度处理"><a href="#二-图像梯度处理" class="headerlink" title="二.图像梯度处理"></a>二.图像梯度处理</h2><h3 id="2-1-图像梯度"><a href="#2-1-图像梯度" class="headerlink" title="2.1 图像梯度"></a>2.1 图像梯度</h3><p>把图片想象成连续函数，因为边缘部分的像素值是与旁边像素有明显区别，所以对图片局部求极值，就可以得到整幅图片的边缘信息了。不过图片是二维的离散函数，导数就变成了差分，这个差分就称为图像的梯度。</p>
+<h3 id="2-2-垂直边缘提取"><a href="#2-2-垂直边缘提取" class="headerlink" title="2.2 垂直边缘提取"></a>2.2 垂直边缘提取</h3><p class='item-img' data-src='/img/temporate/cv70.png'><img src="/img/temporate/cv70.png"></p>
+<p>这个核是用来提取图片中的<strong>垂直边缘</strong>（右侧边缘，若提取左边缘卷积核中正负号换一下就好）的，中间像素就是这个卷积核卷积的结果。</p>
+<p>当前列<strong>左右两侧</strong>的元素进行差分，由于边缘(当前列)的值明显小于（或大于）周边像素，所以边缘(当前列)的差分结果会明显不同，这样就提取出了垂直边缘。简单理解，就是在‘1’位置右边的像素值相对于‘-1’位置左边的像素值的<strong>差距</strong>会显示在<strong>中间</strong>的像素中，所以中间的列就是旁边两列的垂直差分。</p>
+<p>来介绍一下二维卷积函数：</p>
+<p><code>cv2.filter2D(src, ddepth, kernel)</code></p>
+<ul>
+<li><p>src: 输入图像，一般为numpy数组。</p>
+</li>
+<li><p>ddepth: 输出图像的深度，可以是负值（表示与原图相同）、正值或其他特定值（常用-1 表示输出与输入具有相同的深度）。</p>
+</li>
+<li><p>kernel: 卷积核，一个二维数组（通常为奇数大小的方形矩阵），用于计算每个像素周围邻域的加权和。</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> cv2 <span class="hljs-keyword">as</span> cv<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br> <br><span class="hljs-comment"># 模拟一张图像，灰度图</span><br>img=np.array([[<span class="hljs-number">100</span>,<span class="hljs-number">102</span>,<span class="hljs-number">109</span>,<span class="hljs-number">110</span>,<span class="hljs-number">98</span>,<span class="hljs-number">20</span>,<span class="hljs-number">19</span>,<span class="hljs-number">18</span>,<span class="hljs-number">21</span>,<span class="hljs-number">22</span>],<br>             [<span class="hljs-number">109</span>,<span class="hljs-number">101</span>,<span class="hljs-number">98</span>,<span class="hljs-number">108</span>,<span class="hljs-number">102</span>,<span class="hljs-number">20</span>,<span class="hljs-number">21</span>,<span class="hljs-number">19</span>,<span class="hljs-number">20</span>,<span class="hljs-number">21</span>],<br>             [<span class="hljs-number">109</span>,<span class="hljs-number">102</span>,<span class="hljs-number">105</span>,<span class="hljs-number">108</span>,<span class="hljs-number">98</span>,<span class="hljs-number">20</span>,<span class="hljs-number">22</span>,<span class="hljs-number">19</span>,<span class="hljs-number">19</span>,<span class="hljs-number">18</span>],<br>             [<span class="hljs-number">109</span>,<span class="hljs-number">98</span>,<span class="hljs-number">102</span>,<span class="hljs-number">108</span>,<span class="hljs-number">102</span>,<span class="hljs-number">20</span>,<span class="hljs-number">23</span>,<span class="hljs-number">19</span>,<span class="hljs-number">20</span>,<span class="hljs-number">22</span>],<br>             [<span class="hljs-number">109</span>,<span class="hljs-number">102</span>,<span class="hljs-number">105</span>,<span class="hljs-number">108</span>,<span class="hljs-number">98</span>,<span class="hljs-number">20</span>,<span class="hljs-number">22</span>,<span class="hljs-number">19</span>,<span class="hljs-number">20</span>,<span class="hljs-number">18</span>],<br>             [<span class="hljs-number">100</span>,<span class="hljs-number">102</span>,<span class="hljs-number">108</span>,<span class="hljs-number">110</span>,<span class="hljs-number">98</span>,<span class="hljs-number">20</span>,<span class="hljs-number">19</span>,<span class="hljs-number">18</span>,<span class="hljs-number">21</span>,<span class="hljs-number">22</span>],<br>             [<span class="hljs-number">109</span>,<span class="hljs-number">101</span>,<span class="hljs-number">98</span>,<span class="hljs-number">108</span>,<span class="hljs-number">102</span>,<span class="hljs-number">20</span>,<span class="hljs-number">22</span>,<span class="hljs-number">19</span>,<span class="hljs-number">20</span>,<span class="hljs-number">21</span>],<br>             [<span class="hljs-number">109</span>,<span class="hljs-number">102</span>,<span class="hljs-number">108</span>,<span class="hljs-number">108</span>,<span class="hljs-number">98</span>,<span class="hljs-number">20</span>,<span class="hljs-number">22</span>,<span class="hljs-number">19</span>,<span class="hljs-number">19</span>,<span class="hljs-number">18</span>],<br>              ],dtype=np.float32)<br><span class="hljs-comment"># 定义卷积核，</span><br>kernel=np.array([[-<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>],<br>                 [-<span class="hljs-number">2</span>,<span class="hljs-number">0</span>,<span class="hljs-number">2</span>],<br>                 [-<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>]],dtype=np.float32)<br><span class="hljs-comment"># 二维卷积操作</span><br>img2=cv.filter2D(img,-<span class="hljs-number">1</span>,kernel)<br><span class="hljs-comment"># 打印卷积后的图</span><br><span class="hljs-built_in">print</span>(img2)<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">[[   0.   -4.   30.  -14. -356. -320.   -6.    2.   12.    0.]<br> [   0.  -17.   28.  -10. -354. -317.   -5.   -3.    7.    0.]<br> [   0.  -26.   29.  -10. -352. -312.   -4.  -10.    3.    0.]<br> [   0.  -22.   32.  -14. -352. -310.   -4.  -11.    4.    0.]<br> [   0.   -7.   30.  -24. -354. -310.   -5.   -5.    5.    0.]<br> [   0.    1.   29.  -23. -356. -314.   -6.    0.    9.    0.]<br> [   0.  -15.   28.  -12. -354. -315.   -5.   -5.    7.    0.]<br> [   0.  -24.   26.  -12. -352. -312.   -4.  -10.    2.    0.]]<br></code></pre></td></tr></table></figure>
+
+<p>这里的值就是用上面的卷积核计算的，其中边缘由于使用边界反射101进行填充，左右两边的差分为0，也就是无梯度变化。然后中间两列有着超出255的最大数值，这就会作为边缘被提取出来。</p>
+<p>差分后值的符号正负代表梯度的方向，差分值实际应该取绝对值，毕竟我们只是想看数值大小来提取边缘。值超过了255都算(+-)255，即使是负号。</p>
+<p>如果使用的是一张真正的图片进行特征提取，建议转化为灰度图(单通道)方便计算。</p>
+<h3 id="2-3-水平边缘提取"><a href="#2-3-水平边缘提取" class="headerlink" title="2.3 水平边缘提取"></a>2.3 水平边缘提取</h3><p>把上面的卷积矩阵进行转置进行操作就可以了。</p>
+<h3 id="2-4-Sobel算子"><a href="#2-4-Sobel算子" class="headerlink" title="2.4 Sobel算子"></a>2.4 Sobel算子</h3><p>上面的两个卷积核都叫做Sobel算子，只是方向不同。这个算子可以两方向上特征结合提取</p>
+<p>总梯度是：</p>
+<p class='item-img' data-src='/img/temporate/cv71.png'><img src="/img/temporate/cv71.png"></p>
+<p><code>sobel_image = cv2.Sobel(src, ddepth, dx, dy, ksize)</code></p>
+<ul>
+<li><p>src：通常应该是一个单通道图像，因为 Sobel 算子是基于像素亮度梯度计算的。</p>
+</li>
+<li><p>dx,dy：当组合为dx&#x3D;1,dy&#x3D;0时求x方向的一阶导数，在这里，设置为1意味着垂直特征提取，因为其做的是水平方向梯度。（若同时为1，通常得不到想要的结果,两个方向的处理不是太好)</p>
+</li>
+<li><p>ksize：Sobel算子的大小，可选择3、5、7，默认为3。</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> cv2 <span class="hljs-keyword">as</span> cv<br> <br>pig = cv.imread(<span class="hljs-string">&#x27;../images/pig.png&#x27;</span>, cv.IMREAD_GRAYSCALE)<br> <br><span class="hljs-comment"># 选择垂直特征提取</span><br>sobel_img1 = cv.Sobel(pig, -<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">3</span>)<br> <br><span class="hljs-comment"># 选择水平特征提取</span><br>sobel_img2 = cv.Sobel(pig, -<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">3</span>)<br> <br><span class="hljs-comment"># 两特征提取</span><br>sobel = cv.Sobel(pig, -<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">3</span>)<br> <br>cv.imshow(<span class="hljs-string">&#x27;pig&#x27;</span>, pig)<br>cv.imshow(<span class="hljs-string">&#x27;sobel_img1&#x27;</span>, sobel_img1)<br>cv.imshow(<span class="hljs-string">&#x27;sobel_img2&#x27;</span>, sobel_img2)<br>cv.imshow(<span class="hljs-string">&#x27;sobel&#x27;</span>, sobel)<br>cv.waitKey(<span class="hljs-number">0</span>)<br>cv.destroyAllWindows()<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p class='item-img' data-src='/img/temporate/cv72.png'><img src="/img/temporate/cv72.png"></p>
+<p>很多人疑问，Sobel算子的卷积核这几个值是怎么来的呢？事实上，并没有规定，你可以用你自己的(但那就不叫sobel算子了)。比如，最初只利用邻域间的原始差值来检测边缘的<strong>Prewitt</strong>算子：</p>
+<p class='item-img' data-src='/img/temporate/cv73.png'><img src="/img/temporate/cv73.png"></p>
+<h3 id="2-5-Laplacian算子"><a href="#2-5-Laplacian算子" class="headerlink" title="2.5 Laplacian算子"></a>2.5 Laplacian算子</h3><p>其用的是二阶导</p>
+<p>也将两个方向的梯度结合在一起计算，下面是其卷积核：</p>
+<p class='item-img' data-src='/img/temporate/cv74.png'><img src="/img/temporate/cv74.png"></p>
+<p><em>有些时候考虑斜对角元素就会变成：</em></p>
+<p class='item-img' data-src='/img/temporate/cv75.png'><img src="/img/temporate/cv75.png"></p>
+<p><code>cv2.Laplacian(src, ddepth)</code></p>
+<p>Laplacian算子是二阶边缘检测的典型代表，一&#x2F;二阶边缘检测各有优缺点。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> cv2 <span class="hljs-keyword">as</span> cv<br> <br>pig = cv.imread(<span class="hljs-string">&#x27;../images/pig.png&#x27;</span>, cv.IMREAD_GRAYSCALE)<br> <br>La = cv.Laplacian(pig, -<span class="hljs-number">1</span>)<br>cv.imshow(<span class="hljs-string">&#x27;Original&#x27;</span>, pig)<br>cv.imshow(<span class="hljs-string">&#x27;Laplacian&#x27;</span>, La)<br>cv.waitKey(<span class="hljs-number">0</span>)<br>cv.destroyAllWindows()<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p class='item-img' data-src='/img/temporate/cv76.png'><img src="/img/temporate/cv76.png"></p>
+<div id="paginator"></div></div><div id="post-footer"><div id="pages"><div class="footer-link" style="width: 50%;text-align:right;border-right:1px #fe2 solid"><a href="/post/1f43f232/">← 下一篇 图像预处理-图像边缘检测</a></div><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/post/e4106317/">图像预处理-添加水印 上一篇 →</a></div></div></div></div><div class="bottom-btn"><div><a class="i-top" id="to-top" onClick="scrolls.scrolltop();" title="回到顶部" style="opacity: 0; display: none;">∧ </a><a class="i-index" id="to-index" href="#toc-div" title="文章目录">≡</a><a class="i-color" id="color-mode" onClick="colorMode.change()" title="切换主题"></a><a onclick="BgmControl()"><svg id="bgm-control" viewBox="0 0 30 34" fill="#18d1ff" style="width: 24px; transition: transform .3s;margin-top: 4px"><path d="M25.998 23.422V11.29h3.999v12.132h-3.999zM19.497 6.234h4.001v22.243h-4.001V6.234zM12.998.867h4v32.978h-4V.867zm-6.5 5.367h4.001v22.243H6.498V6.234zm-6.5 5.056h4v12.132h-4V11.29z"></path></svg><audio id="bgm" src="/audio/bgm.mp3" autoplay loop crossorigin="anonymous"> </audio></a></div></div></article><aside><div id="about"><a href="/" id="logo"><img src="https://ak.hypergryph.com/assets/index/images/ak/pc/faction/1.png" alt="Logo" style="margin:0;border-radius:0;"></a><h1 id="Dr"><a href="/">Clocky7</a></h1><div id="description"><p></p></div><div id="social-links"><a class="social" target="_blank" rel="noopener" href="https://github.com/Clocky7"><i class="fab fa-github" alt="GitHub"></i></a></div></div><div id="aside-block"><div id="toc-div"><h1>目录</h1><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80-%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.</span> <span class="toc-text">一.基本介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E5%9D%87%E5%80%BC%E6%BB%A4%E6%B3%A2"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 均值滤波</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E6%96%B9%E6%A1%86%E6%BB%A4%E6%B3%A2"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 方框滤波</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E9%AB%98%E6%96%AF%E6%BB%A4%E6%B3%A2"><span class="toc-number">1.3.</span> <span class="toc-text">1.2 高斯滤波</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E4%B8%AD%E5%80%BC%E6%BB%A4%E6%B3%A2"><span class="toc-number">1.4.</span> <span class="toc-text">1.3 中值滤波</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-%E5%8F%8C%E8%BE%B9%E6%BB%A4%E6%B3%A2"><span class="toc-number">1.5.</span> <span class="toc-text">1.4 双边滤波</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C-%E5%9B%BE%E5%83%8F%E6%A2%AF%E5%BA%A6%E5%A4%84%E7%90%86"><span class="toc-number">2.</span> <span class="toc-text">二.图像梯度处理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E5%9B%BE%E5%83%8F%E6%A2%AF%E5%BA%A6"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 图像梯度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E5%9E%82%E7%9B%B4%E8%BE%B9%E7%BC%98%E6%8F%90%E5%8F%96"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 垂直边缘提取</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E6%B0%B4%E5%B9%B3%E8%BE%B9%E7%BC%98%E6%8F%90%E5%8F%96"><span class="toc-number">2.3.</span> <span class="toc-text">2.3 水平边缘提取</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-Sobel%E7%AE%97%E5%AD%90"><span class="toc-number">2.4.</span> <span class="toc-text">2.4 Sobel算子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-Laplacian%E7%AE%97%E5%AD%90"><span class="toc-number">2.5.</span> <span class="toc-text">2.5 Laplacian算子</span></a></li></ol></li></ol></div></div><footer><nobr>构建自 <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr><wbr><nobr> 使用主题 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus/hexo-theme-arknights">Arknights</a></nobr><wbr><nobr> 主题作者 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus">Yue_plus</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas></body></html>

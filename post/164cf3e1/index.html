@@ -1,0 +1,321 @@
+<!DOCTYPE html><html lang="zh-cn" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Numpy基础 | Clocky7's Blog</title><link rel="icon" type="image/x-icon" href="/favicon.ico"><link rel="preload" as="font" crossorigin="anonymous" href="/font/Bender.ttf"><link rel="preload" as="font" crossorigin="anonymous" href="/font/BenderLight.ttf"><link rel="preload" as="font" crossorigin="anonymous" href="/font/JetBrainsMono-Regular.woff2"><link rel="stylesheet" href="/css/arknights.css"><style>@font-face {
+  font-family: Bender;
+  src: local('Bender'), url("/font/Bender.ttf"), url("/font/Bender.otf");
+}
+@font-face {
+  font-family: BenderLight;
+  src: local('BenderLight'), url("/font/BenderLight.ttf");
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}
+</style><script>var config = {"root":"/","search":{"preload":false,"activeHolder":"键入以继续","blurHolder":"搜索","noResult":"无 $0 相关数据"},"code":{"codeInfo":"$0 - $1 行","copy":"复制"}}</script><link type="text/css" rel="stylesheet" href="/lib/encrypt/hbe.style.css"><script src="//unpkg.com/mermaid@10.5.0/dist/mermaid.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+ menuSettings: {
+   zoom: "None"
+ },
+ showMathMenu: false,
+ jax: ["input/TeX","output/CommonHTML"],
+ extensions: ["tex2jax.js"],
+ TeX: {
+   extensions: ["AMSmath.js","AMSsymbols.js"],
+   equationNumbers: {
+     autoNumber: "AMS"
+   }
+ },
+ tex2jax: {
+   inlineMath: [["\\(", "\\)"]],
+   displayMath: [["\\[", "\\]"]]
+ }
+});</script><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lightgallery.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-zoom.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-thumbnail.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/css/all.min.css"><style defer src="article.css"></style><link rel="stylesheet" href="article.css"><script>if (window.localStorage.getItem('theme-mode') === 'light')
+ document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark')
+ document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.woff2") format('woff2');
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}</style><style>:root {
+ --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
+ --light-background: url('/img/bk.jpg');
+ --theme-encrypt-confirm: '确认'
+}</style><script defer src="/js/arknights.js"></script><script defer src="/js/search.js"></script><script defer type="module">import mermaid from '//unpkg.com/mermaid@10.5.0/dist/mermaid.esm.mjs';
+window.mermaid = mermaid;
+code.paintMermaid();
+</script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+  menuSettings: {
+    zoom: "None"
+  },
+  showMathMenu: false,
+  jax: ["input/TeX","output/CommonHTML"],
+  extensions: ["tex2jax.js"],
+  TeX: {
+    extensions: ["AMSmath.js","AMSsymbols.js"],
+    equationNumbers: {
+      autoNumber: "AMS"
+    }
+  },
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]]
+  }
+});
+</script><script async src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script async src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script async src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script async src="/lib/encrypt/hbe.js"></script><script async src="/js/pjax.js"></script><script class="pjax-js">reset= () => {document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js','data-pjax','.busuanzi'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><script class="pjax-js">reset= () => {document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="loading" style="opacity: 0;"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><div class="navBtn"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><nav><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="搜索" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup" tabindex="0"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">主页</span></a></li><li class="navItem"><a class="navBlock" href="/about/"><span class="navItemTitle">于我</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">归档</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>Numpy基础</h1><div id="post-info"><span>文章发布时间: <div class="control"><time datetime="2025-06-24T05:43:51.000Z" id="date"> 2025-06-24</time></div></span><br><span>最后更新时间: <div class="control"><time datetime="2025-06-30T02:14:18.123Z" id="updated"> 2025-06-30</time></div></span><br><span>文章总字数: <div class="control">2.5k</div></span><br><span>预计阅读时间: <div class="control">10 分钟</div></span></div></div><hr><div id="post-content"><p>首先，安装numpy在一个虚拟环境中：cmd打开终端</p>
+<p>然后输入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">conda activate<br></code></pre></td></tr></table></figure>
+
+<p>再输入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">conda activate <span class="hljs-string">&quot;你的环境&quot;</span> <br></code></pre></td></tr></table></figure>
+
+<p>激活并进入虚拟环境，然后就可以在这里下第三方库了。</p>
+<p class='item-img' data-src='/img/temporate/np1.png'><img src="/img/temporate/np1.png"></p>
+<p>再输入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip install numpy==1.26.0 -i https://pypi.tuna.tsinghua.edu.cn/simple/<br></code></pre></td></tr></table></figure>
+
+<p>下载numpy。</p>
+<h2 id="一-Numpy基础"><a href="#一-Numpy基础" class="headerlink" title="一.Numpy基础"></a>一.Numpy基础</h2><ul>
+<li><p>Python 的第三方扩展包,主要用来计算、处理一维或多维数组</p>
+</li>
+<li><p>底层主要用 C语言编写,因此它能够高速地执行数值计算</p>
+</li>
+<li><p>提供了多种数据结构,这些数据结构能够非常契合的应用在数组和矩阵的运算上</p>
+</li>
+<li><p>数组算术计算方面,提供了大量的数学函数</p>
+</li>
+</ul>
+<h3 id="1-1-与列表的区别"><a href="#1-1-与列表的区别" class="headerlink" title="1.1 与列表的区别"></a>1.1 与列表的区别</h3><ol>
+<li><p>NumPy 数组是同质数据类型（homogeneous），Python 列表是异质数据类型（heterogeneous），即列表中的元素可以是不同的类型。</p>
+</li>
+<li><p>列表提供了基本的列表操作，如添加、删除、切片、排序等</p>
+</li>
+<li><p>NumPy 数组提供了丰富的数学函数和操作，如矩阵运算、线性代数、傅里叶变换等</p>
+</li>
+</ol>
+<h2 id="二-ndarray对象"><a href="#二-ndarray对象" class="headerlink" title="二.ndarray对象"></a>二.ndarray对象</h2><p>一个 n 维数组对象，是一个一系列相同类型元素组成的数组集合，每个元素都占有大小相同的内存。内存常用的布局方式有两种，即按行（C语言）或者按列（Fortran语言）。</p>
+<h3 id="2-1-ndarray对象创建"><a href="#2-1-ndarray对象创建" class="headerlink" title="2.1 ndarray对象创建"></a>2.1 ndarray对象创建</h3><p>NumPy 的内置函数 <code>array()</code> 可以创建 ndarray 对象。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 先导入numpy</span><br><span class="hljs-keyword">import</span> numpy<br> <br><span class="hljs-comment"># 用法</span><br>ndarray = numpy.array(<span class="hljs-built_in">object</span>, dtype = <span class="hljs-literal">None</span>, copy = <span class="hljs-literal">True</span>, order = <span class="hljs-literal">None</span>,ndmin = <span class="hljs-number">0</span>)<br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">type</span>(ndarray))<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">&lt;class &#x27;numpy.ndarray&#x27;&gt;<br></code></pre></td></tr></table></figure>
+
+<p>| object | 表示一个数组序列 |<br>| dtype | 可选参数，通过它可以更改数组的数据类型 |<br>| copy | 可选参数，表示数组能否被复制，默认是 True |<br>| order | 以哪种内存布局创建数组，有 3 个可选值，分别是 C(行序列)&#x2F;F(列序列)&#x2F;A(默认) |<br>| ndmin | 用于指定数组的维度 |</p>
+<ol>
+<li>object</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 先导入numpy</span><br><span class="hljs-keyword">import</span> numpy<br> <br><span class="hljs-comment"># 创建两个数组</span><br>a = numpy.array((<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>))<br>b = numpy.array([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>])<br><span class="hljs-built_in">print</span>(a)<br><span class="hljs-built_in">print</span>(b)<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">[1 2 3]<br>[1 2 3]<br></code></pre></td></tr></table></figure>
+
+<p>可以看到数组与列表的差异还是明显的，其中元素以空格分割，而列表以逗号分割。且传进arrary函数的参数可以是任意可迭代对象。</p>
+<ol start="2">
+<li>dtype</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 先导入numpy</span><br><span class="hljs-keyword">import</span> numpy<br> <br><span class="hljs-comment"># 其可改变存在数组中元素的数据类型</span><br>a = numpy.array((<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>),dtype=<span class="hljs-built_in">str</span>)<br><span class="hljs-built_in">print</span>(a)<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">[&#x27;1&#x27; &#x27;2&#x27; &#x27;3&#x27;]<br></code></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>ndmin</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 先导入numpy</span><br><span class="hljs-keyword">import</span> numpy<br> <br><span class="hljs-comment"># 创建一个二维数组</span><br>a = numpy.array((<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>),ndmin=<span class="hljs-number">2</span>)<br> <br><span class="hljs-comment"># 创建一个正常的二维数组</span><br>b = numpy.array(((<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>),(<span class="hljs-number">7</span>,<span class="hljs-number">8</span>,<span class="hljs-number">9</span>)),ndmin=<span class="hljs-number">2</span>)<br><span class="hljs-built_in">print</span>(a)<br> <br><span class="hljs-comment"># 换个行</span><br><span class="hljs-built_in">print</span>()<br> <br><span class="hljs-built_in">print</span>(b)<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">[[1 2 3]]<br><br>[[4 5 6]<br>[7 8 9]]<br></code></pre></td></tr></table></figure>
+
+<p><em>尝试查看数组形状:</em></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 先导入numpy</span><br><span class="hljs-keyword">import</span> numpy<br> <br> <br>b = numpy.array(((<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>),(<span class="hljs-number">7</span>,<span class="hljs-number">8</span>,<span class="hljs-number">9</span>)),ndmin=<span class="hljs-number">2</span>)<br><span class="hljs-built_in">print</span>(b)<br> <br><span class="hljs-comment"># 来个换行</span><br><span class="hljs-built_in">print</span>()<br> <br><span class="hljs-comment"># 看看几行几列，返回一个元组，如果是一维的只有一个数，第二个是空的，俩用逗号隔开</span><br><span class="hljs-built_in">print</span>(b.shape)<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">[[4 5 6]<br>[7 8 9]]<br><br>(2, 3)<br></code></pre></td></tr></table></figure>
+
+<h3 id="2-2-zeros"><a href="#2-2-zeros" class="headerlink" title="2.2 zeros()"></a>2.2 zeros()</h3><p>创建指定大小的数组，数组元素以 <code>0</code> 来填充。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">numpy.zeros(shape, dtype = <span class="hljs-built_in">float</span>, order = <span class="hljs-string">&#x27;C&#x27;</span>)<br></code></pre></td></tr></table></figure>
+
+<p>| shape | 数组形状 |<br>| dtype | 数据类型 |<br>| order | ‘C’ 用于 C 的行数组，或者 ‘F’ 用于 FORTRAN 的列数组 |</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 示例</span><br><span class="hljs-keyword">import</span> numpy<br> <br>a = numpy.zeros((<span class="hljs-number">4</span>,<span class="hljs-number">4</span>))<br><span class="hljs-built_in">print</span>(a)<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">[[0. 0. 0. 0.]<br> [0. 0. 0. 0.]<br> [0. 0. 0. 0.]<br> [0. 0. 0. 0.]]<br></code></pre></td></tr></table></figure>
+
+<p><em>注意：这里的 <em><strong>‘0.’</strong></em> 代表的是浮点数, <em><strong>‘0.’</strong></em> 即 <em><strong>‘0.0’</strong></em></em></p>
+<h3 id="2-3-ones"><a href="#2-3-ones" class="headerlink" title="2.3 ones()"></a>2.3 ones()</h3><p>创建指定形状的数组，数组元素以 <code>1</code>来填充,参数与zeros一致。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">numpy.ones(shape, dtype = None, order = &#x27;C&#x27;)<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 示例</span><br><span class="hljs-keyword">import</span> numpy<br> <br>x = numpy.ones((<span class="hljs-number">3</span>,<span class="hljs-number">4</span>))<br><span class="hljs-built_in">print</span>(x)<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">[[1. 1. 1. 1.]<br> [1. 1. 1. 1.]<br> [1. 1. 1. 1.]]<br></code></pre></td></tr></table></figure>
+
+<h3 id="2-4-full"><a href="#2-4-full" class="headerlink" title="2.4 full()"></a>2.4 full()</h3><p>full()用于创建一个填充指定值的数组。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">numpy.full(shape, fill_value, dtype=None, order=&#x27;C&#x27;)<br></code></pre></td></tr></table></figure>
+
+<p>| shape | 数组的形状（如 (2, 3) 表示 2 行 3 列的数组） |<br>| fill_value | 填充的值 |<br>| dtype | 数组的数据类型（如 <code>np.float32</code>） |<br>| order | 数组的内存布局（如 <code>&#39;C&#39;</code> 表示 C 风格，<code>&#39;F&#39;</code> 表示 Fortran 风格） |</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 示例</span><br><span class="hljs-keyword">import</span> numpy<br> <br>a = numpy.full((<span class="hljs-number">3</span>, <span class="hljs-number">3</span>), <span class="hljs-number">7</span>)<br> <br><span class="hljs-built_in">print</span>(a)<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">[[7 7 7]<br> [7 7 7]<br> [7 7 7]]<br></code></pre></td></tr></table></figure>
+
+<p>可以看到这里传一个整数进去那数组内部默认就是整数了，而不是浮点数。</p>
+<h3 id="2-5-arrange"><a href="#2-5-arrange" class="headerlink" title="2.5 arrange()"></a>2.5 arrange()</h3><p>用于创建一个等差数列的数组。它类似于 Python 内置的 <code>range()</code> 函数，但返回的是一个 NumPy 数组。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">numpy.arange(start, stop, step, dtype)<br></code></pre></td></tr></table></figure>
+
+<p>| start | 起始值，默认为 0 |<br>| stop | 终止值（不包含） |<br>| step | 步长，默认为 1 |<br>| dtype | 返回 ndarray 的数据类型，如果没有提供，则会使用输入数据的类型 |</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 示例</span><br><span class="hljs-keyword">import</span> numpy<br> <br>a = numpy.arange(<span class="hljs-number">0</span>,<span class="hljs-number">10</span>,<span class="hljs-number">2</span>)<br><span class="hljs-built_in">print</span>(a)<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">[0 2 4 6 8]<br></code></pre></td></tr></table></figure>
+
+<h3 id="2-6-linspace"><a href="#2-6-linspace" class="headerlink" title="2.6 linspace()"></a>2.6 linspace()</h3><p>在指定的数值区间内，返回均匀间隔的一维<strong>等差</strong>数组，默认均分 50 份。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">np.linspace(start, stop, num=50, endpoint=True, retstep=False, dtype=None)<br></code></pre></td></tr></table></figure>
+
+<p>| start | 起始值，默认为 0 |<br>| stop | 终止值（默认包含） |<br>| num | 要生成多少个均匀的样本，默认为 50 |<br>| endpoint | 是否包含终止值，默认为 True |<br>| retstep | 是否返回步长，如果为 True，则返回一个包含数组和步长的元组，如果为 False，则只返回数组。默认为 False |<br>| dtype | 返回 ndarray 的数据类型，如果没有提供，则会使用输入数据的类型，默认None |</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 示例</span><br><span class="hljs-keyword">import</span> numpy <br> <br>a = numpy.linspace(<span class="hljs-number">1</span>, <span class="hljs-number">10</span>, <span class="hljs-number">19</span>,retstep=<span class="hljs-literal">True</span>)<br><span class="hljs-built_in">print</span>(a)<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">(array([ 1. ,  1.5,  2. ,  2.5,  3. ,  3.5,  4. ,  4.5,  5. ,  5.5,  6. ,<br>        6.5,  7. ,  7.5,  8. ,  8.5,  9. ,  9.5, 10. ]), 0.5)<br></code></pre></td></tr></table></figure>
+
+<p><em><strong>注意，如果要以0.5为步长的话，应该取(stop-start)的2倍再加1，直接用差值2倍会少取一个</strong></em></p>
+<p>容易出问题的地方如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> numpy <br> <br>a = numpy.linspace(<span class="hljs-number">1</span>, <span class="hljs-number">10</span>, <span class="hljs-number">20</span>,retstep=<span class="hljs-literal">True</span>)<br><span class="hljs-built_in">print</span>(a)<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">(array([ 1.        ,  1.47368421,  1.94736842,  2.42105263,  2.89473684,<br>        3.36842105,  3.84210526,  4.31578947,  4.78947368,  5.26315789,<br>        5.73684211,  6.21052632,  6.68421053,  7.15789474,  7.63157895,<br>        8.10526316,  8.57894737,  9.05263158,  9.52631579, 10.        ]), 0.47368421052631576)<br></code></pre></td></tr></table></figure>
+
+<p>因此延伸出步长的计算：</p>
+<p><code>step = (stop - start) / (num - 1)</code></p>
+<ul>
+<li><p>差了(stop - start)这么多数</p>
+</li>
+<li><p>分成(num - 1)份</p>
+</li>
+</ul>
+<h2 id="三-numpy数据类型"><a href="#三-numpy数据类型" class="headerlink" title="三.numpy数据类型"></a>三.numpy数据类型</h2><ul>
+<li><p>NumPy 提供了比 Python 更加丰富的数据类型</p>
+</li>
+<li><p>NumPy 中每种数据类型都有一个唯一标识的字符码，int8, int16, int32, int64 四种数据类型可以使用字符串 ‘i1’, ‘i2’,’i4’,’i8’ 代替</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-built_in">print</span>(data.dtype)	<span class="hljs-comment">#输出：[(&#x27;name&#x27;, &#x27;S10&#x27;), (&#x27;age&#x27;, &#x27;&lt;i4&#x27;)]</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><p>可以使用数组的 dtype 属性来获取数组中元素的数据类型</p>
+</li>
+<li><p>可以使用 <strong>astype()</strong> 方法来转换数组中元素的数据类型</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br> <br>arr = np.array([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]).astype(np.float64)<br><span class="hljs-built_in">print</span>(arr)<br> <br><span class="hljs-built_in">print</span>(arr.dtype)<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">[1. 2. 3.]<br>float64<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>也可以在数组中直接声明数据类型</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br> <br>arr = np.array([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>],dtype = (np.float64))<br> <br><span class="hljs-built_in">print</span>(arr)<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">[1. 2. 3.]<br></code></pre></td></tr></table></figure>
+
+<p>在编程中，字节序标记用于指定数据的字节顺序。常见的字节序标记包括：</p>
+<ol>
+<li><p><code>&lt;</code> : 小端序，数据的最低有效字节存储在内存的最低地址，而最高有效字节存储在内存的最高地址。</p>
+</li>
+<li><p><code>&gt;</code> : 大端序，数据的最高有效字节存储在内存的最低地址，而最低有效字节存储在内存的最高地址。</p>
+</li>
+</ol>
+<h2 id="四-简单数组属性"><a href="#四-简单数组属性" class="headerlink" title="四.简单数组属性"></a>四.简单数组属性</h2><h3 id="4-1-shape"><a href="#4-1-shape" class="headerlink" title="4.1 shape"></a>4.1 shape</h3><p>通过赋值，可以用来调整数组形状，也可以通过直接访问返回一个元组。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> numpy<br> <br>a = numpy.array([<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>])<br><span class="hljs-built_in">print</span>(a.shape)<br> <br><span class="hljs-comment"># 换个行</span><br><span class="hljs-built_in">print</span>()<br> <br><span class="hljs-comment"># 更改维度</span><br>a.shape = (<span class="hljs-number">3</span>,<span class="hljs-number">1</span>)<br><span class="hljs-built_in">print</span>(a)<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">(3,)<br><br>[[1]<br> [2]<br> [3]]<br></code></pre></td></tr></table></figure>
+
+<p>可以看到，a之前是一个一维数组无所谓行列，但是更改形状后拥有了行列，变成了二维数组,行列都是关于二维数组来讲的。</p>
+<p><em>注意：这里的<code>（3,）</code>表示数组里有3个元素，没有规定是一行还是一列。</em></p>
+<h3 id="4-2-数组维度-ndmin"><a href="#4-2-数组维度-ndmin" class="headerlink" title="4.2 数组维度 ndmin"></a>4.2 数组维度 ndmin</h3><p>ndim 是 NumPy 数组的一个属性，用于返回数组的维度数（即数组的秩）。</p>
+<p>数组的维度就是一个数组中的某个元素，当用数组下标表示的时候，需要用几个数字来表示才能唯一确定这个元素，这个数组就是几维。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> numpy<br> <br>a = numpy.array([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>])<br><span class="hljs-built_in">print</span>(a.ndim)<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">1<br></code></pre></td></tr></table></figure>
+
+<h3 id="4-3-flags"><a href="#4-3-flags" class="headerlink" title="4.3 flags"></a>4.3 flags</h3><ol>
+<li>C_CONTIGUOUS:</li>
+</ol>
+<p>表示数组在内存中是 C 风格连续的（行优先）。</p>
+<p>如果为 True，则数组是 C 风格连续的。</p>
+<ol start="2">
+<li>F_CONTIGUOUS:</li>
+</ol>
+<p>表示数组在内存中是 Fortran 风格连续的（列优先）。</p>
+<p>如果为 True，则数组是 Fortran 风格连续的。</p>
+<ol start="3">
+<li>OWNDATA:</li>
+</ol>
+<p>表示数组是否拥有自己的数据（即是否是视图）。</p>
+<p>如果为 True，则数组拥有自己的数据；如果为 False，则数组可能是从另一个数组或对象借用数据的。</p>
+<ol start="4">
+<li>WRITEABLE:</li>
+</ol>
+<p>表示数组是否可写。</p>
+<p>如果为 True，则数组是可写的；如果为 False，则数组是只读的。</p>
+<ol start="5">
+<li>ALIGNED:</li>
+</ol>
+<p>表示数组是否对齐。</p>
+<p>如果为 True，则数组的数据在内存中是对齐的。</p>
+<ol start="6">
+<li>WRITEBACKIFCOPY:</li>
+</ol>
+<p>表示数组是否是通过 np.copy 创建的副本，并且需要将更改写回原始数组。</p>
+<p>如果为 True，则数组是通过 np.copy 创建的副本，并且需要将更改写回原始数组。</p>
+<ol start="7">
+<li>UPDATEIFCOPY:</li>
+</ol>
+<p>表示数组是否是通过 np.copy 创建的副本，并且需要将更改写回原始数组。</p>
+<p>如果为 True，则数组是通过 np.copy 创建的副本，并且需要将更改写回原始数组。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> numpy<br> <br>a = numpy.array([[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>],[<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>]])<br> <br><span class="hljs-built_in">print</span>(a.flags)<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">C_CONTIGUOUS : True<br>  F_CONTIGUOUS : False<br>  OWNDATA : True<br>  WRITEABLE : True<br>  ALIGNED : True<br>  WRITEBACKIFCOPY : False<br></code></pre></td></tr></table></figure>
+
+<h3 id="4-4-item"><a href="#4-4-item" class="headerlink" title="4.4.item()"></a>4.4.item()</h3><p><code>.item()</code>作用是将数组中的单个元素转换为 Python</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> cv2 <span class="hljs-keyword">as</span> cv<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-comment"># 注意只能有一个元素</span><br>a = np.array([<span class="hljs-number">1</span>])<br><span class="hljs-built_in">print</span>(a.item())<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">1<br></code></pre></td></tr></table></figure><div id="paginator"></div></div><div id="post-footer"><div id="pages"><div class="footer-link" style="width: 50%;text-align:right;border-right:1px #fe2 solid"><a href="/post/92674690/">← 下一篇 Numpy用法（一）</a></div><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/post/5002d946/">git的进阶 上一篇 →</a></div></div></div></div><div class="bottom-btn"><div><a class="i-top" id="to-top" onClick="scrolls.scrolltop();" title="回到顶部" style="opacity: 0; display: none;">∧ </a><a class="i-index" id="to-index" href="#toc-div" title="文章目录">≡</a><a class="i-color" id="color-mode" onClick="colorMode.change()" title="切换主题"></a><a onclick="BgmControl()"><svg id="bgm-control" viewBox="0 0 30 34" fill="#18d1ff" style="width: 24px; transition: transform .3s;margin-top: 4px"><path d="M25.998 23.422V11.29h3.999v12.132h-3.999zM19.497 6.234h4.001v22.243h-4.001V6.234zM12.998.867h4v32.978h-4V.867zm-6.5 5.367h4.001v22.243H6.498V6.234zm-6.5 5.056h4v12.132h-4V11.29z"></path></svg><audio id="bgm" src="/audio/bgm.mp3" autoplay loop crossorigin="anonymous"> </audio></a></div></div></article><aside><div id="about"><a href="/" id="logo"><img src="https://ak.hypergryph.com/assets/index/images/ak/pc/faction/1.png" alt="Logo" style="margin:0;border-radius:0;"></a><h1 id="Dr"><a href="/">Clocky7</a></h1><div id="description"><p></p></div><div id="social-links"><a class="social" target="_blank" rel="noopener" href="https://github.com/Clocky7"><i class="fab fa-github" alt="GitHub"></i></a></div></div><div id="aside-block"><div id="toc-div"><h1>目录</h1><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80-Numpy%E5%9F%BA%E7%A1%80"><span class="toc-number">1.</span> <span class="toc-text">一.Numpy基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E4%B8%8E%E5%88%97%E8%A1%A8%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 与列表的区别</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C-ndarray%E5%AF%B9%E8%B1%A1"><span class="toc-number">2.</span> <span class="toc-text">二.ndarray对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-ndarray%E5%AF%B9%E8%B1%A1%E5%88%9B%E5%BB%BA"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 ndarray对象创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-zeros"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 zeros()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-ones"><span class="toc-number">2.3.</span> <span class="toc-text">2.3 ones()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-full"><span class="toc-number">2.4.</span> <span class="toc-text">2.4 full()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-arrange"><span class="toc-number">2.5.</span> <span class="toc-text">2.5 arrange()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-6-linspace"><span class="toc-number">2.6.</span> <span class="toc-text">2.6 linspace()</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89-numpy%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">3.</span> <span class="toc-text">三.numpy数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B-%E7%AE%80%E5%8D%95%E6%95%B0%E7%BB%84%E5%B1%9E%E6%80%A7"><span class="toc-number">4.</span> <span class="toc-text">四.简单数组属性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-shape"><span class="toc-number">4.1.</span> <span class="toc-text">4.1 shape</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E6%95%B0%E7%BB%84%E7%BB%B4%E5%BA%A6-ndmin"><span class="toc-number">4.2.</span> <span class="toc-text">4.2 数组维度 ndmin</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-flags"><span class="toc-number">4.3.</span> <span class="toc-text">4.3 flags</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4-item"><span class="toc-number">4.4.</span> <span class="toc-text">4.4.item()</span></a></li></ol></li></ol></div></div><footer><nobr>构建自 <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr><wbr><nobr> 使用主题 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus/hexo-theme-arknights">Arknights</a></nobr><wbr><nobr> 主题作者 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus">Yue_plus</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas></body></html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html><html lang="zh-cn" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>图像预处理-霍夫变换 | Clocky7's Blog</title><link rel="icon" type="image/x-icon" href="/favicon.ico"><link rel="preload" as="font" crossorigin="anonymous" href="/font/Bender.ttf"><link rel="preload" as="font" crossorigin="anonymous" href="/font/BenderLight.ttf"><link rel="preload" as="font" crossorigin="anonymous" href="/font/JetBrainsMono-Regular.woff2"><link rel="stylesheet" href="/css/arknights.css"><style>@font-face {
+  font-family: Bender;
+  src: local('Bender'), url("/font/Bender.ttf"), url("/font/Bender.otf");
+}
+@font-face {
+  font-family: BenderLight;
+  src: local('BenderLight'), url("/font/BenderLight.ttf");
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}
+</style><script>var config = {"root":"/","search":{"preload":false,"activeHolder":"键入以继续","blurHolder":"搜索","noResult":"无 $0 相关数据"},"code":{"codeInfo":"$0 - $1 行","copy":"复制"}}</script><link type="text/css" rel="stylesheet" href="/lib/encrypt/hbe.style.css"><script src="//unpkg.com/mermaid@10.5.0/dist/mermaid.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+ menuSettings: {
+   zoom: "None"
+ },
+ showMathMenu: false,
+ jax: ["input/TeX","output/CommonHTML"],
+ extensions: ["tex2jax.js"],
+ TeX: {
+   extensions: ["AMSmath.js","AMSsymbols.js"],
+   equationNumbers: {
+     autoNumber: "AMS"
+   }
+ },
+ tex2jax: {
+   inlineMath: [["\\(", "\\)"]],
+   displayMath: [["\\[", "\\]"]]
+ }
+});</script><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lightgallery.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-zoom.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-thumbnail.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/css/all.min.css"><style defer src="article.css"></style><link rel="stylesheet" href="article.css"><script>if (window.localStorage.getItem('theme-mode') === 'light')
+ document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark')
+ document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.woff2") format('woff2');
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}</style><style>:root {
+ --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
+ --light-background: url('/img/bk.jpg');
+ --theme-encrypt-confirm: '确认'
+}</style><script defer src="/js/arknights.js"></script><script defer src="/js/search.js"></script><script defer type="module">import mermaid from '//unpkg.com/mermaid@10.5.0/dist/mermaid.esm.mjs';
+window.mermaid = mermaid;
+code.paintMermaid();
+</script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+  menuSettings: {
+    zoom: "None"
+  },
+  showMathMenu: false,
+  jax: ["input/TeX","output/CommonHTML"],
+  extensions: ["tex2jax.js"],
+  TeX: {
+    extensions: ["AMSmath.js","AMSsymbols.js"],
+    equationNumbers: {
+      autoNumber: "AMS"
+    }
+  },
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]]
+  }
+});
+</script><script async src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script async src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script async src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script async src="/lib/encrypt/hbe.js"></script><script async src="/js/pjax.js"></script><script class="pjax-js">reset= () => {document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js','data-pjax','.busuanzi'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><script class="pjax-js">reset= () => {document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="loading" style="opacity: 0;"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><div class="navBtn"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><nav><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="搜索" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup" tabindex="0"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">主页</span></a></li><li class="navItem"><a class="navBlock" href="/about/"><span class="navItemTitle">于我</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">归档</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>图像预处理-霍夫变换</h1><div id="post-info"><span>文章发布时间: <div class="control"><time datetime="2025-06-24T05:52:27.000Z" id="date"> 2025-06-24</time></div></span><br><span>最后更新时间: <div class="control"><time datetime="2025-07-01T06:37:05.311Z" id="updated"> 2025-07-01</time></div></span><br><span>文章总字数: <div class="control">2.1k</div></span><br><span>预计阅读时间: <div class="control">8 分钟</div></span></div></div><hr><div id="post-content"><h2 id="一-概念"><a href="#一-概念" class="headerlink" title="一.概念"></a>一.概念</h2><p><strong>霍夫变换</strong>是图像处理的一种技术，主要用于检测图像中的直线、圆等<strong>几何形状</strong>。基本思想就是将图像空间（直角坐标系或极坐标系）中的点映射到(霍夫空间)<strong>参数空间</strong>中，通过在参数空间中寻找累计最大值实现对特定形状的检测。</p>
+<p>接下来以下面这张图进行说明：</p>
+<p class='item-img' data-src='/img/temporate/cv101.png'><img src="/img/temporate/cv101.png"></p>
+<h2 id="二-霍夫直线变换"><a href="#二-霍夫直线变换" class="headerlink" title="二.霍夫直线变换"></a>二.霍夫直线变换</h2><p>这种简单的又称为<strong>标准霍夫变换</strong>。</p>
+<h3 id="2-1-直角坐标系"><a href="#2-1-直角坐标系" class="headerlink" title="2.1 直角坐标系"></a>2.1 直角坐标系</h3><p>对于一条直线（不垂直于x轴的直线），都可以用 <code>y=k x+b</code> 来表示，此时，x和y是横纵坐标，k和b是一个固定参数。而霍夫变换将斜率k作为自变量，截距b作为因变量，式子也就变成了<code>b = -xk+y</code></p>
+<p class='item-img' data-src='/img/temporate/cv102.png'><img src="/img/temporate/cv102.png"></p>
+<p>也就是说，霍夫空间中<strong>一点</strong>相当直角坐标系中的<strong>一条直线</strong>，霍夫空间中一条边相当于直角坐标系一个点。反之，霍夫空间的点和直线也可以映射到直角坐标系中。</p>
+<p>同时我们是想要找到直角坐标系上的一条直线，因此我们引进了<strong>投票</strong>机制，让我们画的直线上包含更多的边缘点。而换到霍夫空间中，就是找到一个点，这个点被很多条<strong>直线经过</strong>。</p>
+<h3 id="2-2-极坐标系"><a href="#2-2-极坐标系" class="headerlink" title="2.2 极坐标系"></a>2.2 极坐标系</h3><p>然而直角坐标系中对于x&#x3D;1这种直线（垂直于x轴）来说，y已经不存在了，斜率无穷大，无法映射到霍夫空间中去。因此我们需要采用另一种坐标系：</p>
+<p><em><strong>极坐标系</strong></em></p>
+<p class='item-img' data-src='/img/temporate/cv103.png'><img src="/img/temporate/cv103.png"></p>
+<p><strong>注意：极坐标系中的theta是不是该直线与x轴的角度，而是从原点作一条直线垂直于目标直线，垂直的直线与x轴的角度才对</strong></p>
+<p class='item-img' data-src='/img/temporate/cv104.png'><img src="/img/temporate/cv104.png"></p>
+<p>极坐标系下是一样的，极坐标中的<strong>点</strong>对应霍夫空间中的<strong>线</strong>，霍夫空间中的<strong>点</strong>对应极坐标中的<strong>直线</strong>。并且此时的霍夫空间不再是以k为横轴、b为纵轴，而是以为θ横轴、ρ(上图中的r)为纵轴。</p>
+<h3 id="2-3-API使用"><a href="#2-3-API使用" class="headerlink" title="2.3 API使用"></a>2.3 API使用</h3><p><code>lines=cv2.HoughLines(image, rho, theta, threshold)</code></p>
+<ul>
+<li><p>image：输入图像，通常为二值图像，其中白点表示边缘点，黑点为背景。</p>
+</li>
+<li><p>rho：r的精度，以像素为单位，表示霍夫空间中每一步的距离增量,  值越大，考虑越多的线。</p>
+</li>
+<li><p>theta：角度θ的精度，通常以弧度为单位，表示霍夫空间中每一步的角度增量。值越小，考虑越多的线。</p>
+</li>
+<li><p>threshold：累加数阈值，只有累积投票数（点数）超过这个阈值的候选直线才会被返回。</p>
+</li>
+<li><p>返回值：一个二维数组，每一行代表一条直线在霍夫空间中的参数 (rho, theta)也就是（r，θ）。</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 养成好习惯，每次都自己敲前面的步骤</span><br><span class="hljs-keyword">import</span> cv2 <span class="hljs-keyword">as</span> cv<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br> <br>img = cv.imread(<span class="hljs-string">&#x27;../images/huofu.png&#x27;</span>)<br> <br><span class="hljs-comment"># 灰度化</span><br>gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)<br> <br><span class="hljs-comment"># 边缘检测</span><br>edges = cv.Canny(gray, <span class="hljs-number">30</span>, <span class="hljs-number">70</span>)<br> <br><span class="hljs-comment"># 获取边缘中的直线</span><br>lines = cv.HoughLines(edges,<span class="hljs-number">0.8</span>, np.pi/<span class="hljs-number">180</span>, <span class="hljs-number">90</span>)<span class="hljs-comment"># np.pie/180表示把度数转化为弧度</span><br><span class="hljs-built_in">print</span>(lines)<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">[[[25.6        1.5707964]]<br><br> [[21.6        1.5707964]]<br><br> [[42.4        2.146755 ]]<br><br> [[46.4        2.146755 ]]]<br></code></pre></td></tr></table></figure>
+
+<p>可见lines是三维数组，遍历时只能拿出一个数据，需要用<code>line[0]</code>来取出二维数组中的每一个值。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 绘制直线</span><br><span class="hljs-keyword">for</span> line <span class="hljs-keyword">in</span> lines:<br>    rho, theta = line[<span class="hljs-number">0</span>]<br>    <span class="hljs-comment"># 获取sin_theta和cos_theta</span><br>    sin_theta = np.sin(theta)<br>    cos_theta = np.cos(theta)<br>    <span class="hljs-comment"># 计算直线的起点和终点，假设直线交于图像左右两侧</span><br>    x0,x1 = <span class="hljs-number">0</span>,img.shape[<span class="hljs-number">1</span>]<br>    <span class="hljs-comment"># 根据公式推算得出y的值</span><br>    y0 = <span class="hljs-built_in">int</span>((rho-x0*cos_theta)/sin_theta)<br>    y1 = <span class="hljs-built_in">int</span>((rho-x1*cos_theta)/sin_theta)<br>    <span class="hljs-comment"># 绘制直线</span><br>    cv.line(img,(x0,y0),(x1,y1),(<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">255</span>),<span class="hljs-number">1</span>)<br></code></pre></td></tr></table></figure>
+
+<p>上面说的公式就是这个推导而来：</p>
+<p class='item-img' data-src='/img/temporate/cv105.png'><img src="/img/temporate/cv105.png"></p>
+<p>也可以有另一个假设，<code>y1,y2 = 0,img.shape[0]</code>，画出来的图都是一样的，<strong>opencv</strong>绘制直线是根据给出的坐标计算修改该线上其他点，超出的部分不绘制即可。就算起始坐标与终点坐标不在原图上也可以。</p>
+<p>最后的阈值要合适，取的小容易得到很多错误的线，甚至可能检测到水平或垂直的线导致绘图时将坐标转为int类型时无法进行，因为角度趋近于0导致<code>sin_theta</code>过小，进而使得int前坐标过大，报</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">cannot convert float infinity to integer<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 显示图像</span><br>cv.imshow(<span class="hljs-string">&#x27;image&#x27;</span>, img)<br>cv.waitKey(<span class="hljs-number">0</span>)<br>cv.destroyAllWindows()<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p class='item-img' data-src='/img/temporate/cv106.png'><img src="/img/temporate/cv106.png"></p>
+<h2 id="三-统计概率霍夫直线变换"><a href="#三-统计概率霍夫直线变换" class="headerlink" title="三.统计概率霍夫直线变换"></a>三.统计概率霍夫直线变换</h2><p>是一种改进的霍夫变换，它在获取到直线之后，会检测原图中在该直线上的点，并获取到两侧的端点坐标，也就是不需要我们自己计算坐标了。然后通过两个点的坐标来计算该直线的长度，通过直线长度与最短长度阈值的比较来决定该直线要不要被保留。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">lines=cv2.HoughLinesP<br>(image, rho, theta, threshold, lines=None, minLineLength=0,maxLineGap=0)<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>image：输入图像，通常为二值图像，其中白点表示边缘点，黑点为背景。</li>
+<li>rho：极径分辨率，以像素为单位，表示极坐标系中的距离分辨率。</li>
+<li>theta：极角分辨率，以弧度为单位，表示极坐标系中角度的分辨率。</li>
+<li>threshold：阈值，用于过滤掉弱检测结果，只有累计投票数超过这个阈值的直线才会被返回。</li>
+<li>lines（可选）：一个可初始化的输出数组，用于存储检测到的直线参数。</li>
+<li>minLineLength（可选）：最短长度阈值，比这个长度短的线会被排除。</li>
+<li>maxLineGap（可选）：同一直线两点之间的<strong>最大距离</strong>。当霍夫变换检测到一系列接近直角的线段时，这些线段可能是同一直线的不同部分。该参数指定了在考虑这些线段属于同一直线时，它们之间最大可接受的像素间隔。</li>
+</ul>
+<p>返回值：一个二维数组，每个元素是一个包含<strong>4个元素的数组</strong>，分别表示每条直线的<strong>起始点</strong>和<strong>结束点</strong>在图像中的坐标（x1, y1, x2, y2）。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> cv2 <span class="hljs-keyword">as</span> cv<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br> <br>img = cv.imread(<span class="hljs-string">&#x27;../images/huofu.png&#x27;</span>)<br> <br><span class="hljs-comment"># 灰度化</span><br>gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)<br> <br><span class="hljs-comment"># 边缘检测</span><br>edges = cv.Canny(gray, <span class="hljs-number">30</span>, <span class="hljs-number">70</span>)<br> <br><span class="hljs-comment"># 获取边缘中的直线</span><br>lines = cv.HoughLinesP(edges, <span class="hljs-number">0.8</span>, np.pi/<span class="hljs-number">180</span>, <span class="hljs-number">90</span>, minLineLength=<span class="hljs-number">50</span>, maxLineGap=<span class="hljs-number">50</span>)<br><span class="hljs-built_in">print</span>(lines)<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">[[[ 12  22 172  22]]<br><br> [[ 21  64 157 152]]<br><br> [[ 11  26 174  26]]<br><br> [[ 19  68 152 154]]<br><br> [[ 19  67 155 155]]]<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 绘制直线</span><br><span class="hljs-keyword">for</span> line <span class="hljs-keyword">in</span> lines:<br>    x0,y0,x1,y1 = line[<span class="hljs-number">0</span>]<br>    <span class="hljs-comment"># 绘制直线</span><br>    cv.line(img,(x0,y0),(x1,y1),(<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">255</span>),<span class="hljs-number">1</span>)<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 显示图像</span><br>cv.imshow(<span class="hljs-string">&#x27;image&#x27;</span>, img)<br>cv.waitKey(<span class="hljs-number">0</span>)<br>cv.destroyAllWindows()<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p class='item-img' data-src='/img/temporate/cv107.png'><img src="/img/temporate/cv107.png"></p>
+<h2 id="四-霍夫圆变换"><a href="#四-霍夫圆变换" class="headerlink" title="四.霍夫圆变换"></a>四.霍夫圆变换</h2><p>它可以从图像中找出潜在的圆形结构，并返回它们的中心坐标和半径。只不过线是用(r,θ)表示，圆是用(x_center,y_center,r)来表示，从二维变成了三维，数据量变大了很多。所以一般使用霍夫梯度法减少计算量。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">circles=cv2.HoughCircles<br>(image, method, dp, minDist, param1, param2)<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><p>method：霍夫变换方法:霍夫梯度法，可以是 cv2.HOUGH_GRADIENT，这是唯一在OpenCV中用于圆检测的方法。</p>
+</li>
+<li><p>dp：累加器分辨率与输入图像分辨率之间的降采样比率，用于加速运算但不影响准确性。设置为1表示霍夫梯度法中累加器图像的分辨率与原图一致</p>
+</li>
+<li><p>minDist：检测到的圆心之间的最小允许距离，以像素为单位。</p>
+</li>
+<li><p>param1 和 param2：这两个参数是在使用 cv2.HOUGH_GRADIENT 方法时的特定参数，分别为：</p>
+<ul>
+<li><p>param1(可选)：阈值1，决定边缘强度的阈值。</p>
+</li>
+<li><p>param2：阈值2，控制圆心识别的精确度。较大的该值会使得检测更严格的圆。</p>
+</li>
+</ul>
+</li>
+<li><p>返回值：一个二维numpy数组，包含了所有满足条件的圆的参数(x_center,y_center,r)。</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 养成好习惯，每次都自己敲前面的步骤</span><br><span class="hljs-keyword">import</span> cv2 <span class="hljs-keyword">as</span> cv<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br> <br>img = cv.imread(<span class="hljs-string">&#x27;../images/huofu.png&#x27;</span>)<br> <br><span class="hljs-comment"># 灰度化</span><br>gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)<br> <br><span class="hljs-comment"># 边缘检测</span><br>edges = cv.Canny(gray, <span class="hljs-number">30</span>, <span class="hljs-number">70</span>)<br> <br><span class="hljs-comment"># 获取边缘中的圆</span><br>circles = cv.HoughCircles(edges, cv.HOUGH_GRADIENT, <span class="hljs-number">1</span>, <span class="hljs-number">20</span>, param2=<span class="hljs-number">30</span>)<br><span class="hljs-built_in">print</span>(circles)<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">[[[177.5  89.5  32.1]]]<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 绘圆</span><br><span class="hljs-keyword">for</span> circle <span class="hljs-keyword">in</span> circles:<br>    x, y, r = np.int_(circle[<span class="hljs-number">0</span>])<br>    cv.circle(img, (x, y), r, (<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">255</span>), <span class="hljs-number">2</span>)<br></code></pre></td></tr></table></figure>
+
+<p><em>这里使用的是np.int_向下取整对数组进行操作</em></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 显示图像</span><br>cv.imshow(<span class="hljs-string">&#x27;image&#x27;</span>, img)<br>cv.waitKey(<span class="hljs-number">0</span>)<br>cv.destroyAllWindows()<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p class='item-img' data-src='/img/temporate/cv108.png'><img src="/img/temporate/cv108.png"></p>
+<div id="paginator"></div></div><div id="post-footer"><div id="pages"><div class="footer-link" style="width: 50%;text-align:right;border-right:1px #fe2 solid"><a href="/post/3d0242e2/">← 下一篇 图像预处理-图像亮度变换</a></div><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/post/be736a62/">图像预处理-模板匹配 上一篇 →</a></div></div></div></div><div class="bottom-btn"><div><a class="i-top" id="to-top" onClick="scrolls.scrolltop();" title="回到顶部" style="opacity: 0; display: none;">∧ </a><a class="i-index" id="to-index" href="#toc-div" title="文章目录">≡</a><a class="i-color" id="color-mode" onClick="colorMode.change()" title="切换主题"></a><a onclick="BgmControl()"><svg id="bgm-control" viewBox="0 0 30 34" fill="#18d1ff" style="width: 24px; transition: transform .3s;margin-top: 4px"><path d="M25.998 23.422V11.29h3.999v12.132h-3.999zM19.497 6.234h4.001v22.243h-4.001V6.234zM12.998.867h4v32.978h-4V.867zm-6.5 5.367h4.001v22.243H6.498V6.234zm-6.5 5.056h4v12.132h-4V11.29z"></path></svg><audio id="bgm" src="/audio/bgm.mp3" autoplay loop crossorigin="anonymous"> </audio></a></div></div></article><aside><div id="about"><a href="/" id="logo"><img src="https://ak.hypergryph.com/assets/index/images/ak/pc/faction/1.png" alt="Logo" style="margin:0;border-radius:0;"></a><h1 id="Dr"><a href="/">Clocky7</a></h1><div id="description"><p></p></div><div id="social-links"><a class="social" target="_blank" rel="noopener" href="https://github.com/Clocky7"><i class="fab fa-github" alt="GitHub"></i></a></div></div><div id="aside-block"><div id="toc-div"><h1>目录</h1><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80-%E6%A6%82%E5%BF%B5"><span class="toc-number">1.</span> <span class="toc-text">一.概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C-%E9%9C%8D%E5%A4%AB%E7%9B%B4%E7%BA%BF%E5%8F%98%E6%8D%A2"><span class="toc-number">2.</span> <span class="toc-text">二.霍夫直线变换</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E7%9B%B4%E8%A7%92%E5%9D%90%E6%A0%87%E7%B3%BB"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 直角坐标系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E6%9E%81%E5%9D%90%E6%A0%87%E7%B3%BB"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 极坐标系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-API%E4%BD%BF%E7%94%A8"><span class="toc-number">2.3.</span> <span class="toc-text">2.3 API使用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89-%E7%BB%9F%E8%AE%A1%E6%A6%82%E7%8E%87%E9%9C%8D%E5%A4%AB%E7%9B%B4%E7%BA%BF%E5%8F%98%E6%8D%A2"><span class="toc-number">3.</span> <span class="toc-text">三.统计概率霍夫直线变换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B-%E9%9C%8D%E5%A4%AB%E5%9C%86%E5%8F%98%E6%8D%A2"><span class="toc-number">4.</span> <span class="toc-text">四.霍夫圆变换</span></a></li></ol></div></div><footer><nobr>构建自 <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr><wbr><nobr> 使用主题 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus/hexo-theme-arknights">Arknights</a></nobr><wbr><nobr> 主题作者 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus">Yue_plus</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas></body></html>

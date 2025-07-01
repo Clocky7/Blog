@@ -1,0 +1,142 @@
+<!DOCTYPE html><html lang="zh-cn" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>图像预处理-图像掩膜 | Clocky7's Blog</title><link rel="icon" type="image/x-icon" href="/favicon.ico"><link rel="preload" as="font" crossorigin="anonymous" href="/font/Bender.ttf"><link rel="preload" as="font" crossorigin="anonymous" href="/font/BenderLight.ttf"><link rel="preload" as="font" crossorigin="anonymous" href="/font/JetBrainsMono-Regular.woff2"><link rel="stylesheet" href="/css/arknights.css"><style>@font-face {
+  font-family: Bender;
+  src: local('Bender'), url("/font/Bender.ttf"), url("/font/Bender.otf");
+}
+@font-face {
+  font-family: BenderLight;
+  src: local('BenderLight'), url("/font/BenderLight.ttf");
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}
+</style><script>var config = {"root":"/","search":{"preload":false,"activeHolder":"键入以继续","blurHolder":"搜索","noResult":"无 $0 相关数据"},"code":{"codeInfo":"$0 - $1 行","copy":"复制"}}</script><link type="text/css" rel="stylesheet" href="/lib/encrypt/hbe.style.css"><script src="//unpkg.com/mermaid@10.5.0/dist/mermaid.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+ menuSettings: {
+   zoom: "None"
+ },
+ showMathMenu: false,
+ jax: ["input/TeX","output/CommonHTML"],
+ extensions: ["tex2jax.js"],
+ TeX: {
+   extensions: ["AMSmath.js","AMSsymbols.js"],
+   equationNumbers: {
+     autoNumber: "AMS"
+   }
+ },
+ tex2jax: {
+   inlineMath: [["\\(", "\\)"]],
+   displayMath: [["\\[", "\\]"]]
+ }
+});</script><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lightgallery.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-zoom.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-thumbnail.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/css/all.min.css"><style defer src="article.css"></style><link rel="stylesheet" href="article.css"><script>if (window.localStorage.getItem('theme-mode') === 'light')
+ document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark')
+ document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.woff2") format('woff2');
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}</style><style>:root {
+ --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
+ --light-background: url('/img/bk.jpg');
+ --theme-encrypt-confirm: '确认'
+}</style><script defer src="/js/arknights.js"></script><script defer src="/js/search.js"></script><script defer type="module">import mermaid from '//unpkg.com/mermaid@10.5.0/dist/mermaid.esm.mjs';
+window.mermaid = mermaid;
+code.paintMermaid();
+</script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+  menuSettings: {
+    zoom: "None"
+  },
+  showMathMenu: false,
+  jax: ["input/TeX","output/CommonHTML"],
+  extensions: ["tex2jax.js"],
+  TeX: {
+    extensions: ["AMSmath.js","AMSsymbols.js"],
+    equationNumbers: {
+      autoNumber: "AMS"
+    }
+  },
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]]
+  }
+});
+</script><script async src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script async src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script async src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script async src="/lib/encrypt/hbe.js"></script><script async src="/js/pjax.js"></script><script class="pjax-js">reset= () => {document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js','data-pjax','.busuanzi'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><script class="pjax-js">reset= () => {document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="loading" style="opacity: 0;"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><div class="navBtn"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><nav><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="搜索" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup" tabindex="0"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">主页</span></a></li><li class="navItem"><a class="navBlock" href="/about/"><span class="navItemTitle">于我</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">归档</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>图像预处理-图像掩膜</h1><div id="post-info"><span>文章发布时间: <div class="control"><time datetime="2025-06-24T05:50:13.000Z" id="date"> 2025-06-24</time></div></span><br><span>最后更新时间: <div class="control"><time datetime="2025-07-01T02:16:23.416Z" id="updated"> 2025-07-01</time></div></span><br><span>文章总字数: <div class="control">1.3k</div></span><br><span>预计阅读时间: <div class="control">5 分钟</div></span></div></div><hr><div id="post-content"><h2 id="一-掩膜简介"><a href="#一-掩膜简介" class="headerlink" title="一.掩膜简介"></a>一.掩膜简介</h2><p>掩膜通常是一个二值化图像，并且与原图像的大小相同，其中目标区域被设置为1（或白色255），而其他区域被设置为0（黑色），并且目标区域可以根据HSV的颜色范围进行修改。</p>
+<h2 id="二-制作掩膜"><a href="#二-制作掩膜" class="headerlink" title="二.制作掩膜"></a>二.制作掩膜</h2><p><code>mask=cv.inRange(img,color_low,color_high)</code></p>
+<p>cv2.inRange 用于进行多通道图像（尤其是彩色图像）的阈值操作。</p>
+<p>首先要把彩图（RGB）转换为HSV颜色空间，然后用之前HSV取值范围来取出特定颜色，即(img,(hmin,smin,vmin),(hmax,smax,vmax))，一般后两个参数传用np创建的数组。</p>
+<p class='item-img' data-src='/img/temporate/cv53.png'><img src="/img/temporate/cv53.png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 导入opencv和numpy</span><br><span class="hljs-keyword">import</span> cv2 <span class="hljs-keyword">as</span> cv<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br> <br><span class="hljs-comment"># 读取图片</span><br>img = cv.imread(<span class="hljs-string">&#x27;../images/demo.png&#x27;</span>)<br> <br><span class="hljs-comment"># 图太大了修改一下大小</span><br>img_re = cv.resize(img, (<span class="hljs-number">480</span>,<span class="hljs-number">480</span>))<br><span class="hljs-comment"># 显示原图</span><br>cv.imshow(<span class="hljs-string">&#x27;tym_1&#x27;</span>, img_re)<br> <br><span class="hljs-comment"># 转换为HSV格式</span><br>img_hsv = cv.cvtColor(img_re, cv.COLOR_BGR2HSV)<br> <br><span class="hljs-comment"># 设定绿色颜色范围</span><br>lower_green =  np.array([<span class="hljs-number">35</span>, <span class="hljs-number">43</span>, <span class="hljs-number">46</span>])<br>higer_green =  np.array([<span class="hljs-number">77</span>, <span class="hljs-number">255</span>, <span class="hljs-number">255</span>])<br> <br><span class="hljs-comment"># 创建掩膜</span><br>mask = cv.inRange(img_hsv, lower_green, higer_green)<br> <br><span class="hljs-comment"># 显示掩膜</span><br>cv.imshow(<span class="hljs-string">&#x27;tym_2&#x27;</span>, mask)<br>cv.waitKey(<span class="hljs-number">0</span>)<br>cv.destroyAllWindows()<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p class='item-img' data-src='/img/temporate/cv54.png'><img src="/img/temporate/cv54.png"></p>
+<p>这里掩膜和掩膜后图像出现右下角的白色(绿色)轮廓，我认为是这里的四个颜色区域的边缘并没有严格使用该区域的颜色，右下角黄色区域的边缘含有绿色，所以会在掩膜和掩膜后图像中显示。</p>
+<p><em>注意：掩膜虽然是用HSV颜色空间创建出来的，但本质上还是<strong>二值化</strong>图像，只有两种值。</em></p>
+<h2 id="三-与运算"><a href="#三-与运算" class="headerlink" title="三.与运算"></a>三.与运算</h2><p>图像处理中，与运算被用来对图像的像素值进行操作，也就是将两个图像中所有的对应像素值一一进行与运算，从而得到新的图像。</p>
+<p>通常来说，掩膜上白色部分的像素值都是 (255，255，255) ，而255是unit8的最大值(2^8)，此时将其与原图(例如：111，123，132)做与运算，就是将值转换为二进制做与运算，而255转换后全是1，所以与运算后就得到原区域。</p>
+<p><code>cv2.bitwise_and(src1,src2[,mask])</code></p>
+<p>参数：</p>
+<ul>
+<li><p>src1：通常是输入的原始图像。</p>
+</li>
+<li><p>src2：它可以是另一个图像、一个常数值或者与 <code>src1</code> 相同的图像。</p>
+<ul>
+<li><p>应用掩膜时，这个参数经常就是<code>src1</code>本身；即对同一个图像进行操作。</p>
+</li>
+<li><p>若对两个不同的图像执行按位与操作（例如，将两张图片的某些部分组合在一起），可以分别将它们作为 src1 和 src2。</p>
+</li>
+</ul>
+</li>
+<li><p>mask：掩膜(可选)。输入数组元素只有在该掩膜非零时才被处理。是一个8位单通道的数组，尺寸必须与 src1 和 src2 相同。</p>
+</li>
+</ul>
+<p>通过掩膜与原图的与运算，就可提取出图像中被掩膜覆盖的区域(扣图)。但这个函数需要我们传入更多参数，前面必须传入 src1 和 src2 两图，所以进行掩膜与运算时把 src2 输入成第一张图就行了，相当于原图自己做与操作。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 导入opencv和numpy</span><br><span class="hljs-keyword">import</span> cv2 <span class="hljs-keyword">as</span> cv<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br> <br><span class="hljs-comment"># 读取图片</span><br>img = cv.imread(<span class="hljs-string">&#x27;../images/demo.png&#x27;</span>)<br> <br><span class="hljs-comment"># 图太大了修改一下大小</span><br>img_re = cv.resize(img, (<span class="hljs-number">480</span>,<span class="hljs-number">480</span>))<br><span class="hljs-comment"># 显示原图</span><br>cv.imshow(<span class="hljs-string">&#x27;tym_1&#x27;</span>, img_re)<br> <br><span class="hljs-comment"># 转换为HSV格式</span><br>img_hsv = cv.cvtColor(img_re, cv.COLOR_BGR2HSV)<br> <br><span class="hljs-comment"># 设定绿色颜色范围</span><br>lower_green =  np.array([<span class="hljs-number">35</span>, <span class="hljs-number">43</span>, <span class="hljs-number">46</span>])<br>higer_green =  np.array([<span class="hljs-number">77</span>, <span class="hljs-number">255</span>, <span class="hljs-number">255</span>])<br> <br><span class="hljs-comment"># 创建掩膜</span><br>mask = cv.inRange(img_hsv, lower_green, higer_green)<br> <br><span class="hljs-comment"># 与运算得到掩膜后图像</span><br>res = cv.bitwise_and(img_re, img_re, mask = mask)<br> <br><span class="hljs-comment"># 显示掩膜后图像</span><br>cv.imshow(<span class="hljs-string">&#x27;tym_2&#x27;</span>, res)<br>cv.waitKey(<span class="hljs-number">0</span>)<br>cv.destroyAllWindows()<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p class='item-img' data-src='/img/temporate/cv55.png'><img src="/img/temporate/cv55.png"></p>
+<p><em>这里提一嘴，转化为HSV的图片显示会跟我们想象的不一样，比如这里的：</em></p>
+<p class='item-img' data-src='/img/temporate/cv56.png'><img src="/img/temporate/cv56.png"></p>
+<p>怎么变HSV颜色空间就全是黄色和红色呢？这是因为可视化工具支持的是<strong>RGB</strong>颜色空间的显示，比如在原图中白色区域的像素值为(255,255,255)，转化为HSV空间后值应该为表中对应的(0,0,255)，但是这在BGR存储顺序中是红色，所以显示的就是红色。</p>
+<p class='item-img' data-src='/img/temporate/cv57.png'><img src="/img/temporate/cv57.png"></p>
+<h2 id="四-颜色替换"><a href="#四-颜色替换" class="headerlink" title="四.颜色替换"></a>四.颜色替换</h2><p><strong>掩膜</strong>与<strong>原图</strong>的大小相同，并且像素位置一一对应，可以通过布尔索引得到掩膜中白色区域的坐标，并将其带入到原图像(RGB颜色空间)中。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 修改掩膜后指定颜色为蓝色</span><br>img_re[mask == <span class="hljs-number">255</span>] = (<span class="hljs-number">255</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>)<br> <br><span class="hljs-comment"># 显示修改颜色后的图像</span><br>cv.imshow(<span class="hljs-string">&#x27;tym_4&#x27;</span>, img_re)<br>cv.waitKey(<span class="hljs-number">0</span>)<br>cv.destroyAllWindows()<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p class='item-img' data-src='/img/temporate/cv58.png'><img src="/img/temporate/cv58.png"></p>
+<p>由于掩膜是二值化图像，所以只有 255 和 0 两种值，可以用布尔索引将掩膜中的目标区域(白色)坐标提取出来。然后原图是RGB颜色空间的，所以又使用(B,G,R)的赋值方式修改像素值。</p>
+<p><em>还有一种颜色替换方法，直接用HSV空间修改颜色，再转换为RGB格式展示：</em></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> cv2 <span class="hljs-keyword">as</span> cv<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br>img = cv.imread(<span class="hljs-string">&#x27;../images/demo.png&#x27;</span>)<br>hsv_img = cv.cvtColor(img,cv.COLOR_BGR2HSV)<br>lower_green = np.array([<span class="hljs-number">40</span>,<span class="hljs-number">40</span>,<span class="hljs-number">40</span>])<br>upper_green = np.array([<span class="hljs-number">80</span>, <span class="hljs-number">255</span>, <span class="hljs-number">255</span>])<br> <br> <br>mask = cv.inRange(hsv_img, lower_green, upper_green)<br> <br><span class="hljs-comment"># 用数组存储蓝色的hsv值</span><br>blue_hsv = np.array([<span class="hljs-number">120</span>, <span class="hljs-number">255</span>, <span class="hljs-number">255</span>])<br> <br><span class="hljs-comment"># 将mask中为1的区域的hsv值替换为蓝色</span><br>hsv_img[mask &gt; <span class="hljs-number">0</span>] = blue_hsv<br> <br><span class="hljs-comment"># 将修改颜色后的HSV空间图片转换为RGB图片方便正确显示</span><br>mask_img = cv.cvtColor(hsv_img, cv.COLOR_HSV2BGR)<br> <br>cv.imshow(<span class="hljs-string">&#x27;原图&#x27;</span>,img)<br>cv.imshow(<span class="hljs-string">&#x27;yjy&#x27;</span>,mask_img)<br> <br>cv.waitKey(<span class="hljs-number">0</span>)<br>cv.destroyAllWindows()<br></code></pre></td></tr></table></figure><div id="paginator"></div></div><div id="post-footer"><div id="pages"><div class="footer-link" style="width: 50%;text-align:right;border-right:1px #fe2 solid"><a href="/post/e4106317/">← 下一篇 图像预处理-添加水印</a></div><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/post/8bd8a8d1/">图像预处理-色彩空间（补充），灰度化与二值化 上一篇 →</a></div></div></div></div><div class="bottom-btn"><div><a class="i-top" id="to-top" onClick="scrolls.scrolltop();" title="回到顶部" style="opacity: 0; display: none;">∧ </a><a class="i-index" id="to-index" href="#toc-div" title="文章目录">≡</a><a class="i-color" id="color-mode" onClick="colorMode.change()" title="切换主题"></a><a onclick="BgmControl()"><svg id="bgm-control" viewBox="0 0 30 34" fill="#18d1ff" style="width: 24px; transition: transform .3s;margin-top: 4px"><path d="M25.998 23.422V11.29h3.999v12.132h-3.999zM19.497 6.234h4.001v22.243h-4.001V6.234zM12.998.867h4v32.978h-4V.867zm-6.5 5.367h4.001v22.243H6.498V6.234zm-6.5 5.056h4v12.132h-4V11.29z"></path></svg><audio id="bgm" src="/audio/bgm.mp3" autoplay loop crossorigin="anonymous"> </audio></a></div></div></article><aside><div id="about"><a href="/" id="logo"><img src="https://ak.hypergryph.com/assets/index/images/ak/pc/faction/1.png" alt="Logo" style="margin:0;border-radius:0;"></a><h1 id="Dr"><a href="/">Clocky7</a></h1><div id="description"><p></p></div><div id="social-links"><a class="social" target="_blank" rel="noopener" href="https://github.com/Clocky7"><i class="fab fa-github" alt="GitHub"></i></a></div></div><div id="aside-block"><div id="toc-div"><h1>目录</h1><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80-%E6%8E%A9%E8%86%9C%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">一.掩膜简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C-%E5%88%B6%E4%BD%9C%E6%8E%A9%E8%86%9C"><span class="toc-number">2.</span> <span class="toc-text">二.制作掩膜</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89-%E4%B8%8E%E8%BF%90%E7%AE%97"><span class="toc-number">3.</span> <span class="toc-text">三.与运算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B-%E9%A2%9C%E8%89%B2%E6%9B%BF%E6%8D%A2"><span class="toc-number">4.</span> <span class="toc-text">四.颜色替换</span></a></li></ol></div></div><footer><nobr>构建自 <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr><wbr><nobr> 使用主题 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus/hexo-theme-arknights">Arknights</a></nobr><wbr><nobr> 主题作者 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus">Yue_plus</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas></body></html>

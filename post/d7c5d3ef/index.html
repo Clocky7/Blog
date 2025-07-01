@@ -1,0 +1,156 @@
+<!DOCTYPE html><html lang="zh-cn" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>机器学习-朴素贝叶斯分类 | Clocky7's Blog</title><link rel="icon" type="image/x-icon" href="/favicon.ico"><link rel="preload" as="font" crossorigin="anonymous" href="/font/Bender.ttf"><link rel="preload" as="font" crossorigin="anonymous" href="/font/BenderLight.ttf"><link rel="preload" as="font" crossorigin="anonymous" href="/font/JetBrainsMono-Regular.woff2"><link rel="stylesheet" href="/css/arknights.css"><style>@font-face {
+  font-family: Bender;
+  src: local('Bender'), url("/font/Bender.ttf"), url("/font/Bender.otf");
+}
+@font-face {
+  font-family: BenderLight;
+  src: local('BenderLight'), url("/font/BenderLight.ttf");
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}
+</style><script>var config = {"root":"/","search":{"preload":false,"activeHolder":"键入以继续","blurHolder":"搜索","noResult":"无 $0 相关数据"},"code":{"codeInfo":"$0 - $1 行","copy":"复制"}}</script><link type="text/css" rel="stylesheet" href="/lib/encrypt/hbe.style.css"><script src="//unpkg.com/mermaid@10.5.0/dist/mermaid.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+ menuSettings: {
+   zoom: "None"
+ },
+ showMathMenu: false,
+ jax: ["input/TeX","output/CommonHTML"],
+ extensions: ["tex2jax.js"],
+ TeX: {
+   extensions: ["AMSmath.js","AMSsymbols.js"],
+   equationNumbers: {
+     autoNumber: "AMS"
+   }
+ },
+ tex2jax: {
+   inlineMath: [["\\(", "\\)"]],
+   displayMath: [["\\[", "\\]"]]
+ }
+});</script><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lightgallery.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-zoom.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-thumbnail.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/css/all.min.css"><style defer src="article.css"></style><link rel="stylesheet" href="article.css"><script>if (window.localStorage.getItem('theme-mode') === 'light')
+ document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark')
+ document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.woff2") format('woff2');
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}</style><style>:root {
+ --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
+ --light-background: url('/img/bk.jpg');
+ --theme-encrypt-confirm: '确认'
+}</style><script defer src="/js/arknights.js"></script><script defer src="/js/search.js"></script><script defer type="module">import mermaid from '//unpkg.com/mermaid@10.5.0/dist/mermaid.esm.mjs';
+window.mermaid = mermaid;
+code.paintMermaid();
+</script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+  menuSettings: {
+    zoom: "None"
+  },
+  showMathMenu: false,
+  jax: ["input/TeX","output/CommonHTML"],
+  extensions: ["tex2jax.js"],
+  TeX: {
+    extensions: ["AMSmath.js","AMSsymbols.js"],
+    equationNumbers: {
+      autoNumber: "AMS"
+    }
+  },
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]]
+  }
+});
+</script><script async src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script async src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script async src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script async src="/lib/encrypt/hbe.js"></script><script async src="/js/pjax.js"></script><script class="pjax-js">reset= () => {document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js','data-pjax','.busuanzi'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><script class="pjax-js">reset= () => {document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="loading" style="opacity: 0;"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><div class="navBtn"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><nav><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="搜索" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup" tabindex="0"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">主页</span></a></li><li class="navItem"><a class="navBlock" href="/about/"><span class="navItemTitle">于我</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">归档</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>机器学习-朴素贝叶斯分类</h1><div id="post-info"><span>文章发布时间: <div class="control"><time datetime="2025-06-24T05:57:50.000Z" id="date"> 2025-06-24</time></div></span><br><span>最后更新时间: <div class="control"><time datetime="2025-07-01T09:52:07.313Z" id="updated"> 2025-07-01</time></div></span><br><span>文章总字数: <div class="control">1.3k</div></span><br><span>预计阅读时间: <div class="control">5 分钟</div></span></div></div><hr><div id="post-content"><h2 id="朴素贝叶斯分类"><a href="#朴素贝叶斯分类" class="headerlink" title="朴素贝叶斯分类"></a>朴素贝叶斯分类</h2><h2 id="一-贝叶斯分类理论"><a href="#一-贝叶斯分类理论" class="headerlink" title="一.贝叶斯分类理论"></a>一.贝叶斯分类理论</h2><p>现在用p1(x,y)表示数据点(x,y)属于类别1的概率，用p2(x,y)表示数据点(x,y)属于类别2的概率，那么对于一个新数据点(x,y)，可以用下面的规则来判断它的类别：</p>
+<ul>
+<li><p>如果p1(x,y)&gt; p2(x,y)，那么类别为1</p>
+</li>
+<li><p>如果p1(x,y)&lt; p2(x,y)，那么类别为2</p>
+</li>
+</ul>
+<p>也就是说，选择高概率对应的类别。这就是贝叶斯决策理论的核心思想，即选择具有最高概率的决策。</p>
+<h2 id="二-条件概率"><a href="#二-条件概率" class="headerlink" title="二.条件概率"></a>二.条件概率</h2><p>条件概率，就是指在事件B发生的情况下，事件A发生的概率，用P(A|B)来表示。</p>
+<p>根据文氏图，在事件B发生的情况下，事件A发生的概率就是</p>
+<p>𝑃(𝐴|𝐵)&#x3D;𝑃(𝐴∩𝐵)&#x2F;𝑃(𝐵)</p>
+<p>因此，</p>
+<p>𝑃(𝐴∩𝐵)&#x3D;𝑃(𝐴|𝐵)𝑃(𝐵)</p>
+<p>同理可得，</p>
+<p>𝑃(𝐴∩𝐵)&#x3D;𝑃(𝐵|𝐴)𝑃(𝐴)</p>
+<p>即</p>
+<p>𝑃(𝐴|𝐵)&#x3D;𝑃(B|A)𝑃(𝐴)&#x2F;𝑃(𝐵)</p>
+<p>这就是条件概率的计算公式。</p>
+<h2 id="三-全概率公式"><a href="#三-全概率公式" class="headerlink" title="三.全概率公式"></a>三.全概率公式</h2><p>如图：</p>
+<p class='item-img' data-src='/img/temporate/ml11.png'><img src="/img/temporate/ml11.png"></p>
+<p>𝑃(𝐵)&#x3D;𝑃(𝐵∩𝐴)+𝑃(𝐵∩𝐴′)</p>
+<p>在上面的推导当中，我们已知</p>
+<p>𝑃(𝐵∩𝐴)&#x3D;𝑃(𝐵|𝐴)𝑃(𝐴)</p>
+<p>所以：</p>
+<p>𝑃(𝐵)&#x3D;𝑃(𝐵|𝐴)𝑃(𝐴)+𝑃(𝐵|𝐴′)𝑃(𝐴′)</p>
+<p>这就是全概率公式。它的含义是，如果A和A’构成样本空间的一个划分，那么事件B的概率，就等于A和A’的概率分别乘以B对这两个事件的条件概率之和。</p>
+<h1 id="四-贝叶斯推断"><a href="#四-贝叶斯推断" class="headerlink" title="四.贝叶斯推断"></a>四.贝叶斯推断</h1><p><strong>我们把P(A)称为”先验概率”（Prior probability）</strong>，即在B事件发生之前，我们对A事件概率的一个判断。</p>
+<p><strong>P(A|B)称为”后验概率”（Posterior probability）</strong>，即在B事件发生之后，我们对A事件概率的重新评估。</p>
+<p><strong>P(B|A)&#x2F;P(B)称为”可能性函数”（Likelyhood）</strong>，这是一个调整因子，使得预估概率更接近真实概率。</p>
+<p>所以，条件概率可以理解成下面的式子：</p>
+<p><strong>后验概率　＝　先验概率ｘ调整因子</strong></p>
+<h1 id="五-朴素贝叶斯推断"><a href="#五-朴素贝叶斯推断" class="headerlink" title="五.朴素贝叶斯推断"></a>五.朴素贝叶斯推断</h1><p>朴素贝叶斯对条件概率分布做了<strong>条件独立</strong>性的假设，也就是把单个特征之间的计算变成了多个特征。</p>
+<p>根据贝叶斯定理，后验概率 P(a|X)  可以表示为：</p>
+<p>其中：</p>
+<ul>
+<li>P(X|a)  是给定类别 ( a ) 下观测到特征向量  X&#x3D;(x1, x2, …, xn)的概率；</li>
+<li>P(a) 是类别  a  的先验概率；</li>
+<li>P(X) 是观测到特征向量 X 的边缘概率，通常作为归一化常数处理。</li>
+</ul>
+<p>我们可以将联合概率 P(X|a)  分解为各个特征的概率乘积：</p>
+<p>下面有一个例子方便进行理解：</p>
+<p>示例：</p>
+<p>P(好瓜)&#x3D;(好瓜数量)&#x2F;所有瓜<br>P(坏瓜)&#x3D;(坏瓜数量)&#x2F;所有瓜<br>p（纹理清晰）&#x3D;(纹理清晰数量)&#x2F;所有瓜</p>
+<p>p(好瓜|纹理清晰，色泽清绿，鼓声沉闷)<br>    &#x3D;【p(好瓜)】<em>【p(纹理清晰，色泽清绿，鼓声沉闷|好瓜)】&#x2F;【p(纹理清晰，色泽清绿，鼓声沉闷)】<br>    &#x3D;【p(好瓜)】</em>【p（纹理清晰|好瓜）<em>p（色泽清绿|好瓜）</em>p（鼓声沉闷|好瓜)】&#x2F;【p（纹理清晰）<em>p（色泽清绿）</em>p（鼓声沉闷)】</p>
+<p>p(坏瓜|纹理清晰，色泽清绿，鼓声沉闷)<br>    &#x3D;【p(坏瓜)<em>p（纹理清晰|坏瓜）</em>p（色泽清绿|坏瓜）<em>p（鼓声沉闷|坏瓜)】&#x2F;【p（纹理清晰）</em>p（色泽清绿）*p（鼓声沉闷)】</p>
+<p>从公式中判断”p(好瓜|纹理清晰，色泽清绿，鼓声沉闷)”和”p(坏瓜|纹理清晰，色泽清绿，鼓声沉闷)”时，因为它们的分母<br>值是相同的，所以只要计算它们的分子就可以判断是”好瓜”还是”坏瓜”之间谁大谁小了，所以没有必要计算分母</p>
+<p>p(好瓜) &#x3D; 6&#x2F;10<br>p(坏瓜)&#x3D;4&#x2F;10<br>p（纹理清晰|好瓜） &#x3D; 4&#x2F;6<br>p（色泽清绿|好瓜） &#x3D; 4&#x2F;6<br>p（鼓声沉闷|好瓜） &#x3D; 2&#x2F;6<br>p（纹理清晰|坏瓜） &#x3D; 1&#x2F;4<br>p（色泽清绿|坏瓜） &#x3D; 1&#x2F;4<br>p（鼓声沉闷|坏瓜） &#x3D; 1&#x2F;4  </p>
+<p>把以上计算代入公式的分子<br>p(好瓜)<em>p（纹理清晰|好瓜）</em>p（色泽清绿|好瓜）<em>p（鼓声沉闷|好瓜) &#x3D; 4&#x2F;45<br>p(坏瓜)<em>p（纹理清晰|坏瓜）</em>p（色泽清绿|坏瓜）</em>p（鼓声沉闷|坏瓜) &#x3D; 1&#x2F;160<br>所以<br>p(好瓜|纹理清晰，色泽清绿，鼓声沉闷) &gt;  p(坏瓜|纹理清晰，色泽清绿，鼓声沉闷)，<br>所以把(纹理清晰，色泽清绿，鼓声沉闷)的样本归类为好瓜</p>
+<h2 id="六-拉普拉斯平滑系数"><a href="#六-拉普拉斯平滑系数" class="headerlink" title="六.拉普拉斯平滑系数"></a>六.拉普拉斯平滑系数</h2><p>某些事件或特征可能从未出现过，这会导致它们的概率被估计为零,拉普拉斯平滑技术可以避免这种“零概率陷阱”,</p>
+<p>其公式为：</p>
+<p class='item-img' data-src='/img/temporate/ml10.png'><img src="/img/temporate/ml10.png"></p>
+<p>一般α取值1，m的值为总特征数量</p>
+<h2 id="API"><a href="#API" class="headerlink" title="API"></a>API</h2><p><code>sklearn.naive_bayes.MultinomialNB(alpha=1)</code></p>
+<ul>
+<li>alpha: 默认为1</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 朴素贝叶斯分类</span><br><span class="hljs-keyword">from</span> sklearn.datasets <span class="hljs-keyword">import</span> load_iris<br><span class="hljs-keyword">from</span> sklearn.naive_bayes <span class="hljs-keyword">import</span> MultinomialNB<br><span class="hljs-keyword">from</span> sklearn.model_selection <span class="hljs-keyword">import</span> train_test_split<br><br><span class="hljs-comment"># 加载数据集</span><br>iris = load_iris()<br>X = iris.data<br>y = iris.target<br><br><span class="hljs-comment"># 划分训练集和测试集</span><br>X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=<span class="hljs-number">0.3</span>, random_state=<span class="hljs-number">0</span>)<br><br><span class="hljs-comment"># 创建朴素贝叶斯分类器</span><br>clf = MultinomialNB()<br><br><span class="hljs-comment"># 训练模型</span><br>clf.fit(X_train, y_train)<br><br><span class="hljs-comment"># 预测测试集</span><br>y_pred = clf.predict(X_test)<br><br><span class="hljs-comment"># 计算准确率</span><br>accuracy = <span class="hljs-built_in">sum</span>(y_pred == y_test) / <span class="hljs-built_in">len</span>(y_test)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;准确率:&quot;</span>, accuracy)<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">准确率: 0.6<br></code></pre></td></tr></table></figure><div id="paginator"></div></div><div id="post-footer"><div id="pages"><div class="footer-link" style="width: 50%;text-align:right;border-right:1px #fe2 solid"><a href="/post/f5588eba/">← 下一篇 机器学习-决策树分类</a></div><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/post/867f56cb/">机器学习-KNN分类算法 上一篇 →</a></div></div></div></div><div class="bottom-btn"><div><a class="i-top" id="to-top" onClick="scrolls.scrolltop();" title="回到顶部" style="opacity: 0; display: none;">∧ </a><a class="i-index" id="to-index" href="#toc-div" title="文章目录">≡</a><a class="i-color" id="color-mode" onClick="colorMode.change()" title="切换主题"></a><a onclick="BgmControl()"><svg id="bgm-control" viewBox="0 0 30 34" fill="#18d1ff" style="width: 24px; transition: transform .3s;margin-top: 4px"><path d="M25.998 23.422V11.29h3.999v12.132h-3.999zM19.497 6.234h4.001v22.243h-4.001V6.234zM12.998.867h4v32.978h-4V.867zm-6.5 5.367h4.001v22.243H6.498V6.234zm-6.5 5.056h4v12.132h-4V11.29z"></path></svg><audio id="bgm" src="/audio/bgm.mp3" autoplay loop crossorigin="anonymous"> </audio></a></div></div></article><aside><div id="about"><a href="/" id="logo"><img src="https://ak.hypergryph.com/assets/index/images/ak/pc/faction/1.png" alt="Logo" style="margin:0;border-radius:0;"></a><h1 id="Dr"><a href="/">Clocky7</a></h1><div id="description"><p></p></div><div id="social-links"><a class="social" target="_blank" rel="noopener" href="https://github.com/Clocky7"><i class="fab fa-github" alt="GitHub"></i></a></div></div><div id="aside-block"><div id="toc-div"><h1>目录</h1><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%88%86%E7%B1%BB"><span class="toc-number">1.</span> <span class="toc-text">朴素贝叶斯分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80-%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%88%86%E7%B1%BB%E7%90%86%E8%AE%BA"><span class="toc-number">2.</span> <span class="toc-text">一.贝叶斯分类理论</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C-%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87"><span class="toc-number">3.</span> <span class="toc-text">二.条件概率</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89-%E5%85%A8%E6%A6%82%E7%8E%87%E5%85%AC%E5%BC%8F"><span class="toc-number">4.</span> <span class="toc-text">三.全概率公式</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%9B-%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%8E%A8%E6%96%AD"><span class="toc-number"></span> <span class="toc-text">四.贝叶斯推断</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%94-%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%8E%A8%E6%96%AD"><span class="toc-number"></span> <span class="toc-text">五.朴素贝叶斯推断</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD-%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF%E5%B9%B3%E6%BB%91%E7%B3%BB%E6%95%B0"><span class="toc-number">1.</span> <span class="toc-text">六.拉普拉斯平滑系数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#API"><span class="toc-number">2.</span> <span class="toc-text">API</span></a></li></ol></div></div><footer><nobr>构建自 <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr><wbr><nobr> 使用主题 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus/hexo-theme-arknights">Arknights</a></nobr><wbr><nobr> 主题作者 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus">Yue_plus</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas></body></html>

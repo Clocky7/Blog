@@ -1,0 +1,310 @@
+<!DOCTYPE html><html lang="zh-cn" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>opencv-python基础 | Clocky7's Blog</title><link rel="icon" type="image/x-icon" href="/favicon.ico"><link rel="preload" as="font" crossorigin="anonymous" href="/font/Bender.ttf"><link rel="preload" as="font" crossorigin="anonymous" href="/font/BenderLight.ttf"><link rel="preload" as="font" crossorigin="anonymous" href="/font/JetBrainsMono-Regular.woff2"><link rel="stylesheet" href="/css/arknights.css"><style>@font-face {
+  font-family: Bender;
+  src: local('Bender'), url("/font/Bender.ttf"), url("/font/Bender.otf");
+}
+@font-face {
+  font-family: BenderLight;
+  src: local('BenderLight'), url("/font/BenderLight.ttf");
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}
+</style><script>var config = {"root":"/","search":{"preload":false,"activeHolder":"键入以继续","blurHolder":"搜索","noResult":"无 $0 相关数据"},"code":{"codeInfo":"$0 - $1 行","copy":"复制"}}</script><link type="text/css" rel="stylesheet" href="/lib/encrypt/hbe.style.css"><script src="//unpkg.com/mermaid@10.5.0/dist/mermaid.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+ menuSettings: {
+   zoom: "None"
+ },
+ showMathMenu: false,
+ jax: ["input/TeX","output/CommonHTML"],
+ extensions: ["tex2jax.js"],
+ TeX: {
+   extensions: ["AMSmath.js","AMSsymbols.js"],
+   equationNumbers: {
+     autoNumber: "AMS"
+   }
+ },
+ tex2jax: {
+   inlineMath: [["\\(", "\\)"]],
+   displayMath: [["\\[", "\\]"]]
+ }
+});</script><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lightgallery.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-zoom.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-thumbnail.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/css/all.min.css"><style defer src="article.css"></style><link rel="stylesheet" href="article.css"><script>if (window.localStorage.getItem('theme-mode') === 'light')
+ document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark')
+ document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.woff2") format('woff2');
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}</style><style>:root {
+ --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
+ --light-background: url('/img/bk.jpg');
+ --theme-encrypt-confirm: '确认'
+}</style><script defer src="/js/arknights.js"></script><script defer src="/js/search.js"></script><script defer type="module">import mermaid from '//unpkg.com/mermaid@10.5.0/dist/mermaid.esm.mjs';
+window.mermaid = mermaid;
+code.paintMermaid();
+</script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+  menuSettings: {
+    zoom: "None"
+  },
+  showMathMenu: false,
+  jax: ["input/TeX","output/CommonHTML"],
+  extensions: ["tex2jax.js"],
+  TeX: {
+    extensions: ["AMSmath.js","AMSsymbols.js"],
+    equationNumbers: {
+      autoNumber: "AMS"
+    }
+  },
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]]
+  }
+});
+</script><script async src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script async src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script async src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script async src="/lib/encrypt/hbe.js"></script><script async src="/js/pjax.js"></script><script class="pjax-js">reset= () => {document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js','data-pjax','.busuanzi'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><script class="pjax-js">reset= () => {document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="loading" style="opacity: 0;"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><div class="navBtn"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><nav><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="搜索" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup" tabindex="0"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">主页</span></a></li><li class="navItem"><a class="navBlock" href="/about/"><span class="navItemTitle">于我</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">归档</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>opencv-python基础</h1><div id="post-info"><span>文章发布时间: <div class="control"><time datetime="2025-06-24T05:48:01.000Z" id="date"> 2025-06-24</time></div></span><br><span>最后更新时间: <div class="control"><time datetime="2025-06-30T08:42:27.965Z" id="updated"> 2025-06-30</time></div></span><br><span>文章总字数: <div class="control">1.9k</div></span><br><span>预计阅读时间: <div class="control">7 分钟</div></span></div></div><hr><div id="post-content"><h2 id="一-opencv-python简述"><a href="#一-opencv-python简述" class="headerlink" title="一.opencv-python简述"></a>一.opencv-python简述</h2><p>其使用Numpy，所有OpenCV数组结构都转换为Numpy数组，是一个高度优化的数据库操作库。</p>
+<h2 id="二-环境安装"><a href="#二-环境安装" class="headerlink" title="二.环境安装"></a>二.环境安装</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip install -i https://pypi.tuna.tsinghua.edu.cn/simple opencv-python<br></code></pre></td></tr></table></figure>
+
+<h2 id="三-基本概念"><a href="#三-基本概念" class="headerlink" title="三.基本概念"></a>三.基本概念</h2><ul>
+<li><p>像素是图像的基本单元，每个像素存储着图像的颜色、亮度和其他特征。</p>
+</li>
+<li><p>数字图像利用0&#x2F;1编码记录信息，opencv中常用的是8位图像,大多数彩色和灰度图像使用8位（uint8）表示每个通道的像素值，范围从0到255，其中 0 最黑，1(255) 最白。</p>
+</li>
+<li><p>几乎所有颜色都可以通过RGB三原色按照不同比例调配而成。</p>
+</li>
+</ul>
+<p><em><strong>注意：通过img.shape获取到(h,w,c)，即高、宽、通道数。对高和宽分别进行遍历，可以得到每个像素点。此时获取到的值是BGR通道(b,g,r)，b,g,r分别代表蓝、绿、红通道上的值。</strong></em></p>
+<h2 id="四-图像存储"><a href="#四-图像存储" class="headerlink" title="四.图像存储"></a>四.图像存储</h2><ul>
+<li><p>彩色图像：三维数组</p>
+</li>
+<li><p>灰度图像：二维数组(矩阵)</p>
+</li>
+<li><p>在OpenCV中，默认情况下，彩色图像是以BGR（蓝-绿-红）顺序存储</p>
+</li>
+<li><p>形状（Shape）：</p>
+</li>
+</ul>
+<p>图像的尺寸由其高（h）、宽（w）和通道数（c）决定。可以通过 img.shape 属性获取(h,w,c)。</p>
+<ul>
+<li><p>彩色图像，返回一个包含三个值的元组 (height, width, channels)。</p>
+</li>
+<li><p>灰度图像，返回一个包含两个值的元组 (height, width)，因为其只有一个通道。</p>
+</li>
+<li><p>数据类型（dtype）：图像中的每个像素值的数据类型决定了可以存储的最大值。例如，8位无符号整数（uint8）允许的范围是从0到255。</p>
+<ul>
+<li>单通道（灰度图像）：每个像素由一个数值表示，代表该点的亮度。值越低越暗，值越高越亮。</li>
+</ul>
+</li>
+</ul>
+<h2 id="五-图像基本操作"><a href="#五-图像基本操作" class="headerlink" title="五.图像基本操作"></a>五.图像基本操作</h2><h3 id="5-1-创建窗体-窗口"><a href="#5-1-创建窗体-窗口" class="headerlink" title="5.1 创建窗体(窗口)"></a>5.1 创建窗体(窗口)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">cv2.namedWindow(winname  [,窗口属性])<br></code></pre></td></tr></table></figure>
+
+<p>参数：</p>
+<ul>
+<li><p>winname：窗口名</p>
+</li>
+<li><p>窗口属性：窗口大小是否可调整</p>
+<ul>
+<li><p>cv2.WINDOW_AUTOSIZE ：默认，窗口会根据加载的图像自动调整到合适的大小，并且用户不能拖动窗口边缘来调整窗口大小。</p>
+</li>
+<li><p>cv2.WINDOW_NORMAL ：窗口大小是可调整的，用户可以通过鼠标拖动窗口边缘来自由改变窗口大小。</p>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> cv2 <span class="hljs-keyword">as</span> cv<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br> <br><span class="hljs-comment"># 创建窗体</span><br>cv.namedWindow(<span class="hljs-string">&quot;win1&quot;</span>,cv.WINDOW_AUTOSIZE)<br>cv.imshow(<span class="hljs-string">&quot;win2&quot;</span>,cv.WINDOW_NORMAL)\<br></code></pre></td></tr></table></figure>
+
+<p>运行后会出现两块窗口，暂时不管。</p>
+<h3 id="5-2-读取图像"><a href="#5-2-读取图像" class="headerlink" title="5.2 读取图像"></a>5.2 读取图像</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">cv2.imread(path  [,读取方式])<br></code></pre></td></tr></table></figure>
+
+<p>参数：</p>
+<ul>
+<li><p>filename：图像路径</p>
+</li>
+<li><p>读取方式：彩色·默认、灰色等</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 读取方式为灰色</span><br>img = cv.imread(<span class="hljs-string">&quot;../images/cat1.png&quot;</span>, cv.IMREAD_GRAYSCALE)\<br></code></pre></td></tr></table></figure>
+
+<p>继续往下看。</p>
+<h3 id="5-3-图像显示"><a href="#5-3-图像显示" class="headerlink" title="5.3 图像显示"></a>5.3 图像显示</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">cv2.imshow(winname,img)<br></code></pre></td></tr></table></figure>
+
+<p>参数：</p>
+<ul>
+<li><p>winname：显示图像的窗口名，以字符串类型表示</p>
+</li>
+<li><p>img：要显示的图像</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python">cv.imshow(<span class="hljs-string">&quot;win1&quot;</span>,img)<br>cv.imshow(<span class="hljs-string">&quot;win2&quot;</span>,img)<br> <br><span class="hljs-comment"># cv.waitKey(n)：n&gt;0,意味着程序将等待n毫秒。</span><br>cv.waitKey(<span class="hljs-number">0</span>)<br> <br><span class="hljs-comment"># cv2.destroyAllWindows(winname)：会在当前程序执行到该语句时立即销毁打开的窗口，并释放与这些窗口相关的资源。</span><br><span class="hljs-comment"># 默认关闭所有</span><br>cv.destroyAllWindows()<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p class='item-img' data-src='/img/temporate/cv.png'><img src="/img/temporate/cv.png"></p>
+<h3 id="5-4-保存图像"><a href="#5-4-保存图像" class="headerlink" title="5.4 保存图像"></a>5.4 保存图像</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">cv2.imwrite(path,img)<br></code></pre></td></tr></table></figure>
+
+<p>参数：</p>
+<ul>
+<li><p>path：图片保存的路径和图片名</p>
+</li>
+<li><p>img：要保存的图像</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">cv.imwrite(<span class="hljs-string">&#x27;output.jpg&#x27;</span>, img)<br></code></pre></td></tr></table></figure>
+
+<h3 id="5-5-创建黑色图像"><a href="#5-5-创建黑色图像" class="headerlink" title="5.5 创建黑色图像"></a>5.5 创建黑色图像</h3><p>使用 np.zeros() 创建全黑图像，再修改像素值(255)成为全白图像。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">numpy.zeros((height,width,channels),dtype=np. uint8)<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> cv2 <span class="hljs-keyword">as</span> cv<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br> <br>w = <span class="hljs-number">480</span><br>h = <span class="hljs-number">640</span><br> <br><span class="hljs-comment"># c = 1 的时候就是灰度图像，单通道，但是为二维图像</span><br>c = <span class="hljs-number">3</span><br> <br> <br>b = np.zeros((h,w,c),dtype=np.uint8)<br>cv.imshow(<span class="hljs-string">&quot;black&quot;</span>,b)<br> <br>cv.waitKey(<span class="hljs-number">0</span>)<br>cv.destroyAllWindows()<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p class='item-img' data-src='/img/temporate/cv1.png'><img src="/img/temporate/cv1.png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 更改为白色图像</span><br><span class="hljs-comment"># 利用数组切片更改值</span><br>b[:,:,:] = <span class="hljs-number">255</span><br> <br>cv.imshow(<span class="hljs-string">&#x27;white&#x27;</span>,b)<br>cv.waitKey(<span class="hljs-number">0</span>)<br>cv.destroyAllWindows()<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p class='item-img' data-src='/img/temporate/cv2.png'><img src="/img/temporate/cv2.png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 随机像素值图像</span><br> <br>b[:,:,:] = np.random.randint(<span class="hljs-number">0</span>,<span class="hljs-number">256</span>,(h,w,c))<br> <br>cv.imshow(<span class="hljs-string">&#x27;random&#x27;</span>,b)<br>cv.waitKey(<span class="hljs-number">0</span>)<br>cv.destroyAllWindows()<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p class='item-img' data-src='/img/temporate/cv3.png'><img src="/img/temporate/cv3.png"></p>
+<h3 id="5-6-图像裁剪（切片）"><a href="#5-6-图像裁剪（切片）" class="headerlink" title="5.6 图像裁剪（切片）"></a>5.6 图像裁剪（切片）</h3><p><code>img[y:y+h,x:x+w]</code></p>
+<p>提取的是从 (x,y) 开始，高度为 h，宽度为 w 的矩形区域。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> cv2 <span class="hljs-keyword">as</span> cv<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br> <br> <br>f = cv.imread(<span class="hljs-string">&#x27;../images/cat1.png&#x27;</span>)<br> <br>y = <span class="hljs-number">200</span><br>x = <span class="hljs-number">200</span><br>h = <span class="hljs-number">400</span><br>w = <span class="hljs-number">400</span><br> <br><span class="hljs-comment"># 先长后宽，这样理解简单些</span><br>s = f[y:y+h,x:x+w]<br>cv.imshow(<span class="hljs-string">&#x27;s&#x27;</span>,s)<br>cv.waitKey(<span class="hljs-number">0</span>)<br>cv.destroyAllWindows()<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p class='item-img' data-src='/img/temporate/cv4.png'><img src="/img/temporate/cv4.png"></p>
+<p><em><strong>这里切记，opencv中坐标原点在图像的左上角，也就是w做横轴，h做纵轴。</strong></em></p>
+<h3 id="5-7-调整大小"><a href="#5-7-调整大小" class="headerlink" title="5.7 调整大小"></a>5.7 调整大小</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">cv2.resize(img,dsize,dts)<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><p>img：输入图像，通常是二维或三位NumPy数组。</p>
+</li>
+<li><p>dsize：输出图像的尺寸，是一个二元组 (w,h)</p>
+</li>
+<li><p>dst：缩放后的图像</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> cv2 <span class="hljs-keyword">as</span> cv<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br>f = cv.imread(<span class="hljs-string">&#x27;../images/cat1.png&#x27;</span>)<br> <br>s = cv.resize(f, (<span class="hljs-number">100</span>,<span class="hljs-number">100</span>))<br>cv.imshow(<span class="hljs-string">&#x27;s&#x27;</span>, s)<br>cv.waitKey(<span class="hljs-number">0</span>)<br>cv.destroyAllWindows()<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p class='item-img' data-src='/img/temporate/cv5.png'><img src="/img/temporate/cv5.png"></p>
+<h2 id="六-图像绘制"><a href="#六-图像绘制" class="headerlink" title="六.图像绘制"></a>六.图像绘制</h2><h3 id="6-1-直线"><a href="#6-1-直线" class="headerlink" title="6.1 直线"></a>6.1 直线</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">cv2.line(img,start,end,color,thickness)<br></code></pre></td></tr></table></figure>
+
+<p>参数：</p>
+<ul>
+<li><p>img：要绘制直线的图像</p>
+</li>
+<li><p>start、end：直线的起点和终点,都是两个元组(坐标)</p>
+</li>
+<li><p>color：直线的颜色，对于彩色图像，使用 BGR 格式（b,g,r）指定颜色</p>
+</li>
+<li><p>thickness：线条粗细,值越大越宽</p>
+</li>
+<li><p>隐藏参数，cv2.LINE_AA ，表示使用抗锯齿算法绘制图像，这在每个绘制函数中都隐式存在，默认为 cv2.LINE_8</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> cv2 <span class="hljs-keyword">as</span> cv<br> <br>img = cv.imread(<span class="hljs-string">&#x27;../images/cat1.png&#x27;</span>)<br> <br><span class="hljs-comment"># 画一条直线，起点终点分别指定，同时为蓝色</span><br>cv.line(img,(<span class="hljs-number">100</span>,<span class="hljs-number">100</span>),(<span class="hljs-number">200</span>,<span class="hljs-number">200</span>),(<span class="hljs-number">255</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>),<span class="hljs-number">3</span>)<br>cv.imshow(<span class="hljs-string">&#x27;image&#x27;</span>,img)<br>cv.waitKey(<span class="hljs-number">0</span>)<br>cv.destroyAllWindows()<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p class='item-img' data-src='/img/temporate/cv6.png'><img src="/img/temporate/cv6.png"></p>
+<h3 id="6-2-圆形"><a href="#6-2-圆形" class="headerlink" title="6.2 圆形"></a>6.2 圆形</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">cv2.circle(img,centerpoint,r,color,thickness)<br></code></pre></td></tr></table></figure>
+
+<p>参数：</p>
+<ul>
+<li><p>img：要绘制圆形的图片</p>
+</li>
+<li><p>centerpoint、r：圆心和半径</p>
+</li>
+<li><p>color：线条颜色</p>
+</li>
+<li><p>tnickness：线条宽度，为-1时生成闭合图案并填充颜色</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> cv2 <span class="hljs-keyword">as</span> cv<br> <br>img = cv.imread(<span class="hljs-string">&#x27;../images/cat1.png&#x27;</span>)<br> <br>cv.circle(img, (<span class="hljs-number">100</span>, <span class="hljs-number">100</span>), <span class="hljs-number">50</span>, (<span class="hljs-number">255</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>), -<span class="hljs-number">1</span>)<br>cv.imshow(<span class="hljs-string">&#x27;img&#x27;</span>, img)<br>cv.waitKey(<span class="hljs-number">0</span>)<br>cv.destroyAllWindows()<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p class='item-img' data-src='/img/temporate/cv7.png'><img src="/img/temporate/cv7.png"></p>
+<h3 id="6-3-绘制矩形"><a href="#6-3-绘制矩形" class="headerlink" title="6.3 绘制矩形"></a>6.3 绘制矩形</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">cv2.rectangle(img,leftupper,rightdown,color,thickness)<br></code></pre></td></tr></table></figure>
+
+<p>参数：</p>
+<ul>
+<li><p>img：要绘制矩形的图像</p>
+</li>
+<li><p>leftupper、rightdown：矩形的左上角和右下角坐标</p>
+</li>
+<li><p>color：线条的颜色</p>
+</li>
+<li><p>thickness：线条的宽度</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> cv2 <span class="hljs-keyword">as</span> cv<br> <br>img = cv.imread(<span class="hljs-string">&#x27;../images/cat1.png&#x27;</span>)<br> <br>cv.rectangle(img, (<span class="hljs-number">100</span>, <span class="hljs-number">100</span>), (<span class="hljs-number">300</span>, <span class="hljs-number">300</span>), (<span class="hljs-number">0</span>, <span class="hljs-number">255</span>, <span class="hljs-number">0</span>), <span class="hljs-number">2</span>)<br>cv.imshow(<span class="hljs-string">&#x27;img&#x27;</span>, img)<br>cv.waitKey(<span class="hljs-number">0</span>)<br>cv.destroyAllWindows()<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p class='item-img' data-src='/img/temporate/cv8.png'><img src="/img/temporate/cv8.png"></p>
+<h3 id="6-4-绘制文本（向图片中添加文字）"><a href="#6-4-绘制文本（向图片中添加文字）" class="headerlink" title="6.4 绘制文本（向图片中添加文字）"></a>6.4 绘制文本（向图片中添加文字）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">cv2.putText(img,text,station,font,Fontscale,color,thickness,cv2.LINE_AA)<br></code></pre></td></tr></table></figure>
+
+<p>参数：</p>
+<ul>
+<li><p>img：要添加文字的图像</p>
+</li>
+<li><p>text：要写入的文本数据(此处是不能加中文的，会显示问号(?)，matplotlib可以显示中文)</p>
+</li>
+<li><p>station：文本的放置位置</p>
+</li>
+<li><p>font：字体样式</p>
+</li>
+<li><p>Fontscale：字体大小</p>
+</li>
+<li><p>thickness：字体线条宽度</p>
+</li>
+<li><p>cv2.LINE_AA :使用反走样技术绘制文本边框</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> cv2 <span class="hljs-keyword">as</span> cv<br> <br>img = cv.imread(<span class="hljs-string">&#x27;../images/cat1.png&#x27;</span>)<br> <br>cv.putText(img, <span class="hljs-string">&#x27;Hello World&#x27;</span>, (<span class="hljs-number">50</span>, <span class="hljs-number">50</span>), cv.FONT_HERSHEY_SIMPLEX, <span class="hljs-number">1</span>, (<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">255</span>), <span class="hljs-number">2</span>)<br>cv.imshow(<span class="hljs-string">&#x27;Image&#x27;</span>, img)<br>cv.waitKey(<span class="hljs-number">0</span>)<br>cv.destroyAllWindows()<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p class='item-img' data-src='/img/temporate/cv9.png'><img src="/img/temporate/cv9.png"></p>
+<h3 id="6-5-读取视频"><a href="#6-5-读取视频" class="headerlink" title="6.5 读取视频"></a>6.5 读取视频</h3><p><code>cap = cv2.VideoCapture(path)</code></p>
+<ul>
+<li>path : 为0代表从默认摄像头捕获视频流</li>
+</ul>
+<p><code>ret,frame = cap.read()</code></p>
+<ul>
+<li>得到一个布尔值和一帧图像，布尔值表示是否成功读取到帧，如果为False，可能是因为视频结束或读取失败，如果为True，frame则是当前帧的图像数据。</li>
+</ul>
+<p><em>那视频都是一帧一帧的，我要怎么读取呢？来一起看看：</em></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> cv2 <span class="hljs-keyword">as</span> cv<br> <br><span class="hljs-comment"># 本地视频</span><br>cap = cv.VideoCapture(<span class="hljs-string">&#x27;../video/arknights_run.mp4&#x27;</span>)<br> <br><span class="hljs-comment"># 循环获取视频每一帧</span><br><span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:<br>    ret, frame = cap.read()<br>    <span class="hljs-comment"># 考虑视频最后一帧为空，跳出循环</span><br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> ret:<br>        <span class="hljs-keyword">break</span><br> <br>    cv.imshow(<span class="hljs-string">&#x27;frame&#x27;</span>, frame)<br>    <span class="hljs-comment"># 0xFF把键盘敲入的键转换为ASCII码</span><br>    <span class="hljs-keyword">if</span> cv.waitKey(<span class="hljs-number">40</span>) &amp; <span class="hljs-number">0xFF</span> == <span class="hljs-built_in">ord</span>(<span class="hljs-string">&#x27;q&#x27;</span>):<br>        <span class="hljs-keyword">break</span><br> <br>cap.release()<br>cv.destroyAllWindows()<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p class='item-img' data-src='/img/temporate/cv10.png'><img src="/img/temporate/cv10.png"></p>
+<div id="paginator"></div></div><div id="post-footer"><div id="pages"><div class="footer-link" style="width: 50%;text-align:right;border-right:1px #fe2 solid"><a href="/post/15f845cf/">← 下一篇 图像预处理-翻转与仿射变换</a></div><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/post/34301b2a/">DataFrame操作（扩充） 上一篇 →</a></div></div></div></div><div class="bottom-btn"><div><a class="i-top" id="to-top" onClick="scrolls.scrolltop();" title="回到顶部" style="opacity: 0; display: none;">∧ </a><a class="i-index" id="to-index" href="#toc-div" title="文章目录">≡</a><a class="i-color" id="color-mode" onClick="colorMode.change()" title="切换主题"></a><a onclick="BgmControl()"><svg id="bgm-control" viewBox="0 0 30 34" fill="#18d1ff" style="width: 24px; transition: transform .3s;margin-top: 4px"><path d="M25.998 23.422V11.29h3.999v12.132h-3.999zM19.497 6.234h4.001v22.243h-4.001V6.234zM12.998.867h4v32.978h-4V.867zm-6.5 5.367h4.001v22.243H6.498V6.234zm-6.5 5.056h4v12.132h-4V11.29z"></path></svg><audio id="bgm" src="/audio/bgm.mp3" autoplay loop crossorigin="anonymous"> </audio></a></div></div></article><aside><div id="about"><a href="/" id="logo"><img src="https://ak.hypergryph.com/assets/index/images/ak/pc/faction/1.png" alt="Logo" style="margin:0;border-radius:0;"></a><h1 id="Dr"><a href="/">Clocky7</a></h1><div id="description"><p></p></div><div id="social-links"><a class="social" target="_blank" rel="noopener" href="https://github.com/Clocky7"><i class="fab fa-github" alt="GitHub"></i></a></div></div><div id="aside-block"><div id="toc-div"><h1>目录</h1><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80-opencv-python%E7%AE%80%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">一.opencv-python简述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C-%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85"><span class="toc-number">2.</span> <span class="toc-text">二.环境安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">3.</span> <span class="toc-text">三.基本概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B-%E5%9B%BE%E5%83%8F%E5%AD%98%E5%82%A8"><span class="toc-number">4.</span> <span class="toc-text">四.图像存储</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94-%E5%9B%BE%E5%83%8F%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="toc-number">5.</span> <span class="toc-text">五.图像基本操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-%E5%88%9B%E5%BB%BA%E7%AA%97%E4%BD%93-%E7%AA%97%E5%8F%A3"><span class="toc-number">5.1.</span> <span class="toc-text">5.1 创建窗体(窗口)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-%E8%AF%BB%E5%8F%96%E5%9B%BE%E5%83%8F"><span class="toc-number">5.2.</span> <span class="toc-text">5.2 读取图像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-%E5%9B%BE%E5%83%8F%E6%98%BE%E7%A4%BA"><span class="toc-number">5.3.</span> <span class="toc-text">5.3 图像显示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-4-%E4%BF%9D%E5%AD%98%E5%9B%BE%E5%83%8F"><span class="toc-number">5.4.</span> <span class="toc-text">5.4 保存图像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-5-%E5%88%9B%E5%BB%BA%E9%BB%91%E8%89%B2%E5%9B%BE%E5%83%8F"><span class="toc-number">5.5.</span> <span class="toc-text">5.5 创建黑色图像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-6-%E5%9B%BE%E5%83%8F%E8%A3%81%E5%89%AA%EF%BC%88%E5%88%87%E7%89%87%EF%BC%89"><span class="toc-number">5.6.</span> <span class="toc-text">5.6 图像裁剪（切片）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-7-%E8%B0%83%E6%95%B4%E5%A4%A7%E5%B0%8F"><span class="toc-number">5.7.</span> <span class="toc-text">5.7 调整大小</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD-%E5%9B%BE%E5%83%8F%E7%BB%98%E5%88%B6"><span class="toc-number">6.</span> <span class="toc-text">六.图像绘制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-%E7%9B%B4%E7%BA%BF"><span class="toc-number">6.1.</span> <span class="toc-text">6.1 直线</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-%E5%9C%86%E5%BD%A2"><span class="toc-number">6.2.</span> <span class="toc-text">6.2 圆形</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3-%E7%BB%98%E5%88%B6%E7%9F%A9%E5%BD%A2"><span class="toc-number">6.3.</span> <span class="toc-text">6.3 绘制矩形</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-4-%E7%BB%98%E5%88%B6%E6%96%87%E6%9C%AC%EF%BC%88%E5%90%91%E5%9B%BE%E7%89%87%E4%B8%AD%E6%B7%BB%E5%8A%A0%E6%96%87%E5%AD%97%EF%BC%89"><span class="toc-number">6.4.</span> <span class="toc-text">6.4 绘制文本（向图片中添加文字）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-5-%E8%AF%BB%E5%8F%96%E8%A7%86%E9%A2%91"><span class="toc-number">6.5.</span> <span class="toc-text">6.5 读取视频</span></a></li></ol></li></ol></div></div><footer><nobr>构建自 <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr><wbr><nobr> 使用主题 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus/hexo-theme-arknights">Arknights</a></nobr><wbr><nobr> 主题作者 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus">Yue_plus</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas></body></html>

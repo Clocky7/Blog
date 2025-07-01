@@ -1,0 +1,158 @@
+<!DOCTYPE html><html lang="zh-cn" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>图像预处理-形态学变换 | Clocky7's Blog</title><link rel="icon" type="image/x-icon" href="/favicon.ico"><link rel="preload" as="font" crossorigin="anonymous" href="/font/Bender.ttf"><link rel="preload" as="font" crossorigin="anonymous" href="/font/BenderLight.ttf"><link rel="preload" as="font" crossorigin="anonymous" href="/font/JetBrainsMono-Regular.woff2"><link rel="stylesheet" href="/css/arknights.css"><style>@font-face {
+  font-family: Bender;
+  src: local('Bender'), url("/font/Bender.ttf"), url("/font/Bender.otf");
+}
+@font-face {
+  font-family: BenderLight;
+  src: local('BenderLight'), url("/font/BenderLight.ttf");
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}
+</style><script>var config = {"root":"/","search":{"preload":false,"activeHolder":"键入以继续","blurHolder":"搜索","noResult":"无 $0 相关数据"},"code":{"codeInfo":"$0 - $1 行","copy":"复制"}}</script><link type="text/css" rel="stylesheet" href="/lib/encrypt/hbe.style.css"><script src="//unpkg.com/mermaid@10.5.0/dist/mermaid.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+ menuSettings: {
+   zoom: "None"
+ },
+ showMathMenu: false,
+ jax: ["input/TeX","output/CommonHTML"],
+ extensions: ["tex2jax.js"],
+ TeX: {
+   extensions: ["AMSmath.js","AMSsymbols.js"],
+   equationNumbers: {
+     autoNumber: "AMS"
+   }
+ },
+ tex2jax: {
+   inlineMath: [["\\(", "\\)"]],
+   displayMath: [["\\[", "\\]"]]
+ }
+});</script><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lightgallery.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-zoom.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-thumbnail.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/css/all.min.css"><style defer src="article.css"></style><link rel="stylesheet" href="article.css"><script>if (window.localStorage.getItem('theme-mode') === 'light')
+ document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark')
+ document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.woff2") format('woff2');
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}</style><style>:root {
+ --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
+ --light-background: url('/img/bk.jpg');
+ --theme-encrypt-confirm: '确认'
+}</style><script defer src="/js/arknights.js"></script><script defer src="/js/search.js"></script><script defer type="module">import mermaid from '//unpkg.com/mermaid@10.5.0/dist/mermaid.esm.mjs';
+window.mermaid = mermaid;
+code.paintMermaid();
+</script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+  menuSettings: {
+    zoom: "None"
+  },
+  showMathMenu: false,
+  jax: ["input/TeX","output/CommonHTML"],
+  extensions: ["tex2jax.js"],
+  TeX: {
+    extensions: ["AMSmath.js","AMSsymbols.js"],
+    equationNumbers: {
+      autoNumber: "AMS"
+    }
+  },
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]]
+  }
+});
+</script><script async src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script async src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script async src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script async src="/lib/encrypt/hbe.js"></script><script async src="/js/pjax.js"></script><script class="pjax-js">reset= () => {document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js','data-pjax','.busuanzi'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><script class="pjax-js">reset= () => {document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="loading" style="opacity: 0;"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><div class="navBtn"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><nav><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="搜索" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup" tabindex="0"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">主页</span></a></li><li class="navItem"><a class="navBlock" href="/about/"><span class="navItemTitle">于我</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">归档</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>图像预处理-形态学变换</h1><div id="post-info"><span>文章发布时间: <div class="control"><time datetime="2025-06-24T05:53:10.000Z" id="date"> 2025-06-24</time></div></span><br><span>最后更新时间: <div class="control"><time datetime="2025-07-01T06:48:31.102Z" id="updated"> 2025-07-01</time></div></span><br><span>文章总字数: <div class="control">1.1k</div></span><br><span>预计阅读时间: <div class="control">4 分钟</div></span></div></div><hr><div id="post-content"><p>针对<strong>二值化</strong>图像，其有两个输入，一个输出：输入为原图像、核（结构化元素），输出为形态学变换后的图像。基本操作有腐蚀和膨胀。</p>
+<h2 id="一-核"><a href="#一-核" class="headerlink" title="一.核"></a>一.核</h2><p>联想到之前的<strong>卷积核</strong>，也是一种核。</p>
+<p>此时的核就跟卷积核不太一样了，有自己的计算规则，对应元素相乘后不一定求和。</p>
+<p>下面是常见的几种核：</p>
+<p class='item-img' data-src='/img/temporate/cv113.png'><img src="/img/temporate/cv113.png"></p>
+<h2 id="二-腐蚀"><a href="#二-腐蚀" class="headerlink" title="二.腐蚀"></a>二.腐蚀</h2><p>与卷积核一样的移动方式，核中心对应的就是目标元素，然后依次从左往右、从上往下移动。腐蚀操作，取的是核操作后的<strong>最小值</strong>，以达到“变瘦”的效果。</p>
+<p><code>cv2.erode(src, kernel, iterations)</code></p>
+<ul>
+<li><p>src : 输入图像</p>
+</li>
+<li><p>kernel : 核，基本是奇数大小的正方形矩阵</p>
+</li>
+<li><p>iterations : 迭代次数，默认值为1，表示只进行一次腐蚀操作，大于1则再从头开始进行腐蚀。</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 养成好习惯，代码自己敲</span><br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">import</span> cv2 <span class="hljs-keyword">as</span> cv<br> <br><span class="hljs-comment"># 直接灰度化</span><br>img = cv.imread(<span class="hljs-string">&#x27;../images/huofu.png&#x27;</span>, cv.IMREAD_GRAYSCALE)<br> <br><span class="hljs-comment"># 二值化</span><br>ret, th = cv.threshold(img, <span class="hljs-number">127</span>, <span class="hljs-number">255</span>, cv.THRESH_BINARY)<br> <br><span class="hljs-comment"># 进行腐蚀</span><br>kernel = np.ones((<span class="hljs-number">5</span>, <span class="hljs-number">5</span>), np.uint8)<br>eroded = cv.erode(th, kernel, iterations=<span class="hljs-number">1</span>)<br> <br>cv.imshow(<span class="hljs-string">&#x27;binary&#x27;</span>, th)<br>cv.imshow(<span class="hljs-string">&#x27;eroded&#x27;</span>, eroded)<br>cv.waitKey(<span class="hljs-number">0</span>)<br>cv.destroyAllWindows()<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p class='item-img' data-src='/img/temporate/cv114.png'><img src="/img/temporate/cv114.png"></p>
+<h2 id="三-膨胀"><a href="#三-膨胀" class="headerlink" title="三.膨胀"></a>三.膨胀</h2><p>膨胀操作，取的是核操作后的<strong>最大值</strong>，以达到“变胖”的效果。</p>
+<p><code>cv2.dilate(src, kernel, iterations)</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">import</span> cv2 <span class="hljs-keyword">as</span> cv<br> <br><span class="hljs-comment"># 直接灰度化</span><br>img = cv.imread(<span class="hljs-string">&#x27;../images/huofu.png&#x27;</span>, cv.IMREAD_GRAYSCALE)<br> <br><span class="hljs-comment"># 二值化</span><br>ret, th = cv.threshold(img, <span class="hljs-number">127</span>, <span class="hljs-number">255</span>, cv.THRESH_BINARY)<br> <br><span class="hljs-comment"># 进行膨胀</span><br>kernel = np.ones((<span class="hljs-number">5</span>, <span class="hljs-number">5</span>), np.uint8)<br>dilate = cv.dilate(th, kernel, iterations=<span class="hljs-number">1</span>)<br> <br>cv.imshow(<span class="hljs-string">&#x27;binary&#x27;</span>, th)<br>cv.imshow(<span class="hljs-string">&#x27;dilate&#x27;</span>, dilate)<br>cv.waitKey(<span class="hljs-number">0</span>)<br>cv.destroyAllWindows()<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p class='item-img' data-src='/img/temporate/cv115.png'><img src="/img/temporate/cv115.png"></p>
+<h2 id="四-开运算（cv2-MORPH-OPEN）"><a href="#四-开运算（cv2-MORPH-OPEN）" class="headerlink" title="四.开运算（cv2.MORPH_OPEN）"></a>四.开运算（cv2.MORPH_OPEN）</h2><p>开运算是<strong>先腐蚀后膨胀</strong>，其作用是消除噪点，去除小的干扰块，而不影响原来的图像</p>
+<p>它和下面的运算用的都是同一种函数，只不过传入的方法不一样。</p>
+<p><code>cv.morphologyEx(src, method, kernel)</code></p>
+<ul>
+<li><p>src : 输入图像</p>
+</li>
+<li><p>method : 运算的方法</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">import</span> cv2 <span class="hljs-keyword">as</span> cv<br> <br><span class="hljs-comment"># 直接灰度化</span><br>img = cv.imread(<span class="hljs-string">&#x27;../images/huofu.png&#x27;</span>, cv.IMREAD_GRAYSCALE)<br> <br><span class="hljs-comment"># 二值化</span><br>ret, th = cv.threshold(img, <span class="hljs-number">127</span>, <span class="hljs-number">255</span>, cv.THRESH_BINARY)<br> <br><span class="hljs-comment"># 开运算</span><br>kernel = np.ones((<span class="hljs-number">5</span>, <span class="hljs-number">5</span>), np.uint8)<br>opening = cv.morphologyEx(th, cv.MORPH_OPEN, kernel)<br> <br>cv.imshow(<span class="hljs-string">&#x27;binary&#x27;</span>, th)<br>cv.imshow(<span class="hljs-string">&#x27;open&#x27;</span>, opening)<br>cv.waitKey(<span class="hljs-number">0</span>)<br>cv.destroyAllWindows()<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p class='item-img' data-src='/img/temporate/cv116.png'><img src="/img/temporate/cv116.png"></p>
+<h2 id="五-闭运算（cv2-MORPH-CLOSE）"><a href="#五-闭运算（cv2-MORPH-CLOSE）" class="headerlink" title="五.闭运算（cv2.MORPH_CLOSE）"></a>五.闭运算（cv2.MORPH_CLOSE）</h2><p><strong>先膨胀后腐蚀</strong>，作用是消除“闭合”物体里面的孔洞。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">import</span> cv2 <span class="hljs-keyword">as</span> cv<br> <br><span class="hljs-comment"># 直接灰度化</span><br>img = cv.imread(<span class="hljs-string">&#x27;../images/huofu.png&#x27;</span>, cv.IMREAD_GRAYSCALE)<br> <br><span class="hljs-comment"># 二值化</span><br>ret, th = cv.threshold(img, <span class="hljs-number">127</span>, <span class="hljs-number">255</span>, cv.THRESH_BINARY_INV)<br> <br><span class="hljs-comment"># 闭运算</span><br>kernel = np.ones((<span class="hljs-number">5</span>, <span class="hljs-number">5</span>), np.uint8)<br>closing = cv.morphologyEx(th, cv.MORPH_CLOSE, kernel)<br> <br>cv.imshow(<span class="hljs-string">&#x27;binary&#x27;</span>, th)<br>cv.imshow(<span class="hljs-string">&#x27;close&#x27;</span>, closing)<br>cv.waitKey(<span class="hljs-number">0</span>)<br>cv.destroyAllWindows()<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p class='item-img' data-src='/img/temporate/cv117.png'><img src="/img/temporate/cv117.png"></p>
+<h2 id="六-顶帽运算（cv2-MORPH-TOPHAT）"><a href="#六-顶帽运算（cv2-MORPH-TOPHAT）" class="headerlink" title="六.顶帽运算（cv2.MORPH_TOPHAT）"></a>六.顶帽运算（cv2.MORPH_TOPHAT）</h2><p>原图像与<strong>开运算</strong>的结果图之差，得到白色噪点。</p>
+<p>用来<strong>分离比邻近点亮一些的斑块</strong>。当一幅图像具有大幅的背景的时候，而微小物品比较有规律的情况下，可以使用礼帽运算进行背景提取</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">import</span> cv2 <span class="hljs-keyword">as</span> cv<br> <br><span class="hljs-comment"># 直接灰度化</span><br>img = cv.imread(<span class="hljs-string">&#x27;../images/huofu.png&#x27;</span>, cv.IMREAD_GRAYSCALE)<br> <br><span class="hljs-comment"># 二值化</span><br>ret, th = cv.threshold(img, <span class="hljs-number">127</span>, <span class="hljs-number">255</span>, cv.THRESH_BINARY)<br> <br><span class="hljs-comment"># 顶帽运算</span><br>kernel = np.ones((<span class="hljs-number">5</span>, <span class="hljs-number">5</span>), np.uint8)<br>top = cv.morphologyEx(th, cv.MORPH_TOPHAT, kernel)<br> <br>cv.imshow(<span class="hljs-string">&#x27;binary&#x27;</span>, th)<br>cv.imshow(<span class="hljs-string">&#x27;top&#x27;</span>, top)<br>cv.waitKey(<span class="hljs-number">0</span>)<br>cv.destroyAllWindows()<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p class='item-img' data-src='/img/temporate/cv118.png'><img src="/img/temporate/cv118.png"></p>
+<h2 id="七-黑帽运算"><a href="#七-黑帽运算" class="headerlink" title="七.黑帽运算"></a>七.黑帽运算</h2><p>原图像与<strong>闭运算</strong>的结果图之差，得到黑色噪点。</p>
+<p>用来<strong>分离比邻近点暗一些</strong>的斑块。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">import</span> cv2 <span class="hljs-keyword">as</span> cv<br> <br><span class="hljs-comment"># 直接灰度化</span><br>img = cv.imread(<span class="hljs-string">&#x27;../images/huofu.png&#x27;</span>, cv.IMREAD_GRAYSCALE)<br> <br><span class="hljs-comment"># 二值化</span><br>ret, th = cv.threshold(img, <span class="hljs-number">127</span>, <span class="hljs-number">255</span>, cv.THRESH_BINARY_INV)<br> <br><span class="hljs-comment"># 黑帽运算</span><br>kernel = np.ones((<span class="hljs-number">5</span>, <span class="hljs-number">5</span>), np.uint8)<br>black = cv.morphologyEx(th, cv.MORPH_BLACKHAT, kernel)<br> <br>cv.imshow(<span class="hljs-string">&#x27;binary&#x27;</span>, th)<br>cv.imshow(<span class="hljs-string">&#x27;black&#x27;</span>, black)<br>cv.waitKey(<span class="hljs-number">0</span>)<br>cv.destroyAllWindows()<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p class='item-img' data-src='/img/temporate/cv119.png'><img src="/img/temporate/cv119.png"></p>
+<h2 id="八-形态学梯度"><a href="#八-形态学梯度" class="headerlink" title="八.形态学梯度"></a>八.形态学梯度</h2><p>通过比较原图像与<strong>膨胀图</strong>和<strong>腐蚀图</strong>之间的差异来突出<strong>图像边缘特征</strong>。对于图像中的每个像素点，其形态学梯度值是该像素点在<strong>膨胀后</strong>的图像值与其在<strong>腐蚀后</strong>的图像值之差</p>
+<p>通常能够强化图像的边缘信息，并且对噪声有一定的抑制作用。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">import</span> cv2 <span class="hljs-keyword">as</span> cv<br> <br><span class="hljs-comment"># 直接灰度化</span><br>img = cv.imread(<span class="hljs-string">&#x27;../images/huofu.png&#x27;</span>, cv.IMREAD_GRAYSCALE)<br> <br><span class="hljs-comment"># 二值化</span><br>ret, th = cv.threshold(img, <span class="hljs-number">127</span>, <span class="hljs-number">255</span>, cv.THRESH_BINARY)<br> <br><span class="hljs-comment"># 形态学梯度</span><br>kernel = np.ones((<span class="hljs-number">5</span>, <span class="hljs-number">5</span>), np.uint8)<br>xtx = cv.morphologyEx(th, cv.MORPH_GRADIENT, kernel)<br> <br>cv.imshow(<span class="hljs-string">&#x27;binary&#x27;</span>, th)<br>cv.imshow(<span class="hljs-string">&#x27;xtx&#x27;</span>, xtx)<br>cv.waitKey(<span class="hljs-number">0</span>)<br>cv.destroyAllWindows()<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p class='item-img' data-src='/img/temporate/cv120.png'><img src="/img/temporate/cv120.png"></p>
+<div id="paginator"></div></div><div id="post-footer"><div id="pages"><div class="footer-link" style="width: 50%;text-align:right;border-right:1px #fe2 solid"><a href="/post/941f5a8/">← 下一篇 机器学习-简述与数据集加载</a></div><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/post/3d0242e2/">图像预处理-图像亮度变换 上一篇 →</a></div></div></div></div><div class="bottom-btn"><div><a class="i-top" id="to-top" onClick="scrolls.scrolltop();" title="回到顶部" style="opacity: 0; display: none;">∧ </a><a class="i-index" id="to-index" href="#toc-div" title="文章目录">≡</a><a class="i-color" id="color-mode" onClick="colorMode.change()" title="切换主题"></a><a onclick="BgmControl()"><svg id="bgm-control" viewBox="0 0 30 34" fill="#18d1ff" style="width: 24px; transition: transform .3s;margin-top: 4px"><path d="M25.998 23.422V11.29h3.999v12.132h-3.999zM19.497 6.234h4.001v22.243h-4.001V6.234zM12.998.867h4v32.978h-4V.867zm-6.5 5.367h4.001v22.243H6.498V6.234zm-6.5 5.056h4v12.132h-4V11.29z"></path></svg><audio id="bgm" src="/audio/bgm.mp3" autoplay loop crossorigin="anonymous"> </audio></a></div></div></article><aside><div id="about"><a href="/" id="logo"><img src="https://ak.hypergryph.com/assets/index/images/ak/pc/faction/1.png" alt="Logo" style="margin:0;border-radius:0;"></a><h1 id="Dr"><a href="/">Clocky7</a></h1><div id="description"><p></p></div><div id="social-links"><a class="social" target="_blank" rel="noopener" href="https://github.com/Clocky7"><i class="fab fa-github" alt="GitHub"></i></a></div></div><div id="aside-block"><div id="toc-div"><h1>目录</h1><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80-%E6%A0%B8"><span class="toc-number">1.</span> <span class="toc-text">一.核</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C-%E8%85%90%E8%9A%80"><span class="toc-number">2.</span> <span class="toc-text">二.腐蚀</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89-%E8%86%A8%E8%83%80"><span class="toc-number">3.</span> <span class="toc-text">三.膨胀</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B-%E5%BC%80%E8%BF%90%E7%AE%97%EF%BC%88cv2-MORPH-OPEN%EF%BC%89"><span class="toc-number">4.</span> <span class="toc-text">四.开运算（cv2.MORPH_OPEN）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94-%E9%97%AD%E8%BF%90%E7%AE%97%EF%BC%88cv2-MORPH-CLOSE%EF%BC%89"><span class="toc-number">5.</span> <span class="toc-text">五.闭运算（cv2.MORPH_CLOSE）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD-%E9%A1%B6%E5%B8%BD%E8%BF%90%E7%AE%97%EF%BC%88cv2-MORPH-TOPHAT%EF%BC%89"><span class="toc-number">6.</span> <span class="toc-text">六.顶帽运算（cv2.MORPH_TOPHAT）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%83-%E9%BB%91%E5%B8%BD%E8%BF%90%E7%AE%97"><span class="toc-number">7.</span> <span class="toc-text">七.黑帽运算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AB-%E5%BD%A2%E6%80%81%E5%AD%A6%E6%A2%AF%E5%BA%A6"><span class="toc-number">8.</span> <span class="toc-text">八.形态学梯度</span></a></li></ol></div></div><footer><nobr>构建自 <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr><wbr><nobr> 使用主题 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus/hexo-theme-arknights">Arknights</a></nobr><wbr><nobr> 主题作者 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus">Yue_plus</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas></body></html>

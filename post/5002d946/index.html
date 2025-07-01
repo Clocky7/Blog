@@ -1,0 +1,149 @@
+<!DOCTYPE html><html lang="zh-cn" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>git的进阶 | Clocky7's Blog</title><link rel="icon" type="image/x-icon" href="/favicon.ico"><link rel="preload" as="font" crossorigin="anonymous" href="/font/Bender.ttf"><link rel="preload" as="font" crossorigin="anonymous" href="/font/BenderLight.ttf"><link rel="preload" as="font" crossorigin="anonymous" href="/font/JetBrainsMono-Regular.woff2"><link rel="stylesheet" href="/css/arknights.css"><style>@font-face {
+  font-family: Bender;
+  src: local('Bender'), url("/font/Bender.ttf"), url("/font/Bender.otf");
+}
+@font-face {
+  font-family: BenderLight;
+  src: local('BenderLight'), url("/font/BenderLight.ttf");
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}
+</style><script>var config = {"root":"/","search":{"preload":false,"activeHolder":"键入以继续","blurHolder":"搜索","noResult":"无 $0 相关数据"},"code":{"codeInfo":"$0 - $1 行","copy":"复制"}}</script><link type="text/css" rel="stylesheet" href="/lib/encrypt/hbe.style.css"><script src="//unpkg.com/mermaid@10.5.0/dist/mermaid.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+ menuSettings: {
+   zoom: "None"
+ },
+ showMathMenu: false,
+ jax: ["input/TeX","output/CommonHTML"],
+ extensions: ["tex2jax.js"],
+ TeX: {
+   extensions: ["AMSmath.js","AMSsymbols.js"],
+   equationNumbers: {
+     autoNumber: "AMS"
+   }
+ },
+ tex2jax: {
+   inlineMath: [["\\(", "\\)"]],
+   displayMath: [["\\[", "\\]"]]
+ }
+});</script><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lightgallery.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-zoom.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-thumbnail.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/css/all.min.css"><style defer src="article.css"></style><link rel="stylesheet" href="article.css"><script>if (window.localStorage.getItem('theme-mode') === 'light')
+ document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark')
+ document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.woff2") format('woff2');
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}</style><style>:root {
+ --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
+ --light-background: url('/img/bk.jpg');
+ --theme-encrypt-confirm: '确认'
+}</style><script defer src="/js/arknights.js"></script><script defer src="/js/search.js"></script><script defer type="module">import mermaid from '//unpkg.com/mermaid@10.5.0/dist/mermaid.esm.mjs';
+window.mermaid = mermaid;
+code.paintMermaid();
+</script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+  menuSettings: {
+    zoom: "None"
+  },
+  showMathMenu: false,
+  jax: ["input/TeX","output/CommonHTML"],
+  extensions: ["tex2jax.js"],
+  TeX: {
+    extensions: ["AMSmath.js","AMSsymbols.js"],
+    equationNumbers: {
+      autoNumber: "AMS"
+    }
+  },
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]]
+  }
+});
+</script><script async src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script async src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script async src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script async src="/lib/encrypt/hbe.js"></script><script async src="/js/pjax.js"></script><script class="pjax-js">reset= () => {document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js','data-pjax','.busuanzi'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><script class="pjax-js">reset= () => {document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="loading" style="opacity: 0;"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><div class="navBtn"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><nav><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="搜索" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup" tabindex="0"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">主页</span></a></li><li class="navItem"><a class="navBlock" href="/about/"><span class="navItemTitle">于我</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">归档</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>git的进阶</h1><div id="post-info"><span>文章发布时间: <div class="control"><time datetime="2025-06-24T05:43:40.000Z" id="date"> 2025-06-24</time></div></span><br><span>最后更新时间: <div class="control"><time datetime="2025-06-30T01:51:07.240Z" id="updated"> 2025-06-30</time></div></span><br><span>文章总字数: <div class="control">1.2k</div></span><br><span>预计阅读时间: <div class="control">4 分钟</div></span></div></div><hr><div id="post-content"><h2 id="一-协作冲突"><a href="#一-协作冲突" class="headerlink" title="一.协作冲突"></a>一.协作冲突</h2><p>&emsp;&emsp;举个简单的例子，公司里两个人(A,B)同一天上班，都拉取了远程仓库数据。然后A做完了所有的工作，进行了x文件的修改并提交至远程仓库。而B在做自己工作的时候不小心或者需要修改x文件，B认为A没有操作x文件直接push没有问题。</p>
+<p>但是程序会报错，提醒B将远程仓库的内容pull，pull后x文件包含了A和B的修改，需要两个人联系如何整合代码，整合后再push进远程仓库。</p>
+<p>步骤就是：push 失败 — pull — 整合代码 — push</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs plaintext"># git给出的提示<br> <br>print(&quot;hello&quot;)<br>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD<br>print(&quot;A的修改&quot;)<br>= = = = =<br>print(&quot;B的修改&quot;)<br>&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; # 一大串字符<br></code></pre></td></tr></table></figure>
+
+<p>上面 <code>HEAD</code> 后的就是起冲突的部分，<code>= = =</code> 前面的是第一个人的修改，后面的是第二个人的修改，只需要整合这两部分的代码就好。</p>
+<h2 id="二-git对仓库分支的操作"><a href="#二-git对仓库分支的操作" class="headerlink" title="二.git对仓库分支的操作"></a>二.git对仓库分支的操作</h2><p>这里讲的是本地创建分支并提交到远程仓库，实际上在远程仓库上创建再下载到本地也是可以的:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">还是一样的配方：open git bash here<br></code></pre></td></tr></table></figure>
+
+<h3 id="2-1-查看分支"><a href="#2-1-查看分支" class="headerlink" title="2.1 查看分支"></a>2.1 查看分支</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git branch <br></code></pre></td></tr></table></figure>
+
+<p>你会看到默认分支即主分支叫 <strong>master</strong> ，后续创建的所有分支都可以通过这个命令查看。</p>
+<h3 id="2-2-创建分支"><a href="#2-2-创建分支" class="headerlink" title="2.2 创建分支"></a>2.2 创建分支</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git branch ‘分支名’<br></code></pre></td></tr></table></figure>
+
+<h3 id="2-3-进入分支"><a href="#2-3-进入分支" class="headerlink" title="2.3 进入分支"></a>2.3 进入分支</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git checkout <span class="hljs-string">&#x27;分支名&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<p>可以切换到你所需要的分支进行编写代码，一般一个分支做一个任务的功能，然后分别提交分支到远程仓库。所有上传到远程的分支一般由项目经理下载到本地并将所有分支合并到主分支再同步。</p>
+<p>同时:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git checkout -b <span class="hljs-string">&#x27;分支名&#x27;</span> <br></code></pre></td></tr></table></figure>
+
+<p>会寻找分支若没有就创建再进入该分支。<br>（<em><strong>注意：此时git pull 或者clone只能拉下主分支的东西，除非分支合并到主分支并上传到远程仓库</strong></em>）</p>
+<h3 id="2-4-删除分支"><a href="#2-4-删除分支" class="headerlink" title="2.4 删除分支"></a>2.4 删除分支</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git branch -d ‘分支名’<br></code></pre></td></tr></table></figure>
+
+<p>必须先退出当前指令所在的分支,否则删除不了。</p>
+<h3 id="2-5-提交分支"><a href="#2-5-提交分支" class="headerlink" title="2.5 提交分支"></a>2.5 提交分支</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git push origin ‘分支名’<br></code></pre></td></tr></table></figure>
+
+<p> 执行完本地仓库的添加后，这个指令会将这个分支的内容传进远程仓库，且所有内容都在这个分支中，<code>master</code>分支是没有的。</p>
+<h3 id="2-6-合并分支"><a href="#2-6-合并分支" class="headerlink" title="2.6 合并分支"></a>2.6 合并分支</h3><p> 首先回到主分支:</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git checkout  master<br></code></pre></td></tr></table></figure>
+
+<p>然后:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git merge <span class="hljs-string">&#x27;分支名&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<p>就会将分支合并到主分支中，经过项目经理审查后没有问题就push进远程仓库。</p>
+<p><em><strong>提示：其实一般写代码都是在vscode等代码编辑器进行的，里面的操作更简单，不需要这些指令，不过需要自行熟悉。但请记住，在编程软件仓库源代码选项中，慎用键盘，按到control+z会直接回退版本，而且找不到。</strong></em></p>
+<h2 id="三-版本回退（慎用）"><a href="#三-版本回退（慎用）" class="headerlink" title="三.版本回退（慎用）"></a>三.版本回退（慎用）</h2><p>&emsp;&emsp;这种情况一般出现在一个时间段内编写的程序有极大的问题才会使用，去找到上一个时间段或者其他以前的时间段的版本，然后回退。因为回退版本是很大的事，就好像花了很多资源培养一个二游角色，最后回退直接清空进度。</p>
+<h3 id="3-1-查看往期版本"><a href="#3-1-查看往期版本" class="headerlink" title="3.1 查看往期版本"></a>3.1 查看往期版本</h3><p>两种指令可以查看，显示效果不一样,主要是为了得到每个版本的id号:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">log</span><br><br>git <span class="hljs-built_in">log</span> --pretty=oneline<br></code></pre></td></tr></table></figure>
+
+<p>下面这个显示的更简单。其都是根据你的commit内容来查找版本。</p>
+<h3 id="3-2-回退"><a href="#3-2-回退" class="headerlink" title="3.2 回退"></a>3.2 回退</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git reset --hard  ‘得到的<span class="hljs-built_in">id</span>号’<br></code></pre></td></tr></table></figure>
+
+<p>就可以回退到自定义的版本了。</p>
+<h3 id="3-3-回到现版本"><a href="#3-3-回到现版本" class="headerlink" title="3.3 回到现版本"></a>3.3 回到现版本</h3><p>那我要是找半天还不如在现在的版本上修改呢？</p>
+<p>查看历史操作,然后得到对应所有版本的id:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git reflog<br></code></pre></td></tr></table></figure>
+
+<p>回退到你想去的版本:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git reset --hard  ‘上一步得到的<span class="hljs-built_in">id</span>号’<br></code></pre></td></tr></table></figure>
+
+<h2 id="四-git忽略文件"><a href="#四-git忽略文件" class="headerlink" title="四.git忽略文件"></a>四.git忽略文件</h2><p>本地中会需要各种第三方库或数据，上传到远程仓库会占用容量，只需要列一份清单告知他人运行这段程序需要下载一些东西，这就是忽略文件的意义：会不上传某些数据文件。</p>
+<p>在你的仓库文件夹中创建这个文件 <code>.gitignore</code> ,其实很好记就<code>.git + ignore</code>，在其中编写数据的路径就可以不让这些数据上传，比如 <code>/test/1.png</code> 、<code>*.jpg</code>(所有这类文件都忽略)、<code>/test/</code>。 </p>
+<div id="paginator"></div></div><div id="post-footer"><div id="pages"><div class="footer-link" style="width: 50%;text-align:right;border-right:1px #fe2 solid"><a href="/post/164cf3e1/">← 下一篇 Numpy基础</a></div><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/post/6a6ec481/">git的入门 上一篇 →</a></div></div></div></div><div class="bottom-btn"><div><a class="i-top" id="to-top" onClick="scrolls.scrolltop();" title="回到顶部" style="opacity: 0; display: none;">∧ </a><a class="i-index" id="to-index" href="#toc-div" title="文章目录">≡</a><a class="i-color" id="color-mode" onClick="colorMode.change()" title="切换主题"></a><a onclick="BgmControl()"><svg id="bgm-control" viewBox="0 0 30 34" fill="#18d1ff" style="width: 24px; transition: transform .3s;margin-top: 4px"><path d="M25.998 23.422V11.29h3.999v12.132h-3.999zM19.497 6.234h4.001v22.243h-4.001V6.234zM12.998.867h4v32.978h-4V.867zm-6.5 5.367h4.001v22.243H6.498V6.234zm-6.5 5.056h4v12.132h-4V11.29z"></path></svg><audio id="bgm" src="/audio/bgm.mp3" autoplay loop crossorigin="anonymous"> </audio></a></div></div></article><aside><div id="about"><a href="/" id="logo"><img src="https://ak.hypergryph.com/assets/index/images/ak/pc/faction/1.png" alt="Logo" style="margin:0;border-radius:0;"></a><h1 id="Dr"><a href="/">Clocky7</a></h1><div id="description"><p></p></div><div id="social-links"><a class="social" target="_blank" rel="noopener" href="https://github.com/Clocky7"><i class="fab fa-github" alt="GitHub"></i></a></div></div><div id="aside-block"><div id="toc-div"><h1>目录</h1><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80-%E5%8D%8F%E4%BD%9C%E5%86%B2%E7%AA%81"><span class="toc-number">1.</span> <span class="toc-text">一.协作冲突</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C-git%E5%AF%B9%E4%BB%93%E5%BA%93%E5%88%86%E6%94%AF%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="toc-number">2.</span> <span class="toc-text">二.git对仓库分支的操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E6%9F%A5%E7%9C%8B%E5%88%86%E6%94%AF"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 查看分支</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E5%88%9B%E5%BB%BA%E5%88%86%E6%94%AF"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 创建分支</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E8%BF%9B%E5%85%A5%E5%88%86%E6%94%AF"><span class="toc-number">2.3.</span> <span class="toc-text">2.3 进入分支</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-%E5%88%A0%E9%99%A4%E5%88%86%E6%94%AF"><span class="toc-number">2.4.</span> <span class="toc-text">2.4 删除分支</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-%E6%8F%90%E4%BA%A4%E5%88%86%E6%94%AF"><span class="toc-number">2.5.</span> <span class="toc-text">2.5 提交分支</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-6-%E5%90%88%E5%B9%B6%E5%88%86%E6%94%AF"><span class="toc-number">2.6.</span> <span class="toc-text">2.6 合并分支</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89-%E7%89%88%E6%9C%AC%E5%9B%9E%E9%80%80%EF%BC%88%E6%85%8E%E7%94%A8%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">三.版本回退（慎用）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E6%9F%A5%E7%9C%8B%E5%BE%80%E6%9C%9F%E7%89%88%E6%9C%AC"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 查看往期版本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E5%9B%9E%E9%80%80"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 回退</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-%E5%9B%9E%E5%88%B0%E7%8E%B0%E7%89%88%E6%9C%AC"><span class="toc-number">3.3.</span> <span class="toc-text">3.3 回到现版本</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B-git%E5%BF%BD%E7%95%A5%E6%96%87%E4%BB%B6"><span class="toc-number">4.</span> <span class="toc-text">四.git忽略文件</span></a></li></ol></div></div><footer><nobr>构建自 <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr><wbr><nobr> 使用主题 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus/hexo-theme-arknights">Arknights</a></nobr><wbr><nobr> 主题作者 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus">Yue_plus</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas></body></html>

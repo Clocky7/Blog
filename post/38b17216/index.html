@@ -1,0 +1,164 @@
+<!DOCTYPE html><html lang="zh-cn" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>机器学习-k-means聚类算法 | Clocky7's Blog</title><link rel="icon" type="image/x-icon" href="/favicon.ico"><link rel="preload" as="font" crossorigin="anonymous" href="/font/Bender.ttf"><link rel="preload" as="font" crossorigin="anonymous" href="/font/BenderLight.ttf"><link rel="preload" as="font" crossorigin="anonymous" href="/font/JetBrainsMono-Regular.woff2"><link rel="stylesheet" href="/css/arknights.css"><style>@font-face {
+  font-family: Bender;
+  src: local('Bender'), url("/font/Bender.ttf"), url("/font/Bender.otf");
+}
+@font-face {
+  font-family: BenderLight;
+  src: local('BenderLight'), url("/font/BenderLight.ttf");
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}
+</style><script>var config = {"root":"/","search":{"preload":false,"activeHolder":"键入以继续","blurHolder":"搜索","noResult":"无 $0 相关数据"},"code":{"codeInfo":"$0 - $1 行","copy":"复制"}}</script><link type="text/css" rel="stylesheet" href="/lib/encrypt/hbe.style.css"><script src="//unpkg.com/mermaid@10.5.0/dist/mermaid.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+ menuSettings: {
+   zoom: "None"
+ },
+ showMathMenu: false,
+ jax: ["input/TeX","output/CommonHTML"],
+ extensions: ["tex2jax.js"],
+ TeX: {
+   extensions: ["AMSmath.js","AMSsymbols.js"],
+   equationNumbers: {
+     autoNumber: "AMS"
+   }
+ },
+ tex2jax: {
+   inlineMath: [["\\(", "\\)"]],
+   displayMath: [["\\[", "\\]"]]
+ }
+});</script><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lightgallery.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-zoom.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-thumbnail.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/css/all.min.css"><style defer src="article.css"></style><link rel="stylesheet" href="article.css"><script>if (window.localStorage.getItem('theme-mode') === 'light')
+ document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark')
+ document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.woff2") format('woff2');
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}</style><style>:root {
+ --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
+ --light-background: url('/img/bk.jpg');
+ --theme-encrypt-confirm: '确认'
+}</style><script defer src="/js/arknights.js"></script><script defer src="/js/search.js"></script><script defer type="module">import mermaid from '//unpkg.com/mermaid@10.5.0/dist/mermaid.esm.mjs';
+window.mermaid = mermaid;
+code.paintMermaid();
+</script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+  menuSettings: {
+    zoom: "None"
+  },
+  showMathMenu: false,
+  jax: ["input/TeX","output/CommonHTML"],
+  extensions: ["tex2jax.js"],
+  TeX: {
+    extensions: ["AMSmath.js","AMSsymbols.js"],
+    equationNumbers: {
+      autoNumber: "AMS"
+    }
+  },
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]]
+  }
+});
+</script><script async src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script async src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script async src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script async src="/lib/encrypt/hbe.js"></script><script async src="/js/pjax.js"></script><script class="pjax-js">reset= () => {document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js','data-pjax','.busuanzi'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><script class="pjax-js">reset= () => {document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="loading" style="opacity: 0;"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><div class="navBtn"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><nav><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="搜索" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup" tabindex="0"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">主页</span></a></li><li class="navItem"><a class="navBlock" href="/about/"><span class="navItemTitle">于我</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">归档</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>机器学习-k-means聚类算法</h1><div id="post-info"><span>文章发布时间: <div class="control"><time datetime="2025-06-24T06:02:20.000Z" id="date"> 2025-06-24</time></div></span><br><span>最后更新时间: <div class="control"><time datetime="2025-07-01T10:28:36.238Z" id="updated"> 2025-07-01</time></div></span><br><span>文章总字数: <div class="control">856</div></span><br><span>预计阅读时间: <div class="control">3 分钟</div></span></div></div><hr><div id="post-content"><h2 id="无监督学习-k-means聚类算法"><a href="#无监督学习-k-means聚类算法" class="headerlink" title="无监督学习-k-means聚类算法"></a>无监督学习-k-means聚类算法</h2><h2 id="一-特点"><a href="#一-特点" class="headerlink" title="一.特点"></a>一.特点</h2><ul>
+<li><p>数据集中，拥有数据特征，但是没有具体的标签</p>
+</li>
+<li><p>将数据划分成有意义或有用的簇</p>
+</li>
+<li><p>聚类算法追求“簇内差异小，簇外差异大”。而这个 “差异”便是通过样本点到其簇质心的距离来衡量</p>
+</li>
+</ul>
+<h2 id="二-k-means算法"><a href="#二-k-means算法" class="headerlink" title="二.k-means算法"></a>二.k-means算法</h2><h3 id="2-1-算法介绍"><a href="#2-1-算法介绍" class="headerlink" title="2.1 算法介绍"></a>2.1 算法介绍</h3><p>该算法的目标是将数据集中的样本划分为K个簇，使得簇内的样本彼此之间的差异最小化。这种差异通常通过簇内所有点到该簇中心点的距离平方和（欧式距离）来衡量。</p>
+<p>相关概念：</p>
+<ul>
+<li><p>簇：<code>Kmeans</code>算法将一组<code>N</code>个样本的特征矩阵<code>X</code>划分为<code>K</code>个无交集的簇，直观上看来簇是一个又一个聚集一起的数据，在一个簇中的数据就认为是同一类，簇就是聚类的结果表现，其中簇的个数是一个超参数</p>
+</li>
+<li><p>质心：每个簇中所有数据的均值<code>u</code>，通常被称为这个簇的<code>&quot;质心&quot;</code>，在二维平面中，簇的质心横坐标是横坐标的均值，质心的纵坐标是纵坐标的均值</p>
+</li>
+</ul>
+<h3 id="2-2-算法步骤"><a href="#2-2-算法步骤" class="headerlink" title="2.2 算法步骤"></a>2.2 算法步骤</h3><ul>
+<li><p>随机抽取<code>k</code>个样本作为最初的质心，这可以通过随机选取数据集中的K个样本或用一些启发式方法（比如选择最远的两点）</p>
+</li>
+<li><p>计算每个样本点与<code>k</code>个质心的距离（通常是欧氏距离），将样本点分配到最近的一个质心</p>
+</li>
+<li><p>每次聚类算法完成一次后，重新计算质心的位置，重复聚类过程</p>
+</li>
+<li><p>当质心的位置不再发生变化或者迭代结束，聚类完成</p>
+</li>
+</ul>
+<h2 id="API"><a href="#API" class="headerlink" title="API"></a>API</h2><p><code>sklearn.cluster.KMeans</code></p>
+<p>参数：</p>
+<ul>
+<li><p><code>n_clusters</code>: 簇的数量，默认为8。</p>
+</li>
+<li><p><code>init</code>: {‘k-means++’, ‘random’}, callable 或传入的数组，默认为’k-means++’。’k-means++’使用一种启发式方法来选择初始质心，以加快收敛速度；’random’则随机选择初始质心</p>
+</li>
+<li><p><code>n_init</code>: 运行算法的次数（epoch），每次使用不同的质心初始化。默认为10。</p>
+</li>
+<li><p><code>max_iter</code>: 单次运行的最大迭代次数，默认为300</p>
+</li>
+</ul>
+<p>属性：</p>
+<ul>
+<li><p><code>cluster_centers_</code>：存储每个聚类的中心点坐标，一个数组</p>
+</li>
+<li><p><code>labels_</code>：存储每个数据点的聚类标签,一个数组</p>
+</li>
+</ul>
+<p><code>make_blobs</code></p>
+<p>是 Sklearn 库中 sklearn.datasets 模块提供的一个函数，用于生成一组二维或高维的数据簇。这些数据簇通常用于聚类算法的测试。</p>
+<p>参数：</p>
+<ul>
+<li><p>n_samples 指定生成样本的数量</p>
+</li>
+<li><p>centers 定义数据集中簇的中心数量,即一个簇有几个中心</p>
+</li>
+<li><p>random_state 随机数种子</p>
+</li>
+</ul>
+<p>返回值：（元组）</p>
+<ul>
+<li><p>X：一个形状为 (n_samples, n_features) 的数组，表示生成的样本数据。每个样本都是一行，特征列为样本的各个维度坐标</p>
+</li>
+<li><p>y：一个形状为 (n_samples,) 的数组，表示每个样本所属的簇标签（中心索引）。如果不需要这个标签，可以像示例中那样用 _ 忽略它</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> sklearn.cluster <span class="hljs-keyword">import</span> KMeans<br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br>data=np.random.randint(<span class="hljs-number">0</span>,<span class="hljs-number">1000</span>,(<span class="hljs-number">1000</span>,<span class="hljs-number">2</span>))<br><span class="hljs-comment"># print(data)</span><br><span class="hljs-comment"># plt.scatter(data[:,0],data[:,1])</span><br><span class="hljs-comment"># plt.show()</span><br><span class="hljs-comment"># model.fit(data)</span><br>n_class=<span class="hljs-number">7</span><br>model=KMeans(n_class)<br>model.fit(data)<br><span class="hljs-comment"># print(model.cluster_centers_)</span><br><span class="hljs-comment"># print(model.labels_)</span><br><span class="hljs-comment"># print(model.labels_==0)</span><br><span class="hljs-comment"># print(data[model.labels_==0])</span><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n_class):<br>    point=data[model.labels_==i]<br>    plt.scatter(point[:,<span class="hljs-number">0</span>],point[:,<span class="hljs-number">1</span>])<br><span class="hljs-comment"># plt.scatter(model.cluster_centers_[:,0],model.cluster_centers_[:,1])</span><br>plt.show()<br></code></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<p class='item-img' data-src='/img/temporate/ml43.png'><img src="/img/temporate/ml43.png"></p>
+<div id="paginator"></div></div><div id="post-footer"><div id="pages" style="justify-content: flex-end"><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/post/a0a1582a/">机器学习-逻辑回归 上一篇 →</a></div></div></div></div><div class="bottom-btn"><div><a class="i-top" id="to-top" onClick="scrolls.scrolltop();" title="回到顶部" style="opacity: 0; display: none;">∧ </a><a class="i-index" id="to-index" href="#toc-div" title="文章目录">≡</a><a class="i-color" id="color-mode" onClick="colorMode.change()" title="切换主题"></a><a onclick="BgmControl()"><svg id="bgm-control" viewBox="0 0 30 34" fill="#18d1ff" style="width: 24px; transition: transform .3s;margin-top: 4px"><path d="M25.998 23.422V11.29h3.999v12.132h-3.999zM19.497 6.234h4.001v22.243h-4.001V6.234zM12.998.867h4v32.978h-4V.867zm-6.5 5.367h4.001v22.243H6.498V6.234zm-6.5 5.056h4v12.132h-4V11.29z"></path></svg><audio id="bgm" src="/audio/bgm.mp3" autoplay loop crossorigin="anonymous"> </audio></a></div></div></article><aside><div id="about"><a href="/" id="logo"><img src="https://ak.hypergryph.com/assets/index/images/ak/pc/faction/1.png" alt="Logo" style="margin:0;border-radius:0;"></a><h1 id="Dr"><a href="/">Clocky7</a></h1><div id="description"><p></p></div><div id="social-links"><a class="social" target="_blank" rel="noopener" href="https://github.com/Clocky7"><i class="fab fa-github" alt="GitHub"></i></a></div></div><div id="aside-block"><div id="toc-div"><h1>目录</h1><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0-k-means%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95"><span class="toc-number">1.</span> <span class="toc-text">无监督学习-k-means聚类算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80-%E7%89%B9%E7%82%B9"><span class="toc-number">2.</span> <span class="toc-text">一.特点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C-k-means%E7%AE%97%E6%B3%95"><span class="toc-number">3.</span> <span class="toc-text">二.k-means算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E7%AE%97%E6%B3%95%E4%BB%8B%E7%BB%8D"><span class="toc-number">3.1.</span> <span class="toc-text">2.1 算法介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E7%AE%97%E6%B3%95%E6%AD%A5%E9%AA%A4"><span class="toc-number">3.2.</span> <span class="toc-text">2.2 算法步骤</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#API"><span class="toc-number">4.</span> <span class="toc-text">API</span></a></li></ol></div></div><footer><nobr>构建自 <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr><wbr><nobr> 使用主题 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus/hexo-theme-arknights">Arknights</a></nobr><wbr><nobr> 主题作者 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus">Yue_plus</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas></body></html>

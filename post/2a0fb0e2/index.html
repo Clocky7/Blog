@@ -1,0 +1,193 @@
+<!DOCTYPE html><html lang="zh-cn" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>python-模块与包 | Clocky7's Blog</title><link rel="icon" type="image/x-icon" href="/favicon.ico"><link rel="preload" as="font" crossorigin="anonymous" href="/font/Bender.ttf"><link rel="preload" as="font" crossorigin="anonymous" href="/font/BenderLight.ttf"><link rel="preload" as="font" crossorigin="anonymous" href="/font/JetBrainsMono-Regular.woff2"><link rel="stylesheet" href="/css/arknights.css"><style>@font-face {
+  font-family: Bender;
+  src: local('Bender'), url("/font/Bender.ttf"), url("/font/Bender.otf");
+}
+@font-face {
+  font-family: BenderLight;
+  src: local('BenderLight'), url("/font/BenderLight.ttf");
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}
+</style><script>var config = {"root":"/","search":{"preload":false,"activeHolder":"键入以继续","blurHolder":"搜索","noResult":"无 $0 相关数据"},"code":{"codeInfo":"$0 - $1 行","copy":"复制"}}</script><link type="text/css" rel="stylesheet" href="/lib/encrypt/hbe.style.css"><script src="//unpkg.com/mermaid@10.5.0/dist/mermaid.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+ menuSettings: {
+   zoom: "None"
+ },
+ showMathMenu: false,
+ jax: ["input/TeX","output/CommonHTML"],
+ extensions: ["tex2jax.js"],
+ TeX: {
+   extensions: ["AMSmath.js","AMSsymbols.js"],
+   equationNumbers: {
+     autoNumber: "AMS"
+   }
+ },
+ tex2jax: {
+   inlineMath: [["\\(", "\\)"]],
+   displayMath: [["\\[", "\\]"]]
+ }
+});</script><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lightgallery.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-zoom.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-thumbnail.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/css/all.min.css"><style defer src="article.css"></style><link rel="stylesheet" href="article.css"><script>if (window.localStorage.getItem('theme-mode') === 'light')
+ document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark')
+ document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.woff2") format('woff2');
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}</style><style>:root {
+ --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
+ --light-background: url('/img/bk.jpg');
+ --theme-encrypt-confirm: '确认'
+}</style><script defer src="/js/arknights.js"></script><script defer src="/js/search.js"></script><script defer type="module">import mermaid from '//unpkg.com/mermaid@10.5.0/dist/mermaid.esm.mjs';
+window.mermaid = mermaid;
+code.paintMermaid();
+</script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+  menuSettings: {
+    zoom: "None"
+  },
+  showMathMenu: false,
+  jax: ["input/TeX","output/CommonHTML"],
+  extensions: ["tex2jax.js"],
+  TeX: {
+    extensions: ["AMSmath.js","AMSsymbols.js"],
+    equationNumbers: {
+      autoNumber: "AMS"
+    }
+  },
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]]
+  }
+});
+</script><script async src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script async src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script async src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script async src="/lib/encrypt/hbe.js"></script><script async src="/js/pjax.js"></script><script class="pjax-js">reset= () => {document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js','data-pjax','.busuanzi'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><script class="pjax-js">reset= () => {document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="loading" style="opacity: 0;"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><div class="navBtn"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><nav><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="搜索" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup" tabindex="0"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">主页</span></a></li><li class="navItem"><a class="navBlock" href="/about/"><span class="navItemTitle">于我</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">归档</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>python-模块与包</h1><div id="post-info"><span>文章发布时间: <div class="control"><time datetime="2025-06-24T05:43:08.000Z" id="date"> 2025-06-24</time></div></span><br><span>最后更新时间: <div class="control"><time datetime="2025-06-30T01:15:58.239Z" id="updated"> 2025-06-30</time></div></span><br><span>文章总字数: <div class="control">1.2k</div></span><br><span>预计阅读时间: <div class="control">5 分钟</div></span></div></div><hr><div id="post-content"><h2 id="一-模块"><a href="#一-模块" class="headerlink" title="一.模块"></a>一.模块</h2><ul>
+<li><p>模块是一个Python文件，每个  .py  文件就是一个模块</p>
+</li>
+<li><p>通过  import  语句导入模块中的内容</p>
+</li>
+<li><p>一个项目拆分成多个模块会更方便阅读理解，更具有模块化</p>
+</li>
+<li><p>模块导入后可以使用其中的变量、函数、类等</p>
+</li>
+</ul>
+<h3 id="1-1-导入语法"><a href="#1-1-导入语法" class="headerlink" title="1.1 导入语法"></a>1.1 导入语法</h3><ol>
+<li>import  模块名  [ as  模块新名字1]</li>
+</ol>
+<p>导入一个模块到当前程序</p>
+<ol start="2">
+<li>from  模块名  import  模块属性名 [ as  属性新名]</li>
+</ol>
+<p>导入一个模块内部的部分属性到当前程序，比如函数</p>
+<ol start="3">
+<li>from  模块名  import *</li>
+</ol>
+<p>导入一个模块内部的全部属性到当前程序</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 在外面定义了module和module1的模块</span><br><span class="hljs-keyword">import</span> module<br><span class="hljs-keyword">import</span> module1<br> <br>module.test()<br> <br>module1.is_1(<span class="hljs-number">1</span>)<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">这是一个模块<br><br>1<br></code></pre></td></tr></table></figure>
+
+<p><strong>注意，模块与模块之间不能嵌套导入，比如模块1中导入模块2，在一个.py文件中导入模块1，是访问不到模块2里的东西的。</strong></p>
+<h3 id="1-2-内部属性"><a href="#1-2-内部属性" class="headerlink" title="1.2 内部属性"></a>1.2 内部属性</h3><p><strong>file</strong>  绑定模块的路径,打印会返回当前模块路径</p>
+<p><strong>name</strong>  绑定模块的名称：</p>
+<pre><code>   如果是主模块（首先启动的模块）则绑定 &#39;__main__&#39;如果不是主模块则 绑定 xxx.py 中的 xxx 这个模块名。什么意思呢？就是在这个py文件里打印`__name__`就是&#39;__main__&#39;,如果在另一个模块里打印`__name__`，然后再用现在这个py文件里导入另一个模块，则打印出来的就是模块名。
+</code></pre>
+<p>实际上俩存储的都是字符串</p>
+<h3 id="1-3-内置模块"><a href="#1-3-内置模块" class="headerlink" title="1.3 内置模块"></a>1.3 内置模块</h3><ol>
+<li>数学模块</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 数学模块</span><br><span class="hljs-keyword">import</span> math<br> <br><span class="hljs-comment"># 开平方</span><br>a = <span class="hljs-number">9</span><br>b = math.sqrt(a)<br><span class="hljs-built_in">print</span>(b)<br> <br><span class="hljs-comment"># pi即圆周率</span><br><span class="hljs-built_in">print</span>(math.pi)<br> <br><span class="hljs-comment"># 对数，底数默认为e,更改后面的值即可更改底数</span><br><span class="hljs-built_in">print</span>(math.log(<span class="hljs-number">2</span>,<span class="hljs-number">4</span>))<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">3.0<br>3.141592653589793<br>0.5<br></code></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>随机数</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 随机数</span><br><span class="hljs-keyword">import</span> random<br> <br><span class="hljs-comment"># 生成一个范围在[0，1)的数</span><br>x = random.random()<br><span class="hljs-built_in">print</span>(x)<br> <br><span class="hljs-comment"># 生成一个特定范围的数,这里是在[-5,6)之间，即(max-min)后面再加初始值</span><br>y = random.random() * (<span class="hljs-number">6</span>-(-<span class="hljs-number">5</span>))+(-<span class="hljs-number">5</span>)<br><span class="hljs-built_in">print</span>(y)<br> <br><span class="hljs-comment"># 从一个序列中，随机返回一个元素</span><br>x = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">34</span>]<br><span class="hljs-built_in">print</span>(random.choice(x))<br><span class="hljs-built_in">print</span>(random.choice(<span class="hljs-string">&#x27;ABCD&#x27;</span>))<br> <br><span class="hljs-comment"># 生成整数</span><br>a = random.randint(<span class="hljs-number">1</span>,<span class="hljs-number">10</span>)<br><span class="hljs-built_in">print</span>(a)<br> <br><span class="hljs-comment"># random.shuffer(x)  # 把列表X 打乱</span><br>x = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>,<span class="hljs-number">7</span>,<span class="hljs-number">8</span>,<span class="hljs-number">9</span>,<span class="hljs-number">10</span>]<br>random.shuffle(x)<br><span class="hljs-built_in">print</span>(x)<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">0.2984475886500685<br>0.03470368839121374<br>1<br>A<br>5<br>[6, 10, 8, 9, 1, 7, 4, 5, 2, 3]<br></code></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>time 模块</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># time 模块</span><br><span class="hljs-keyword">import</span> time<br> <br><span class="hljs-comment"># 输出秒数，这里其实是根据1970年1月1日8时开始计算的</span><br><span class="hljs-comment"># 其可以用于生成时间戳，生成的就是完全不同的字符串，也可以拿来做字典的键</span><br><span class="hljs-built_in">print</span>(time.time())<br> <br><span class="hljs-comment"># 睡眠，让程序在此处暂停几秒</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;2秒后打印&quot;</span>)<br>time.sleep(<span class="hljs-number">2</span>)<br><span class="hljs-built_in">print</span>()<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;打印咯&quot;</span>)<br> <br><span class="hljs-comment"># 输出当前时间，精确到年、月、日、时、分、秒等</span><br><span class="hljs-built_in">print</span>(time.localtime()) <br> <br><span class="hljs-comment"># 将时间转为字符串,精确到哪里取决于你的占位符的多少</span><br>time.strftime(<span class="hljs-string">&quot;%Y-%m-%d %H:%M:%S&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">1742627503.7597053<br>2秒后打印<br><br>打印咯<br>time.struct_time(tm_year=2025, tm_mon=3, tm_mday=22, tm_hour=15, tm_min=11,<br><br>tm_sec=45, tm_wday=5, tm_yday=81, tm_isdst=0)<br><br>&#x27;2025-03-22 15:11:45&#x27;<br></code></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>os 模块</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># os模块</span><br><span class="hljs-keyword">import</span> os<br> <br><span class="hljs-comment"># 即当前项目运行的文件夹路径</span><br><span class="hljs-built_in">print</span>(os.getcwd())<br> <br><span class="hljs-comment"># 把多个路径拼接起来，函数不在乎是否存在这个路径</span><br>os.path.join(os.getcwd(),<span class="hljs-string">&#x27;test.txt&#x27;</span>)<br> <br><span class="hljs-comment"># 转换为相对路径，相对当前文件</span><br>os.path.relpath(os.path.join(os.getcwd(),<span class="hljs-string">&#x27;test.txt&#x27;</span>))<br> <br><span class="hljs-comment"># 创建文件夹</span><br>os.mkdir(<span class="hljs-string">&#x27;test&#x27;</span>)<br> <br><span class="hljs-comment"># 列出文件夹下的所有文件，&#x27;.&#x27;表示当前所处项目文件夹</span><br><span class="hljs-built_in">print</span>(os.listdir(<span class="hljs-string">&#x27;.&#x27;</span>))<br> <br><span class="hljs-comment"># 删除文件夹</span><br>os.rmdir(<span class="hljs-string">&#x27;test&#x27;</span>)<br> <br><span class="hljs-comment"># 删除文件</span><br>os.remove(<span class="hljs-string">&#x27;test.txt&#x27;</span>)<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">d:\Software\code\py\hqyj\3.22<br>[&#x27;3.22.ipynb&#x27;, &#x27;3.22_1.ipynb&#x27;, &#x27;3.22_2.ipynb&#x27;, &#x27;module.py&#x27;, &#x27;module1.py&#x27;, &#x27;test&#x27;, &#x27;test.py&#x27;, &#x27;test.txt&#x27;, &#x27;__pycache__&#x27;]<br></code></pre></td></tr></table></figure>
+
+<h3 id="1-4-第三方模块"><a href="#1-4-第三方模块" class="headerlink" title="1.4 第三方模块"></a>1.4 第三方模块</h3><p>要先下载在当前环境下，才能进行导入。</p>
+<h2 id="二-包"><a href="#二-包" class="headerlink" title="二.包"></a>二.包</h2><ul>
+<li><p>包的本质是一个包含 <strong>init</strong>.py 文件的文件夹。</p>
+</li>
+<li><p>其中装了很多模块</p>
+</li>
+<li><p>从网上下载的第三方库，其实就是包</p>
+</li>
+</ul>
+<h3 id="2-1-怎么用"><a href="#2-1-怎么用" class="headerlink" title="2.1 怎么用"></a>2.1 怎么用</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 举几个引入包内模块的例子</span><br><span class="hljs-keyword">import</span> tool.m1<br><span class="hljs-keyword">from</span> tool <span class="hljs-keyword">import</span> m1<br></code></pre></td></tr></table></figure>
+
+<h3 id="2-2-init-py"><a href="#2-2-init-py" class="headerlink" title="2.2 _init.py"></a>2.2 _<em>init</em>.py</h3><ul>
+<li><p>告诉Python解释器当前目录应被视为一个包</p>
+</li>
+<li><p>可以包含任何代码，通常用于包的初始化操作，如变量初始化、导入模块等。这些代码在包被导入时执行</p>
+</li>
+<li><p>通过  <strong>all</strong>  变量明确指定从包中可以导入哪些模块，从而限制包的公开接口</p>
+</li>
+<li><p><strong>init</strong>.py 中定义的变量和函数可以在包的模块中共享,相当于是当前文件夹的数据</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 这就是在__init__.py中定义的变量</span><br><span class="hljs-keyword">from</span> tool <span class="hljs-keyword">import</span> a,b<br><span class="hljs-keyword">import</span> tool.m1<br><span class="hljs-built_in">print</span>(a,b)<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">1 2<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 假设__all__里面只有m1模块，那 * 这种导入就只能导入__all__中的模块</span><br><span class="hljs-keyword">from</span> tool <span class="hljs-keyword">import</span> *<br>m2.fn1()<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p class='item-img' data-src='/img/temporate/1.png'><img src="/img/temporate/1.png"></p>
+<p><em><strong>是运行不了的。</strong></em></p>
+<div id="paginator"></div></div><div id="post-footer"><div id="pages"><div class="footer-link" style="width: 50%;text-align:right;border-right:1px #fe2 solid"><a href="/post/2f57a694/">← 下一篇 正则表达式</a></div><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/post/7a903bb0/">python异常处理 上一篇 →</a></div></div></div></div><div class="bottom-btn"><div><a class="i-top" id="to-top" onClick="scrolls.scrolltop();" title="回到顶部" style="opacity: 0; display: none;">∧ </a><a class="i-index" id="to-index" href="#toc-div" title="文章目录">≡</a><a class="i-color" id="color-mode" onClick="colorMode.change()" title="切换主题"></a><a onclick="BgmControl()"><svg id="bgm-control" viewBox="0 0 30 34" fill="#18d1ff" style="width: 24px; transition: transform .3s;margin-top: 4px"><path d="M25.998 23.422V11.29h3.999v12.132h-3.999zM19.497 6.234h4.001v22.243h-4.001V6.234zM12.998.867h4v32.978h-4V.867zm-6.5 5.367h4.001v22.243H6.498V6.234zm-6.5 5.056h4v12.132h-4V11.29z"></path></svg><audio id="bgm" src="/audio/bgm.mp3" autoplay loop crossorigin="anonymous"> </audio></a></div></div></article><aside><div id="about"><a href="/" id="logo"><img src="https://ak.hypergryph.com/assets/index/images/ak/pc/faction/1.png" alt="Logo" style="margin:0;border-radius:0;"></a><h1 id="Dr"><a href="/">Clocky7</a></h1><div id="description"><p></p></div><div id="social-links"><a class="social" target="_blank" rel="noopener" href="https://github.com/Clocky7"><i class="fab fa-github" alt="GitHub"></i></a></div></div><div id="aside-block"><div id="toc-div"><h1>目录</h1><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80-%E6%A8%A1%E5%9D%97"><span class="toc-number">1.</span> <span class="toc-text">一.模块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E5%AF%BC%E5%85%A5%E8%AF%AD%E6%B3%95"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 导入语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E5%86%85%E9%83%A8%E5%B1%9E%E6%80%A7"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 内部属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E5%86%85%E7%BD%AE%E6%A8%A1%E5%9D%97"><span class="toc-number">1.3.</span> <span class="toc-text">1.3 内置模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-%E7%AC%AC%E4%B8%89%E6%96%B9%E6%A8%A1%E5%9D%97"><span class="toc-number">1.4.</span> <span class="toc-text">1.4 第三方模块</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C-%E5%8C%85"><span class="toc-number">2.</span> <span class="toc-text">二.包</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E6%80%8E%E4%B9%88%E7%94%A8"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 怎么用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-init-py"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 _init.py</span></a></li></ol></li></ol></div></div><footer><nobr>构建自 <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr><wbr><nobr> 使用主题 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus/hexo-theme-arknights">Arknights</a></nobr><wbr><nobr> 主题作者 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus">Yue_plus</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas></body></html>

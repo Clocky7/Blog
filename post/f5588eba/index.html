@@ -1,0 +1,192 @@
+<!DOCTYPE html><html lang="zh-cn" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>机器学习-决策树分类 | Clocky7's Blog</title><link rel="icon" type="image/x-icon" href="/favicon.ico"><link rel="preload" as="font" crossorigin="anonymous" href="/font/Bender.ttf"><link rel="preload" as="font" crossorigin="anonymous" href="/font/BenderLight.ttf"><link rel="preload" as="font" crossorigin="anonymous" href="/font/JetBrainsMono-Regular.woff2"><link rel="stylesheet" href="/css/arknights.css"><style>@font-face {
+  font-family: Bender;
+  src: local('Bender'), url("/font/Bender.ttf"), url("/font/Bender.otf");
+}
+@font-face {
+  font-family: BenderLight;
+  src: local('BenderLight'), url("/font/BenderLight.ttf");
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}
+</style><script>var config = {"root":"/","search":{"preload":false,"activeHolder":"键入以继续","blurHolder":"搜索","noResult":"无 $0 相关数据"},"code":{"codeInfo":"$0 - $1 行","copy":"复制"}}</script><link type="text/css" rel="stylesheet" href="/lib/encrypt/hbe.style.css"><script src="//unpkg.com/mermaid@10.5.0/dist/mermaid.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+ menuSettings: {
+   zoom: "None"
+ },
+ showMathMenu: false,
+ jax: ["input/TeX","output/CommonHTML"],
+ extensions: ["tex2jax.js"],
+ TeX: {
+   extensions: ["AMSmath.js","AMSsymbols.js"],
+   equationNumbers: {
+     autoNumber: "AMS"
+   }
+ },
+ tex2jax: {
+   inlineMath: [["\\(", "\\)"]],
+   displayMath: [["\\[", "\\]"]]
+ }
+});</script><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lightgallery.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-zoom.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-thumbnail.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/css/all.min.css"><style defer src="article.css"></style><link rel="stylesheet" href="article.css"><script>if (window.localStorage.getItem('theme-mode') === 'light')
+ document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark')
+ document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.woff2") format('woff2');
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}</style><style>:root {
+ --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
+ --light-background: url('/img/bk.jpg');
+ --theme-encrypt-confirm: '确认'
+}</style><script defer src="/js/arknights.js"></script><script defer src="/js/search.js"></script><script defer type="module">import mermaid from '//unpkg.com/mermaid@10.5.0/dist/mermaid.esm.mjs';
+window.mermaid = mermaid;
+code.paintMermaid();
+</script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+  menuSettings: {
+    zoom: "None"
+  },
+  showMathMenu: false,
+  jax: ["input/TeX","output/CommonHTML"],
+  extensions: ["tex2jax.js"],
+  TeX: {
+    extensions: ["AMSmath.js","AMSsymbols.js"],
+    equationNumbers: {
+      autoNumber: "AMS"
+    }
+  },
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]]
+  }
+});
+</script><script async src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script async src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script async src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script async src="/lib/encrypt/hbe.js"></script><script async src="/js/pjax.js"></script><script class="pjax-js">reset= () => {document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js','data-pjax','.busuanzi'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><script class="pjax-js">reset= () => {document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="loading" style="opacity: 0;"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><div class="navBtn"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><nav><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="搜索" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup" tabindex="0"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">主页</span></a></li><li class="navItem"><a class="navBlock" href="/about/"><span class="navItemTitle">于我</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">归档</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>机器学习-决策树分类</h1><div id="post-info"><span>文章发布时间: <div class="control"><time datetime="2025-06-24T05:58:28.000Z" id="date"> 2025-06-24</time></div></span><br><span>最后更新时间: <div class="control"><time datetime="2025-07-01T09:59:50.459Z" id="updated"> 2025-07-01</time></div></span><br><span>文章总字数: <div class="control">1.6k</div></span><br><span>预计阅读时间: <div class="control">6 分钟</div></span></div></div><hr><div id="post-content"><h2 id="决策树-分类"><a href="#决策树-分类" class="headerlink" title="决策树-分类"></a>决策树-分类</h2><h2 id="一-概念"><a href="#一-概念" class="headerlink" title="一.概念"></a>一.概念</h2><ol>
+<li><p>决策节点<br>通过条件判断而进行分支选择的节点</p>
+</li>
+<li><p>叶子节点<br>没有子节点的节点，表示最终的决策结果。</p>
+</li>
+<li><p>决策树的深度<br>所有节点的最大层次数。根节点的层次数定为0，从下面开始每一层子节点层次数增加,不包括叶子节点</p>
+</li>
+<li><p>决策树优点：</p>
+</li>
+</ol>
+<p>​可视化-可解释能力高-对算力要求低</p>
+<ol start="5">
+<li>决策树缺点：</li>
+</ol>
+<p>​容易过拟合，不要把深度调整太大。</p>
+<p>给一个简单的决策树例子：</p>
+<p class='item-img' data-src='/img/temporate/ml12.png'><img src="/img/temporate/ml12.png"></p>
+<h2 id="二-基于信息增益决策树的建立"><a href="#二-基于信息增益决策树的建立" class="headerlink" title="二.基于信息增益决策树的建立"></a>二.基于信息增益决策树的建立</h2><h3 id="2-1-信息熵"><a href="#2-1-信息熵" class="headerlink" title="2.1 信息熵"></a>2.1 信息熵</h3><p>信息熵描述的是不确定性。信息熵越大，不同的数据量越大，不确定性越大。</p>
+<p>假设样本某特征或标签共有N类，第k类样本所占比例为:</p>
+<p class='item-img' data-src='/img/temporate/ml13.png'><img src="/img/temporate/ml13.png"></p>
+<h3 id="2-2-信息增益-ID3算法会使用"><a href="#2-2-信息增益-ID3算法会使用" class="headerlink" title="2.2 信息增益(ID3算法会使用)"></a>2.2 信息增益(ID3算法会使用)</h3><p>信息增益是一个统计量，用来描述一个属性区分数据样本的能力。信息增益越大，那么决策树就会越简洁，因为增益越大的决策节点会放在更前面。</p>
+<p>信息增益需要信息熵来计算，即用某种特征区分样本标签的信息增益为：</p>
+<p class='item-img' data-src='/img/temporate/ml14.png'><img src="/img/temporate/ml14.png"></p>
+<p>也就是说，先得算标签的信息熵，然后再计算用某个特征区分标签的信息熵，最后再作差。</p>
+<p>我们用一个例子来介绍信息增益决策树的建立：</p>
+<p class='item-img' data-src='/img/temporate/ml15.png'><img src="/img/temporate/ml15.png"></p>
+<p class='item-img' data-src='/img/temporate/ml16.png'><img src="/img/temporate/ml16.png"></p>
+<p>对比属性信息增益发现，”收入”和”学历”相等，并且是最高的，所以我们就可以选择”学历”或”收入”作为第一个决策树的节点（这里是把学历分为两类，如果就直接分类的话，那么每种学历都得单独计算信息增益且可能会单独作为一个决策节点）</p>
+<p><strong>注意：此时筛选掉第一个决策节点选择的数据，接下来我们继续重复1，2的做法继续寻找合适的属性节点</strong></p>
+<h2 id="三-基于基尼指数决策树的建立-CART算法会使用"><a href="#三-基于基尼指数决策树的建立-CART算法会使用" class="headerlink" title="三.基于基尼指数决策树的建立(CART算法会使用)"></a>三.基于基尼指数决策树的建立(CART算法会使用)</h2><p><strong>基尼指数</strong>（Gini Index）是决策树算法中用于评估数据集纯度的一种度量，基尼指数衡量的是数据集的不纯度，或者说分类的不确定性。</p>
+<p>对于多分类问题，如果一个节点包含的样本属于第 k 类的概率是 pk，则节点的基尼指数定义为：</p>
+<p>基尼指数越低，代表所有样本类别都基本一致，纯度高。</p>
+<p>而基于基尼指数的决策树更简单，假设一个特征有m种不同值，那么就是用这m种值的基尼指数乘以自身占比并求和得到该特征的基尼指数。通过选择最小的基尼指数，得到决策树。</p>
+<h2 id="四-两种决策树的API"><a href="#四-两种决策树的API" class="headerlink" title="四.两种决策树的API"></a>四.两种决策树的API</h2><h3 id="4-1-模型API"><a href="#4-1-模型API" class="headerlink" title="4.1 模型API"></a>4.1 模型API</h3><p><code>sklearn.tree.DecisionTreeClassifier()</code></p>
+<p>参数：</p>
+<ul>
+<li><p>criterion:</p>
+<ul>
+<li><p>当criterion取值为”gini”(默认)时采用 基尼不纯度（Gini impurity）算法构造决策树，</p>
+</li>
+<li><p>当criterion取值为”entropy”时采用信息增益（ information gain）算法构造决策树.</p>
+</li>
+</ul>
+</li>
+<li><p>max_depth：默认为&#x3D;None，树的最大深度</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 以信息增益构建决策树</span><br><span class="hljs-keyword">from</span> sklearn.tree <span class="hljs-keyword">import</span> DecisionTreeClassifier<br><span class="hljs-keyword">from</span> sklearn.datasets <span class="hljs-keyword">import</span> load_iris<br><span class="hljs-keyword">from</span> sklearn.model_selection <span class="hljs-keyword">import</span> train_test_split<br><br><span class="hljs-comment"># 加载数据集</span><br>iris = load_iris()<br>X = iris.data<br>y = iris.target<br><br><span class="hljs-comment"># 划分数据集</span><br>X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=<span class="hljs-number">0.3</span>, random_state=<span class="hljs-number">42</span>)<br><br><span class="hljs-comment"># 构建信息增益决策树</span><br>clf = DecisionTreeClassifier(criterion=<span class="hljs-string">&#x27;entropy&#x27;</span>, max_depth=<span class="hljs-number">5</span>)<br>clf.fit(X_train, y_train)<br><br><span class="hljs-comment"># 预测测试集</span><br>y_pred = clf.predict(X_test)<br><br><span class="hljs-comment"># 计算准确率</span><br>score = clf.score(X_test, y_test)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;准确率:&#x27;</span>, score)<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">准确率: 0.9777777777777777<br></code></pre></td></tr></table></figure>
+
+<h3 id="4-2-可视化API"><a href="#4-2-可视化API" class="headerlink" title="4.2 可视化API"></a>4.2 可视化API</h3><p><code>sklearn.tree.export_graphviz(estimator, out_file=&quot;iris_tree.dot&quot;, feature_names=iris.feature_names)</code></p>
+<p>参数：</p>
+<pre><code>- estimator决策树预估器
+
+- out_file生成的文档
+
+- feature_names节点特征属性名
+- 
+</code></pre>
+<p>功能:</p>
+<pre><code>把生成的文档打开，复制出内容粘贴到&lt;http://webgraphviz.com&gt;中，点击&quot;generate Graph&quot;会生成一个树型的决策树图。
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 以信息增益构建决策树</span><br><span class="hljs-keyword">from</span> sklearn.tree <span class="hljs-keyword">import</span> DecisionTreeClassifier<br><span class="hljs-keyword">from</span> sklearn.datasets <span class="hljs-keyword">import</span> load_iris<br><span class="hljs-keyword">from</span> sklearn.model_selection <span class="hljs-keyword">import</span> train_test_split<br><span class="hljs-keyword">from</span> sklearn.tree <span class="hljs-keyword">import</span> export_graphviz<br><br><span class="hljs-comment"># 加载数据集</span><br>iris = load_iris()<br>X = iris.data<br>y = iris.target<br><br><span class="hljs-comment"># 划分数据集</span><br>X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=<span class="hljs-number">0.3</span>, random_state=<span class="hljs-number">42</span>)<br><br><span class="hljs-comment"># 构建信息增益决策树</span><br>clf = DecisionTreeClassifier(criterion=<span class="hljs-string">&#x27;entropy&#x27;</span>, max_depth=<span class="hljs-number">5</span>)<br>clf.fit(X_train, y_train)<br><br><span class="hljs-comment"># 可视化</span><br>export_graphviz(clf, out_file=<span class="hljs-string">&#x27;tree.dot&#x27;</span>, feature_names=[<span class="hljs-string">&#x27;花瓣长度&#x27;</span>, <span class="hljs-string">&#x27;花萼宽度&#x27;</span>, <span class="hljs-string">&#x27;花瓣长度&#x27;</span>, <span class="hljs-string">&#x27;花瓣宽度&#x27;</span>])<br></code></pre></td></tr></table></figure>
+
+<h2 id="五-集成学习方法之随机森林"><a href="#五-集成学习方法之随机森林" class="headerlink" title="五.集成学习方法之随机森林"></a>五.集成学习方法之随机森林</h2><h3 id="5-1-基本概念"><a href="#5-1-基本概念" class="headerlink" title="5.1 基本概念"></a>5.1 基本概念</h3><p>集成学习是机器学习一个大方向，基本思想就是将多个分类器组合，从而实现一个预测效果更好的集成分类器。</p>
+<p>其特点为：</p>
+<ol>
+<li><p>每次有放回地从训练集中取出 n 个训练样本，组成新的训练集；</p>
+</li>
+<li><p>利用新的训练集，训练得到M个子模型；</p>
+</li>
+<li><p>对于分类问题，采用投票的方法，得票最多子模型的分类类别为最终的类别。</p>
+</li>
+</ol>
+<p><strong>随机森林</strong>就属于集成学习,是通过构建一个包含多个决策树(通常称为基学习器或弱学习器)的森林，每棵树都在不同的数据子集和特征子集上进行训练，最终通过投票或平均预测结果来产生更准确和稳健的预测。</p>
+<p>下图是其算法原理：</p>
+<p class='item-img' data-src='/img/temporate/ml17.png'><img src="/img/temporate/ml17.png"></p>
+<p>但其为什么叫随机森林呢？随机性就在特征随机，训练集随机上。</p>
+<p>训练集随机就是上面讲过的有放回地取出n个训练样本组成一个新训练集；</p>
+<p>特征随机就是在每棵树的训练过程中，对特征进行随机选择，可以是一个，也可以是多个。</p>
+<h3 id="5-2-API"><a href="#5-2-API" class="headerlink" title="5.2 API"></a>5.2 API</h3><p><code>sklearn.ensemble.RandomForestClassifier</code></p>
+<p>参数：</p>
+<ul>
+<li><p>n_estimators:决策树个数,默认100</p>
+</li>
+<li><p>criterion：{“gini”, “entropy”}</p>
+</li>
+<li><p>max_depth：树的最大深度。</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 随机森林预测</span><br><span class="hljs-keyword">from</span> sklearn.datasets <span class="hljs-keyword">import</span> load_iris<br><span class="hljs-keyword">from</span> sklearn.ensemble <span class="hljs-keyword">import</span> RandomForestClassifier<br><span class="hljs-keyword">from</span> sklearn.model_selection <span class="hljs-keyword">import</span> train_test_split<br><br><span class="hljs-comment"># 加载数据集</span><br>iris = load_iris()<br>X = iris.data<br>y = iris.target<br><br><span class="hljs-comment"># 划分训练集和测试集</span><br>X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=<span class="hljs-number">0.3</span>, random_state=<span class="hljs-number">42</span>)<br><br><span class="hljs-comment"># 随机森林预测</span><br>rf = RandomForestClassifier(n_estimators=<span class="hljs-number">100</span>, random_state=<span class="hljs-number">42</span>)<br>rf.fit(X_train, y_train)<br><br><span class="hljs-comment"># 预测</span><br>data_new = [[<span class="hljs-number">5.1</span>, <span class="hljs-number">3.5</span>, <span class="hljs-number">1.4</span>, <span class="hljs-number">0.2</span>]]<br>new_pred = rf.predict(data_new)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;预测结果:&quot;</span>, new_pred)<br><span class="hljs-comment"># 评估模型</span><br>score = rf.score(X_test, y_test)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;准确率:&quot;</span>, score)<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">预测结果: [0]<br>准确率: 1.0<br></code></pre></td></tr></table></figure><div id="paginator"></div></div><div id="post-footer"><div id="pages"><div class="footer-link" style="width: 50%;text-align:right;border-right:1px #fe2 solid"><a href="/post/19883263/">← 下一篇 机器学习-线性回归</a></div><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/post/d7c5d3ef/">机器学习-朴素贝叶斯分类 上一篇 →</a></div></div></div></div><div class="bottom-btn"><div><a class="i-top" id="to-top" onClick="scrolls.scrolltop();" title="回到顶部" style="opacity: 0; display: none;">∧ </a><a class="i-index" id="to-index" href="#toc-div" title="文章目录">≡</a><a class="i-color" id="color-mode" onClick="colorMode.change()" title="切换主题"></a><a onclick="BgmControl()"><svg id="bgm-control" viewBox="0 0 30 34" fill="#18d1ff" style="width: 24px; transition: transform .3s;margin-top: 4px"><path d="M25.998 23.422V11.29h3.999v12.132h-3.999zM19.497 6.234h4.001v22.243h-4.001V6.234zM12.998.867h4v32.978h-4V.867zm-6.5 5.367h4.001v22.243H6.498V6.234zm-6.5 5.056h4v12.132h-4V11.29z"></path></svg><audio id="bgm" src="/audio/bgm.mp3" autoplay loop crossorigin="anonymous"> </audio></a></div></div></article><aside><div id="about"><a href="/" id="logo"><img src="https://ak.hypergryph.com/assets/index/images/ak/pc/faction/1.png" alt="Logo" style="margin:0;border-radius:0;"></a><h1 id="Dr"><a href="/">Clocky7</a></h1><div id="description"><p></p></div><div id="social-links"><a class="social" target="_blank" rel="noopener" href="https://github.com/Clocky7"><i class="fab fa-github" alt="GitHub"></i></a></div></div><div id="aside-block"><div id="toc-div"><h1>目录</h1><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%B3%E7%AD%96%E6%A0%91-%E5%88%86%E7%B1%BB"><span class="toc-number">1.</span> <span class="toc-text">决策树-分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80-%E6%A6%82%E5%BF%B5"><span class="toc-number">2.</span> <span class="toc-text">一.概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C-%E5%9F%BA%E4%BA%8E%E4%BF%A1%E6%81%AF%E5%A2%9E%E7%9B%8A%E5%86%B3%E7%AD%96%E6%A0%91%E7%9A%84%E5%BB%BA%E7%AB%8B"><span class="toc-number">3.</span> <span class="toc-text">二.基于信息增益决策树的建立</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E4%BF%A1%E6%81%AF%E7%86%B5"><span class="toc-number">3.1.</span> <span class="toc-text">2.1 信息熵</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E4%BF%A1%E6%81%AF%E5%A2%9E%E7%9B%8A-ID3%E7%AE%97%E6%B3%95%E4%BC%9A%E4%BD%BF%E7%94%A8"><span class="toc-number">3.2.</span> <span class="toc-text">2.2 信息增益(ID3算法会使用)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89-%E5%9F%BA%E4%BA%8E%E5%9F%BA%E5%B0%BC%E6%8C%87%E6%95%B0%E5%86%B3%E7%AD%96%E6%A0%91%E7%9A%84%E5%BB%BA%E7%AB%8B-CART%E7%AE%97%E6%B3%95%E4%BC%9A%E4%BD%BF%E7%94%A8"><span class="toc-number">4.</span> <span class="toc-text">三.基于基尼指数决策树的建立(CART算法会使用)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B-%E4%B8%A4%E7%A7%8D%E5%86%B3%E7%AD%96%E6%A0%91%E7%9A%84API"><span class="toc-number">5.</span> <span class="toc-text">四.两种决策树的API</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E6%A8%A1%E5%9E%8BAPI"><span class="toc-number">5.1.</span> <span class="toc-text">4.1 模型API</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E5%8F%AF%E8%A7%86%E5%8C%96API"><span class="toc-number">5.2.</span> <span class="toc-text">4.2 可视化API</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E4%B9%8B%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97"><span class="toc-number">6.</span> <span class="toc-text">五.集成学习方法之随机森林</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">6.1.</span> <span class="toc-text">5.1 基本概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-API"><span class="toc-number">6.2.</span> <span class="toc-text">5.2 API</span></a></li></ol></li></ol></div></div><footer><nobr>构建自 <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr><wbr><nobr> 使用主题 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus/hexo-theme-arknights">Arknights</a></nobr><wbr><nobr> 主题作者 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus">Yue_plus</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas></body></html>

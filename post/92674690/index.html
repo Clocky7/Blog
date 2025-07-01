@@ -1,0 +1,229 @@
+<!DOCTYPE html><html lang="zh-cn" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Numpy用法（一） | Clocky7's Blog</title><link rel="icon" type="image/x-icon" href="/favicon.ico"><link rel="preload" as="font" crossorigin="anonymous" href="/font/Bender.ttf"><link rel="preload" as="font" crossorigin="anonymous" href="/font/BenderLight.ttf"><link rel="preload" as="font" crossorigin="anonymous" href="/font/JetBrainsMono-Regular.woff2"><link rel="stylesheet" href="/css/arknights.css"><style>@font-face {
+  font-family: Bender;
+  src: local('Bender'), url("/font/Bender.ttf"), url("/font/Bender.otf");
+}
+@font-face {
+  font-family: BenderLight;
+  src: local('BenderLight'), url("/font/BenderLight.ttf");
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}
+</style><script>var config = {"root":"/","search":{"preload":false,"activeHolder":"键入以继续","blurHolder":"搜索","noResult":"无 $0 相关数据"},"code":{"codeInfo":"$0 - $1 行","copy":"复制"}}</script><link type="text/css" rel="stylesheet" href="/lib/encrypt/hbe.style.css"><script src="//unpkg.com/mermaid@10.5.0/dist/mermaid.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+ menuSettings: {
+   zoom: "None"
+ },
+ showMathMenu: false,
+ jax: ["input/TeX","output/CommonHTML"],
+ extensions: ["tex2jax.js"],
+ TeX: {
+   extensions: ["AMSmath.js","AMSsymbols.js"],
+   equationNumbers: {
+     autoNumber: "AMS"
+   }
+ },
+ tex2jax: {
+   inlineMath: [["\\(", "\\)"]],
+   displayMath: [["\\[", "\\]"]]
+ }
+});</script><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lightgallery.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-zoom.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-thumbnail.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/css/all.min.css"><style defer src="article.css"></style><link rel="stylesheet" href="article.css"><script>if (window.localStorage.getItem('theme-mode') === 'light')
+ document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark')
+ document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.woff2") format('woff2');
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}</style><style>:root {
+ --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
+ --light-background: url('/img/bk.jpg');
+ --theme-encrypt-confirm: '确认'
+}</style><script defer src="/js/arknights.js"></script><script defer src="/js/search.js"></script><script defer type="module">import mermaid from '//unpkg.com/mermaid@10.5.0/dist/mermaid.esm.mjs';
+window.mermaid = mermaid;
+code.paintMermaid();
+</script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+  menuSettings: {
+    zoom: "None"
+  },
+  showMathMenu: false,
+  jax: ["input/TeX","output/CommonHTML"],
+  extensions: ["tex2jax.js"],
+  TeX: {
+    extensions: ["AMSmath.js","AMSsymbols.js"],
+    equationNumbers: {
+      autoNumber: "AMS"
+    }
+  },
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]]
+  }
+});
+</script><script async src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script async src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script async src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script async src="/lib/encrypt/hbe.js"></script><script async src="/js/pjax.js"></script><script class="pjax-js">reset= () => {document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js','data-pjax','.busuanzi'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><script class="pjax-js">reset= () => {document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="loading" style="opacity: 0;"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><div class="navBtn"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><nav><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="搜索" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup" tabindex="0"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">主页</span></a></li><li class="navItem"><a class="navBlock" href="/about/"><span class="navItemTitle">于我</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">归档</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>Numpy用法（一）</h1><div id="post-info"><span>文章发布时间: <div class="control"><time datetime="2025-06-24T05:44:06.000Z" id="date"> 2025-06-24</time></div></span><br><span>最后更新时间: <div class="control"><time datetime="2025-06-30T06:25:34.624Z" id="updated"> 2025-06-30</time></div></span><br><span>文章总字数: <div class="control">2.4k</div></span><br><span>预计阅读时间: <div class="control">10 分钟</div></span></div></div><hr><div id="post-content"><h2 id="一-数组切片"><a href="#一-数组切片" class="headerlink" title="一.数组切片"></a>一.数组切片</h2><p>ndarray 对象的内容可以通过索引或切片来访问和修改，与 Python 中 <code>list</code> 的切片操作一样。</p>
+<p>a[x , y],x 为行索引，y 为列索引。x,y的格式都是 a : b : c ，其中 a,b,c 为整数，a 为起始索引，b 为结束索引，c 为步长。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> numpy<br> <br>a = numpy.array([[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>],[<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>]])<br> <br><span class="hljs-comment"># 查询第一、二列（其中：可以用 ... 代替）</span><br><span class="hljs-built_in">print</span>(a[:,<span class="hljs-number">0</span>:<span class="hljs-number">2</span>])<br> <br><span class="hljs-comment"># 查询第一行的第一列和第二列</span><br><span class="hljs-built_in">print</span>(a[<span class="hljs-number">0</span>,<span class="hljs-number">0</span>:<span class="hljs-number">2</span>])<br> <br><span class="hljs-comment"># 更改提取的切片会改变原数组</span><br>b = a[<span class="hljs-number">0</span>,<span class="hljs-number">0</span>:<span class="hljs-number">2</span>]<br>b[:] = <span class="hljs-number">1</span><br><span class="hljs-built_in">print</span>(b)<br><span class="hljs-built_in">print</span>(a)<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">[[1 2]<br> [4 5]]<br>[1 2]<br>[1 1]<br>[[1 1 3]<br> [4 5 6]]<br></code></pre></td></tr></table></figure>
+
+<h2 id="二-高级索引"><a href="#二-高级索引" class="headerlink" title="二.高级索引"></a>二.高级索引</h2><h3 id="2-1-整数数组索引"><a href="#2-1-整数数组索引" class="headerlink" title="2.1 整数数组索引"></a>2.1 整数数组索引</h3><ul>
+<li><p>使用一个数组来访问另一个数组的元素。</p>
+</li>
+<li><p>这个数组中的每个元素都是目标数组中某个维度上的索引值。</p>
+</li>
+</ul>
+<p> 就是把数组中元素的横纵坐标取出来，所有要取的元素的<code>横坐标</code>放在一个列表中，<code>纵坐标</code>放在另一个列表中，然后将两个列表整<code>合成</code>一个数组，用这个数组作为<code>下标</code>访问就可以得到想要的值了。</p>
+<p>看到这里是不是觉得有点懵，没事，举个例子就明白了：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 示例</span><br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br> <br><span class="hljs-comment"># 创建一个二维数组</span><br>a = numpy.array([[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>],[<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>]])<br> <br><span class="hljs-comment"># 把元素&#x27;1&#x27;和&#x27;5&#x27;的横坐标取出来[0,1]，纵坐标取出来[0,1],合并成数组就是[[0,1],[0,1]]</span><br> <br><span class="hljs-built_in">print</span>(a[[<span class="hljs-number">0</span>,<span class="hljs-number">0</span>],[<span class="hljs-number">0</span>,<span class="hljs-number">1</span>]])<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">[1 2]<br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;也就是说，先根据数组形状，在脑子里构建一个坐标系。你要取什么元素，就把这个元素的横坐标单独取出来，纵坐标单独取出来，然后把这两个列表组合起来当成数组下标就能拿到了你想要的元素了。</p>
+<p><em>还有一个特殊情况，可以用简便方法：</em></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 取出 4 * 3 数组四个角的数据</span><br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br> <br>a = np.array([[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>], [<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>], [<span class="hljs-number">7</span>, <span class="hljs-number">8</span>, <span class="hljs-number">9</span>], [<span class="hljs-number">10</span>, <span class="hljs-number">11</span>, <span class="hljs-number">12</span>]])<br> <br><span class="hljs-comment"># 倒数第一行、列可以用 -1 表示</span><br><span class="hljs-built_in">print</span>(a[[<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,-<span class="hljs-number">1</span>,-<span class="hljs-number">1</span>],[<span class="hljs-number">0</span>,-<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,-<span class="hljs-number">1</span>]])<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">[ 1  3 10 12]<br></code></pre></td></tr></table></figure>
+
+<h3 id="2-2-布尔索引"><a href="#2-2-布尔索引" class="headerlink" title="2.2 布尔索引"></a>2.2 布尔索引</h3><p>通过布尔运算，来获取符合指定条件的元素的数组。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br> <br>a = np.array([<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>,<span class="hljs-number">7</span>])<br> <br><span class="hljs-comment"># 也就是一个包含a的表达式，把数组中每个元素都用这个表达式进行处理并返回一个布尔值</span><br>bool_idx = a &gt; <span class="hljs-number">2</span><br><span class="hljs-built_in">print</span>(bool_idx)<br> <br><span class="hljs-comment"># 将表达式作为下标进行访问，会返回满足条件的元素</span><br><span class="hljs-built_in">print</span>(a[bool_idx])<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">[False False  True  True  True  True]<br>[3 5 6 7]<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 高维数组</span><br> <br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br> <br><span class="hljs-comment"># 一个二维数组</span><br>a = np.array([[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>],[<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>],[<span class="hljs-number">7</span>,<span class="hljs-number">8</span>,<span class="hljs-number">9</span>]])<br> <br><span class="hljs-built_in">print</span>(a)<br> <br> <br><span class="hljs-comment"># 换个行</span><br> <br><span class="hljs-built_in">print</span>()<br> <br><span class="hljs-comment"># 取出满足条件的元素</span><br><span class="hljs-built_in">print</span>(a[a&gt;<span class="hljs-number">4</span>])<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">[[1 2 3]<br> [4 5 6]<br> [7 8 9]]<br><br>[5 6 7 8 9]<br></code></pre></td></tr></table></figure>
+
+<p><em><strong>大的来了——:</strong></em></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br> <br><span class="hljs-comment"># 切片布尔索引</span><br><span class="hljs-comment"># 这里的关键点是被布尔处理后的每个元素返回一个布尔值，为True的返回该元素所在的行或列</span><br> <br> <br><span class="hljs-comment"># 一个二维数组</span><br>a = np.array([[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>],[<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>],[<span class="hljs-number">7</span>,<span class="hljs-number">8</span>,<span class="hljs-number">9</span>]])<br> <br> <br><span class="hljs-comment"># 布尔处理第三列中的值大于3的元素，将结果作为下标索引行</span><br><span class="hljs-comment"># (因为这里的表达式是写在行这边的，所以索引的是行)</span><br><span class="hljs-built_in">print</span>(a[a[...,<span class="hljs-number">2</span>] &gt; <span class="hljs-number">3</span>]) <span class="hljs-comment"># 这里其实默认是(a[a[...,2] &gt; 3],...)</span><br> <br> <br><span class="hljs-comment"># 换个行</span><br><span class="hljs-built_in">print</span>()<br> <br> <br><span class="hljs-comment"># 布尔处理第三行的值大于7的元素，将结果作为下标索引行</span><br><span class="hljs-comment">#（这里是把第三行被布尔处理后的值当作是行的索引）</span><br><span class="hljs-built_in">print</span>(a[a[<span class="hljs-number">2</span>,...] &gt; <span class="hljs-number">7</span>])<br> <br> <br> <br><span class="hljs-comment">######</span><br><span class="hljs-comment"># 比如这里索引的结果是[False,True,True],而表达式在行这边，所以就取下标为1和2的行</span><br><span class="hljs-comment"># 也就是把布尔处理后True的顺序[0(为假)，1，2]作为下标，返回用这个下标的行</span><br><span class="hljs-comment">######</span><br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">[[4 5 6]<br> [7 8 9]]<br><br>[[4 5 6]<br> [7 8 9]]<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 布尔处理第2行 值大于5 的元素，将其作为下标索引所在列(因为这里的表达式是写在列这边的，所以索引的是列)</span><br><span class="hljs-built_in">print</span>(a[:, a[<span class="hljs-number">1</span>] &gt; <span class="hljs-number">5</span>])<br> <br><span class="hljs-comment"># 换个行</span><br><span class="hljs-built_in">print</span>()<br> <br><span class="hljs-comment"># 布尔处理第2列 值大于4 的元素，然后将结果作为下标索引最前面取出来的一、二行中的列</span><br><span class="hljs-built_in">print</span>(a[<span class="hljs-number">0</span>:<span class="hljs-number">2</span>,a[...,<span class="hljs-number">1</span>] &gt; <span class="hljs-number">4</span>])<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">[[3]<br> [6]<br> [9]]<br><br>[[2 3]<br> [5 6]]<br></code></pre></td></tr></table></figure>
+
+<p>这里有一个简单的理解方法:</p>
+<p><code>a []</code> 的括号中是要放表达式的，可能既有行也有列，当其中一个地方(行或列)填表达式时，可以先解读表达式的结果，然后把结果代入另一个列(或行)的切片去找到满足表达式的值。</p>
+<p>同时，布尔运算也能加上逻辑运算符,各个条件要加上()：</p>
+<ul>
+<li><p>&amp;：与运算，组合多个条件。</p>
+</li>
+<li><p>|：或运算，组合多个条件。</p>
+</li>
+<li><p>~：非运算，取反条件。</p>
+</li>
+</ul>
+<h3 id="2-3-提取数组主对角线元素"><a href="#2-3-提取数组主对角线元素" class="headerlink" title="2.3 提取数组主对角线元素"></a>2.3 提取数组主对角线元素</h3><p>使用 <code>diag()</code> 方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br> <br>a = np.array([[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>],[<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>],[<span class="hljs-number">7</span>,<span class="hljs-number">8</span>,<span class="hljs-number">9</span>]])<br><span class="hljs-built_in">print</span>(np.diag(a))<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">[1 5 9]<br></code></pre></td></tr></table></figure>
+
+<h2 id="三-广播"><a href="#三-广播" class="headerlink" title="三.广播"></a>三.广播</h2><p>&emsp;&emsp;是 numpy 对不同形状（shape）的数组进行数值计算的方式,要求维数相同，且各维度的长度相同，如果不相同，可以通过广播机制，这种机制的核心是对形状较小的数组，在横向或纵向上进行一定次数的重复，使其与形状较大的数组拥有相同的维度。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 维度不同，但某一维度上长度（元素个数）相同</span><br> <br><span class="hljs-keyword">import</span> numpy<br> <br>a = numpy.array([<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>])<br>b = numpy.array([[<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>],[<span class="hljs-number">7</span>,<span class="hljs-number">8</span>,<span class="hljs-number">9</span>]])<br> <br><span class="hljs-built_in">print</span>(a + b)<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">[[ 5  7  9]<br> [ 8 10 12]]<br></code></pre></td></tr></table></figure>
+
+<p>可以看到，a的形状是 (3,) ,b的形状是 (2,3) ,a会通过广播机机制复制自身增加维度让自己的形状变成(2,3)，这样a和b的形状就匹配了。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 维度不同，没有一个维度的长度相同，但其中一个数组在该维度上的长度为 1</span><br> <br><span class="hljs-keyword">import</span> numpy<br> <br>a = numpy.array([<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>])<br>b = numpy.array([[<span class="hljs-number">1</span>],[<span class="hljs-number">2</span>]])<br> <br><span class="hljs-built_in">print</span>(a+b)<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">[[2 3 4]<br> [3 4 5]]<br></code></pre></td></tr></table></figure>
+
+<p>维度<strong>不匹配</strong>的时候，先看看其中一个数组的每个维度中是否只有一个元素或没有元素，如果是的话，那么就自动扩展这个维度长度；如果没有元素就向高维扩展（形状（2,2）往前面扩展为（1，2，2））依次扩展其他维度。这里就是把b数组中的<code>[1]</code>扩展成<code>[1 1 1]</code>,<code>[2]</code>扩展成<code>[2 2 2]</code>。然后就变成了长度匹配的做法了。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 与标量相加</span><br> <br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br> <br>a = np.array([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>])<br> <br><span class="hljs-comment"># 1 会自动扩展为[1 1 1 1]</span><br><span class="hljs-built_in">print</span>(a + <span class="hljs-number">1</span>)<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">[2 3 4 5]<br></code></pre></td></tr></table></figure>
+
+<p><em>其余大多数情况，都是不能进行广播的，比如：</em></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br> <br><span class="hljs-comment"># 形状为（3，）</span><br>a = np.array([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>])<br> <br> <br><span class="hljs-comment"># 形状为（2，2）</span><br>b = np.array([[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">4</span>, <span class="hljs-number">5</span>]])<br><span class="hljs-built_in">print</span>(a+b)<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">---------------------------------------------------------------------------<br>ValueError                                Traceback (most recent call last)<br>Cell In[26], line 6<br>      3 a = np.array([1, 2, 3])<br>      5 b = np.array([[1, 2], [4, 5]])<br>----&gt; 6 print(a+b)<br><br>ValueError: operands could not be broadcast together with shapes (3,) (2,2)<br></code></pre></td></tr></table></figure>
+
+<p>也就是两个数组行列<strong>至少</strong>有一边长度相同，另一边长度为1；或俩都有一边长度为1；或一个数组的几个维度长度全为1，这样才可以进行广播相加。</p>
+<h2 id="四-数组遍历"><a href="#四-数组遍历" class="headerlink" title="四.数组遍历"></a>四.数组遍历</h2><h3 id="4-1-遍历数组的第一维度"><a href="#4-1-遍历数组的第一维度" class="headerlink" title="4.1 遍历数组的第一维度"></a>4.1 遍历数组的第一维度</h3><ul>
+<li>for i in arr:</li>
+</ul>
+<p>遍历数组的第一维度，即按行或列的顺序逐个访问元素,返回的是数组的子数组（如行或列），而不是单个元素。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br> <br>a = np.array([[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>],[<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>]])<br> <br><span class="hljs-comment"># 这里就是通过行来进行遍历，一维的话只需要[]就可以了，而不是[][]两个下标才能得到值</span><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> a:<br>    <span class="hljs-built_in">print</span>(i)<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">[1 2 3]<br>[4 5 6]<br></code></pre></td></tr></table></figure>
+
+<h3 id="4-2-nditer逐个访问元素"><a href="#4-2-nditer逐个访问元素" class="headerlink" title="4.2 nditer逐个访问元素"></a>4.2 nditer逐个访问元素</h3><p>是 NumPy 中的一个强大的迭代器对象，其中有两个重要参数：<code>order</code>、<code>flags</code></p>
+<ol>
+<li><code>order</code> 参数用于指定数组的遍历顺序。默认情况下，nditer 按照 C 风格（行优先）遍历数组。</li>
+</ol>
+<ul>
+<li><p>C 风格（行优先）: order&#x3D;’C’</p>
+</li>
+<li><p>Fortran 风格（列优先）: order&#x3D;’F’</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br> <br>a = np.array([[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>],[<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>]])<br> <br><span class="hljs-comment"># 按列优先</span><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> np.nditer(a,order=<span class="hljs-string">&#x27;F&#x27;</span>): <br>    <span class="hljs-built_in">print</span>(i)<br> <br><span class="hljs-comment"># 换个行</span><br><span class="hljs-built_in">print</span>()<br> <br><span class="hljs-comment"># 按行优先</span><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> np.nditer(a,order=<span class="hljs-string">&#x27;C&#x27;</span>): <br>    <span class="hljs-built_in">print</span>(i)<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">1<br>4<br>2<br>5<br>3<br>6<br><br>1<br>2<br>3<br>4<br>5<br>6<br></code></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><code>flags</code> 参数用于指定迭代器的额外行为，一般配合新建变量来使用</li>
+</ol>
+<ul>
+<li><p>multi_index: 返回每个元素的多维索引，这是一个存储数据的东西，需要引用</p>
+</li>
+<li><p>external_loop: 返回一维数组而不是单个元素，减少函数调用的次数，从而提高性能。</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br> <br>a = np.array([[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>],[<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>]])<br> <br><span class="hljs-comment"># 返回多维索引（坐标）</span><br>x = np.nditer(a,flags = [<span class="hljs-string">&#x27;multi_index&#x27;</span>])<br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> x: <br>    <span class="hljs-built_in">print</span>(i,x.multi_index)<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">1 (0, 0)<br>2 (0, 1)<br>3 (0, 2)<br>4 (1, 0)<br>5 (1, 1)<br>6 (1, 2)<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 返回一维数组</span><br> <br><span class="hljs-comment"># external_loop 和 order=&#x27;C&#x27; 一起使用时，会将所有元素打包成一个数组返回，而不是按行打包。</span><br>x = np.nditer(a,flags = [<span class="hljs-string">&#x27;external_loop&#x27;</span>],order=<span class="hljs-string">&#x27;C&#x27;</span>)<br> <br><span class="hljs-comment"># external_loop 和 order=&#x27;F&#x27; 一起使用时，会将每列的元素打包成一个数组返回。</span><br>y = np.nditer(a,flags = [<span class="hljs-string">&#x27;external_loop&#x27;</span>],order=<span class="hljs-string">&#x27;F&#x27;</span>)<br> <br> <br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> x: <br>    <span class="hljs-built_in">print</span>(i)<br> <br><span class="hljs-comment"># 换个行</span><br><span class="hljs-built_in">print</span>()<br> <br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> y: <br>    <span class="hljs-built_in">print</span>(i)<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">[1 2 3 4 5 6]<br><br>[1 4]<br>[2 5]<br>[3 6]<br></code></pre></td></tr></table></figure><div id="paginator"></div></div><div id="post-footer"><div id="pages"><div class="footer-link" style="width: 50%;text-align:right;border-right:1px #fe2 solid"><a href="/post/a271aa48/">← 下一篇 Numpy用法（二）</a></div><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/post/164cf3e1/">Numpy基础 上一篇 →</a></div></div></div></div><div class="bottom-btn"><div><a class="i-top" id="to-top" onClick="scrolls.scrolltop();" title="回到顶部" style="opacity: 0; display: none;">∧ </a><a class="i-index" id="to-index" href="#toc-div" title="文章目录">≡</a><a class="i-color" id="color-mode" onClick="colorMode.change()" title="切换主题"></a><a onclick="BgmControl()"><svg id="bgm-control" viewBox="0 0 30 34" fill="#18d1ff" style="width: 24px; transition: transform .3s;margin-top: 4px"><path d="M25.998 23.422V11.29h3.999v12.132h-3.999zM19.497 6.234h4.001v22.243h-4.001V6.234zM12.998.867h4v32.978h-4V.867zm-6.5 5.367h4.001v22.243H6.498V6.234zm-6.5 5.056h4v12.132h-4V11.29z"></path></svg><audio id="bgm" src="/audio/bgm.mp3" autoplay loop crossorigin="anonymous"> </audio></a></div></div></article><aside><div id="about"><a href="/" id="logo"><img src="https://ak.hypergryph.com/assets/index/images/ak/pc/faction/1.png" alt="Logo" style="margin:0;border-radius:0;"></a><h1 id="Dr"><a href="/">Clocky7</a></h1><div id="description"><p></p></div><div id="social-links"><a class="social" target="_blank" rel="noopener" href="https://github.com/Clocky7"><i class="fab fa-github" alt="GitHub"></i></a></div></div><div id="aside-block"><div id="toc-div"><h1>目录</h1><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80-%E6%95%B0%E7%BB%84%E5%88%87%E7%89%87"><span class="toc-number">1.</span> <span class="toc-text">一.数组切片</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C-%E9%AB%98%E7%BA%A7%E7%B4%A2%E5%BC%95"><span class="toc-number">2.</span> <span class="toc-text">二.高级索引</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E6%95%B4%E6%95%B0%E6%95%B0%E7%BB%84%E7%B4%A2%E5%BC%95"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 整数数组索引</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E5%B8%83%E5%B0%94%E7%B4%A2%E5%BC%95"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 布尔索引</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E6%8F%90%E5%8F%96%E6%95%B0%E7%BB%84%E4%B8%BB%E5%AF%B9%E8%A7%92%E7%BA%BF%E5%85%83%E7%B4%A0"><span class="toc-number">2.3.</span> <span class="toc-text">2.3 提取数组主对角线元素</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89-%E5%B9%BF%E6%92%AD"><span class="toc-number">3.</span> <span class="toc-text">三.广播</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B-%E6%95%B0%E7%BB%84%E9%81%8D%E5%8E%86"><span class="toc-number">4.</span> <span class="toc-text">四.数组遍历</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E9%81%8D%E5%8E%86%E6%95%B0%E7%BB%84%E7%9A%84%E7%AC%AC%E4%B8%80%E7%BB%B4%E5%BA%A6"><span class="toc-number">4.1.</span> <span class="toc-text">4.1 遍历数组的第一维度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-nditer%E9%80%90%E4%B8%AA%E8%AE%BF%E9%97%AE%E5%85%83%E7%B4%A0"><span class="toc-number">4.2.</span> <span class="toc-text">4.2 nditer逐个访问元素</span></a></li></ol></li></ol></div></div><footer><nobr>构建自 <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr><wbr><nobr> 使用主题 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus/hexo-theme-arknights">Arknights</a></nobr><wbr><nobr> 主题作者 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus">Yue_plus</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas></body></html>

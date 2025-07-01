@@ -1,0 +1,127 @@
+<!DOCTYPE html><html lang="zh-cn" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>机器学习-拟合 | Clocky7's Blog</title><link rel="icon" type="image/x-icon" href="/favicon.ico"><link rel="preload" as="font" crossorigin="anonymous" href="/font/Bender.ttf"><link rel="preload" as="font" crossorigin="anonymous" href="/font/BenderLight.ttf"><link rel="preload" as="font" crossorigin="anonymous" href="/font/JetBrainsMono-Regular.woff2"><link rel="stylesheet" href="/css/arknights.css"><style>@font-face {
+  font-family: Bender;
+  src: local('Bender'), url("/font/Bender.ttf"), url("/font/Bender.otf");
+}
+@font-face {
+  font-family: BenderLight;
+  src: local('BenderLight'), url("/font/BenderLight.ttf");
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}
+</style><script>var config = {"root":"/","search":{"preload":false,"activeHolder":"键入以继续","blurHolder":"搜索","noResult":"无 $0 相关数据"},"code":{"codeInfo":"$0 - $1 行","copy":"复制"}}</script><link type="text/css" rel="stylesheet" href="/lib/encrypt/hbe.style.css"><script src="//unpkg.com/mermaid@10.5.0/dist/mermaid.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+ menuSettings: {
+   zoom: "None"
+ },
+ showMathMenu: false,
+ jax: ["input/TeX","output/CommonHTML"],
+ extensions: ["tex2jax.js"],
+ TeX: {
+   extensions: ["AMSmath.js","AMSsymbols.js"],
+   equationNumbers: {
+     autoNumber: "AMS"
+   }
+ },
+ tex2jax: {
+   inlineMath: [["\\(", "\\)"]],
+   displayMath: [["\\[", "\\]"]]
+ }
+});</script><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lightgallery.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-zoom.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-thumbnail.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/css/all.min.css"><style defer src="article.css"></style><link rel="stylesheet" href="article.css"><script>if (window.localStorage.getItem('theme-mode') === 'light')
+ document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark')
+ document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.woff2") format('woff2');
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}</style><style>:root {
+ --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
+ --light-background: url('/img/bk.jpg');
+ --theme-encrypt-confirm: '确认'
+}</style><script defer src="/js/arknights.js"></script><script defer src="/js/search.js"></script><script defer type="module">import mermaid from '//unpkg.com/mermaid@10.5.0/dist/mermaid.esm.mjs';
+window.mermaid = mermaid;
+code.paintMermaid();
+</script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+  menuSettings: {
+    zoom: "None"
+  },
+  showMathMenu: false,
+  jax: ["input/TeX","output/CommonHTML"],
+  extensions: ["tex2jax.js"],
+  TeX: {
+    extensions: ["AMSmath.js","AMSsymbols.js"],
+    equationNumbers: {
+      autoNumber: "AMS"
+    }
+  },
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]]
+  }
+});
+</script><script async src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script async src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script async src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script async src="/lib/encrypt/hbe.js"></script><script async src="/js/pjax.js"></script><script class="pjax-js">reset= () => {document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js','data-pjax','.busuanzi'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><script class="pjax-js">reset= () => {document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="loading" style="opacity: 0;"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><div class="navBtn"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><nav><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="搜索" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup" tabindex="0"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">主页</span></a></li><li class="navItem"><a class="navBlock" href="/about/"><span class="navItemTitle">于我</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">归档</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>机器学习-拟合</h1><div id="post-info"><span>文章发布时间: <div class="control"><time datetime="2025-06-24T06:01:10.000Z" id="date"> 2025-06-24</time></div></span><br><span>最后更新时间: <div class="control"><time datetime="2025-07-01T10:18:14.169Z" id="updated"> 2025-07-01</time></div></span><br><span>文章总字数: <div class="control">809</div></span><br><span>预计阅读时间: <div class="control">2 分钟</div></span></div></div><hr><div id="post-content"><h2 id="一-拟合"><a href="#一-拟合" class="headerlink" title="一.拟合"></a>一.拟合</h2><h3 id="1-1-欠拟合"><a href="#1-1-欠拟合" class="headerlink" title="1.1 欠拟合"></a>1.1 欠拟合</h3><p>指模型在训练数据上表现不佳，同时在新的未见过的数据上也表现不佳。一般是：</p>
+<ul>
+<li><p>训练误差较高。</p>
+</li>
+<li><p>测试误差同样较高。</p>
+</li>
+</ul>
+<p>原因：模型可能过于简化，数据太少，不能充分学习训练数据中的模式。</p>
+<h3 id="1-2-过拟合"><a href="#1-2-过拟合" class="headerlink" title="1.2 过拟合"></a>1.2 过拟合</h3><p>在训练数据上表现得非常好，但在新的未见过的数据上表现较差。一般是：</p>
+<ul>
+<li><p>训练误差非常低。</p>
+</li>
+<li><p>测试误差较高。</p>
+</li>
+</ul>
+<p>原因：模型过于复杂，w过多，学习到了训练数据中的噪声规律。</p>
+<h3 id="1-3-正则化"><a href="#1-3-正则化" class="headerlink" title="1.3 正则化"></a>1.3 正则化</h3><p>正则化就是防止过拟合，增加模型的<strong>鲁棒性</strong>。若两个模型损失都一样，就要看哪个模型的鲁棒性更好。也就是看两个模型对有部分错误的数据集的预测效果如何，如果效果依然不错，那么鲁棒性就好。一般模型参数w越小，同等损失下，鲁棒性越好。那我们既需要模型误差小，又得让鲁棒性更好怎么办？</p>
+<p>这就是正则化的工作。</p>
+<p><strong>正则化</strong>本质就是牺牲模型在训练集上的正确率来提高推广、泛化能力。将原来的损失函数加上一个惩罚项（正则化函数）组成新损失函数，让新损失更小，即让计算出来的模型W相对更小一些，就是正则化</p>
+<p>常用的惩罚项有L1正则项或者L2正则项:</p>
+<p>$L1&#x3D;||w||<em>1&#x3D;\textstyle\sum</em>{i&#x3D;1}^{n}|w_i|$  对应曼哈顿距离</p>
+<p>$L2&#x3D;||w||<em>2&#x3D;\textstyle\sqrt[p]{\sum</em>{i&#x3D;1}^{n}x^p_i,X&#x3D;(x_1,x_2,…x_n)}$  对应欧氏距离</p>
+<p>其实L1和L2正则的公式在数学里面的意义就是范数,代表空间中向量到原点的距离</p>
+<p class='item-img' data-src='/img/temporate/ml32.png'><img src="/img/temporate/ml32.png"></p>
+<p>上图以L2正则化为例，蓝色虚线直观体现正则化的作用。由p点进行梯度下降到P1，没有正则化就会到此为止。加入L2正则化后，其会选择更靠近原点的P2，使得w向量更小。</p>
+<p>当我们把多元线性回归损失函数加上L2正则的时候，就诞生了Ridge岭回归。当我们把多元线性回归损失函数加上L1正则的时候，就孕育出来了Lasso回归。还记得我们之前讲过的损失等高线吗？由于原损失函数加上惩罚项之后图像我们是难想象的，所以我们把损失函数和惩罚项分别画出来，方便理解：</p>
+<p class='item-img' data-src='/img/temporate/ml33.png'><img src="/img/temporate/ml33.png"></p>
+<p class='item-img' data-src='/img/temporate/ml34.png'><img src="/img/temporate/ml34.png"></p>
+<p>图中横纵坐标轴是w1，w2，蓝色就是L2与L1正则化的函数图像，等高线是损失函数loss，紫色是loss相同的两点。我们的目的是让loss加正则化函数的整体变小，那两个函数都得尽量小，成反比的两个函数值就得达到一个平衡点，也就是两个函数图像相交的点，到两个图像的中心即原点和等高线最低点都要尽可能的近。那么显而易见，我们就会选择更靠向原点的紫色点。</p>
+<p class='item-img' data-src='/img/temporate/ml35.png'><img src="/img/temporate/ml35.png"></p>
+<div id="paginator"></div></div><div id="post-footer"><div id="pages"><div class="footer-link" style="width: 50%;text-align:right;border-right:1px #fe2 solid"><a href="/post/b753aecb/">← 下一篇 机器学习-岭回归与Lasso回归</a></div><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/post/a7c96958/">机器学习-sklearn梯度下降 上一篇 →</a></div></div></div></div><div class="bottom-btn"><div><a class="i-top" id="to-top" onClick="scrolls.scrolltop();" title="回到顶部" style="opacity: 0; display: none;">∧ </a><a class="i-index" id="to-index" href="#toc-div" title="文章目录">≡</a><a class="i-color" id="color-mode" onClick="colorMode.change()" title="切换主题"></a><a onclick="BgmControl()"><svg id="bgm-control" viewBox="0 0 30 34" fill="#18d1ff" style="width: 24px; transition: transform .3s;margin-top: 4px"><path d="M25.998 23.422V11.29h3.999v12.132h-3.999zM19.497 6.234h4.001v22.243h-4.001V6.234zM12.998.867h4v32.978h-4V.867zm-6.5 5.367h4.001v22.243H6.498V6.234zm-6.5 5.056h4v12.132h-4V11.29z"></path></svg><audio id="bgm" src="/audio/bgm.mp3" autoplay loop crossorigin="anonymous"> </audio></a></div></div></article><aside><div id="about"><a href="/" id="logo"><img src="https://ak.hypergryph.com/assets/index/images/ak/pc/faction/1.png" alt="Logo" style="margin:0;border-radius:0;"></a><h1 id="Dr"><a href="/">Clocky7</a></h1><div id="description"><p></p></div><div id="social-links"><a class="social" target="_blank" rel="noopener" href="https://github.com/Clocky7"><i class="fab fa-github" alt="GitHub"></i></a></div></div><div id="aside-block"><div id="toc-div"><h1>目录</h1><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80-%E6%8B%9F%E5%90%88"><span class="toc-number">1.</span> <span class="toc-text">一.拟合</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E6%AC%A0%E6%8B%9F%E5%90%88"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 欠拟合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E8%BF%87%E6%8B%9F%E5%90%88"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 过拟合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E6%AD%A3%E5%88%99%E5%8C%96"><span class="toc-number">1.3.</span> <span class="toc-text">1.3 正则化</span></a></li></ol></li></ol></div></div><footer><nobr>构建自 <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr><wbr><nobr> 使用主题 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus/hexo-theme-arknights">Arknights</a></nobr><wbr><nobr> 主题作者 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus">Yue_plus</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas></body></html>

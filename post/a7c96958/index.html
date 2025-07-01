@@ -1,0 +1,183 @@
+<!DOCTYPE html><html lang="zh-cn" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>机器学习-sklearn梯度下降 | Clocky7's Blog</title><link rel="icon" type="image/x-icon" href="/favicon.ico"><link rel="preload" as="font" crossorigin="anonymous" href="/font/Bender.ttf"><link rel="preload" as="font" crossorigin="anonymous" href="/font/BenderLight.ttf"><link rel="preload" as="font" crossorigin="anonymous" href="/font/JetBrainsMono-Regular.woff2"><link rel="stylesheet" href="/css/arknights.css"><style>@font-face {
+  font-family: Bender;
+  src: local('Bender'), url("/font/Bender.ttf"), url("/font/Bender.otf");
+}
+@font-face {
+  font-family: BenderLight;
+  src: local('BenderLight'), url("/font/BenderLight.ttf");
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}
+</style><script>var config = {"root":"/","search":{"preload":false,"activeHolder":"键入以继续","blurHolder":"搜索","noResult":"无 $0 相关数据"},"code":{"codeInfo":"$0 - $1 行","copy":"复制"}}</script><link type="text/css" rel="stylesheet" href="/lib/encrypt/hbe.style.css"><script src="//unpkg.com/mermaid@10.5.0/dist/mermaid.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+ menuSettings: {
+   zoom: "None"
+ },
+ showMathMenu: false,
+ jax: ["input/TeX","output/CommonHTML"],
+ extensions: ["tex2jax.js"],
+ TeX: {
+   extensions: ["AMSmath.js","AMSsymbols.js"],
+   equationNumbers: {
+     autoNumber: "AMS"
+   }
+ },
+ tex2jax: {
+   inlineMath: [["\\(", "\\)"]],
+   displayMath: [["\\[", "\\]"]]
+ }
+});</script><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lightgallery.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-zoom.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-thumbnail.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/css/all.min.css"><style defer src="article.css"></style><link rel="stylesheet" href="article.css"><script>if (window.localStorage.getItem('theme-mode') === 'light')
+ document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark')
+ document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.woff2") format('woff2');
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}</style><style>:root {
+ --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
+ --light-background: url('/img/bk.jpg');
+ --theme-encrypt-confirm: '确认'
+}</style><script defer src="/js/arknights.js"></script><script defer src="/js/search.js"></script><script defer type="module">import mermaid from '//unpkg.com/mermaid@10.5.0/dist/mermaid.esm.mjs';
+window.mermaid = mermaid;
+code.paintMermaid();
+</script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+  menuSettings: {
+    zoom: "None"
+  },
+  showMathMenu: false,
+  jax: ["input/TeX","output/CommonHTML"],
+  extensions: ["tex2jax.js"],
+  TeX: {
+    extensions: ["AMSmath.js","AMSsymbols.js"],
+    equationNumbers: {
+      autoNumber: "AMS"
+    }
+  },
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]]
+  }
+});
+</script><script async src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script async src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script async src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script async src="/lib/encrypt/hbe.js"></script><script async src="/js/pjax.js"></script><script class="pjax-js">reset= () => {document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js','data-pjax','.busuanzi'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><script class="pjax-js">reset= () => {document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="loading" style="opacity: 0;"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><div class="navBtn"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><nav><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="搜索" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup" tabindex="0"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">主页</span></a></li><li class="navItem"><a class="navBlock" href="/about/"><span class="navItemTitle">于我</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">归档</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>机器学习-sklearn梯度下降</h1><div id="post-info"><span>文章发布时间: <div class="control"><time datetime="2025-06-24T06:00:38.000Z" id="date"> 2025-06-24</time></div></span><br><span>最后更新时间: <div class="control"><time datetime="2025-07-01T10:15:22.125Z" id="updated"> 2025-07-01</time></div></span><br><span>文章总字数: <div class="control">2.2k</div></span><br><span>预计阅读时间: <div class="control">9 分钟</div></span></div></div><hr><div id="post-content"><h2 id="sklearn-梯度下降"><a href="#sklearn-梯度下降" class="headerlink" title="sklearn 梯度下降"></a>sklearn 梯度下降</h2><p>官方的梯度下降API常用有三种:</p>
+<ul>
+<li><p>批量梯度下降BGD(Batch Gradient Descent) </p>
+</li>
+<li><p>小批量梯度下降MBGD(Mini-BatchGradient Descent)</p>
+</li>
+<li><p>随机梯度下降SGD(Stochastic Gradient Descent)。</p>
+</li>
+</ul>
+<p class='item-img' data-src='/img/temporate/ml31.png'><img src="/img/temporate/ml31.png"></p>
+<p>上面的图中，描述的正是三种梯度下降算法实现的过程，黑色等高线代表损失。接下来我们详细讲讲：</p>
+<h2 id="一-批量梯度下降BGD"><a href="#一-批量梯度下降BGD" class="headerlink" title="一.批量梯度下降BGD"></a>一.批量梯度下降BGD</h2><p>其使用整个训练数据集来计算梯度并更新模型参数，这也就是我们之前用的算法。每一次迭代都使用所有数据来进行训练（构建损失函数），这使得更新方向更加准确，但计算成本较高，且一个很大的缺点是需要在内存中存储整个数据集，对于大型数据集来说可能成为一个问题。</p>
+<p>而且BGD是没有专门的API函数的，所以只能自己实现，包括损失函数的计算，梯度的计算以及权重更新的代码都要自己写。</p>
+<h2 id="二-随机梯度下降SGD"><a href="#二-随机梯度下降SGD" class="headerlink" title="二.随机梯度下降SGD"></a>二.随机梯度下降SGD</h2><p>每一步更新参数时，仅使用单个训练样本，用这个样本计算梯度，然后更新参数w，直到一轮训练epoch完成,即整个数据集被遍历完一次。</p>
+<p>每一次更新用的都是上一个样本更新的w,来计算这一次选择的样本的梯度，然后再更新w。</p>
+<p>后期能够很好地解决局部最优解的问题。然而，由于每次只使用一个样本进行更新，梯度估计可能较为嘈杂，这可能导致更新过程中出现较大的波动。在实际应用中，可以通过减少学习率（例如采用学习率衰减策略）来解决。</p>
+<p>注意：</p>
+<ul>
+<li><p>学习率 alpha: 需要适当设置，太大会导致算法不收敛，太小则收敛速度慢。</p>
+</li>
+<li><p>随机性: 每次迭代都从训练集中随机选择一个样本，这有助于避免陷入<strong>局部最小值</strong>。</p>
+</li>
+<li><p>停止条件: 可以是达到预定的最大迭代次数，或者梯度的范数小于某个阈值。</p>
+</li>
+</ul>
+<p>API:</p>
+<p><code>sklearn.linear_model.SGDRegressor()</code></p>
+<p>参数:</p>
+<ul>
+<li><p>loss: 损失函数，默认为 squared_error</p>
+</li>
+<li><p>fit_intercept: 是否计算偏置，default&#x3D;True</p>
+</li>
+<li><p>eta0:学习率初始值，默认0.01</p>
+</li>
+<li><p>learning_rate: </p>
+<ul>
+<li>constant: eta &#x3D; eta0 学习率为eta0设置的值，保持不变</li>
+</ul>
+<p>  <em><strong>下面的三种都是让学习率不断减小，只是公式不同：</strong></em></p>
+<ul>
+<li>optimal: eta &#x3D; 1.0 &#x2F; (alpha * (t + t0)) </li>
+<li>invscaling（默认）: eta &#x3D; eta0 &#x2F; pow(t, power_t)</li>
+<li>adaptive: eta &#x3D; eta0, 学习率由eta0开始，逐步变小</li>
+</ul>
+</li>
+<li><p>max_iter: 取数据的次数，default&#x3D;1000</p>
+</li>
+<li><p>shuffle&#x3D;True 每批次是否洗牌</p>
+</li>
+<li><p>penalty（暂时不用管）:要使用的惩罚(又称正则化项)</p>
+<p>   默认为’ l2 ‘，这是线性SVM模型的标准正则化器。</p>
+<p>  ‘ l1 ‘和’ elasticnet ‘可能会给模型(特征选择)带来’ l2 ‘无法实现的稀疏性。</p>
+<p>  当设置为None时，不添加惩罚。</p>
+</li>
+</ul>
+<p>属性：</p>
+<ul>
+<li><p>coef_ 回归后的权重系数</p>
+</li>
+<li><p>intercept_ 偏置</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 线性回归 加载糖尿病数据集，进行回归预测</span><br><span class="hljs-keyword">from</span> sklearn.model_selection <span class="hljs-keyword">import</span> train_test_split<br><span class="hljs-keyword">from</span> sklearn.preprocessing <span class="hljs-keyword">import</span> StandardScaler<br><span class="hljs-keyword">from</span> sklearn.linear_model <span class="hljs-keyword">import</span> SGDRegressor<br><span class="hljs-keyword">from</span> sklearn.metrics <span class="hljs-keyword">import</span> mean_squared_error<br><br><span class="hljs-keyword">from</span> sklearn.datasets <span class="hljs-keyword">import</span> load_diabetes<br><span class="hljs-comment"># 加载数据</span><br>diabetes = load_diabetes()<br><span class="hljs-built_in">print</span>(diabetes)<br><span class="hljs-comment"># 划分训练集与测试集</span><br>x_train, x_test, y_train, y_test = train_test_split(diabetes.data, diabetes.target, random_state=<span class="hljs-number">22</span>)<br><span class="hljs-comment"># 标准化</span><br>transfer = StandardScaler()<br>x_train = transfer.fit_transform(x_train)<br>x_test = transfer.transform(x_test)<br><br><span class="hljs-comment"># 线性回归预估器</span><br>estimator = SGDRegressor(learning_rate=<span class="hljs-string">&quot;constant&quot;</span>, eta0=<span class="hljs-number">0.01</span>, max_iter=<span class="hljs-number">10000</span>,loss=<span class="hljs-string">&quot;squared_error&quot;</span>)<br><br>estimator.fit(x_train, y_train)<br><br><span class="hljs-comment"># 得出模型</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;权重系数为：\n&quot;</span>, estimator.coef_)  <span class="hljs-comment">#权重系数与特征数一定是同样的个数。</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;偏置为：\n&quot;</span>, estimator.intercept_)<br><br><span class="hljs-comment"># 模型评估</span><br>y_predict = estimator.predict(x_test)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;预测的数据集：\n&quot;</span>, y_predict)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;得分:\n&quot;</span>,estimator.score(x_test, y_test))<br>error = mean_squared_error(y_test, y_predict)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;均方误差为：\n&quot;</span>, error)<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">&#123;&#x27;data&#x27;: array([[ 0.03807591,  0.05068012,  0.06169621, ..., -0.00259226,<br>         0.01990749, -0.01764613],<br>       [-0.00188202, -0.04464164, -0.05147406, ..., -0.03949338,<br>        -0.06833155, -0.09220405],<br>       [ 0.08529891,  0.05068012,  0.04445121, ..., -0.00259226,<br>         0.00286131, -0.02593034],<br>       ...,<br>       [ 0.04170844,  0.05068012, -0.01590626, ..., -0.01107952,<br>        -0.04688253,  0.01549073],<br>       [-0.04547248, -0.04464164,  0.03906215, ...,  0.02655962,<br>         0.04452873, -0.02593034],<br>       [-0.04547248, -0.04464164, -0.0730303 , ..., -0.03949338,<br>        -0.00422151,  0.00306441]], shape=(442, 10)), &#x27;target&#x27;: array([151.,  75., 141., 206., 135.,  97., 138.,  63., 110., 310., 101.,<br>        69., 179., 185., 118., 171., 166., 144.,  97., 168.,  68.,  49.,<br>        68., 245., 184., 202., 137.,  85., 131., 283., 129.,  59., 341.,<br>        87.,  65., 102., 265., 276., 252.,  90., 100.,  55.,  61.,  92.,<br>       259.,  53., 190., 142.,  75., 142., 155., 225.,  59., 104., 182.,<br>       128.,  52.,  37., 170., 170.,  61., 144.,  52., 128.,  71., 163.,<br>       150.,  97., 160., 178.,  48., 270., 202., 111.,  85.,  42., 170.,<br>       200., 252., 113., 143.,  51.,  52., 210.,  65., 141.,  55., 134.,<br>        42., 111.,  98., 164.,  48.,  96.,  90., 162., 150., 279.,  92.,<br>        83., 128., 102., 302., 198.,  95.,  53., 134., 144., 232.,  81.,<br>       104.,  59., 246., 297., 258., 229., 275., 281., 179., 200., 200.,<br>       173., 180.,  84., 121., 161.,  99., 109., 115., 268., 274., 158.,<br>       107.,  83., 103., 272.,  85., 280., 336., 281., 118., 317., 235.,<br>...<br>得分:<br> 0.4759617296042802<br>均方误差为：<br> 3208.299159729948<br></code></pre></td></tr></table></figure>
+
+<h2 id="三-小批量梯度下降MBGD"><a href="#三-小批量梯度下降MBGD" class="headerlink" title="三.小批量梯度下降MBGD"></a>三.小批量梯度下降MBGD</h2><p>小批量梯度下降是一种介于批量梯度下降（BGD）与随机梯度下降（SGD）之间的优化算法，它结合了两者的优点，在机器学习和深度学习中被广泛使用。</p>
+<p>基本思想是在每个迭代步骤中使用一小部分（即“小批量”）训练样本来计算损失函数的梯度，并据此更新模型参数。小批量梯度下降能够在保持较快的收敛速度的同时，维持相对较高的稳定性。且MBGD和SGD都有几个优点：</p>
+<ol>
+<li><p>减少内存需求</p>
+</li>
+<li><p>可以进行分布式训练：因为一般数据集很大，数据都是存在磁盘中，每次使用取一部分出来。只取一条或者一批数据方便几台电脑同时训练一个大数据集</p>
+</li>
+<li><p>在线学习：可以随时训练，即使用原数据开始训练时，另一个新的数据集也可以加入训练中</p>
+</li>
+</ol>
+<p>但由于没有BGD的API，所以只能用SGD来实现。但严格来说这样实现的也不是MBGD的算法思想，而是另一种接近的思想。</p>
+<p>注意：我们分批次（batch）地训练模型，调用<strong>partial_fit</strong>函数训练会直接更新权重,而不需要调fit从头开始训练。</p>
+<p>fit()是不用自己设置迭代次数的，max_iter就能控制迭代次数。而partial_fit()每次只能训练一批数据，迭代需要自己实现，max_iter不起作用。所以每一批次的训练需要自己来用for循环实现，所有批次遍历完就是一个epoch。只使用SGD的话，也就是使用fit会使用其中默认的batch_size&#x3D;1，即每次迭代训练一个样本。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 具体实现方法</span><br><span class="hljs-comment"># 线性回归 加载糖尿病数据集，进行回归预测</span><br><span class="hljs-keyword">from</span> sklearn.model_selection <span class="hljs-keyword">import</span> train_test_split<br><span class="hljs-keyword">from</span> sklearn.preprocessing <span class="hljs-keyword">import</span> StandardScaler<br><span class="hljs-keyword">from</span> sklearn.linear_model <span class="hljs-keyword">import</span>  SGDRegressor<br><span class="hljs-keyword">from</span> sklearn.metrics <span class="hljs-keyword">import</span> mean_squared_error<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">import</span> math<br><span class="hljs-keyword">import</span> time<br><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">import</span> joblib<br><br><span class="hljs-keyword">from</span> sklearn.datasets <span class="hljs-keyword">import</span> load_diabetes<br>diabetes = load_diabetes()<br><br><span class="hljs-comment"># 若本地有模型，选择获取</span><br>model_path=os.path.join(os.path.dirname(__file__),<span class="hljs-string">&#x27;../model&#x27;</span>,<span class="hljs-string">&quot;mbgd_regressor_model.pkl&quot;</span>)<br>transfer_path=os.path.join(os.path.dirname(__file__),<span class="hljs-string">&#x27;../model&#x27;</span>,<span class="hljs-string">&quot;mbgd_transfer.pkl&quot;</span>)<br><br>model=<span class="hljs-literal">None</span><br>transfer=<span class="hljs-literal">None</span><br><span class="hljs-comment"># 根据模型再本地是否存在，选择两种模型加载方式</span><br><span class="hljs-keyword">if</span> os.path.exists(model_path):<br>    model=joblib.load(model_path)<br>    transfer=joblib.load(transfer_path)<br><span class="hljs-keyword">else</span>:<br>    model=SGDRegressor(fit_intercept=<span class="hljs-literal">False</span>,loss=<span class="hljs-string">&quot;squared_error&quot;</span>,max_iter=<span class="hljs-number">100</span>,eta0=<span class="hljs-number">0.001</span>,learning_rate=<span class="hljs-string">&quot;constant&quot;</span>)<br>    transfer=StandardScaler()<br><br><span class="hljs-comment"># 划分训练集与测试集</span><br>x_train, x_test, y_train, y_test = train_test_split(diabetes.data, diabetes.target, random_state=<span class="hljs-number">22</span>)<br><br><span class="hljs-comment"># 标准化</span><br>transfer = StandardScaler()<br>x_train = transfer.fit_transform(x_train)<br>x_test = transfer.transform(x_test)<br><br><span class="hljs-comment"># 定义超参数</span><br>batch_size = <span class="hljs-number">32</span>  <span class="hljs-comment"># 批量大小</span><br>epochs = <span class="hljs-number">100</span>  <span class="hljs-comment"># 迭代次数</span><br><br><span class="hljs-comment"># 线性回归预估器</span><br>model = SGDRegressor(fit_intercept=<span class="hljs-literal">False</span>,learning_rate=<span class="hljs-string">&quot;constant&quot;</span>, eta0=<span class="hljs-number">0.001</span>, max_iter=<span class="hljs-number">100</span>,shuffle=<span class="hljs-literal">True</span>)<br><br><span class="hljs-comment"># 批次数量,向上取整</span><br>n_batches = math.ceil(<span class="hljs-built_in">len</span>(x_train) / batch_size)  <br><br><span class="hljs-comment"># 这个循环是迭代次数的体现</span><br><span class="hljs-keyword">for</span> epoch <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(epochs):<br>    <span class="hljs-comment"># 随机打乱样本顺序</span><br>    indices = np.arange(<span class="hljs-built_in">len</span>(x_train))<br>    np.random.shuffle(indices)<br>    start_time = time.time()<br>    <br><br>    <span class="hljs-comment"># 这个循环是为了把每个批次都取一遍，因为把所有数据都取一次才算一次迭代epoch</span><br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n_batches):<br>        start_idx = i * batch_size<br>        <span class="hljs-comment"># 因为最后一批可能不足一个batch_size，所以要用min函数</span><br>        end_idx = <span class="hljs-built_in">min</span>((i + <span class="hljs-number">1</span>) * batch_size,<span class="hljs-built_in">len</span>(x_train))<br>        batch_indices = indices[start_idx:end_idx]<br>        X_batch = x_train[batch_indices]<br>        y_batch = y_train[batch_indices]<br>        model.partial_fit(X_batch, y_batch)  <span class="hljs-comment"># 更新模型权重</span><br><br>    score = model.score(x_test, y_test)<br>    <span class="hljs-comment"># 打印每一轮的评分与训练时间</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;训练轮次:<span class="hljs-subst">&#123;epoch&#125;</span> / <span class="hljs-subst">&#123;epochs&#125;</span>, score:<span class="hljs-subst">&#123;score&#125;</span>, 训练时间:<span class="hljs-subst">&#123;time.time() - start_time&#125;</span>s&quot;</span>)<br><br>    <span class="hljs-comment"># 保存模型</span><br>    joblib.dump(model,model_path)<br>    joblib.dump(transfer,transfer_path)<br>  <br><span class="hljs-comment"># 得出模型</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;权重系数为：\n&quot;</span>, model.coef_)  <span class="hljs-comment">#权重系数与特征数一定是同样的个数。</span><br><br><span class="hljs-comment"># 模型评估</span><br>y_predict = model.predict(x_test)<br>error = mean_squared_error(y_test, y_predict)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;均方误差为：\n&quot;</span>, error)<br><br><span class="hljs-comment"># 预测</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">detect</span>():<br>    model=joblib.load(model_path)<br>    transfer=joblib.load(transfer_path)<br>    x_true=[[<span class="hljs-number">0.1</span>,<span class="hljs-number">0.2</span>,<span class="hljs-number">0.3</span>,<span class="hljs-number">0.4</span>,<span class="hljs-number">0.5</span>,<span class="hljs-number">0.6</span>,<span class="hljs-number">0.7</span>,<span class="hljs-number">0.8</span>,<span class="hljs-number">0.9</span>,<span class="hljs-number">1.0</span>]]<br>    x_true=transfer.transform(x_true)<br>    <span class="hljs-built_in">print</span>(model.predict(x_true))<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    detect()<br></code></pre></td></tr></table></figure>
+
+<p>以后梯度下降都是用的MBGD方法，且上面的代码就是机器学习及深度学习的基本步骤。</p>
+<h2 id="四-梯度下降优化"><a href="#四-梯度下降优化" class="headerlink" title="四.梯度下降优化"></a>四.梯度下降优化</h2><h3 id="4-1-标准化"><a href="#4-1-标准化" class="headerlink" title="4.1 标准化"></a>4.1 标准化</h3><p>针对数据方面的问题优化</p>
+<h3 id="4-2-正则化"><a href="#4-2-正则化" class="headerlink" title="4.2 正则化"></a>4.2 正则化</h3><p>针对模型方面的问题优化，把模型变简单</p>
+<div id="paginator"></div></div><div id="post-footer"><div id="pages"><div class="footer-link" style="width: 50%;text-align:right;border-right:1px #fe2 solid"><a href="/post/c9db4650/">← 下一篇 机器学习-拟合</a></div><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/post/65419645/">机器学习-梯度下降 上一篇 →</a></div></div></div></div><div class="bottom-btn"><div><a class="i-top" id="to-top" onClick="scrolls.scrolltop();" title="回到顶部" style="opacity: 0; display: none;">∧ </a><a class="i-index" id="to-index" href="#toc-div" title="文章目录">≡</a><a class="i-color" id="color-mode" onClick="colorMode.change()" title="切换主题"></a><a onclick="BgmControl()"><svg id="bgm-control" viewBox="0 0 30 34" fill="#18d1ff" style="width: 24px; transition: transform .3s;margin-top: 4px"><path d="M25.998 23.422V11.29h3.999v12.132h-3.999zM19.497 6.234h4.001v22.243h-4.001V6.234zM12.998.867h4v32.978h-4V.867zm-6.5 5.367h4.001v22.243H6.498V6.234zm-6.5 5.056h4v12.132h-4V11.29z"></path></svg><audio id="bgm" src="/audio/bgm.mp3" autoplay loop crossorigin="anonymous"> </audio></a></div></div></article><aside><div id="about"><a href="/" id="logo"><img src="https://ak.hypergryph.com/assets/index/images/ak/pc/faction/1.png" alt="Logo" style="margin:0;border-radius:0;"></a><h1 id="Dr"><a href="/">Clocky7</a></h1><div id="description"><p></p></div><div id="social-links"><a class="social" target="_blank" rel="noopener" href="https://github.com/Clocky7"><i class="fab fa-github" alt="GitHub"></i></a></div></div><div id="aside-block"><div id="toc-div"><h1>目录</h1><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#sklearn-%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D"><span class="toc-number">1.</span> <span class="toc-text">sklearn 梯度下降</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80-%E6%89%B9%E9%87%8F%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8DBGD"><span class="toc-number">2.</span> <span class="toc-text">一.批量梯度下降BGD</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C-%E9%9A%8F%E6%9C%BA%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8DSGD"><span class="toc-number">3.</span> <span class="toc-text">二.随机梯度下降SGD</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89-%E5%B0%8F%E6%89%B9%E9%87%8F%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8DMBGD"><span class="toc-number">4.</span> <span class="toc-text">三.小批量梯度下降MBGD</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B-%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E4%BC%98%E5%8C%96"><span class="toc-number">5.</span> <span class="toc-text">四.梯度下降优化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E6%A0%87%E5%87%86%E5%8C%96"><span class="toc-number">5.1.</span> <span class="toc-text">4.1 标准化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E6%AD%A3%E5%88%99%E5%8C%96"><span class="toc-number">5.2.</span> <span class="toc-text">4.2 正则化</span></a></li></ol></li></ol></div></div><footer><nobr>构建自 <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr><wbr><nobr> 使用主题 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus/hexo-theme-arknights">Arknights</a></nobr><wbr><nobr> 主题作者 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus">Yue_plus</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas></body></html>

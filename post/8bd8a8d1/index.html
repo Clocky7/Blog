@@ -1,0 +1,216 @@
+<!DOCTYPE html><html lang="zh-cn" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>图像预处理-色彩空间（补充），灰度化与二值化 | Clocky7's Blog</title><link rel="icon" type="image/x-icon" href="/favicon.ico"><link rel="preload" as="font" crossorigin="anonymous" href="/font/Bender.ttf"><link rel="preload" as="font" crossorigin="anonymous" href="/font/BenderLight.ttf"><link rel="preload" as="font" crossorigin="anonymous" href="/font/JetBrainsMono-Regular.woff2"><link rel="stylesheet" href="/css/arknights.css"><style>@font-face {
+  font-family: Bender;
+  src: local('Bender'), url("/font/Bender.ttf"), url("/font/Bender.otf");
+}
+@font-face {
+  font-family: BenderLight;
+  src: local('BenderLight'), url("/font/BenderLight.ttf");
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}
+</style><script>var config = {"root":"/","search":{"preload":false,"activeHolder":"键入以继续","blurHolder":"搜索","noResult":"无 $0 相关数据"},"code":{"codeInfo":"$0 - $1 行","copy":"复制"}}</script><link type="text/css" rel="stylesheet" href="/lib/encrypt/hbe.style.css"><script src="//unpkg.com/mermaid@10.5.0/dist/mermaid.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+ menuSettings: {
+   zoom: "None"
+ },
+ showMathMenu: false,
+ jax: ["input/TeX","output/CommonHTML"],
+ extensions: ["tex2jax.js"],
+ TeX: {
+   extensions: ["AMSmath.js","AMSsymbols.js"],
+   equationNumbers: {
+     autoNumber: "AMS"
+   }
+ },
+ tex2jax: {
+   inlineMath: [["\\(", "\\)"]],
+   displayMath: [["\\[", "\\]"]]
+ }
+});</script><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lightgallery.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-zoom.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-thumbnail.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/css/all.min.css"><style defer src="article.css"></style><link rel="stylesheet" href="article.css"><script>if (window.localStorage.getItem('theme-mode') === 'light')
+ document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark')
+ document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.woff2") format('woff2');
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}</style><style>:root {
+ --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
+ --light-background: url('/img/bk.jpg');
+ --theme-encrypt-confirm: '确认'
+}</style><script defer src="/js/arknights.js"></script><script defer src="/js/search.js"></script><script defer type="module">import mermaid from '//unpkg.com/mermaid@10.5.0/dist/mermaid.esm.mjs';
+window.mermaid = mermaid;
+code.paintMermaid();
+</script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+  menuSettings: {
+    zoom: "None"
+  },
+  showMathMenu: false,
+  jax: ["input/TeX","output/CommonHTML"],
+  extensions: ["tex2jax.js"],
+  TeX: {
+    extensions: ["AMSmath.js","AMSsymbols.js"],
+    equationNumbers: {
+      autoNumber: "AMS"
+    }
+  },
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]]
+  }
+});
+</script><script async src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script async src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script async src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script async src="/lib/encrypt/hbe.js"></script><script async src="/js/pjax.js"></script><script class="pjax-js">reset= () => {document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js','data-pjax','.busuanzi'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><script class="pjax-js">reset= () => {document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="loading" style="opacity: 0;"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><div class="navBtn"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><nav><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="搜索" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup" tabindex="0"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">主页</span></a></li><li class="navItem"><a class="navBlock" href="/about/"><span class="navItemTitle">于我</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">归档</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>图像预处理-色彩空间（补充），灰度化与二值化</h1><div id="post-info"><span>文章发布时间: <div class="control"><time datetime="2025-06-24T05:50:03.000Z" id="date"> 2025-06-24</time></div></span><br><span>最后更新时间: <div class="control"><time datetime="2025-07-01T02:08:45.109Z" id="updated"> 2025-07-01</time></div></span><br><span>文章总字数: <div class="control">2.3k</div></span><br><span>预计阅读时间: <div class="control">9 分钟</div></span></div></div><hr><div id="post-content"><h2 id="一-图像色彩空间转换"><a href="#一-图像色彩空间转换" class="headerlink" title="一.图像色彩空间转换"></a>一.图像色彩空间转换</h2><h3 id="1-1-HSV颜色空间"><a href="#1-1-HSV颜色空间" class="headerlink" title="1.1 HSV颜色空间"></a>1.1 HSV颜色空间</h3><p>HSV颜色空间使用色调（Hue）、饱和度（Saturation）和亮度（Value）三个参数来表示颜色</p>
+<p>一般对颜色空间的图像进行有效处理都是在HSV空间进行的，然后对于基本色中对应的HSV分量需要给定一个严格的范围，下面是通过实验计算的模糊范围（准确的范围在网上都没有给出）。</p>
+<p>H: 0— 180</p>
+<p>S: 0— 255</p>
+<p>V: 0— 255</p>
+<p class='item-img' data-src='/img/temporate/cv42.png'><img src="/img/temporate/cv42.png"></p>
+<p>也就是可以通过颜色的范围来提取图像中的一种或多种颜色。</p>
+<p>HSV的好处：</p>
+<ul>
+<li><p>符合人类对颜色的感知方式：人类对颜色的感知是基于色调、饱和度和亮度三个维度的，而HSV颜色空间恰好就是通过这三个维度来描述颜色的。因此，使用HSV空间处理图像可以更直观地调整颜色和进行色彩平衡等操作，更符合人类的感知习惯。</p>
+</li>
+<li><p>颜色调整更加直观：例如，在RGB空间中要调整红色系的颜色，需要同时调整R、G、B三个通道的数值，而在HSV空间中只需要调整色调和饱和度即可。</p>
+</li>
+<li><p>降维处理有利于计算：在图像处理中，降维处理可以减少计算的复杂性和计算量。HSV颜色空间相对于RGB颜色空间，减少了两个维度（红、绿、蓝）</p>
+</li>
+</ul>
+<h3 id="1-2-颜色空间转换"><a href="#1-2-颜色空间转换" class="headerlink" title="1.2 颜色空间转换"></a>1.2 颜色空间转换</h3><p><code>cv2.cvtColor(img,code)</code></p>
+<p>code：指定转换的类型，可以使用预定义的转换代码。</p>
+<ul>
+<li><p>cv2.COLOR_RGB2GRAY 表示从RGB到灰度图像的转换</p>
+</li>
+<li><p>cv2.COLOR_BGR2HSV 从RGB到HSV的转换</p>
+</li>
+</ul>
+<h2 id="二-灰度化"><a href="#二-灰度化" class="headerlink" title="二.灰度化"></a>二.灰度化</h2><p>彩色图是由R、G、B三个通道组成，而灰度图只有<strong>一个</strong>通道。</p>
+<p>灰度图像与黑白图像不同，在计算机图像领域中黑白图像只有黑色与白色两种颜色但是，灰度图像的取值可以是0~255，不过只有一个通道。这样可以有256级灰度。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 在读取时也可以直接将其转化为灰度图</span><br><span class="hljs-keyword">import</span> cv2 <span class="hljs-keyword">as</span> cv<br> <br>img = cv.imread(<span class="hljs-string">&#x27;../images/flower.png&#x27;</span>, cv.IMREAD_GRAYSCALE)<br>cv.imshow(<span class="hljs-string">&#x27;Gray Image&#x27;</span>, img)<br>cv.waitKey(<span class="hljs-number">0</span>)<br>cv.destroyAllWindows()<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p class='item-img' data-src='/img/temporate/cv43.png'><img src="/img/temporate/cv43.png"></p>
+<h3 id="2-1-最大值法"><a href="#2-1-最大值法" class="headerlink" title="2.1 最大值法"></a>2.1 最大值法</h3><p>从R、G、B三个通道的值中选出最大的一个，并将其作为灰度图像中对应位置的像素值。</p>
+<h3 id="2-2-平均值法"><a href="#2-2-平均值法" class="headerlink" title="2.2 平均值法"></a>2.2 平均值法</h3><p>将R、G、B三个通道的像素值全部加起来，然后再除以三。</p>
+<h3 id="2-3-加权均值法（最常用且内置）"><a href="#2-3-加权均值法（最常用且内置）" class="headerlink" title="2.3 加权均值法（最常用且内置）"></a>2.3 加权均值法（最常用且内置）</h3><p>按照一定的权重去乘以每个通道的像素值，并将其相加，得到最后的值就是灰度图像中对应位置的像素值。权重的比例为： R乘以0.299，G乘以0.587，B乘以0.114，这是经过大量实验得到的一个权重比例，也是一个比较常用的权重比例。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> cv2 <span class="hljs-keyword">as</span> cv<br> <br>img = cv.imread(<span class="hljs-string">&#x27;../images/flower.png&#x27;</span>)<br>flower = cv.resize(img,(<span class="hljs-number">200</span>, <span class="hljs-number">200</span>))<br> <br>gray = cv.cvtColor(flower, cv.COLOR_BGR2GRAY)<br> <br>cv.imshow(<span class="hljs-string">&#x27;Original&#x27;</span>, flower)<br>cv.imshow(<span class="hljs-string">&#x27;Gray&#x27;</span>, gray) <br> <br>cv.waitKey(<span class="hljs-number">0</span>)   <br>cv.destroyAllWindows()<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p class='item-img' data-src='/img/temporate/cv44.png'><img src="/img/temporate/cv44.png"></p>
+<h2 id="三-二值化处理"><a href="#三-二值化处理" class="headerlink" title="三. 二值化处理"></a>三. 二值化处理</h2><p>二值图像的二维矩阵仅由两个值构成，也就是灰度图像的取值范围变了，只有0，1</p>
+<ul>
+<li>其操作的图像必须是灰度图</li>
+</ul>
+<p>二值化处理函数：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">_,binary = cv2.threshold(img,thresh,maxval,type)<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><p>img：输入图像，要进行二值化处理的灰度图。</p>
+</li>
+<li><p>thresh：设定的阈值。</p>
+</li>
+<li><p>maxval：当像素值大于(或小于，取决于阈值类型)thresh时，该像素被赋予的值。</p>
+</li>
+<li><p>type：阈值处理的类型。</p>
+</li>
+<li><p>返回值：</p>
+<ul>
+<li><p>第一个值（通常用下划线表示）：计算出的阈值，若使用自适应阈值法，会根据算法自动计算出这个值。</p>
+</li>
+<li><p>第二个值（binary）：二值化后的图像矩阵。与输入图像尺寸相同。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-1-阈值法"><a href="#3-1-阈值法" class="headerlink" title="3.1 阈值法"></a>3.1 阈值法</h3><p><code>THRESH_BINARY</code></p>
+<p>设置一个阈值，将灰度图中的每一个像素值与该阈值进行比较，小于等于阈值的像素就被设置为0（通常代表背景），大于阈值的像素就被设置为maxval(通常为255)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> cv2 <span class="hljs-keyword">as</span> cv<br> <br>img = cv.imread(<span class="hljs-string">&#x27;../images/flower.png&#x27;</span>)<br>flower = cv.resize(img,(<span class="hljs-number">200</span>, <span class="hljs-number">200</span>))<br> <br><span class="hljs-comment"># 获得灰度图</span><br>gray = cv.cvtColor(flower, cv.COLOR_BGR2GRAY)<br> <br><span class="hljs-comment"># 使用阈值法二值化</span><br>_,binary = cv.threshold(gray, <span class="hljs-number">127</span>, <span class="hljs-number">255</span>, cv.THRESH_BINARY)<br> <br>cv.imshow(<span class="hljs-string">&#x27;flower&#x27;</span>, gray)<br>cv.imshow(<span class="hljs-string">&#x27;binary&#x27;</span>, binary)<br>cv.waitKey(<span class="hljs-number">0</span>)<br>cv.destroyAllWindows()<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p class='item-img' data-src='/img/temporate/cv45.png'><img src="/img/temporate/cv45.png"></p>
+<h3 id="3-2-反阈值法"><a href="#3-2-反阈值法" class="headerlink" title="3.2 反阈值法"></a>3.2 反阈值法</h3><p><code>THRESH_BINARY_INV</code></p>
+<p>与阈值法相反</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> cv2 <span class="hljs-keyword">as</span> cv<br> <br>img = cv.imread(<span class="hljs-string">&#x27;../images/flower.png&#x27;</span>)<br>flower = cv.resize(img,(<span class="hljs-number">200</span>, <span class="hljs-number">200</span>))<br> <br><span class="hljs-comment"># 获得灰度图</span><br>gray = cv.cvtColor(flower, cv.COLOR_BGR2GRAY)<br> <br><span class="hljs-comment"># 使用反阈值法二值化</span><br>_,binary = cv.threshold(gray, <span class="hljs-number">127</span>, <span class="hljs-number">255</span>, cv.THRESH_BINARY_INV)<br> <br>cv.imshow(<span class="hljs-string">&#x27;flower&#x27;</span>, gray)<br>cv.imshow(<span class="hljs-string">&#x27;binary&#x27;</span>, binary)<br>cv.waitKey(<span class="hljs-number">0</span>)<br>cv.destroyAllWindows()<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p class='item-img' data-src='/img/temporate/cv46.png'><img src="/img/temporate/cv46.png"></p>
+<h3 id="3-3-截断阈值法"><a href="#3-3-截断阈值法" class="headerlink" title="3.3 截断阈值法"></a>3.3 截断阈值法</h3><p><code>THRESH_TRUNC</code></p>
+<p>所有像素与阈值进行比较，像素值大于阈值的部分将会被修改为阈值，小于等于阈值的部分不变。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> cv2 <span class="hljs-keyword">as</span> cv<br> <br>img = cv.imread(<span class="hljs-string">&#x27;../images/flower.png&#x27;</span>)<br>flower = cv.resize(img,(<span class="hljs-number">200</span>, <span class="hljs-number">200</span>))<br> <br><span class="hljs-comment"># 获得灰度图</span><br>gray = cv.cvtColor(flower, cv.COLOR_BGR2GRAY)<br> <br><span class="hljs-comment"># 使用截断阈值法二值化</span><br><span class="hljs-comment"># 可以看到我们依然给了maxval，但是实际上这个maxval没有起作用，但是还是要写不然会报错</span><br>_,binary = cv.threshold(gray, <span class="hljs-number">127</span>, <span class="hljs-number">255</span>, cv.THRESH_TRUNC)<br> <br>cv.imshow(<span class="hljs-string">&#x27;flower&#x27;</span>, gray)<br>cv.imshow(<span class="hljs-string">&#x27;binary&#x27;</span>, binary)<br>cv.waitKey(<span class="hljs-number">0</span>)<br>cv.destroyAllWindows()<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p class='item-img' data-src='/img/temporate/cv47.png'><img src="/img/temporate/cv47.png"></p>
+<h3 id="3-4-低阈值零处理"><a href="#3-4-低阈值零处理" class="headerlink" title="3.4 低阈值零处理"></a>3.4 低阈值零处理</h3><p><code>THRESH_TOZERO</code></p>
+<p>像素值小于等于阈值的部分被置为0,大于阈值的部分不变。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> cv2 <span class="hljs-keyword">as</span> cv<br> <br>img = cv.imread(<span class="hljs-string">&#x27;../images/flower.png&#x27;</span>)<br>flower = cv.resize(img,(<span class="hljs-number">200</span>, <span class="hljs-number">200</span>))<br> <br><span class="hljs-comment"># 获得灰度图</span><br>gray = cv.cvtColor(flower, cv.COLOR_BGR2GRAY)<br> <br><span class="hljs-comment"># 使用低阈值零处理二值化</span><br> <br>_,binary = cv.threshold(gray, <span class="hljs-number">127</span>, <span class="hljs-number">255</span>, cv.THRESH_TOZERO)<br> <br>cv.imshow(<span class="hljs-string">&#x27;flower&#x27;</span>, gray)<br>cv.imshow(<span class="hljs-string">&#x27;binary&#x27;</span>, binary)<br>cv.waitKey(<span class="hljs-number">0</span>)<br>cv.destroyAllWindows()<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p class='item-img' data-src='/img/temporate/cv48.png'><img src="/img/temporate/cv48.png"></p>
+<h3 id="3-5-超阈值零处理"><a href="#3-5-超阈值零处理" class="headerlink" title="3.5 超阈值零处理"></a>3.5 超阈值零处理</h3><p><code>THRESH_TOZERO_INV</code></p>
+<p>像素值大于阈值的部分置为0，像素值小于等于阈值的部分不变。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> cv2 <span class="hljs-keyword">as</span> cv<br> <br>img = cv.imread(<span class="hljs-string">&#x27;../images/flower.png&#x27;</span>)<br>flower = cv.resize(img,(<span class="hljs-number">200</span>, <span class="hljs-number">200</span>))<br> <br><span class="hljs-comment"># 获得灰度图</span><br>gray = cv.cvtColor(flower, cv.COLOR_BGR2GRAY)<br> <br><span class="hljs-comment"># 使用超阈值零处理二值化</span><br>_,binary = cv.threshold(gray, <span class="hljs-number">127</span>, <span class="hljs-number">255</span>, cv.THRESH_TOZERO_INV)<br> <br>cv.imshow(<span class="hljs-string">&#x27;flower&#x27;</span>, gray)<br>cv.imshow(<span class="hljs-string">&#x27;binary&#x27;</span>, binary)<br>cv.waitKey(<span class="hljs-number">0</span>)<br>cv.destroyAllWindows()<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p class='item-img' data-src='/img/temporate/cv49.png'><img src="/img/temporate/cv49.png"></p>
+<h3 id="3-6-OTSU阈值法"><a href="#3-6-OTSU阈值法" class="headerlink" title="3.6 OTSU阈值法"></a>3.6 OTSU阈值法</h3><p><code>cv2.THRESH_OTS</code></p>
+<p><code>cv2.THRESH_OTS</code> 并不是一个有效的阈值类型或标,它其实是用来计算合适阈值的方法，通常与 <code>THRESH_BINARY</code> 或 <code>THRESH_BINARY_INV</code> 结合使用</p>
+<p>OTSU算法是通过一个值将这张图分前景和背景</p>
+<p>（也就是灰度图中小于这个值的是一类，大于这个值的是一类。例如，如果你设置阈值为128，则所有大于128的像素点可以被视作前景，而小于等于128的像素点则被视为背景。）</p>
+<p>通过统计学方法（最大类间方差）来验证该值的合理性，当根据该值进行分割时，使用最大类间方差计算得到的值最大时，该值就是二值化算法中所需要的阈值。通常该值是从灰度图中的最小值加1开始进行迭代计算，直到灰度图中的最大像素值减1，然后把得到的最大类间方差值进行比较。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> cv2 <span class="hljs-keyword">as</span> cv<br> <br>img = cv.imread(<span class="hljs-string">&#x27;../images/flower.png&#x27;</span>)<br>flower = cv.resize(img,(<span class="hljs-number">200</span>, <span class="hljs-number">200</span>))<br> <br><span class="hljs-comment"># 获得灰度图</span><br>gray = cv.cvtColor(flower, cv.COLOR_BGR2GRAY)<br> <br> <br><span class="hljs-comment"># 使用OTSU阈值法二值化(默认是结合阈值法即THRESH_BINARY)</span><br>_,binary = cv.threshold(gray, <span class="hljs-number">127</span>, <span class="hljs-number">255</span>, cv.THRESH_OTSU)<br><span class="hljs-comment"># 结合反阈值法</span><br>_,binary1 = cv.threshold(gray, <span class="hljs-number">0</span>, <span class="hljs-number">255</span>, cv.THRESH_OTSU+cv.THRESH_BINARY_INV)<br> <br>cv.imshow(<span class="hljs-string">&#x27;flower&#x27;</span>, gray)<br>cv.imshow(<span class="hljs-string">&#x27;binary&#x27;</span>, binary)<br>cv.imshow(<span class="hljs-string">&#x27;binary1&#x27;</span>, binary1)<br>cv.waitKey(<span class="hljs-number">0</span>)<br>cv.destroyAllWindows()<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p class='item-img' data-src='/img/temporate/cv50.png'><img src="/img/temporate/cv50.png"></p>
+<h3 id="3-7-自适应二值化"><a href="#3-7-自适应二值化" class="headerlink" title="3.7 自适应二值化"></a>3.7 自适应二值化</h3><p>其会对图像中的所有像素点计算其各自的阈值，将图像划分为固定大小的块，然后对每个块进行阈值处理。</p>
+<p><code>cv2.adaptiveThreshold</code></p>
+<p>(image_np_gray, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 7, 10)</p>
+<p>参数：</p>
+<p>maxval：最大阈值，一般为255</p>
+<p>adaptiveMethod：小区域阈值的计算方式：</p>
+<p>ADAPTIVE_THRESH_MEAN_C：小区域内取均值</p>
+<p>ADAPTIVE_THRESH_GAUSSIAN_C：小区域内加权求和，权重是个高斯核</p>
+<p>thresholdType：二值化方法，只能使用THRESH_BINARY、THRESH_BINARY_INV，也就是阈值法和反阈值法</p>
+<p>blockSize：选取的小区域的面积，如7就是7*7的小块。</p>
+<p>C：最终阈值等于小区域计算出的阈值再减去此值</p>
+<p><strong>自适应二值化更加适合用在明暗分布不均的图片，因为图片的明暗不均，导致图片上的每一小部分都要使用不同的阈值进行二值化处理。</strong></p>
+<h4 id="3-7-1-取均值"><a href="#3-7-1-取均值" class="headerlink" title="3.7.1 取均值"></a>3.7.1 取均值</h4><p>&emsp;&emsp;从图片的左上角开始计算其邻域内的平均值，用一个均值卷积核来实现，将卷积核中心对准要阈值处理的像素，然后计算这个卷积核内所有像素的平均值，最后减去常数C得到该点阈值。</p>
+<p class='item-img' data-src='/img/temporate/cv51.png'><img src="/img/temporate/cv51.png"></p>
+<p>如图，如果像取第一个元素卷积核有空缺处，就按边缘填充的方式填充。</p>
+<h4 id="3-7-2-加权求和"><a href="#3-7-2-加权求和" class="headerlink" title="3.7.2 加权求和"></a>3.7.2 加权求和</h4><p>对小区域内的像素进行加权求和得到新的阈值，其权重值来自于高斯分布。与取均值的区别就是采用另一种规则的卷积核进行阈值选择，函数中有着基本相同的参数。</p>
+<p>3*3卷积核示例：</p>
+<p class='item-img' data-src='/img/temporate/cv52.png'><img src="/img/temporate/cv52.png"></p>
+<div id="paginator"></div></div><div id="post-footer"><div id="pages"><div class="footer-link" style="width: 50%;text-align:right;border-right:1px #fe2 solid"><a href="/post/ba0d9a33/">← 下一篇 图像预处理-图像掩膜</a></div><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/post/8f63cf41/">图像预处理-边缘填充，透视变换和色彩空间基础 上一篇 →</a></div></div></div></div><div class="bottom-btn"><div><a class="i-top" id="to-top" onClick="scrolls.scrolltop();" title="回到顶部" style="opacity: 0; display: none;">∧ </a><a class="i-index" id="to-index" href="#toc-div" title="文章目录">≡</a><a class="i-color" id="color-mode" onClick="colorMode.change()" title="切换主题"></a><a onclick="BgmControl()"><svg id="bgm-control" viewBox="0 0 30 34" fill="#18d1ff" style="width: 24px; transition: transform .3s;margin-top: 4px"><path d="M25.998 23.422V11.29h3.999v12.132h-3.999zM19.497 6.234h4.001v22.243h-4.001V6.234zM12.998.867h4v32.978h-4V.867zm-6.5 5.367h4.001v22.243H6.498V6.234zm-6.5 5.056h4v12.132h-4V11.29z"></path></svg><audio id="bgm" src="/audio/bgm.mp3" autoplay loop crossorigin="anonymous"> </audio></a></div></div></article><aside><div id="about"><a href="/" id="logo"><img src="https://ak.hypergryph.com/assets/index/images/ak/pc/faction/1.png" alt="Logo" style="margin:0;border-radius:0;"></a><h1 id="Dr"><a href="/">Clocky7</a></h1><div id="description"><p></p></div><div id="social-links"><a class="social" target="_blank" rel="noopener" href="https://github.com/Clocky7"><i class="fab fa-github" alt="GitHub"></i></a></div></div><div id="aside-block"><div id="toc-div"><h1>目录</h1><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80-%E5%9B%BE%E5%83%8F%E8%89%B2%E5%BD%A9%E7%A9%BA%E9%97%B4%E8%BD%AC%E6%8D%A2"><span class="toc-number">1.</span> <span class="toc-text">一.图像色彩空间转换</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-HSV%E9%A2%9C%E8%89%B2%E7%A9%BA%E9%97%B4"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 HSV颜色空间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E9%A2%9C%E8%89%B2%E7%A9%BA%E9%97%B4%E8%BD%AC%E6%8D%A2"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 颜色空间转换</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C-%E7%81%B0%E5%BA%A6%E5%8C%96"><span class="toc-number">2.</span> <span class="toc-text">二.灰度化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E6%9C%80%E5%A4%A7%E5%80%BC%E6%B3%95"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 最大值法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E5%B9%B3%E5%9D%87%E5%80%BC%E6%B3%95"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 平均值法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E5%8A%A0%E6%9D%83%E5%9D%87%E5%80%BC%E6%B3%95%EF%BC%88%E6%9C%80%E5%B8%B8%E7%94%A8%E4%B8%94%E5%86%85%E7%BD%AE%EF%BC%89"><span class="toc-number">2.3.</span> <span class="toc-text">2.3 加权均值法（最常用且内置）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89-%E4%BA%8C%E5%80%BC%E5%8C%96%E5%A4%84%E7%90%86"><span class="toc-number">3.</span> <span class="toc-text">三. 二值化处理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E9%98%88%E5%80%BC%E6%B3%95"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 阈值法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E5%8F%8D%E9%98%88%E5%80%BC%E6%B3%95"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 反阈值法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-%E6%88%AA%E6%96%AD%E9%98%88%E5%80%BC%E6%B3%95"><span class="toc-number">3.3.</span> <span class="toc-text">3.3 截断阈值法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-%E4%BD%8E%E9%98%88%E5%80%BC%E9%9B%B6%E5%A4%84%E7%90%86"><span class="toc-number">3.4.</span> <span class="toc-text">3.4 低阈值零处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-5-%E8%B6%85%E9%98%88%E5%80%BC%E9%9B%B6%E5%A4%84%E7%90%86"><span class="toc-number">3.5.</span> <span class="toc-text">3.5 超阈值零处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-6-OTSU%E9%98%88%E5%80%BC%E6%B3%95"><span class="toc-number">3.6.</span> <span class="toc-text">3.6 OTSU阈值法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-7-%E8%87%AA%E9%80%82%E5%BA%94%E4%BA%8C%E5%80%BC%E5%8C%96"><span class="toc-number">3.7.</span> <span class="toc-text">3.7 自适应二值化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-7-1-%E5%8F%96%E5%9D%87%E5%80%BC"><span class="toc-number">3.7.1.</span> <span class="toc-text">3.7.1 取均值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-7-2-%E5%8A%A0%E6%9D%83%E6%B1%82%E5%92%8C"><span class="toc-number">3.7.2.</span> <span class="toc-text">3.7.2 加权求和</span></a></li></ol></li></ol></li></ol></div></div><footer><nobr>构建自 <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr><wbr><nobr> 使用主题 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus/hexo-theme-arknights">Arknights</a></nobr><wbr><nobr> 主题作者 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus">Yue_plus</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas></body></html>

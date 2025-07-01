@@ -1,0 +1,194 @@
+<!DOCTYPE html><html lang="zh-cn" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>图像预处理-直方图均衡化 | Clocky7's Blog</title><link rel="icon" type="image/x-icon" href="/favicon.ico"><link rel="preload" as="font" crossorigin="anonymous" href="/font/Bender.ttf"><link rel="preload" as="font" crossorigin="anonymous" href="/font/BenderLight.ttf"><link rel="preload" as="font" crossorigin="anonymous" href="/font/JetBrainsMono-Regular.woff2"><link rel="stylesheet" href="/css/arknights.css"><style>@font-face {
+  font-family: Bender;
+  src: local('Bender'), url("/font/Bender.ttf"), url("/font/Bender.otf");
+}
+@font-face {
+  font-family: BenderLight;
+  src: local('BenderLight'), url("/font/BenderLight.ttf");
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}
+</style><script>var config = {"root":"/","search":{"preload":false,"activeHolder":"键入以继续","blurHolder":"搜索","noResult":"无 $0 相关数据"},"code":{"codeInfo":"$0 - $1 行","copy":"复制"}}</script><link type="text/css" rel="stylesheet" href="/lib/encrypt/hbe.style.css"><script src="//unpkg.com/mermaid@10.5.0/dist/mermaid.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+ menuSettings: {
+   zoom: "None"
+ },
+ showMathMenu: false,
+ jax: ["input/TeX","output/CommonHTML"],
+ extensions: ["tex2jax.js"],
+ TeX: {
+   extensions: ["AMSmath.js","AMSsymbols.js"],
+   equationNumbers: {
+     autoNumber: "AMS"
+   }
+ },
+ tex2jax: {
+   inlineMath: [["\\(", "\\)"]],
+   displayMath: [["\\[", "\\]"]]
+ }
+});</script><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lightgallery.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-zoom.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-thumbnail.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/css/all.min.css"><style defer src="article.css"></style><link rel="stylesheet" href="article.css"><script>if (window.localStorage.getItem('theme-mode') === 'light')
+ document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark')
+ document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.woff2") format('woff2');
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}</style><style>:root {
+ --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
+ --light-background: url('/img/bk.jpg');
+ --theme-encrypt-confirm: '确认'
+}</style><script defer src="/js/arknights.js"></script><script defer src="/js/search.js"></script><script defer type="module">import mermaid from '//unpkg.com/mermaid@10.5.0/dist/mermaid.esm.mjs';
+window.mermaid = mermaid;
+code.paintMermaid();
+</script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+  menuSettings: {
+    zoom: "None"
+  },
+  showMathMenu: false,
+  jax: ["input/TeX","output/CommonHTML"],
+  extensions: ["tex2jax.js"],
+  TeX: {
+    extensions: ["AMSmath.js","AMSsymbols.js"],
+    equationNumbers: {
+      autoNumber: "AMS"
+    }
+  },
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]]
+  }
+});
+</script><script async src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script async src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script async src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script async src="/lib/encrypt/hbe.js"></script><script async src="/js/pjax.js"></script><script class="pjax-js">reset= () => {document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js','data-pjax','.busuanzi'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><script class="pjax-js">reset= () => {document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="loading" style="opacity: 0;"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><div class="navBtn"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><nav><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="搜索" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup" tabindex="0"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">主页</span></a></li><li class="navItem"><a class="navBlock" href="/about/"><span class="navItemTitle">于我</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">归档</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>图像预处理-直方图均衡化</h1><div id="post-info"><span>文章发布时间: <div class="control"><time datetime="2025-06-24T05:52:00.000Z" id="date"> 2025-06-24</time></div></span><br><span>最后更新时间: <div class="control"><time datetime="2025-07-01T02:57:40.637Z" id="updated"> 2025-07-01</time></div></span><br><span>文章总字数: <div class="control">1.8k</div></span><br><span>预计阅读时间: <div class="control">6 分钟</div></span></div></div><hr><div id="post-content"><h2 id="一-什么是直方图"><a href="#一-什么是直方图" class="headerlink" title="一.什么是直方图"></a>一.什么是直方图</h2><p>反映图像像素分布的统计图，横坐标就是图像像素的取值，纵坐标是该像素的个数。</p>
+<h2 id="二-绘制直方图"><a href="#二-绘制直方图" class="headerlink" title="二.绘制直方图"></a>二.绘制直方图</h2><p><code>hist=cv2.calcHist(images, channels, mask, histSize, ranges)</code></p>
+<ul>
+<li><p>images：输入图像列表（必须用[ ]包裹），可以是一幅或多幅图像（通常是灰度图像或者彩色图像的各个通道）。</p>
+</li>
+<li><p>channels：如果输入图像是灰度图，它的值就是 [0]；如果是彩色图像的话，传入的参数可以是 [0]，[1]，[2] 它们分别对应着通道 B，G，R。</p>
+</li>
+<li><p>mask（可选）：一个与输入图像尺寸相同的二值掩模图像，其中非零元素标记了参与直方图计算的区域, None 为全部计算。</p>
+</li>
+<li><p>histSize：一个整数列表，也就是直方图的区间个数(柱子的数目)。用中括号括起来，例如：[256]。</p>
+</li>
+<li><p>ranges：每维数据的取值范围，它是一个二维列表，每一维对应一个通道的最小值和最大值，例如对灰度图像可能是 [0, 256]。</p>
+</li>
+</ul>
+<p>返回值hist 是一个长度为255的数组，数组中的每个值表示图像中对应灰度等级的像素计数</p>
+<p>下面介绍一个方法，获取部分信息便于后面绘图：</p>
+<p><code>minVal, maxVal, minLoc, maxLoc = cv2.minMaxLoc(hist)</code></p>
+<p>获取直方图的最小值、最大值及其对应的位置索引</p>
+<p>绘图函数：</p>
+<p><code>cv2.line(img, pt1, pt2, color, thickness)</code></p>
+<ul>
+<li><p>img：原始图像，即要在上面画线的numpy数组（一般为uint8类型）。</p>
+</li>
+<li><p>pt1 和 pt2：分别为线段的起点和终点坐标，它们都是元组类型，例如 (x1, y1) 和 (x2, y2) 分别代表线段两端的横纵坐标。</p>
+</li>
+<li><p>color：线段的颜色，通常是一个包含三个元素的元组 <code>(B, G, R)</code> 表示BGR色彩空间的像素值，也可以是灰度图像的一个整数值。</p>
+</li>
+<li><p>thickness：线段的宽度，默认值是1，如果设置为负数，则线宽会被 填充。</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> cv2 <span class="hljs-keyword">as</span> cv<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br> <br>img = cv.imread(<span class="hljs-string">&#x27;../images/zhifang.png&#x27;</span>)<br> <br><span class="hljs-comment"># 获取图像像素计数相关信息</span><br>hist = cv.calcHist([img], [<span class="hljs-number">0</span>], <span class="hljs-literal">None</span>, [<span class="hljs-number">256</span>], [<span class="hljs-number">0</span>, <span class="hljs-number">256</span>])<br> <br><span class="hljs-comment"># 获取直方图最小值、最大值及其位置索引</span><br>minVal, maxVal, minLoc, maxLoc = cv.minMaxLoc(hist)<br> <br><span class="hljs-comment"># 限制直方图的高，不要超过图像高度的90%</span><br>hist_height = <span class="hljs-built_in">int</span>(<span class="hljs-number">256</span> * <span class="hljs-number">0.9</span>)<br> <br><span class="hljs-comment"># 创建一张全白的图像，作为背景来绘图</span><br>hist_img = np.full((<span class="hljs-number">256</span>, <span class="hljs-number">256</span>, <span class="hljs-number">3</span>), <span class="hljs-number">255</span>, np.uint8)<br> <br><span class="hljs-comment"># 绘制直方图</span><br><span class="hljs-keyword">for</span> h <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">256</span>):<br>    <span class="hljs-comment"># 计算每个直方图的高度，这里* hist_height / maxVal 是为了限制直方图的高度，不要超过图像高度的90%</span><br>    height = <span class="hljs-built_in">int</span>(hist[h].item() * hist_height / maxVal )<br>    <span class="hljs-comment"># 开始绘制（这里的坐标系是opencv绘图的坐标系，不要搞混了）</span><br>    cv.line(hist_img, (h, <span class="hljs-number">256</span>), (h, <span class="hljs-number">256</span> - height), (<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">255</span>), <span class="hljs-number">1</span>)<br> <br>cv.imshow(<span class="hljs-string">&#x27;hist&#x27;</span>, hist_img)<br>cv.waitKey(<span class="hljs-number">0</span>)<br>cv.destroyAllWindows()<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p class='item-img' data-src='/img/temporate/cv89.png'><img src="/img/temporate/cv89.png"></p>
+<h2 id="三-直方图均衡化"><a href="#三-直方图均衡化" class="headerlink" title="三.直方图均衡化"></a>三.直方图均衡化</h2><p>就是用来改善图像的全局亮度和对比度，通俗的讲，就是遍历图像的像素统计出灰度值的个数、比例与累计比例，并重新映射（归一化）到0-255范围（也可以是其他范围）内。</p>
+<h3 id="3-1-自适应直方图均衡化（Adaptive-Histogram-Equalization-AHE）"><a href="#3-1-自适应直方图均衡化（Adaptive-Histogram-Equalization-AHE）" class="headerlink" title="3.1 自适应直方图均衡化（Adaptive Histogram Equalization, AHE）"></a>3.1 自适应直方图均衡化（Adaptive Histogram Equalization, AHE）</h3><p>首先就是统计其每个像素值的个数、比例以及其累计比例：</p>
+<p class='item-img' data-src='/img/temporate/cv90.png'><img src="/img/temporate/cv90.png"></p>
+<p>随后用原像素值的累计比例乘以255（一般缩放比例都是0~255），得到新的像素值。这样就完成了最基本的直方图均衡化的过程：</p>
+<p class='item-img' data-src='/img/temporate/cv91.png'><img src="/img/temporate/cv91.png"></p>
+<p>AHE函数：</p>
+<p><code>dst = cv.equalizeHist(imgGray)</code></p>
+<p>imgGray为需要直方图均衡化的灰度图，返回值为处理后的图像。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> cv2 <span class="hljs-keyword">as</span> cv<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br> <br><span class="hljs-comment"># 直接灰度化</span><br>img = cv.imread(<span class="hljs-string">&#x27;../images/zhifang.png&#x27;</span>, cv.IMREAD_GRAYSCALE)<br> <br><span class="hljs-comment"># 自适应直方图均衡化</span><br>img_adapteq = cv.equalizeHist(img)<br> <br>cv.imshow(<span class="hljs-string">&#x27;img&#x27;</span>, img)<br>cv.imshow(<span class="hljs-string">&#x27;img_adapteq&#x27;</span>, img_adapteq)<br>cv.waitKey(<span class="hljs-number">0</span>)<br>cv.destroyAllWindows()<br></code></pre></td></tr></table></figure>
+
+<p>该方法适用于图像的灰度分布不均匀，且灰度分布集中在更窄的范围，图像的细节不够清晰且对比度较低的情况。但很明显，因为全局调整亮度和对比度的原因，脸部太亮，大部分细节都丢失了。</p>
+<h3 id="3-2-对比度受限的自适应直方图均衡化（CLAHE）"><a href="#3-2-对比度受限的自适应直方图均衡化（CLAHE）" class="headerlink" title="3.2 对比度受限的自适应直方图均衡化（CLAHE）"></a>3.2 对比度受限的自适应直方图均衡化（CLAHE）</h3><p>其主要步骤为：</p>
+<ol>
+<li><p>图像分块（Tiling）：</p>
+<ul>
+<li>图像首先被划分为多个不重叠的小块（tiles）。这样做的目的是因为在全局直方图均衡化中，单一的直方图无法反映图像各个局部区域的差异性。（tiles 的 大小默认是 8x8）</li>
+</ul>
+</li>
+<li><p>计算子区域直方图：</p>
+<ul>
+<li>对于每个小块，独立计算其内部像素的灰度直方图。直方图反映了该区域内像素值的分布情况。</li>
+</ul>
+</li>
+<li><p>子区域直方图均衡化：</p>
+<ul>
+<li>对每个小块的直方图执行直方图均衡化操作。这涉及重新分配像素值，以便在整个小块内更均匀地分布。均衡化过程会增加低频像素的数量，减少高频像素的数量，从而提高整个小块的对比度。</li>
+</ul>
+</li>
+<li><p>对比度限制（Contrast Limiting）：</p>
+<ul>
+<li>为了防止过大的对比度增强导致噪声放大，出现了限制对比度自适应直方图均衡化。CLAHE会在直方图均衡化过程中引入一个对比度限制参数。当某一小块的直方图在均衡化后出现极端值时，会对直方图进行平滑处理（使用线性或非线性的钳制函数），确保对比度增强在一个合理的范围内。</li>
+</ul>
+</li>
+<li><p>重采样和邻域像素融合：</p>
+<ul>
+<li>由于小块之间是不重叠的，直接拼接经过均衡化处理的小块会产生明显的边界效应。因此，在CLAHE中通常采用重采样技术来消除这种效应，比如通过双线性插值将相邻小块的均衡化结果进行平滑过渡，使最终图像看起来更为自然和平滑。</li>
+</ul>
+</li>
+<li><p>合成输出图像：</p>
+<ul>
+<li>将所有小块均衡化后的结果整合在一起，得到最终的自适应直方图均衡化后的图像。</li>
+</ul>
+</li>
+</ol>
+<p><code>clahe = cv2.createCLAHE(clipLimit=None, tileGridSize=None)</code></p>
+<ul>
+<li><p>clipLimit（可选）：对比度限制参数，用于控制直方图均衡化过程中对比度增强的程度。如果不设置，OpenCV会使用一个默认值1。</p>
+</li>
+<li><p>tileGridSize（可选）：图像分块的大小，通常是一个包含两个整数的元组，如(8, 8)。分块大小的选择会影响到CLAHE的效果以及处理速度。</p>
+</li>
+</ul>
+<p>创建CLAHE对象后，可以使用 .apply() 方法对图像进行CLAHE处理：</p>
+<p>img&#x3D;clahe.apply(image)</p>
+<ul>
+<li><p>image：要均衡化的图像。</p>
+</li>
+<li><p>img：均衡后的图像</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> cv2 <span class="hljs-keyword">as</span> cv<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br> <br><span class="hljs-comment"># 直接灰度化</span><br>img = cv.imread(<span class="hljs-string">&#x27;../images/zhifang.png&#x27;</span>, cv.IMREAD_GRAYSCALE)<br> <br><span class="hljs-comment"># 自适应直方图均衡化</span><br>img_adapteq = cv.equalizeHist(img)<br> <br><span class="hljs-comment"># 对比度受限直方图均衡化</span><br>clahe = cv.createCLAHE(clipLimit=<span class="hljs-number">2.0</span>, tileGridSize=(<span class="hljs-number">8</span>, <span class="hljs-number">8</span>))<br>img_clahe = clahe.apply(img)<br> <br>cv.imshow(<span class="hljs-string">&#x27;img&#x27;</span>, img)<br>cv.imshow(<span class="hljs-string">&#x27;img_adapteq&#x27;</span>, img_adapteq)<br>cv.imshow(<span class="hljs-string">&#x27;img_clahe&#x27;</span>, img_clahe)<br>cv.waitKey(<span class="hljs-number">0</span>)<br>cv.destroyAllWindows()<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p class='item-img' data-src='/img/temporate/cv92.png'><img src="/img/temporate/cv92.png"></p>
+<div id="paginator"></div></div><div id="post-footer"><div id="pages"><div class="footer-link" style="width: 50%;text-align:right;border-right:1px #fe2 solid"><a href="/post/be736a62/">← 下一篇 图像预处理-模板匹配</a></div><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/post/1f77d3da/">图像预处理-图像轮廓特征查找 上一篇 →</a></div></div></div></div><div class="bottom-btn"><div><a class="i-top" id="to-top" onClick="scrolls.scrolltop();" title="回到顶部" style="opacity: 0; display: none;">∧ </a><a class="i-index" id="to-index" href="#toc-div" title="文章目录">≡</a><a class="i-color" id="color-mode" onClick="colorMode.change()" title="切换主题"></a><a onclick="BgmControl()"><svg id="bgm-control" viewBox="0 0 30 34" fill="#18d1ff" style="width: 24px; transition: transform .3s;margin-top: 4px"><path d="M25.998 23.422V11.29h3.999v12.132h-3.999zM19.497 6.234h4.001v22.243h-4.001V6.234zM12.998.867h4v32.978h-4V.867zm-6.5 5.367h4.001v22.243H6.498V6.234zm-6.5 5.056h4v12.132h-4V11.29z"></path></svg><audio id="bgm" src="/audio/bgm.mp3" autoplay loop crossorigin="anonymous"> </audio></a></div></div></article><aside><div id="about"><a href="/" id="logo"><img src="https://ak.hypergryph.com/assets/index/images/ak/pc/faction/1.png" alt="Logo" style="margin:0;border-radius:0;"></a><h1 id="Dr"><a href="/">Clocky7</a></h1><div id="description"><p></p></div><div id="social-links"><a class="social" target="_blank" rel="noopener" href="https://github.com/Clocky7"><i class="fab fa-github" alt="GitHub"></i></a></div></div><div id="aside-block"><div id="toc-div"><h1>目录</h1><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80-%E4%BB%80%E4%B9%88%E6%98%AF%E7%9B%B4%E6%96%B9%E5%9B%BE"><span class="toc-number">1.</span> <span class="toc-text">一.什么是直方图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C-%E7%BB%98%E5%88%B6%E7%9B%B4%E6%96%B9%E5%9B%BE"><span class="toc-number">2.</span> <span class="toc-text">二.绘制直方图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89-%E7%9B%B4%E6%96%B9%E5%9B%BE%E5%9D%87%E8%A1%A1%E5%8C%96"><span class="toc-number">3.</span> <span class="toc-text">三.直方图均衡化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E8%87%AA%E9%80%82%E5%BA%94%E7%9B%B4%E6%96%B9%E5%9B%BE%E5%9D%87%E8%A1%A1%E5%8C%96%EF%BC%88Adaptive-Histogram-Equalization-AHE%EF%BC%89"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 自适应直方图均衡化（Adaptive Histogram Equalization, AHE）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E5%AF%B9%E6%AF%94%E5%BA%A6%E5%8F%97%E9%99%90%E7%9A%84%E8%87%AA%E9%80%82%E5%BA%94%E7%9B%B4%E6%96%B9%E5%9B%BE%E5%9D%87%E8%A1%A1%E5%8C%96%EF%BC%88CLAHE%EF%BC%89"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 对比度受限的自适应直方图均衡化（CLAHE）</span></a></li></ol></li></ol></div></div><footer><nobr>构建自 <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr><wbr><nobr> 使用主题 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus/hexo-theme-arknights">Arknights</a></nobr><wbr><nobr> 主题作者 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus">Yue_plus</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas></body></html>

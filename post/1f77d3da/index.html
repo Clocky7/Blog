@@ -1,0 +1,151 @@
+<!DOCTYPE html><html lang="zh-cn" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>图像预处理-图像轮廓特征查找 | Clocky7's Blog</title><link rel="icon" type="image/x-icon" href="/favicon.ico"><link rel="preload" as="font" crossorigin="anonymous" href="/font/Bender.ttf"><link rel="preload" as="font" crossorigin="anonymous" href="/font/BenderLight.ttf"><link rel="preload" as="font" crossorigin="anonymous" href="/font/JetBrainsMono-Regular.woff2"><link rel="stylesheet" href="/css/arknights.css"><style>@font-face {
+  font-family: Bender;
+  src: local('Bender'), url("/font/Bender.ttf"), url("/font/Bender.otf");
+}
+@font-face {
+  font-family: BenderLight;
+  src: local('BenderLight'), url("/font/BenderLight.ttf");
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}
+</style><script>var config = {"root":"/","search":{"preload":false,"activeHolder":"键入以继续","blurHolder":"搜索","noResult":"无 $0 相关数据"},"code":{"codeInfo":"$0 - $1 行","copy":"复制"}}</script><link type="text/css" rel="stylesheet" href="/lib/encrypt/hbe.style.css"><script src="//unpkg.com/mermaid@10.5.0/dist/mermaid.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+ menuSettings: {
+   zoom: "None"
+ },
+ showMathMenu: false,
+ jax: ["input/TeX","output/CommonHTML"],
+ extensions: ["tex2jax.js"],
+ TeX: {
+   extensions: ["AMSmath.js","AMSsymbols.js"],
+   equationNumbers: {
+     autoNumber: "AMS"
+   }
+ },
+ tex2jax: {
+   inlineMath: [["\\(", "\\)"]],
+   displayMath: [["\\[", "\\]"]]
+ }
+});</script><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lightgallery.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-zoom.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-thumbnail.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/css/all.min.css"><style defer src="article.css"></style><link rel="stylesheet" href="article.css"><script>if (window.localStorage.getItem('theme-mode') === 'light')
+ document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark')
+ document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.woff2") format('woff2');
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}</style><style>:root {
+ --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
+ --light-background: url('/img/bk.jpg');
+ --theme-encrypt-confirm: '确认'
+}</style><script defer src="/js/arknights.js"></script><script defer src="/js/search.js"></script><script defer type="module">import mermaid from '//unpkg.com/mermaid@10.5.0/dist/mermaid.esm.mjs';
+window.mermaid = mermaid;
+code.paintMermaid();
+</script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+  menuSettings: {
+    zoom: "None"
+  },
+  showMathMenu: false,
+  jax: ["input/TeX","output/CommonHTML"],
+  extensions: ["tex2jax.js"],
+  TeX: {
+    extensions: ["AMSmath.js","AMSsymbols.js"],
+    equationNumbers: {
+      autoNumber: "AMS"
+    }
+  },
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]]
+  }
+});
+</script><script async src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script async src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script async src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script async src="/lib/encrypt/hbe.js"></script><script async src="/js/pjax.js"></script><script class="pjax-js">reset= () => {document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js','data-pjax','.busuanzi'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><script class="pjax-js">reset= () => {document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="loading" style="opacity: 0;"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><div class="navBtn"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><nav><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="搜索" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup" tabindex="0"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">主页</span></a></li><li class="navItem"><a class="navBlock" href="/about/"><span class="navItemTitle">于我</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">归档</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>图像预处理-图像轮廓特征查找</h1><div id="post-info"><span>文章发布时间: <div class="control"><time datetime="2025-06-24T05:51:50.000Z" id="date"> 2025-06-24</time></div></span><br><span>最后更新时间: <div class="control"><time datetime="2025-07-01T02:51:43.146Z" id="updated"> 2025-07-01</time></div></span><br><span>文章总字数: <div class="control">1.2k</div></span><br><span>预计阅读时间: <div class="control">4 分钟</div></span></div></div><hr><div id="post-content"><p>其实就是外接轮廓，有了轮廓点就可以找到最上、最下、最左、最右的四个坐标（因为有xmin,xmax,ymin,ymax）。就可以绘制出矩形。</p>
+<h2 id="一-外接矩形"><a href="#一-外接矩形" class="headerlink" title="一.外接矩形"></a>一.外接矩形</h2><p><code>cv.boundingRect(轮廓点)</code></p>
+<ul>
+<li>返回x,y,w,h，传入一个轮廓的轮廓点，若有多个轮廓需要循环获取。</li>
+</ul>
+<p>这是最简单的外接矩形，理论上是方方正正的。</p>
+<p class='item-img' data-src='/img/temporate/cv84.png'><img src="/img/temporate/cv84.png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> cv2 <span class="hljs-keyword">as</span> cv<br> <br>num = cv.imread(<span class="hljs-string">&#x27;../images/num.png&#x27;</span>)<br> <br><span class="hljs-comment"># 拷贝</span><br>img = num.copy()<br> <br><span class="hljs-comment"># 灰度化</span><br>gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)<br> <br><span class="hljs-comment"># 二值化</span><br>ret, binary = cv.threshold(gray, <span class="hljs-number">0</span>, <span class="hljs-number">255</span>, cv.THRESH_OTSU+cv.THRESH_BINARY_INV)<br> <br><span class="hljs-comment"># 轮廓检测</span><br>contours, hierarchy = cv.findContours(binary, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE)<br> <br><span class="hljs-comment"># 绘制轮廓</span><br>cv.drawContours(img, contours, -<span class="hljs-number">1</span>, (<span class="hljs-number">0</span>, <span class="hljs-number">255</span>, <span class="hljs-number">0</span>), <span class="hljs-number">2</span>)<br> <br><span class="hljs-comment"># 获取外接矩形</span><br><span class="hljs-keyword">for</span> cnt <span class="hljs-keyword">in</span> contours:<br>    x, y, w, h = cv.boundingRect(cnt)<br>    <span class="hljs-comment"># 绘制外接矩形</span><br>    cv.rectangle(img, (x, y), (x+w, y+h), (<span class="hljs-number">255</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>), <span class="hljs-number">2</span>)<br> <br> <br><span class="hljs-comment"># 绘制图像</span><br>cv.imshow(<span class="hljs-string">&#x27;img&#x27;</span>, img)<br>cv.imshow(<span class="hljs-string">&#x27;binary&#x27;</span>, binary)<br> <br>cv.waitKey(<span class="hljs-number">0</span>)<br>cv.destroyAllWindows()<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p class='item-img' data-src='/img/temporate/cv85.png'><img src="/img/temporate/cv85.png"></p>
+<h2 id="二-最小外接矩形"><a href="#二-最小外接矩形" class="headerlink" title="二.最小外接矩形"></a>二.最小外接矩形</h2><p>寻找最小外接矩形使用的算法叫做<strong>旋转卡壳法</strong>,其就是基于<strong>凸包点</strong>进行的。</p>
+<p>而对于凸包多边形的一个最小外接矩形，应存在一条边与<strong>原</strong>凸包多边形的边共线。</p>
+<p>如图，这是一个凸包点的图像，找一条边<strong>ab</strong>，然后找到离这条边最远的点<strong>d</strong>，画一条线。然后分别找在<strong>向量ab</strong>与<strong>ba</strong>上投影<strong>最长的点</strong>，找到后平移之前画的直线与投影最长的点重合即可。</p>
+<p class='item-img' data-src='/img/temporate/cv86.png'><img src="/img/temporate/cv86.png"></p>
+<p><code>rect = cv2.minAreaRect(cnt)</code></p>
+<p>传入的cnt参数为contours中的轮廓也可以是凸包点(不过内部已经自动处理得到凸包了)</p>
+<ul>
+<li><p>计算轮廓最小面积外接矩形:</p>
+</li>
+<li><p>rect 结构通常返回中心点坐标 (x, y)、宽度 width、高度 height 和旋转角度 angle</p>
+</li>
+</ul>
+<p><code>cv2.boxPoints(rect).astype(int)</code></p>
+<ul>
+<li><p>返回一个形状为 4行2列的数组，每一行代表一个点的坐标（x, y），顺序按照逆时针或顺时针方向排列</p>
+</li>
+<li><p>而这些坐标一般会是浮点数，需要转换为整数坐标</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> cv2 <span class="hljs-keyword">as</span> cv<br> <br>num = cv.imread(<span class="hljs-string">&#x27;../images/num.png&#x27;</span>)<br> <br>img = num.copy()<br> <br><span class="hljs-comment"># 灰度化</span><br>gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)<br> <br><span class="hljs-comment"># 二值化</span><br>ret, binary = cv.threshold(gray, <span class="hljs-number">0</span>, <span class="hljs-number">255</span>, cv.THRESH_OTSU+cv.THRESH_BINARY_INV)<br> <br><span class="hljs-comment"># 轮廓检测</span><br>contours, hierarchy = cv.findContours(binary, cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)<br> <br><span class="hljs-comment"># 绘制轮廓</span><br>cv.drawContours(img, contours, -<span class="hljs-number">1</span>, (<span class="hljs-number">0</span>, <span class="hljs-number">255</span>, <span class="hljs-number">0</span>), <span class="hljs-number">2</span>)<br> <br><span class="hljs-comment"># 获取最小外接矩形坐标</span><br><span class="hljs-keyword">for</span> cnt <span class="hljs-keyword">in</span> contours:<br>    <span class="hljs-comment"># 筛选面积最小的矩形</span><br>    rect = cv.minAreaRect(cnt)<br>    <span class="hljs-comment"># 计算最小矩形的四个顶点坐标</span><br>    box = cv.boxPoints(rect).astype(<span class="hljs-built_in">int</span>)<br>    <span class="hljs-comment"># 绘图</span><br>    cv.drawContours(img, [box], <span class="hljs-number">0</span>, (<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">255</span>), <span class="hljs-number">2</span>)<br> <br>cv.imshow(<span class="hljs-string">&#x27;img&#x27;</span>, img)<br>cv.waitKey(<span class="hljs-number">0</span>)<br>cv.destroyAllWindows()<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p class='item-img' data-src='/img/temporate/cv87.png'><img src="/img/temporate/cv87.png"></p>
+<h2 id="三-最小外接圆"><a href="#三-最小外接圆" class="headerlink" title="三.最小外接圆"></a>三.最小外接圆</h2><p>使用的算法是<strong>Welzl</strong>算法。Welzl算法基于一个定理：希尔伯特圆定理,对于平面上的任意三个不在同一直线上的点，存在一个唯一的圆同时通过这三个点，且该圆是<strong>最小面积</strong>的圆。</p>
+<p>若已经存在平面上互不共线（或共圆）的 n 个点，并确定了它们的最小覆盖圆，那么添加第 n+1 个点，并且要求这个点不在原来的最小覆盖圆内（即在圆外），为了使新的包含 n+1 个点的最小覆盖圆的半径增大，新加入的点必须位于由原 n 个点确定的最小覆盖圆的边界上（即圆周上）。</p>
+<p>这是因为，如果新点在原最小覆盖圆的内部，显然不会影响最小覆盖圆；如果新点在原最小覆盖圆之外但不在圆周上，那么通过新点和至少两个原有圆上的点可以构造出一个更大的圆，这个圆必然比原最小覆盖圆更大，因此不是包含所有 n+1 个点的最小覆盖圆。所以，按照这一逻辑，当第 n+1 个点在原 n 个点的最小覆盖圆外时，确实这个点会位于包含所有 n+1 个点的新最小覆盖圆的圆周上。</p>
+<p>获取参数的函数：</p>
+<p><code>cv2.minEnclosingCircle(points)</code></p>
+<p>参数说明：</p>
+<ul>
+<li>points：输入参数图片轮廓数据</li>
+</ul>
+<p>返回值：</p>
+<ul>
+<li><p>center：一个包含圆心坐标的二元组 (x, y)。</p>
+</li>
+<li><p>radius：浮点数类型，表示计算得到的最小覆盖圆的半径。</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> cv2 <span class="hljs-keyword">as</span> cv<br> <br>num = cv.imread(<span class="hljs-string">&#x27;../images/num.png&#x27;</span>)<br> <br>img = num.copy()<br> <br><span class="hljs-comment"># 灰度化</span><br>gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)<br> <br><span class="hljs-comment"># 二值化</span><br>ret, binary = cv.threshold(gray, <span class="hljs-number">0</span>, <span class="hljs-number">255</span>, cv.THRESH_OTSU+cv.THRESH_BINARY_INV)<br> <br><span class="hljs-comment"># 轮廓检测</span><br>contours, hierarchy = cv.findContours(binary, cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)<br> <br><span class="hljs-comment"># 绘制轮廓</span><br>cv.drawContours(img, contours, -<span class="hljs-number">1</span>, (<span class="hljs-number">0</span>, <span class="hljs-number">255</span>, <span class="hljs-number">0</span>), <span class="hljs-number">2</span>)<br> <br><span class="hljs-comment"># 获取最小外接圆</span><br><span class="hljs-keyword">for</span> cnt <span class="hljs-keyword">in</span> contours:<br>    (x, y), radius = cv.minEnclosingCircle(cnt)<br>    center = (<span class="hljs-built_in">int</span>(x), <span class="hljs-built_in">int</span>(y))<br>    radius = <span class="hljs-built_in">int</span>(radius)<br>    cv.circle(img, center, radius, (<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">255</span>), <span class="hljs-number">2</span>)<br> <br>cv.imshow(<span class="hljs-string">&#x27;img&#x27;</span>, img)<br>cv.waitKey(<span class="hljs-number">0</span>)<br>cv.destroyAllWindows()<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p class='item-img' data-src='/img/temporate/cv88.png'><img src="/img/temporate/cv88.png"></p>
+<div id="paginator"></div></div><div id="post-footer"><div id="pages"><div class="footer-link" style="width: 50%;text-align:right;border-right:1px #fe2 solid"><a href="/post/8c50130d/">← 下一篇 图像预处理-直方图均衡化</a></div><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/post/4907448/">图像预处理-绘制图像轮廓与凸包 上一篇 →</a></div></div></div></div><div class="bottom-btn"><div><a class="i-top" id="to-top" onClick="scrolls.scrolltop();" title="回到顶部" style="opacity: 0; display: none;">∧ </a><a class="i-index" id="to-index" href="#toc-div" title="文章目录">≡</a><a class="i-color" id="color-mode" onClick="colorMode.change()" title="切换主题"></a><a onclick="BgmControl()"><svg id="bgm-control" viewBox="0 0 30 34" fill="#18d1ff" style="width: 24px; transition: transform .3s;margin-top: 4px"><path d="M25.998 23.422V11.29h3.999v12.132h-3.999zM19.497 6.234h4.001v22.243h-4.001V6.234zM12.998.867h4v32.978h-4V.867zm-6.5 5.367h4.001v22.243H6.498V6.234zm-6.5 5.056h4v12.132h-4V11.29z"></path></svg><audio id="bgm" src="/audio/bgm.mp3" autoplay loop crossorigin="anonymous"> </audio></a></div></div></article><aside><div id="about"><a href="/" id="logo"><img src="https://ak.hypergryph.com/assets/index/images/ak/pc/faction/1.png" alt="Logo" style="margin:0;border-radius:0;"></a><h1 id="Dr"><a href="/">Clocky7</a></h1><div id="description"><p></p></div><div id="social-links"><a class="social" target="_blank" rel="noopener" href="https://github.com/Clocky7"><i class="fab fa-github" alt="GitHub"></i></a></div></div><div id="aside-block"><div id="toc-div"><h1>目录</h1><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80-%E5%A4%96%E6%8E%A5%E7%9F%A9%E5%BD%A2"><span class="toc-number">1.</span> <span class="toc-text">一.外接矩形</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C-%E6%9C%80%E5%B0%8F%E5%A4%96%E6%8E%A5%E7%9F%A9%E5%BD%A2"><span class="toc-number">2.</span> <span class="toc-text">二.最小外接矩形</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89-%E6%9C%80%E5%B0%8F%E5%A4%96%E6%8E%A5%E5%9C%86"><span class="toc-number">3.</span> <span class="toc-text">三.最小外接圆</span></a></li></ol></div></div><footer><nobr>构建自 <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr><wbr><nobr> 使用主题 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus/hexo-theme-arknights">Arknights</a></nobr><wbr><nobr> 主题作者 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus">Yue_plus</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas></body></html>

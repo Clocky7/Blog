@@ -1,0 +1,128 @@
+<!DOCTYPE html><html lang="zh-cn" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>图像预处理-图像边缘检测 | Clocky7's Blog</title><link rel="icon" type="image/x-icon" href="/favicon.ico"><link rel="preload" as="font" crossorigin="anonymous" href="/font/Bender.ttf"><link rel="preload" as="font" crossorigin="anonymous" href="/font/BenderLight.ttf"><link rel="preload" as="font" crossorigin="anonymous" href="/font/JetBrainsMono-Regular.woff2"><link rel="stylesheet" href="/css/arknights.css"><style>@font-face {
+  font-family: Bender;
+  src: local('Bender'), url("/font/Bender.ttf"), url("/font/Bender.otf");
+}
+@font-face {
+  font-family: BenderLight;
+  src: local('BenderLight'), url("/font/BenderLight.ttf");
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}
+</style><script>var config = {"root":"/","search":{"preload":false,"activeHolder":"键入以继续","blurHolder":"搜索","noResult":"无 $0 相关数据"},"code":{"codeInfo":"$0 - $1 行","copy":"复制"}}</script><link type="text/css" rel="stylesheet" href="/lib/encrypt/hbe.style.css"><script src="//unpkg.com/mermaid@10.5.0/dist/mermaid.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+ menuSettings: {
+   zoom: "None"
+ },
+ showMathMenu: false,
+ jax: ["input/TeX","output/CommonHTML"],
+ extensions: ["tex2jax.js"],
+ TeX: {
+   extensions: ["AMSmath.js","AMSsymbols.js"],
+   equationNumbers: {
+     autoNumber: "AMS"
+   }
+ },
+ tex2jax: {
+   inlineMath: [["\\(", "\\)"]],
+   displayMath: [["\\[", "\\]"]]
+ }
+});</script><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lightgallery.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-zoom.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-thumbnail.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/css/all.min.css"><style defer src="article.css"></style><link rel="stylesheet" href="article.css"><script>if (window.localStorage.getItem('theme-mode') === 'light')
+ document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark')
+ document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.woff2") format('woff2');
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}</style><style>:root {
+ --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
+ --light-background: url('/img/bk.jpg');
+ --theme-encrypt-confirm: '确认'
+}</style><script defer src="/js/arknights.js"></script><script defer src="/js/search.js"></script><script defer type="module">import mermaid from '//unpkg.com/mermaid@10.5.0/dist/mermaid.esm.mjs';
+window.mermaid = mermaid;
+code.paintMermaid();
+</script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+  menuSettings: {
+    zoom: "None"
+  },
+  showMathMenu: false,
+  jax: ["input/TeX","output/CommonHTML"],
+  extensions: ["tex2jax.js"],
+  TeX: {
+    extensions: ["AMSmath.js","AMSsymbols.js"],
+    equationNumbers: {
+      autoNumber: "AMS"
+    }
+  },
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]]
+  }
+});
+</script><script async src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script async src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script async src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script async src="/lib/encrypt/hbe.js"></script><script async src="/js/pjax.js"></script><script class="pjax-js">reset= () => {document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js','data-pjax','.busuanzi'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><script class="pjax-js">reset= () => {document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="loading" style="opacity: 0;"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><div class="navBtn"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><nav><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="搜索" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup" tabindex="0"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">主页</span></a></li><li class="navItem"><a class="navBlock" href="/about/"><span class="navItemTitle">于我</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">归档</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>图像预处理-图像边缘检测</h1><div id="post-info"><span>文章发布时间: <div class="control"><time datetime="2025-06-24T05:51:19.000Z" id="date"> 2025-06-24</time></div></span><br><span>最后更新时间: <div class="control"><time datetime="2025-07-01T02:37:31.709Z" id="updated"> 2025-07-01</time></div></span><br><span>文章总字数: <div class="control">753</div></span><br><span>预计阅读时间: <div class="control">2 分钟</div></span></div></div><hr><div id="post-content"><h2 id="一-高斯滤波"><a href="#一-高斯滤波" class="headerlink" title="一.高斯滤波"></a>一.高斯滤波</h2><p>因为图像边缘检测就是把像素值有差异的地方提取出来，所以噪声会有很大影响，因此需要对图像进行平滑处理，高斯滤波是流程中常用的方法。</p>
+<h2 id="二-计算图像的梯度与方向"><a href="#二-计算图像的梯度与方向" class="headerlink" title="二.计算图像的梯度与方向"></a>二.计算图像的梯度与方向</h2><p>过程中通常使用sobel算子进行梯度计算，在OpenCV中，默认使用<code> G=|G(x)+G(y)|</code> 来计算梯度值。</p>
+<p class='item-img' data-src='/img/temporate/cv77.png'><img src="/img/temporate/cv77.png"></p>
+<p>这个角度值其实是当前边缘的梯度方向,若梯度方向不是0°、45°、90°、135°这种特定角度，那么就要用到插值算法来计算当前像素点在其方向上进行插值的结果，然后进行比较并判断是否保留该像素点。</p>
+<ul>
+<li><p>为-22.5°<del>22.5°，或-157.5°</del>157.5°，则认为边缘为水平边缘；</p>
+</li>
+<li><p>为22.5°<del>67.5°，或-112.5°</del>-157.5°，则认为边缘为45°边缘；</p>
+</li>
+<li><p>为67.5°<del>112.5°，或-67.5°</del>-112.5°，则认为边缘为垂直边缘；</p>
+</li>
+<li><p>为112.5°<del>157.5°，或-22.5°</del>-67.5°，则认为边缘为135°边缘；</p>
+</li>
+</ul>
+<p class='item-img' data-src='/img/temporate/cv78.png'><img src="/img/temporate/cv78.png"></p>
+<h2 id="三-非极大值抑制"><a href="#三-非极大值抑制" class="headerlink" title="三.非极大值抑制"></a>三.非极大值抑制</h2><p>经过<strong>第二步</strong>得到的<strong>边缘</strong>不经过处理是没办法使用的，因为高斯滤波去噪后<strong>边缘会模糊</strong>，得到的边缘像素点非常多，因此需要对其进行一些过滤操作，而<strong>非极大值抑制</strong>就是一个很好的方法。即检查每个像素点的梯度方向上的相邻像素，并保留梯度值<strong>最大</strong>的像素，将其他像素抑制为零。</p>
+<h2 id="四-双阈值筛选"><a href="#四-双阈值筛选" class="headerlink" title="四.双阈值筛选"></a>四.双阈值筛选</h2><p>经过非极大值抑制之后，我们还需要设置阈值来进行筛选。</p>
+<p>当某一像素位置的幅值超过最高阈值时，该像素必是边缘像素；当幅值低于最低阈值时，该像素必不是边缘像素；幅值处于最高像素与最低像素之间时，如果它能连接到一个高于阈值的边缘时，则被认为是边缘像素，否则就不会被认为是边缘。</p>
+<p class='item-img' data-src='/img/temporate/cv79.png'><img src="/img/temporate/cv79.png"></p>
+<h2 id="五-实现边缘检测的流程函数"><a href="#五-实现边缘检测的流程函数" class="headerlink" title="五.实现边缘检测的流程函数"></a>五.实现边缘检测的流程函数</h2><p><code>edges = cv2.Canny(image, threshold1, threshold2)</code></p>
+<ul>
+<li><p>threshold1：低阈值，用于决定可能的边缘点。</p>
+</li>
+<li><p>threshold2：高阈值，用于决定强边缘点。</p>
+</li>
+<li><p>即使读到的是彩色图也可以进行处理。</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> cv2 <span class="hljs-keyword">as</span> cv<br> <br>img = cv.imread(<span class="hljs-string">&#x27;../images/lvbo2.png&#x27;</span>)<br> <br>gray1 = cv.cvtColor(img, cv.COLOR_BGR2GRAY)<br><span class="hljs-comment"># 手动进行高斯滤波再调用canny边缘检测</span><br>img2 = cv.GaussianBlur(img, (<span class="hljs-number">3</span>, <span class="hljs-number">3</span>), <span class="hljs-number">1</span>)<br> <br>gray2 = cv.cvtColor(img2, cv.COLOR_BGR2GRAY)<br> <br><span class="hljs-comment"># 二值化处理方便观察</span><br>ret, binary = cv.threshold(gray1, <span class="hljs-number">0</span>, <span class="hljs-number">255</span>, cv.THRESH_BINARY | cv.THRESH_OTSU)<br>ret, binary1 = cv.threshold(gray2, <span class="hljs-number">0</span>, <span class="hljs-number">255</span>, cv.THRESH_BINARY | cv.THRESH_OTSU)<br> <br><span class="hljs-comment"># 利用内置高斯滤波器进行边缘检测</span><br>edge = cv.Canny(binary, <span class="hljs-number">30</span>, <span class="hljs-number">70</span>)<br>edge1 = cv.Canny(binary1, <span class="hljs-number">30</span>, <span class="hljs-number">70</span>)<br> <br>cv.imshow(<span class="hljs-string">&#x27;edge&#x27;</span>, edge)<br>cv.imshow(<span class="hljs-string">&#x27;edge1&#x27;</span>, edge1)<br>cv.waitKey(<span class="hljs-number">0</span>)<br>cv.destroyAllWindows()<br></code></pre></td></tr></table></figure>
+
+<p> 可以发现，提前手动进行去噪处理效果更好，虽然canny函数内置了高斯滤波，但根据要求进行去噪预处理可以得到更好的效果。</p>
+<div id="paginator"></div></div><div id="post-footer"><div id="pages"><div class="footer-link" style="width: 50%;text-align:right;border-right:1px #fe2 solid"><a href="/post/4907448/">← 下一篇 图像预处理-绘制图像轮廓与凸包</a></div><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/post/ef5701d3/">图像预处理-图像噪点消除 上一篇 →</a></div></div></div></div><div class="bottom-btn"><div><a class="i-top" id="to-top" onClick="scrolls.scrolltop();" title="回到顶部" style="opacity: 0; display: none;">∧ </a><a class="i-index" id="to-index" href="#toc-div" title="文章目录">≡</a><a class="i-color" id="color-mode" onClick="colorMode.change()" title="切换主题"></a><a onclick="BgmControl()"><svg id="bgm-control" viewBox="0 0 30 34" fill="#18d1ff" style="width: 24px; transition: transform .3s;margin-top: 4px"><path d="M25.998 23.422V11.29h3.999v12.132h-3.999zM19.497 6.234h4.001v22.243h-4.001V6.234zM12.998.867h4v32.978h-4V.867zm-6.5 5.367h4.001v22.243H6.498V6.234zm-6.5 5.056h4v12.132h-4V11.29z"></path></svg><audio id="bgm" src="/audio/bgm.mp3" autoplay loop crossorigin="anonymous"> </audio></a></div></div></article><aside><div id="about"><a href="/" id="logo"><img src="https://ak.hypergryph.com/assets/index/images/ak/pc/faction/1.png" alt="Logo" style="margin:0;border-radius:0;"></a><h1 id="Dr"><a href="/">Clocky7</a></h1><div id="description"><p></p></div><div id="social-links"><a class="social" target="_blank" rel="noopener" href="https://github.com/Clocky7"><i class="fab fa-github" alt="GitHub"></i></a></div></div><div id="aside-block"><div id="toc-div"><h1>目录</h1><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80-%E9%AB%98%E6%96%AF%E6%BB%A4%E6%B3%A2"><span class="toc-number">1.</span> <span class="toc-text">一.高斯滤波</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C-%E8%AE%A1%E7%AE%97%E5%9B%BE%E5%83%8F%E7%9A%84%E6%A2%AF%E5%BA%A6%E4%B8%8E%E6%96%B9%E5%90%91"><span class="toc-number">2.</span> <span class="toc-text">二.计算图像的梯度与方向</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89-%E9%9D%9E%E6%9E%81%E5%A4%A7%E5%80%BC%E6%8A%91%E5%88%B6"><span class="toc-number">3.</span> <span class="toc-text">三.非极大值抑制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B-%E5%8F%8C%E9%98%88%E5%80%BC%E7%AD%9B%E9%80%89"><span class="toc-number">4.</span> <span class="toc-text">四.双阈值筛选</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94-%E5%AE%9E%E7%8E%B0%E8%BE%B9%E7%BC%98%E6%A3%80%E6%B5%8B%E7%9A%84%E6%B5%81%E7%A8%8B%E5%87%BD%E6%95%B0"><span class="toc-number">5.</span> <span class="toc-text">五.实现边缘检测的流程函数</span></a></li></ol></div></div><footer><nobr>构建自 <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr><wbr><nobr> 使用主题 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus/hexo-theme-arknights">Arknights</a></nobr><wbr><nobr> 主题作者 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus">Yue_plus</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas></body></html>

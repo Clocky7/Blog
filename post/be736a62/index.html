@@ -1,0 +1,175 @@
+<!DOCTYPE html><html lang="zh-cn" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>图像预处理-模板匹配 | Clocky7's Blog</title><link rel="icon" type="image/x-icon" href="/favicon.ico"><link rel="preload" as="font" crossorigin="anonymous" href="/font/Bender.ttf"><link rel="preload" as="font" crossorigin="anonymous" href="/font/BenderLight.ttf"><link rel="preload" as="font" crossorigin="anonymous" href="/font/JetBrainsMono-Regular.woff2"><link rel="stylesheet" href="/css/arknights.css"><style>@font-face {
+  font-family: Bender;
+  src: local('Bender'), url("/font/Bender.ttf"), url("/font/Bender.otf");
+}
+@font-face {
+  font-family: BenderLight;
+  src: local('BenderLight'), url("/font/BenderLight.ttf");
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}
+</style><script>var config = {"root":"/","search":{"preload":false,"activeHolder":"键入以继续","blurHolder":"搜索","noResult":"无 $0 相关数据"},"code":{"codeInfo":"$0 - $1 行","copy":"复制"}}</script><link type="text/css" rel="stylesheet" href="/lib/encrypt/hbe.style.css"><script src="//unpkg.com/mermaid@10.5.0/dist/mermaid.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+ menuSettings: {
+   zoom: "None"
+ },
+ showMathMenu: false,
+ jax: ["input/TeX","output/CommonHTML"],
+ extensions: ["tex2jax.js"],
+ TeX: {
+   extensions: ["AMSmath.js","AMSsymbols.js"],
+   equationNumbers: {
+     autoNumber: "AMS"
+   }
+ },
+ tex2jax: {
+   inlineMath: [["\\(", "\\)"]],
+   displayMath: [["\\[", "\\]"]]
+ }
+});</script><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lightgallery.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-zoom.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-thumbnail.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/css/all.min.css"><style defer src="article.css"></style><link rel="stylesheet" href="article.css"><script>if (window.localStorage.getItem('theme-mode') === 'light')
+ document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark')
+ document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.woff2") format('woff2');
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}</style><style>:root {
+ --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
+ --light-background: url('/img/bk.jpg');
+ --theme-encrypt-confirm: '确认'
+}</style><script defer src="/js/arknights.js"></script><script defer src="/js/search.js"></script><script defer type="module">import mermaid from '//unpkg.com/mermaid@10.5.0/dist/mermaid.esm.mjs';
+window.mermaid = mermaid;
+code.paintMermaid();
+</script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+  menuSettings: {
+    zoom: "None"
+  },
+  showMathMenu: false,
+  jax: ["input/TeX","output/CommonHTML"],
+  extensions: ["tex2jax.js"],
+  TeX: {
+    extensions: ["AMSmath.js","AMSsymbols.js"],
+    equationNumbers: {
+      autoNumber: "AMS"
+    }
+  },
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]]
+  }
+});
+</script><script async src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script async src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script async src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script async src="/lib/encrypt/hbe.js"></script><script async src="/js/pjax.js"></script><script class="pjax-js">reset= () => {document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js','data-pjax','.busuanzi'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><script class="pjax-js">reset= () => {document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="loading" style="opacity: 0;"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><div class="navBtn"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><nav><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="搜索" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup" tabindex="0"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">主页</span></a></li><li class="navItem"><a class="navBlock" href="/about/"><span class="navItemTitle">于我</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">归档</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>图像预处理-模板匹配</h1><div id="post-info"><span>文章发布时间: <div class="control"><time datetime="2025-06-24T05:52:10.000Z" id="date"> 2025-06-24</time></div></span><br><span>最后更新时间: <div class="control"><time datetime="2025-07-01T06:26:11.122Z" id="updated"> 2025-07-01</time></div></span><br><span>文章总字数: <div class="control">1.7k</div></span><br><span>预计阅读时间: <div class="control">7 分钟</div></span></div></div><hr><div id="post-content"><p>就是用模板图在目标图像中不断的滑动比较，通过某种比较方法来判断是否匹配成功,找到模板图所在的位置。</p>
+<ul>
+<li><p>不会有边缘填充。</p>
+</li>
+<li><p>类似于卷积，滑动比较，挨个比较象素。</p>
+</li>
+<li><p>返回结果res大小是：目标图大小-模板图大小+1（H-h+1,W-w+1）</p>
+</li>
+</ul>
+<h2 id="一-匹配方法"><a href="#一-匹配方法" class="headerlink" title="一.匹配方法"></a>一.匹配方法</h2><p><code>res=cv2.matchTemplate(image, templ, method)</code></p>
+<ul>
+<li><p>image：原图像，这是一个灰度图像或彩色图像（在这种情况下，匹配将在每个通道上独立进行）。</p>
+</li>
+<li><p>templ：模板图像，也是灰度图像或与原图像相同通道数的彩色图像。</p>
+</li>
+<li><p>method：匹配方法，可以是以下之一：</p>
+<ul>
+<li><p>cv2.TM_CCOEFF</p>
+</li>
+<li><p>cv2.TM_CCOEFF_NORMED</p>
+</li>
+<li><p>cv2.TM_CCORR</p>
+</li>
+<li><p>cv2.TM_CCORR_NORMED</p>
+</li>
+<li><p>cv2.TM_SQDIFF</p>
+</li>
+<li><p>cv2.TM_SQDIFF_NORMED</p>
+</li>
+<li><p>返回值res，每个元素表示原图像中相应位置与模板图像匹配的相似度，而每个元素的位置其实就是对应匹配位置的左上角元素位置。匹配方法不同，返回矩阵的值的含义也会有所区别。以下是几种常用的匹配方法及其返回值含义：</p>
+</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li><p>cv2.TM_SQDIFF 或 cv2.TM_SQDIFF_NORMED：</p>
+<p>返回值越接近0，表示匹配程度越好。最小值对应的最佳匹配位置。</p>
+</li>
+<li><p>cv2.TM_CCORR 或 cv2.TM_CCORR_NORMED：</p>
+<p>返回值越大，表示匹配程度越好。最大值对应的最佳匹配位置。</p>
+</li>
+<li><p>cv2.TM_CCOEFF 或 cv2.TM_CCOEFF_NORMED：</p>
+<p>返回值越大，表示匹配程度越好。最大值对应的最佳匹配位置。</p>
+</li>
+</ol>
+<h3 id="1-1-平方差匹配（cv2-TM-SQDIFF）"><a href="#1-1-平方差匹配（cv2-TM-SQDIFF）" class="headerlink" title="1.1 平方差匹配（cv2.TM_SQDIFF）"></a>1.1 平方差匹配（cv2.TM_SQDIFF）</h3><p>以模板图与目标图所对应的像素值使用<strong>平方差公式</strong>来计算，其结果越小，代表匹配程度越高。如图：</p>
+<p class='item-img' data-src='/img/temporate/cv93.png'><img src="/img/temporate/cv93.png"></p>
+<h3 id="1-2-归一化平方差匹配（cv2-TM-SQDIFF-NORMED）"><a href="#1-2-归一化平方差匹配（cv2-TM-SQDIFF-NORMED）" class="headerlink" title="1.2 归一化平方差匹配（cv2.TM_SQDIFF_NORMED）"></a>1.2 归一化平方差匹配（cv2.TM_SQDIFF_NORMED）</h3><p>与平方差匹配类似，只不过需要将<strong>值统一到0到1</strong>，计算结果越小，代表匹配程度越高。如图：</p>
+<p class='item-img' data-src='/img/temporate/cv94.png'><img src="/img/temporate/cv94.png"></p>
+<h3 id="1-3-相关匹配（cv2-TM-CCORR）"><a href="#1-3-相关匹配（cv2-TM-CCORR）" class="headerlink" title="1.3 相关匹配（cv2.TM_CCORR）"></a>1.3 相关匹配（cv2.TM_CCORR）</h3><p>使用对应像素的<strong>乘积</strong>进行匹配，乘积的结果越大其匹配程度越高。如图：</p>
+<p class='item-img' data-src='/img/temporate/cv95.png'><img src="/img/temporate/cv95.png"></p>
+<h3 id="1-4-归一化相关匹配（cv2-TM-CCORR-NORMED）"><a href="#1-4-归一化相关匹配（cv2-TM-CCORR-NORMED）" class="headerlink" title="1.4 归一化相关匹配（cv2.TM_CCORR_NORMED）"></a>1.4 归一化相关匹配（cv2.TM_CCORR_NORMED）</h3><p>与相关匹配类似，只不过是将其值统一到0到1之间，值越大，代表匹配程度越高。如图：</p>
+<p class='item-img' data-src='/img/temporate/cv96.png'><img src="/img/temporate/cv96.png"></p>
+<h3 id="1-5-相关系数匹配（cv2-TM-CCOEFF）"><a href="#1-5-相关系数匹配（cv2-TM-CCOEFF）" class="headerlink" title="1.5 相关系数匹配（cv2.TM_CCOEFF）"></a>1.5 相关系数匹配（cv2.TM_CCOEFF）</h3><p>先计算<strong>模板</strong>与目标图像的均值，然后通过每个像素与均值之间的<strong>差的乘积</strong>再<strong>求和</strong>来表示其匹配程度，1表示完美的匹配，-1表示最差的匹配。如图：</p>
+<p class='item-img' data-src='/img/temporate/cv97.png'><img src="/img/temporate/cv97.png"></p>
+<h3 id="1-6-归一化相关系数匹配（cv2-TM-CCOEFF-NORMED）"><a href="#1-6-归一化相关系数匹配（cv2-TM-CCOEFF-NORMED）" class="headerlink" title="1.6 归一化相关系数匹配（cv2.TM_CCOEFF_NORMED）"></a>1.6 归一化相关系数匹配（cv2.TM_CCOEFF_NORMED）</h3><p>将相关系数匹配的结果统一到0到1之间，值越接近1代表匹配程度越高。如图：</p>
+<p class='item-img' data-src='/img/temporate/cv98.png'><img src="/img/temporate/cv98.png"></p>
+<h2 id="二-绘制轮廓"><a href="#二-绘制轮廓" class="headerlink" title="二.绘制轮廓"></a>二.绘制轮廓</h2><p>设定一个匹配阈值来筛选出多个匹配程度高的区域，找出数组中所有大于0.8的元素索引：</p>
+<p><code>loc=np.where(array &gt; 0.8)</code></p>
+<p>获取轮廓点：</p>
+<p><code>zip(*loc)</code></p>
+<ul>
+<li><p>*loc 是解包操作，将 loc 中的多个数组拆开，作为单独的参数传递给 zip。</p>
+</li>
+<li><p>zip 将这些数组按元素一一配对，生成一个迭代器，每个元素是一个元组，表示一个坐标点。</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> cv2 <span class="hljs-keyword">as</span> cv<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br> <br><span class="hljs-comment"># 导入目标图</span><br>img = cv.imread(<span class="hljs-string">&#x27;../images/game.png&#x27;</span>)<br><span class="hljs-comment"># 导入模板图</span><br>temp = cv.imread(<span class="hljs-string">&#x27;../images/temp.png&#x27;</span>)<br> <br><span class="hljs-comment"># 使用归一化相关系数匹配拿到所有匹配结果的数组</span><br>res = cv.matchTemplate(img, temp, cv.TM_CCORR_NORMED)<br><span class="hljs-comment"># 用布尔索引查找满足实际要求的匹配结果</span><br>loc = np.where(res &gt;= <span class="hljs-number">0.8</span>)<br><span class="hljs-built_in">print</span>(loc)<br> <br><span class="hljs-comment"># 循环获取匹配结果并绘制矩形框</span><br><span class="hljs-keyword">for</span> pt <span class="hljs-keyword">in</span> <span class="hljs-built_in">zip</span>(*loc):<br>    <span class="hljs-comment"># 因为where函数是对数组操作，先返回行索引再返回列索引，返回的坐标是(y,x)形式，所以需要反转</span><br>    pt = pt[::-<span class="hljs-number">1</span>]<br>    <span class="hljs-comment"># 绘制矩形框，已经知道loc中坐标是匹配区域左上角的坐标，右下角的坐标用模板图的尺寸加上左上角坐标即可</span><br>    cv.rectangle(img, pt, (pt[<span class="hljs-number">0</span>]  + temp.shape[<span class="hljs-number">1</span>], pt[<span class="hljs-number">1</span>] + temp.shape[<span class="hljs-number">0</span>]), (<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">255</span>), <span class="hljs-number">2</span>)<br> <br>cv.imshow(<span class="hljs-string">&#x27;result&#x27;</span>, img)<br>cv.imshow(<span class="hljs-string">&#x27;temp&#x27;</span>, temp)<br>cv.waitKey(<span class="hljs-number">0</span>)<br>cv.destroyAllWindows()<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">(array([ 61, 61, 61, 61, 61, 61, 61, 61, 61, 62, 62, 62, 62, 62, 62, 62, 62, 62, 62, 62, 62, 62, 62, 62, 62, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 67, 67, 67, 67, 67, 67, 67, 67, 67, 67, 67, 67, 67, 67, 68, 68, 68, 68, 99, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 104, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 138, 138, 138, 138, 138, 138, 138, 138, 138, 138, 138, 139, 139, 139, 139, 139, 139, 139, 139, 139,<br><br>...<br><br>139, 140, 154, 155, 156, 157, 171, 172, 173, 174, 70, 71, 72, 87, 88, 89, 104, 105, 106, 121, 122, 123, 138, 139, 140, 155, 156, 171, 172, 173, 71, 88, 105, 122, 138, 139, 155, 156, 172, 173, 32, 30, 31, 32, 30, 31, 32, 30, 31]))<br></code></pre></td></tr></table></figure>
+
+<p class='item-img' data-src='/img/temporate/cv99.png'><img src="/img/temporate/cv99.png"></p>
+<p><em><strong>这里有一个注意点，那就是将原图灰度化后，是不能使用(b,g,r)三通道颜色赋值的，而黑色很难看出来，所以使用白色(255,255,255)绘制矩形。</strong></em></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> cv2 <span class="hljs-keyword">as</span> cv<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br> <br><span class="hljs-comment"># 导入目标图并灰度化</span><br>img = cv.imread(<span class="hljs-string">&#x27;../images/game.png&#x27;</span>, cv.IMREAD_GRAYSCALE)<br><span class="hljs-comment"># 导入模板图并灰度化</span><br>temp = cv.imread(<span class="hljs-string">&#x27;../images/temp.png&#x27;</span>, cv.IMREAD_GRAYSCALE)<br> <br><span class="hljs-comment"># 使用归一化相关系数匹配拿到所有匹配结果的数组</span><br>res = cv.matchTemplate(img, temp, cv.TM_CCORR_NORMED)<br><span class="hljs-comment"># 用布尔索引查找满足实际要求的匹配结果</span><br>loc = np.where(res &gt;= <span class="hljs-number">0.8</span>)<br> <br><span class="hljs-comment"># 循环获取匹配结果并绘制矩形框</span><br><span class="hljs-keyword">for</span> pt <span class="hljs-keyword">in</span> <span class="hljs-built_in">zip</span>(*loc):<br>    <span class="hljs-comment"># 因为where函数是对数组操作，先返回行索引再返回列索引，返回的坐标是(y,x)形式，所以需要反转</span><br>    pt = pt[::-<span class="hljs-number">1</span>]<br>    <span class="hljs-comment"># 绘制矩形框，这里使用了原来的红色框，实际显示为黑色</span><br>    cv.rectangle(img, pt, (pt[<span class="hljs-number">0</span>] + temp.shape[<span class="hljs-number">1</span>], pt[<span class="hljs-number">1</span>] + temp.shape[<span class="hljs-number">0</span>]), (<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">255</span>), <span class="hljs-number">2</span>)<br> <br>cv.imshow(<span class="hljs-string">&#x27;result&#x27;</span>, img)<br>cv.imshow(<span class="hljs-string">&#x27;temp&#x27;</span>, temp)<br>cv.waitKey(<span class="hljs-number">0</span>)<br>cv.destroyAllWindows()<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p class='item-img' data-src='/img/temporate/cv100.png'><img src="/img/temporate/cv100.png"></p>
+<div id="paginator"></div></div><div id="post-footer"><div id="pages"><div class="footer-link" style="width: 50%;text-align:right;border-right:1px #fe2 solid"><a href="/post/6d1a07a/">← 下一篇 图像预处理-霍夫变换</a></div><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/post/8c50130d/">图像预处理-直方图均衡化 上一篇 →</a></div></div></div></div><div class="bottom-btn"><div><a class="i-top" id="to-top" onClick="scrolls.scrolltop();" title="回到顶部" style="opacity: 0; display: none;">∧ </a><a class="i-index" id="to-index" href="#toc-div" title="文章目录">≡</a><a class="i-color" id="color-mode" onClick="colorMode.change()" title="切换主题"></a><a onclick="BgmControl()"><svg id="bgm-control" viewBox="0 0 30 34" fill="#18d1ff" style="width: 24px; transition: transform .3s;margin-top: 4px"><path d="M25.998 23.422V11.29h3.999v12.132h-3.999zM19.497 6.234h4.001v22.243h-4.001V6.234zM12.998.867h4v32.978h-4V.867zm-6.5 5.367h4.001v22.243H6.498V6.234zm-6.5 5.056h4v12.132h-4V11.29z"></path></svg><audio id="bgm" src="/audio/bgm.mp3" autoplay loop crossorigin="anonymous"> </audio></a></div></div></article><aside><div id="about"><a href="/" id="logo"><img src="https://ak.hypergryph.com/assets/index/images/ak/pc/faction/1.png" alt="Logo" style="margin:0;border-radius:0;"></a><h1 id="Dr"><a href="/">Clocky7</a></h1><div id="description"><p></p></div><div id="social-links"><a class="social" target="_blank" rel="noopener" href="https://github.com/Clocky7"><i class="fab fa-github" alt="GitHub"></i></a></div></div><div id="aside-block"><div id="toc-div"><h1>目录</h1><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80-%E5%8C%B9%E9%85%8D%E6%96%B9%E6%B3%95"><span class="toc-number">1.</span> <span class="toc-text">一.匹配方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E5%B9%B3%E6%96%B9%E5%B7%AE%E5%8C%B9%E9%85%8D%EF%BC%88cv2-TM-SQDIFF%EF%BC%89"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 平方差匹配（cv2.TM_SQDIFF）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E5%BD%92%E4%B8%80%E5%8C%96%E5%B9%B3%E6%96%B9%E5%B7%AE%E5%8C%B9%E9%85%8D%EF%BC%88cv2-TM-SQDIFF-NORMED%EF%BC%89"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 归一化平方差匹配（cv2.TM_SQDIFF_NORMED）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E7%9B%B8%E5%85%B3%E5%8C%B9%E9%85%8D%EF%BC%88cv2-TM-CCORR%EF%BC%89"><span class="toc-number">1.3.</span> <span class="toc-text">1.3 相关匹配（cv2.TM_CCORR）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-%E5%BD%92%E4%B8%80%E5%8C%96%E7%9B%B8%E5%85%B3%E5%8C%B9%E9%85%8D%EF%BC%88cv2-TM-CCORR-NORMED%EF%BC%89"><span class="toc-number">1.4.</span> <span class="toc-text">1.4 归一化相关匹配（cv2.TM_CCORR_NORMED）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5-%E7%9B%B8%E5%85%B3%E7%B3%BB%E6%95%B0%E5%8C%B9%E9%85%8D%EF%BC%88cv2-TM-CCOEFF%EF%BC%89"><span class="toc-number">1.5.</span> <span class="toc-text">1.5 相关系数匹配（cv2.TM_CCOEFF）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-6-%E5%BD%92%E4%B8%80%E5%8C%96%E7%9B%B8%E5%85%B3%E7%B3%BB%E6%95%B0%E5%8C%B9%E9%85%8D%EF%BC%88cv2-TM-CCOEFF-NORMED%EF%BC%89"><span class="toc-number">1.6.</span> <span class="toc-text">1.6 归一化相关系数匹配（cv2.TM_CCOEFF_NORMED）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C-%E7%BB%98%E5%88%B6%E8%BD%AE%E5%BB%93"><span class="toc-number">2.</span> <span class="toc-text">二.绘制轮廓</span></a></li></ol></div></div><footer><nobr>构建自 <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr><wbr><nobr> 使用主题 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus/hexo-theme-arknights">Arknights</a></nobr><wbr><nobr> 主题作者 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus">Yue_plus</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas></body></html>

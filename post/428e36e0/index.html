@@ -1,0 +1,217 @@
+<!DOCTYPE html><html lang="zh-cn" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>机器学习-无量纲化与特征降维（一） | Clocky7's Blog</title><link rel="icon" type="image/x-icon" href="/favicon.ico"><link rel="preload" as="font" crossorigin="anonymous" href="/font/Bender.ttf"><link rel="preload" as="font" crossorigin="anonymous" href="/font/BenderLight.ttf"><link rel="preload" as="font" crossorigin="anonymous" href="/font/JetBrainsMono-Regular.woff2"><link rel="stylesheet" href="/css/arknights.css"><style>@font-face {
+  font-family: Bender;
+  src: local('Bender'), url("/font/Bender.ttf"), url("/font/Bender.otf");
+}
+@font-face {
+  font-family: BenderLight;
+  src: local('BenderLight'), url("/font/BenderLight.ttf");
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}
+</style><script>var config = {"root":"/","search":{"preload":false,"activeHolder":"键入以继续","blurHolder":"搜索","noResult":"无 $0 相关数据"},"code":{"codeInfo":"$0 - $1 行","copy":"复制"}}</script><link type="text/css" rel="stylesheet" href="/lib/encrypt/hbe.style.css"><script src="//unpkg.com/mermaid@10.5.0/dist/mermaid.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+ menuSettings: {
+   zoom: "None"
+ },
+ showMathMenu: false,
+ jax: ["input/TeX","output/CommonHTML"],
+ extensions: ["tex2jax.js"],
+ TeX: {
+   extensions: ["AMSmath.js","AMSsymbols.js"],
+   equationNumbers: {
+     autoNumber: "AMS"
+   }
+ },
+ tex2jax: {
+   inlineMath: [["\\(", "\\)"]],
+   displayMath: [["\\[", "\\]"]]
+ }
+});</script><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lightgallery.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-zoom.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-thumbnail.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/css/all.min.css"><style defer src="article.css"></style><link rel="stylesheet" href="article.css"><script>if (window.localStorage.getItem('theme-mode') === 'light')
+ document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark')
+ document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.woff2") format('woff2');
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}</style><style>:root {
+ --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
+ --light-background: url('/img/bk.jpg');
+ --theme-encrypt-confirm: '确认'
+}</style><script defer src="/js/arknights.js"></script><script defer src="/js/search.js"></script><script defer type="module">import mermaid from '//unpkg.com/mermaid@10.5.0/dist/mermaid.esm.mjs';
+window.mermaid = mermaid;
+code.paintMermaid();
+</script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+  menuSettings: {
+    zoom: "None"
+  },
+  showMathMenu: false,
+  jax: ["input/TeX","output/CommonHTML"],
+  extensions: ["tex2jax.js"],
+  TeX: {
+    extensions: ["AMSmath.js","AMSsymbols.js"],
+    equationNumbers: {
+      autoNumber: "AMS"
+    }
+  },
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]]
+  }
+});
+</script><script async src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script async src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script async src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script async src="/lib/encrypt/hbe.js"></script><script async src="/js/pjax.js"></script><script class="pjax-js">reset= () => {document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js','data-pjax','.busuanzi'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><script class="pjax-js">reset= () => {document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="loading" style="opacity: 0;"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><div class="navBtn"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><nav><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="搜索" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup" tabindex="0"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">主页</span></a></li><li class="navItem"><a class="navBlock" href="/about/"><span class="navItemTitle">于我</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">归档</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>机器学习-无量纲化与特征降维（一）</h1><div id="post-info"><span>文章发布时间: <div class="control"><time datetime="2025-06-24T05:54:39.000Z" id="date"> 2025-06-24</time></div></span><br><span>最后更新时间: <div class="control"><time datetime="2025-07-01T09:40:28.375Z" id="updated"> 2025-07-01</time></div></span><br><span>文章总字数: <div class="control">1.7k</div></span><br><span>预计阅读时间: <div class="control">6 分钟</div></span></div></div><hr><div id="post-content"><h2 id="一-无量纲化-预处理无量纲，即没有单位的数据"><a href="#一-无量纲化-预处理无量纲，即没有单位的数据" class="headerlink" title="一.无量纲化-预处理无量纲，即没有单位的数据"></a>一.无量纲化-预处理无量纲，即没有单位的数据</h2><p>无量纲化包括”归一化”和”标准化”，这样做有什么用呢？假设用欧式距离计算一个公司员工之间的差距，有身高（m）、体重（kg）以及收入（元）三个标准，正常情况下，收入带来的差距会很大，且看下面的公式：</p>
+<p class='item-img' data-src='/img/temporate/ml5.png'><img src="/img/temporate/ml5.png"></p>
+<p>从计算上来看, 发现身高体重对计算结果没有什么影响, 基本主要由收入来决定了,但是现实生活中,身高是比较重要的判断标准.  所以需要无量纲化.</p>
+<h3 id="1-1-MinMaxScaler-归一化"><a href="#1-1-MinMaxScaler-归一化" class="headerlink" title="1.1 MinMaxScaler 归一化"></a>1.1 MinMaxScaler 归一化</h3><p>公式：</p>
+<p class='item-img' data-src='/img/temporate/ml6.png'><img src="/img/temporate/ml6.png"></p>
+<p>API：</p>
+<p><code>sklearn.preprocessing.MinMaxScaler(feature_range)</code></p>
+<p>参数：</p>
+<ul>
+<li>feature_range：归一化后的数据的范围，默认为(0,1)。归一化中假设x是(0，1)，设置为(2,5)背后即用x*(5-2)+2就可以完成归一化后的范围转化。</li>
+</ul>
+<p>返回值为ndarray类型</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 导入相关库</span><br><span class="hljs-keyword">from</span> sklearn.preprocessing <span class="hljs-keyword">import</span> MinMaxScaler<br> <br><span class="hljs-comment"># 定义数据</span><br>data = [[<span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>], <br>        [<span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>],<br>        [<span class="hljs-number">8</span>, <span class="hljs-number">9</span>, <span class="hljs-number">10</span>]]<br> <br><span class="hljs-comment"># 实例化MinMaxScaler</span><br>scaler = MinMaxScaler(feature_range=(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>))<br>data_new = scaler.fit_transform(data)<br> <br><span class="hljs-comment"># 打印结果</span><br><span class="hljs-built_in">print</span>(data_new)<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">[[1.  1.  1. ]<br> [1.5 1.5 1.5]<br> [2.  2.  2. ]]<br></code></pre></td></tr></table></figure>
+
+<h3 id="1-2-normalize归一化"><a href="#1-2-normalize归一化" class="headerlink" title="1.2 normalize归一化"></a>1.2 normalize归一化</h3><p>API:</p>
+<p><code>normalize(data, norm=&#39;l2&#39;, axis=1)</code></p>
+<p>参数：</p>
+<ul>
+<li><p>norm：归一化方式，默认为l2，可选l1、l2、max</p>
+<ul>
+<li><p>l1：绝对值相加作为分母,特征值作为分子</p>
+</li>
+<li><p>l2：平方相加作为分母,特征值作为分子</p>
+</li>
+<li><p>max：最大值作为分母,特征值作为分子</p>
+</li>
+</ul>
+</li>
+<li><p>axis：归一化的维度，默认为1，可选0、1</p>
+</li>
+</ul>
+<p>返回值：归一化后的数据</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 导入相关库</span><br><span class="hljs-keyword">from</span> sklearn.preprocessing <span class="hljs-keyword">import</span> normalize<br> <br><span class="hljs-comment"># 定义数据</span><br>data = [[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>],<br>        [<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>],<br>        [<span class="hljs-number">7</span>, <span class="hljs-number">8</span>, <span class="hljs-number">9</span>]]<br> <br><span class="hljs-comment"># 归一化</span><br>normalized_data = normalize(data,norm=<span class="hljs-string">&#x27;l1&#x27;</span>,axis=<span class="hljs-number">0</span>)<br> <br><span class="hljs-comment"># 打印结果</span><br><span class="hljs-built_in">print</span>(normalized_data)<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">[[0.08333333 0.13333333 0.16666667]<br> [0.33333333 0.33333333 0.33333333]<br> [0.58333333 0.53333333 0.5       ]]<br></code></pre></td></tr></table></figure>
+
+<p>注意：这里的normalize是不需要进行<code>fit_transform</code>操作的</p>
+<p>上述两种归一化都有缺点：最大值和最小值容易受到异常点影响，所以<strong>鲁棒性较差</strong>。所以常使用标准化的无量钢化。</p>
+<h3 id="1-3-StandardScaler-标准化"><a href="#1-3-StandardScaler-标准化" class="headerlink" title="1.3 StandardScaler 标准化"></a>1.3 StandardScaler 标准化</h3><p>也是数据归一化的一种，目的是将不同特征的数值范围缩放到统一的标准范围。</p>
+<p>最常见的标准化方法是Z-score标准化，也叫零均值标准化。通过对每个特征的值减去其均值，再除以其标准差，将数据转换为均值为0，标准差为1的分布：</p>
+<p class='item-img' data-src='/img/temporate/ml7.png'><img src="/img/temporate/ml7.png"></p>
+<p>API：</p>
+<p><code>sklearn.preprocessing.StandardScale</code></p>
+<p>所有归一化返回的都是ndarray类型</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 导入相关库</span><br><span class="hljs-keyword">from</span> sklearn.preprocessing <span class="hljs-keyword">import</span> StandardScaler<br> <br><span class="hljs-comment"># 定义数据</span><br>data = [[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>],<br>        [<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>],<br>        [<span class="hljs-number">7</span>,<span class="hljs-number">8</span>,<span class="hljs-number">9</span>]]<br> <br><span class="hljs-comment"># 标准化数据</span><br>scaler = StandardScaler()<br>data_new = scaler.fit_transform(data)<br> <br><span class="hljs-comment"># 打印结果</span><br><span class="hljs-built_in">print</span>(data_new)<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">[[-1.22474487 -1.22474487 -1.22474487]<br> [ 0.          0.          0.        ]<br> [ 1.22474487  1.22474487  1.22474487]]<br></code></pre></td></tr></table></figure>
+
+<p><em>这里补充讲讲前面提到过的 <code>fit_transform()</code> 与 fit() 和 <code>transform()</code> 的区别：</em></p>
+<p><code>fit()</code> 是对传入的数据进行计算，<code>transform()</code> 是对传入的数据进行特征转换，<code>fit_transform()</code> 是先 <code>fit()</code>再 <code>transform()</code>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 导入相关库</span><br><span class="hljs-keyword">from</span> sklearn.preprocessing <span class="hljs-keyword">import</span> StandardScaler<br> <br><span class="hljs-comment"># 定义数据</span><br>data = [[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>],<br>        [<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>],<br>        [<span class="hljs-number">7</span>,<span class="hljs-number">8</span>,<span class="hljs-number">9</span>]]<br> <br>data1 = [[<span class="hljs-number">10</span>,<span class="hljs-number">20</span>,<span class="hljs-number">30</span>],<br>         [<span class="hljs-number">40</span>,<span class="hljs-number">50</span>,<span class="hljs-number">60</span>],<br>         [<span class="hljs-number">70</span>,<span class="hljs-number">80</span>,<span class="hljs-number">90</span>]]<br> <br><span class="hljs-comment"># 标准化数据</span><br>scaler = StandardScaler()<br><span class="hljs-comment"># 先调用fit</span><br>scaler.fit(data)<br> <br><span class="hljs-comment"># 可以查看fit计算的均值和方差</span><br><span class="hljs-built_in">print</span>(scaler.mean_)<br><span class="hljs-built_in">print</span>(scaler.var_)<br> <br> <br><span class="hljs-comment"># 再调用transform</span><br>data_scaled = scaler.transform(data1)<br> <br><span class="hljs-comment"># 打印结果</span><br><span class="hljs-built_in">print</span>(data_scaled)<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">[4. 5. 6.]<br>[6. 6. 6.]<br>[[ 2.44948974  6.12372436  9.79795897]<br> [14.69693846 18.37117307 22.04540769]<br> [26.94438717 30.61862178 34.2928564 ]]<br></code></pre></td></tr></table></figure>
+
+<p>可以发现，上面的结果有所不同，这是因为先调用了 <code>fit()</code> 对data的数据进行计算，得到data的均值和方差，此时调用 <code>transform()</code> 会使用最近一次 <code>fit()</code> 计算的均值与方差，所以这里就是用data的均值和方差来对data1进行标准化处理。也可以先调 <code>fit_transform</code> 然后再调 transform ，就是使用前面 <code>fit_transform</code> 计算的均值和方差转化。</p>
+<p>这个通常用于训练集与测试集，要用训练集中的均值和方差来对测试集进行转化，一般不使用测试集的均值方差。</p>
+<h2 id="二-特征降维"><a href="#二-特征降维" class="headerlink" title="二.特征降维"></a>二.特征降维</h2><p>实际数据中,有时候特征很多,会增加计算量,降维就是去掉一些特征,或者转化多个特征为少量个特征。其目的就是减少数据集维度，尽可能保留重要信息。</p>
+<p>有两种常见的特征降维方式：</p>
+<ul>
+<li><p>特征选择</p>
+<ul>
+<li>从原始特征集中挑选出最相关的特征</li>
+</ul>
+</li>
+<li><p>主成份分析(PCA)</p>
+<ul>
+<li>主成分分析就是把之前的特征通过一系列数学计算，形成新的特征，新的特征数量会小于之前特征数量</li>
+</ul>
+</li>
+</ul>
+<p>接下来介绍一下基本的特征选择：</p>
+<h3 id="2-1-特征选择"><a href="#2-1-特征选择" class="headerlink" title="2.1 特征选择"></a>2.1 特征选择</h3><h4 id="2-1-1-VarianceThreshold-低方差过滤特征选择"><a href="#2-1-1-VarianceThreshold-低方差过滤特征选择" class="headerlink" title="2.1.1 VarianceThreshold 低方差过滤特征选择"></a>2.1.1 VarianceThreshold 低方差过滤特征选择</h4><p>若一个特征的方差很小，说明这个特征的值在样本中几乎相同或变化不大，包含的信息量很少，下面是VarianceThreshold的工作原理：</p>
+<ol>
+<li><p>计算方差：对于每个特征，计算其在训练集中的方差(每个样本值与均值之差的平方,在求平均)。</p>
+</li>
+<li><p>设定阈值：选择一个方差阈值，任何低于这个阈值的特征都将被视为低方差特征。</p>
+</li>
+<li><p>过滤特征：移除所有方差低于设定阈值threshold的特征</p>
+</li>
+</ol>
+<p>API：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">sklearn.feature_selection.VarianceThreshold(threshold=2.0)<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 导入相关库</span><br><span class="hljs-keyword">from</span> sklearn.feature_selection <span class="hljs-keyword">import</span> VarianceThreshold<br> <br><span class="hljs-comment"># 定义数据</span><br>data = [[<span class="hljs-number">12</span>,<span class="hljs-number">22</span>,<span class="hljs-number">4</span>],<br>        [<span class="hljs-number">11</span>,<span class="hljs-number">23</span>,<span class="hljs-number">1</span>],<br>        [<span class="hljs-number">11</span>,<span class="hljs-number">23</span>,<span class="hljs-number">9</span>]]<br> <br><span class="hljs-comment"># 实例化VarianceThreshold</span><br>vt = VarianceThreshold(threshold=<span class="hljs-number">2</span>)<br> <br><span class="hljs-comment"># 应用VarianceThreshold</span><br>result = vt.fit_transform(data)<br> <br><span class="hljs-comment"># 打印结果</span><br><span class="hljs-built_in">print</span>(result)<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">[[4]<br> [1]<br> [9]]<br></code></pre></td></tr></table></figure>
+
+<h4 id="2-1-2-根据相关系数的特征选择"><a href="#2-1-2-根据相关系数的特征选择" class="headerlink" title="2.1.2 根据相关系数的特征选择"></a>2.1.2 根据相关系数的特征选择</h4><p>皮尔逊相关系数（Pearson correlation coefficient)是一种度量两个变量之间线性相关性的统计量，它是一个介于-1和1之间的数。</p>
+<ul>
+<li><p>ρ &#x3D; 1 表示完全正相关，即随着一个变量的增加，另一个变量也线性增加。</p>
+</li>
+<li><p>ρ &#x3D; -1 表示完全负相关，即随着一个变量的增加，另一个变量线性减少。</p>
+</li>
+<li><p>ρ &#x3D; 0 表示两个变量之间不存在线性关系。</p>
+</li>
+</ul>
+<p>|ρ|&lt;0.4为低度相关;    0.4&lt;&#x3D;|ρ|&lt;0.7为显著相关；  0.7&lt;&#x3D;|ρ|&lt;1为高度相关</p>
+<p>API:</p>
+<p><code>scipy.stats.personr(x, y)</code></p>
+<p>参数：</p>
+<ul>
+<li>x, y: 数组或序列，维度必须相同或能广播至相同。</li>
+</ul>
+<p>返回对象有两个属性:</p>
+<ul>
+<li><p>statistic 皮尔逊相关系数  </p>
+</li>
+<li><p>pvalue 另一种相关稀疏，零假设(作了解),统计上评估两个变量之间的相关性,越小越相关</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 导入相关库</span><br><span class="hljs-keyword">from</span> scipy.stats <span class="hljs-keyword">import</span> pearsonr<br> <br><span class="hljs-comment"># 定义数据</span><br>data = [<span class="hljs-number">12</span>,<span class="hljs-number">22</span>,<span class="hljs-number">4</span>]<br> <br>tezheng = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>]<br> <br><span class="hljs-comment"># 计算相关系数</span><br>re = pearsonr(data, tezheng)<br> <br><span class="hljs-comment"># 输出相关系数</span><br><span class="hljs-built_in">print</span>(re.statistic)<br><span class="hljs-built_in">print</span>(re.pvalue)<br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">-0.4435327625727436<br>0.7074499612035013<br></code></pre></td></tr></table></figure><div id="paginator"></div></div><div id="post-footer"><div id="pages"><div class="footer-link" style="width: 50%;text-align:right;border-right:1px #fe2 solid"><a href="/post/867f56cb/">← 下一篇 机器学习-KNN分类算法</a></div><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/post/86f676a5/">机器学习-数据集划分与特征工程 上一篇 →</a></div></div></div></div><div class="bottom-btn"><div><a class="i-top" id="to-top" onClick="scrolls.scrolltop();" title="回到顶部" style="opacity: 0; display: none;">∧ </a><a class="i-index" id="to-index" href="#toc-div" title="文章目录">≡</a><a class="i-color" id="color-mode" onClick="colorMode.change()" title="切换主题"></a><a onclick="BgmControl()"><svg id="bgm-control" viewBox="0 0 30 34" fill="#18d1ff" style="width: 24px; transition: transform .3s;margin-top: 4px"><path d="M25.998 23.422V11.29h3.999v12.132h-3.999zM19.497 6.234h4.001v22.243h-4.001V6.234zM12.998.867h4v32.978h-4V.867zm-6.5 5.367h4.001v22.243H6.498V6.234zm-6.5 5.056h4v12.132h-4V11.29z"></path></svg><audio id="bgm" src="/audio/bgm.mp3" autoplay loop crossorigin="anonymous"> </audio></a></div></div></article><aside><div id="about"><a href="/" id="logo"><img src="https://ak.hypergryph.com/assets/index/images/ak/pc/faction/1.png" alt="Logo" style="margin:0;border-radius:0;"></a><h1 id="Dr"><a href="/">Clocky7</a></h1><div id="description"><p></p></div><div id="social-links"><a class="social" target="_blank" rel="noopener" href="https://github.com/Clocky7"><i class="fab fa-github" alt="GitHub"></i></a></div></div><div id="aside-block"><div id="toc-div"><h1>目录</h1><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80-%E6%97%A0%E9%87%8F%E7%BA%B2%E5%8C%96-%E9%A2%84%E5%A4%84%E7%90%86%E6%97%A0%E9%87%8F%E7%BA%B2%EF%BC%8C%E5%8D%B3%E6%B2%A1%E6%9C%89%E5%8D%95%E4%BD%8D%E7%9A%84%E6%95%B0%E6%8D%AE"><span class="toc-number">1.</span> <span class="toc-text">一.无量纲化-预处理无量纲，即没有单位的数据</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-MinMaxScaler-%E5%BD%92%E4%B8%80%E5%8C%96"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 MinMaxScaler 归一化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-normalize%E5%BD%92%E4%B8%80%E5%8C%96"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 normalize归一化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-StandardScaler-%E6%A0%87%E5%87%86%E5%8C%96"><span class="toc-number">1.3.</span> <span class="toc-text">1.3 StandardScaler 标准化</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C-%E7%89%B9%E5%BE%81%E9%99%8D%E7%BB%B4"><span class="toc-number">2.</span> <span class="toc-text">二.特征降维</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E7%89%B9%E5%BE%81%E9%80%89%E6%8B%A9"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 特征选择</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-1-VarianceThreshold-%E4%BD%8E%E6%96%B9%E5%B7%AE%E8%BF%87%E6%BB%A4%E7%89%B9%E5%BE%81%E9%80%89%E6%8B%A9"><span class="toc-number">2.1.1.</span> <span class="toc-text">2.1.1 VarianceThreshold 低方差过滤特征选择</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-2-%E6%A0%B9%E6%8D%AE%E7%9B%B8%E5%85%B3%E7%B3%BB%E6%95%B0%E7%9A%84%E7%89%B9%E5%BE%81%E9%80%89%E6%8B%A9"><span class="toc-number">2.1.2.</span> <span class="toc-text">2.1.2 根据相关系数的特征选择</span></a></li></ol></li></ol></li></ol></div></div><footer><nobr>构建自 <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr><wbr><nobr> 使用主题 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus/hexo-theme-arknights">Arknights</a></nobr><wbr><nobr> 主题作者 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus">Yue_plus</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas></body></html>
